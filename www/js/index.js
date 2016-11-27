@@ -80,7 +80,6 @@ var app = {
                 crossDomain: true,
                 cache: false,
                 beforeSend: function() {
-                    alert("di magsend");
                     //do something while waiting to connect
                 },
                 success: function(data) {
@@ -105,6 +104,28 @@ var app = {
                 data.title,           // title
                 'Ok'                  // buttonName
             );
-       });
-    }
+
+            //do something when device receives the notification?
+            //ts_delivered
+            var reg_id = data.registrationId;
+            var dataString = "reg_id=" + reg_id + "&push_notif_received=";
+            $.ajax({
+                type: "POST",
+                url: "http://192.168.1.14/school_connect_server/push_notif_received.php",
+                data: dataString,
+                crossDomain: true,
+                cache: false,
+                beforeSend: function() {
+                    //do something while waiting to connect
+                },
+                success: function(data) {
+                    if (data == "success") {
+                        alert("registered");
+                    } else if (data == "error") {
+                        alert("error");
+                    }
+                }
+            });//end of $,ajax
+       });//end of push.on('notif')
+    }//end of setupPush: function()
 };
