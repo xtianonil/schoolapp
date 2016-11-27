@@ -73,23 +73,20 @@ var app = {
             //register device: save deviceID to DB
             //var reg_id = data.registrationId;
             //var dataString = "reg_id=" + reg_id + "&register=";
-            var title = "";
-            var reg_id = data.registrationId;
-            var price = "";
-            var dataString = "title=" + title + "&reg_id=" + reg_id + "&price=" + price + "&insert=";
             $.ajax({
                 type: "POST",
                 url: "http://192.168.1.14/school_connect_server/register.php",
-                data: dataString,
+                data: { reg_id : data.registrationId },
+                dataType: "json",
                 crossDomain: true,
                 cache: false,
                 beforeSend: function() {
-                    //$("#update").val('Connecting...');
+                    //alert("di magsend");
+                    //do something while waiting to connect
                 },
                 success: function(data) {
                     if (data == "success") {
-                        alert("inserted");
-                        //$("#update").val("Update");
+                        alert("registered");
                     } else if (data == "error") {
                         alert("error");
                     }
