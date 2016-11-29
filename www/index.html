@@ -98,7 +98,8 @@
             <input id="username" type="text" placeholder="username" />            
             <input id="password" type="password" placeholder="password" value="" autocomplete="off">
             <button id="login" class="ui-btn">Login</button>
-            <!--<input id="email" type="email" placeholder="email@domain.com" />-->
+            <div style="text-align:center;"><a href="#register">Register</a></div>
+            <!--<button id="register" class="ui-btn">Register</button>-->
         </div>
         <div data-role="footer">
             <h1></h1>
@@ -132,6 +133,22 @@
 
             <h1><a href="#" id="logout">Logout</a></h1>
         </div> 
+    </div>
+
+    <div data-role="page" id="register">
+        <div data-role="header">
+            <h1>Registration</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+            <input id="reg_username" type="text" placeholder="username" />
+            <input id="reg_password" type="password" placeholder="password" /> 
+            <input id="reg_email" type="email" placeholder="email@domain.com" /> 
+            <input id="verif_code" type="text" placeholder="verification code" />
+            <button id="register_btn" class="ui-btn">Submit</button>
+        </div>
+        <div data-role="footer">
+            
+        </div>
     </div>
 
     <div data-role="page" id="send_notif">
@@ -172,6 +189,7 @@
     <script type="text/javascript">
         app.initialize();
     </script>
+    <script type="text/javascript" src="js/register.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/logout.js"></script>
 </body>
