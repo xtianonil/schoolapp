@@ -172,9 +172,9 @@
                     <input class="add_new_user" type="text" name="last_name_new" id="last_name_new" placeholder="last name" />
                     <button id="add_user_btn" class="ui-btn">Submit</button>
                 </div>
-                <div data-role="collapsible" class="collapsible">
+                <div data-role="collapsible" class="collapsible" id="list_users_header">
                     <h3>List Users</h3>
-                    <p>I'm the collapsible content for section 2</p>
+                    <div id="list_users_content"></div>
                 </div>
                 <div data-role="collapsible" class="collapsible">
                     <h3>Delete</h3>
@@ -229,10 +229,9 @@
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/logout.js"></script>
 
-    <script type="text/javascript" src="js/overlaymenu.js"></script>
-
     <script type="text/javascript" src="js/user_add.js"></script>
     <script type="text/javascript" src="js/username_availability.js"></script>
+    <script type="text/javascript" src="js/user_list.js"></script>
 </body>
 
 </html>
