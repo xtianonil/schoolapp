@@ -38,14 +38,20 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css" />
+    <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.min.css" />-->
 
     <!--JQuery Mobile-->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
 
-    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <!--<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>-->
+    <style type="text/css">
+        input {
+            -webkit-user-select: auto;
+        }
+    </style>
 
     <script type="text/javascript">
         $(function(){
@@ -126,7 +132,7 @@
             <ul>
                 <li><a href="#logged_in">Home</a></li>
                 <li><a href="#send_notif">Send Notification</a></li>
-                <li><a href="#logout">Log out</a></li>
+                <!--<li><a href="#">Log out</a></li>-->
             </ul>
         </div> 
         <div data-role="header">
