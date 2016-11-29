@@ -4,7 +4,7 @@ $("#register_btn").click(function(){
 	var eml = $("#reg_email").val();
 	var vcode = $("#verif_code").val();
 
-	alert(reg_id);
+	alert(localStorage.getItem('registrationId'));
 	/*
 	var dataString="username="+uname;
 	$.ajax({
