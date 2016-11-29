@@ -84,9 +84,9 @@ var app = {
                 },
                 success: function(data) {
                     if (data == "success") {
-                        alert("registered");
+                        //alert("registered");
                     } else if (data == "error") {
-                        alert("error");
+                        //alert("error");
                     }
                 }
             });

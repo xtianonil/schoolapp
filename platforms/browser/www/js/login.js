@@ -15,18 +15,18 @@ $("#login").click(function(){
 				//`alert(dataString);
 			},
 			success: function(data){
-				if(data=="success")
-				{
-					localStorage.login="true";
-					localStorage.username=username;
-					//alert("login success");
-					//redirect...
+				if(data)
+				{	// login success
+					var user_details = JSON.parse(data);
+					localStorage.login = "true";
+					localStorage.username = username;
+					localStorage.user_type = user_details[0].user_type;
+					//alert(localStorage.user_type); 
+
 					window.location.href = "index.html#logged_in";
-					//$('#not_logged_in').hide();
-					//$('#logged_in').show();
 				}
-				else if(data="failed")
-				{
+				else if(data)
+				{	//login error
 					alert("Login error");
 					$("#login").html('Login');
 				}
