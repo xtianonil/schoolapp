@@ -55,15 +55,6 @@
 
     <script type="text/javascript">
         $(function(){
-            /*
-            $.post("http://192.168.1.14/school_connect_server/register.php",
-                {
-
-                }).done(function(){
-
-                });
-            */
-            //alert("localStorage.login: "+localStorage.login);
             if (localStorage.login === "false")
             {
                 window.location.href = "index.html#not_logged_in";
@@ -72,6 +63,8 @@
             {
                 window.location.href = "index.html#logged_in";
             }
+            localStorage.webhost = "http://192.168.0.16/school_connect_server/";
+
         });
     </script>
     <title>School Connect</title>
@@ -111,6 +104,7 @@
             <h2><!--Menu<a href="#pageone" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left"></a>--></h2>
             <ul>
                 <li><a href="#logged_in">Home</a></li>
+                <li><a href="#user_management">User Management</a></li>
                 <li><a href="#send_notif">Send Notification</a></li>
                 <!--<li><a href="#">Log out</a></li>-->
             </ul>
@@ -142,12 +136,54 @@
         <div data-role="main" class="ui-content">
             <input id="reg_username" type="text" placeholder="username" />
             <!--<input id="reg_password" type="password" placeholder="password" /> -->
-            <input id="reg_email" type="email" placeholder="email" /> 
+            <!--<input id="reg_email" type="email" placeholder="email" />-->
             <input id="verif_code" type="text" placeholder="verification code" />
             <button id="register_btn" class="ui-btn">Submit</button>
         </div>
         <div data-role="footer">
-            
+            <h1></h1>
+        </div>
+    </div>
+
+    <div data-role="page" id="user_management">
+        <div data-role="header">
+            <h1>User Management</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+            <div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+                <div data-role="collapsible" class="collapsible">
+                    <h3>Add new user</h3>
+                    <div id="username_new_errordiv"></div>
+                    <input class="add_new_user" type="text" name="username_new" id="username_new" placeholder="username"/>
+                    <input class="add_new_user" type="password" name="password_new" id="password_new" placeholder="password" />
+                    <input class="add_new_user" type="text" name="verif_code_new" id="verif_code_new" placeholder="verification code" />
+                    <label for="user_type_new">User type:</label>
+                    <select id="user_type_new" name="user_type_new">
+                        <option value="teacher">teacher</option>
+                        <option value="parent">parent</option>
+                    </select>
+                    <label for="user_status_new">User status:</label>
+                    <select id="user_status_new" name="user_status_new">
+                        <option value=""></option>
+                        <option value="registered">registered</option>
+                    </select>
+                    <input class="add_new_user" type="email" name="email_new" id="email_new" placeholder="email" />
+                    <input class="add_new_user" type="text" name="first_name_new" id="first_name_new" placeholder="first name" />
+                    <input class="add_new_user" type="text" name="last_name_new" id="last_name_new" placeholder="last name" />
+                    <button id="add_user_btn" class="ui-btn">Submit</button>
+                </div>
+                <div data-role="collapsible" class="collapsible">
+                    <h3>List Users</h3>
+                    <p>I'm the collapsible content for section 2</p>
+                </div>
+                <div data-role="collapsible" class="collapsible">
+                    <h3>Delete</h3>
+                    <p>I'm the collapsible content for section 3</p>
+                </div>
+            </div>
+        </div>
+        <div data-role="footer">
+            <h1></h1>
         </div>
     </div>
 
@@ -192,6 +228,11 @@
     <script type="text/javascript" src="js/register.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/logout.js"></script>
+
+    <script type="text/javascript" src="js/overlaymenu.js"></script>
+
+    <script type="text/javascript" src="js/user_add.js"></script>
+    <script type="text/javascript" src="js/username_availability.js"></script>
 </body>
 
 </html>
