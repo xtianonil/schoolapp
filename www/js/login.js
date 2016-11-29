@@ -15,23 +15,38 @@ $("#login").click(function(){
 				//`alert(dataString);
 			},
 			success: function(data){
-				if(data)
+				if (data === "login_error")
+				{
+					alert("invalid username or password");
+
+				}
+				else if(data !== "login_error")
 				{	// login success
 					var user_details = JSON.parse(data);
-					localStorage.login = "true";
-					localStorage.username = username;
-					localStorage.user_type = user_details[0].user_type;
-					//alert(localStorage.user_type); 
 
-					window.location.href = "index.html#logged_in";
+					if (user_details[0].user_status !== "registered")
+					{
+						alert("Unregistered account");
+						
+					}
+					else
+					{	//registered account
+						localStorage.login = "true";
+						localStorage.username = username;
+						localStorage.user_type = user_details[0].user_type;
+						localStorage.user_status = user_details[0].user_status;
+						
+						window.location.href = "index.html#logged_in";
+					}
 				}
-				else if(data)
+				else
 				{	//login error
 					alert("Login error");
-					$("#login").html('Login');
+					
 				}
-			}
-		});
+				$("#login").html('Login');
+			}//end of success
+		});//end of ajax
 	}
 	return false;
 });

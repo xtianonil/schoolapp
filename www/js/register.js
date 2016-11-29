@@ -1,79 +1,60 @@
 $("#register_btn").click(function(){
 	var uname = $("#reg_username").val();
-	var pword = $("#reg_password").val();
+	//var pword = $("#reg_password").val();
 	var eml = $("#reg_email").val();
 	var vcode = $("#verif_code").val();
-
-	alert(localStorage.getItem('registrationId'));
-	/*
-	var dataString="username="+uname;
-	$.ajax({
-			type: "POST",
-			url: "http://192.168.0.16/school_connect_server/check_if_username_exists.php",
-			data: dataString,
-			crossDomain: true,
-			cache: false,
-			beforeSend: function(){
-
-			},
-			success: function(data){
-				alert(dataString);
-			}
-	});
-	*/
 	
 	$.post("http://192.168.0.16/school_connect_server/check_if_username_exists.php",
 	{
 		username : uname
 	})
-		.done(function(data){
-			//alert(data);
-			if (data === "username_exists")
+		.done(function(user_availability){
+			if (user_availability === "username_available")
 			{
-				//alert("username exists");
+				alert("Invalid username");
 			}
-			else if (data === "username_available")
+			else if (user_availability === "username_exists")
 			{
-				//alert("error");
+				$.post("http://192.168.0.16/school_connect_server/check_if_user_registered.php",{username:uname})
+					.done(function(is_user_registered){
+						if (is_user_registered === "user_registered_true")
+						{
+							alert("Username already registered");
+						}
+						else
+						{
+							$.post("http://192.168.0.16/school_connect_server/check_verif_code.php",
+							{
+								username : uname,
+								verif_code : vcode
+								})
+								.done(function(code_verification){
+									if (code_verification === "verif_code_true")
+									{
+										//alert("correct verification code")
+										//chnage user_status to "registered"
+										$.post("http://192.168.0.16/school_connect_server/user_register.php",
+											{
+												username : uname
+											})
+										.done(function(registration_successful){
+											if (registration_successful)
+											{
+												alert("registration successful");
+												window.location.href = "index.html#not_logged_in";
+												$("#login").html('Login');
+											}
+											else
+												alert("registration error");
+										});
+									}
+									else if (code_verification === "verif_code_false")
+									{
+										alert("invalid verification code");
+									}
+							});//end of $.post check verif code
+						}
+				});		
 			}
-	});
-	
-	/*
-	alert("submit registration");
-	var username = $("#username").val();
-	var password = $("#password").val();
-	var dataString="username="+username+"&password="+password+"&register=";
-	if($.trim(username).length>0 & $.trim(password).length>0)
-	{
-		$.ajax({
-			type: "POST",
-			url: "http://192.168.0.16/school_connect_server/register.php",
-			data: dataString,
-			crossDomain: true,
-			cache: false,
-			beforeSend: function(){ 
-				$("#register").html('Connecting...');
-				//`alert(dataString);
-			},
-			success: function(data){
-				if(data)
-				{	// register success
-					var user_details = JSON.parse(data);
-					localStorage.register = "true";
-					localStorage.username = username;
-					localStorage.user_type = user_details[0].user_type;
-					//alert(localStorage.user_type); 
-
-					window.location.href = "index.html#logged_in";
-				}
-				else if(data)
-				{	//register error
-					alert("register error");
-					$("#register").html('register');
-				}
-			}
-		});
-	}
-	return false;
-	*/
-});
+	});//end of $.post check if username exists
+});//end of register.btn click
