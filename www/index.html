@@ -57,6 +57,7 @@
 
                 });
             */
+            alert("localStorage.login: "+localStorage.login);
         });
     </script>
     <title>School Connect</title>
@@ -72,25 +73,50 @@
         </div>
         -->
     </div>
-    <div data-role="page" id="pageone">
-        <div data-role="panel" id="overlayPanel" data-display="overlay"> 
-            <h2>Menu</h2>
+    <div data-role="page" id="not_logged_in">
+        <div data-role="footer">
+            <h1></h1>
+        </div> 
+        <!--<a href="#logged_in" class="ui-btn">&lt;</a>-->
+        <div data-role="main" class="ui-content">
+            <!--<p>Click on one of the the buttons to open the Panel with different display modes.</p>-->
+            <!--<a href="#overlayPanel" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">Menu</a>-->
+            <input id="username" type="text" placeholder="username" />            
+            <input id="password" type="password" placeholder="password" value="" autocomplete="off">
+            <button id="login" class="ui-btn">Login</button>
+            <!--<input id="email" type="email" placeholder="email@domain.com" />-->
+        </div>
+        <div data-role="footer">
+            <h1></h1>
+        </div> 
+    </div>
+
+    <div data-role="page" id="logged_in">
+        <div data-role="panel" id="overlayPanel" data-display="overlay">
+            <h2>Menu<a href="#pageone" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left"></a></h2>
             <ul>
                 <li><a href="#pagetwo">Go to page 2</a></li>
                 <li><a href="#pagethree">Go to page 3</a></li>
+                <li><a href="#logout">Log out</a></li>
             </ul>
-            <a href="#pageone" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left">Close menu</a>
         </div> 
         <div data-role="header">
             <a href="#overlayPanel" class="ui-btn">&lt;</a>
             <h1>Home</h1>
         </div>
         <div data-role="main" class="ui-content">
-            <p>Click on one of the the buttons to open the Panel with different display modes.</p>
+            <!--<p>Click on one of the the buttons to open the Panel with different display modes.</p>-->
             <!--<a href="#overlayPanel" class="ui-btn ui-btn-inline ui-corner-all ui-shadow">Menu</a>-->
+            <!--
+            <input id="username" type="text" placeholder="username" />            
+            <input id="password" type="password" placeholder="password" value="" autocomplete="off">
+            <button id="login" class="ui-btn">Login</button>
+            -->
+            <!--<input id="email" type="email" placeholder="email@domain.com" />-->
         </div>
         <div data-role="footer">
-            <h1></h1>
+
+            <h1><a href="#" id="logout">Logout</a></h1>
         </div> 
     </div> 
 
@@ -99,6 +125,8 @@
     <script type="text/javascript">
         app.initialize();
     </script>
+    <script type="text/javascript" src="js/login.js"></script>
+    <script type="text/javascript" src="js/logout.js"></script>
 </body>
 
 </html>

@@ -75,7 +75,7 @@ var app = {
             var dataString = "reg_id=" + reg_id + "&register=";
             $.ajax({
                 type: "POST",
-                url: "http://192.168.1.14/school_connect_server/register.php",
+                url: "http://192.168.0.16/school_connect_server/register.php",
                 data: dataString,
                 crossDomain: true,
                 cache: false,
