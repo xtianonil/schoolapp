@@ -64,6 +64,14 @@
                 });
             */
             //alert("localStorage.login: "+localStorage.login);
+            if (localStorage.login === "false")
+            {
+                window.location.href = "index.html#not_logged_in";
+            }
+            else
+            {
+                window.location.href = "index.html#logged_in";
+            }
         });
     </script>
     <title>School Connect</title>
