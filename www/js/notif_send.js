@@ -1,4 +1,4 @@
-$('#send_notif').on('pageinit', function() {
+$('#send_notif').on('pagebeforeshow', function() {
 	//populate target recipients dropbox
 	$.post(localStorage.webhost+"group_fetch_list.php")
 		.done(function(query_result){
@@ -42,7 +42,7 @@ $('#send_notif').on('pageinit', function() {
 									.done(function(save_successful){
 										if (save_successful)
 										{
-											
+
 										}
 									});//end of localstorage webhost notif save
 								});//end of localstorage webhost send notif gcm
