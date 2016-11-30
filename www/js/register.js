@@ -31,12 +31,12 @@ $("#register_btn").click(function(){
 								.done(function(code_verification){
 									if (code_verification === "verif_code_true")
 									{
-										//alert("correct verification code")
+										//alert(localStorage.registrationId);
 										//chnage user_status to "registered"
 										$.post("http://192.168.0.16/school_connect_server/user_register.php",
 											{
 												username : uname,
-												regid : localStorage.registrationId
+												regid : localStorage.getItem('registrationId')
 											})
 											.done(function(registration_successful){
 												if (registration_successful)
