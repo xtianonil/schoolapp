@@ -15,7 +15,6 @@ $("#login").click(function(){
 				//`alert(dataString);
 			},
 			success: function(data){
-				alert(data);
 				if (data === "login_error")
 				{
 					alert("invalid username or password");
