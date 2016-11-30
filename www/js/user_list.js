@@ -3,7 +3,7 @@ $("#list_users_header")
 	$.post(localStorage.webhost+"user_list.php")
 		.done(function(result_set){
 			var users = JSON.parse(result_set);
-			var table = $('<table id="users_table" style="border-collapse: collapse;"></table>');
+			var table = $('<table id="users_table" style="border-collapse:collapse; margin:0;"></table>');
 
 			$.each(users, function(i, field)
 			{
@@ -21,23 +21,99 @@ $("#list_users_header")
 				row = $('<tr></tr>');
 				var rowData = $("<td></td>")
 							.attr('id',userid)
-							//.addClass('cells')
+							.addClass('cells')
 							.text(username);
 				row.append(rowData);
 
 				var rowData = $("<td></td>")
 							.attr('id',userid)
-							//.addClass('cells')
+							.addClass('cells')
 							.text(user_type);
 				row.append(rowData);
 
 				table.append(row);
 			});
+
 			$("#list_users_content").empty();
 			$("#list_users_content").append(table);
 
-			$("#users_table tr:even").css("background-color", "#CCCCCC");
-			$("#users_table tr:odd").css("background-color", "#F4F4F8");
+			$("#users_table tr:even").css("background-color", "#E0E0E0");
+			$("#users_table tr:odd").css("background-color", "#F6F6F6");
+
+			$(".cells").click(function(){
+				var id = $(this).attr('id');
+				//alert(pg);
+				$("#list_users").click();
+
+				$.post(localStorage.webhost+"record_view.php",
+				{
+					table 			: "user",
+					field 			: "user_id",
+					searchstring 	: id,
+					orderby			: "username"
+				}
+					)
+					.done(function(res){
+						var user_details = JSON.parse(res);
+						var table = $('<table id="user_details_table" style="border-collapse:collapse; margin:0;"></table>');
+
+						var row = $('<tr></tr>');
+						var rowData = $("<td></td>")
+							.attr('id',user_details[0].user_id)
+							.addClass('cells')
+							.text("Username:");
+						row.append(rowData);
+						var rowData = $("<td></td>")
+							.attr('id',user_details[0].user_id)
+							.addClass('cells')
+							.text(user_details[0].username);
+						row.append(rowData);
+						table.append(row);
+
+						var row = $('<tr></tr>');
+						var rowData = $("<td></td>")
+							.attr('id',user_details[0].user_id)
+							.addClass('cells')
+							.text("Email:");
+						row.append(rowData);
+						var rowData = $("<td></td>")
+							.attr('id',user_details[0].user_id)
+							.addClass('cells')
+							.text(user_details[0].email);
+						row.append(rowData);
+						table.append(row);
+
+						var row = $('<tr></tr>');
+						var rowData = $("<td></td>")
+							.attr('id',user_details[0].user_id)
+							.addClass('cells')
+							.text("User type:");
+						row.append(rowData);
+						var rowData = $("<td></td>")
+							.attr('id',user_details[0].user_id)
+							.addClass('cells')
+							.text(user_details[0].user_type);
+						row.append(rowData);
+						table.append(row);
+						
+						$("#user_details_div").empty();
+						$("#user_details_div").append(table);
+					});
+
+				$("#delete_user_btn").click(function(){
+						//alert("user:"+id+" deleted from...");
+						$.post(localStorage.webhost+"user_delete.php",{userid:id})
+							.done(function(deletion_successful){
+								if (deletion_successful)
+								{
+									alert("User deletion successful");
+									$("#users_list_dialog").dialog("close");
+									$(".collapsible").collapsible('collapse');
+									//$("#list_users").click();
+								}
+							});
+					});//end of delete user btn click
+				});//end of .cells click
 		});
 });
 

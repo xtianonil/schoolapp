@@ -10,9 +10,22 @@ $("#add_user_btn").click(function(){
 		first_name : $.trim($("#first_name_new").val()),
 		last_name : $.trim($("#last_name_new").val())
 		})
-		.done(function(new_user_added){
-			if (new_user_added)
+		.done(function(userid_lastinserted){
+			//alert("last inserted id: "+userid_lastinserted);
+			if (userid_lastinserted)
 			{
+				//user automatically becomes a member of the school
+				
+				$.post(localStorage.webhost+"group_add_member.php",
+					{
+						userid : userid_lastinserted,
+						groupid : "1"
+					}
+					)
+					.done(function(){
+
+				});
+
 				alert("New user added successfully");
 				window.location.href = "index.html#user_management";
 

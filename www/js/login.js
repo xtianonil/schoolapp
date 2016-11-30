@@ -34,7 +34,13 @@ $("#login").click(function(){
 						localStorage.login = "true";
 						localStorage.username = username;
 						localStorage.user_type = user_details[0].user_type;
-						
+
+						//restrict access
+						if (localStorage.user_type === "school_admin")
+							$(".admin_only").show();
+						else
+							$(".admin_only").hide();
+
 						window.location.href = "index.html#logged_in";
 					}
 				}
