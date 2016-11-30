@@ -4234,7 +4234,7 @@ textarea.ui-input-text.ui-textinput-autogrow {
 	-moz-transition-duration: 100ms;
 	-o-transition-duration: 100ms;
 	transition-duration: 100ms;
-	-webkit-touch-callout: none;
+	/*-webkit-touch-callout: none;*/
 	/*-webkit-user-select: none;*/
 	-moz-user-select: none;
 	-ms-user-select: none;
