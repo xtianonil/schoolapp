@@ -35,17 +35,18 @@ $("#register_btn").click(function(){
 										//chnage user_status to "registered"
 										$.post("http://192.168.0.16/school_connect_server/user_register.php",
 											{
-												username : uname
+												username : uname,
+												regid : localStorage.registrationId
 											})
-										.done(function(registration_successful){
-											if (registration_successful)
-											{
-												alert("registration successful");
-												window.location.href = "index.html#not_logged_in";
-												$("#login").html('Login');
-											}
-											else
-												alert("registration error");
+											.done(function(registration_successful){
+												if (registration_successful)
+												{
+													alert("registration successful");
+													window.location.href = "index.html#not_logged_in";
+													$("#login").html('Login');
+												}
+												else
+													alert("registration error");
 										});
 									}
 									else if (code_verification === "verif_code_false")
