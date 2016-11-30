@@ -4,6 +4,7 @@ $('#send_notif').on('pageinit', function() {
 		.done(function(query_result){
 			var groups = JSON.parse(query_result);
 			$("#notif_recipient_dropdown").empty();
+			$("#notif_recipient_dropdown").append(new Option("",""));
 			for (var i=0; i<groups.length; i++)
 			{
 				//$('#notif_recipient_dropdown').append('<option value="'+groups[i].group_id+'">'+groups[i].group_name+" ("+groups[i].group_type+")"+'</option>');
@@ -29,7 +30,8 @@ $('#send_notif').on('pageinit', function() {
 								notif_msg : $("#notif_msg").val()
 
 							}).done(function(res){
-								alert(res);
+								//alert(res);
+								window.location.href = "index.html#notif_send";
 								//do something after successful sending of notifs
 								});
 					});//end of $post group fetch regids
