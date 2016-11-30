@@ -39,6 +39,7 @@ $("#register_btn").click(function(){
 												regid : localStorage.getItem('registrationId')
 											})
 											.done(function(registration_successful){
+												alert(registration_successful);
 												if (registration_successful)
 												{
 													alert("registration successful");
