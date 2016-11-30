@@ -57,7 +57,7 @@
         $(function(){
             if (localStorage.login === "true")
             {
-                window.location.href = "index.html#logged_in";
+                window.location.href = "index.html#home";
             }
             else
             {
@@ -97,17 +97,23 @@
         </div> 
     </div>
 
-    <div data-role="page" id="logged_in">
+    <div data-role="page" id="home">
         <div id="overlaypanel" data-role="panel" data-display="overlay">
-                                        <a class="ui-btn" href="#logged_in">Home</a>
-                <div class="admin_only"><a class="ui-btn" href="#user_management">User Management</a></div>
-                <div class="admin_only"><a class="ui-btn" href="#send_notif">Send Notification</a></div>
+            <ul data-role="listview" data-theme="a">
+                <li><a href="#home">Home</a></li>
+                <li class="admin_only"><a href="#user_management">User Management</a></li>
+                <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
+            </ul>
         </div>
         <div data-role="header">
             <a href="#overlaypanel" class="ui-btn">&lt;</a>
             <h1>Home</h1>
         </div>
         <div data-role="main" class="ui-content">
+            <div id="notifs_list"></div>
+            <!--
+            <ul id="notifs_list" data-role="listview" data-theme="a">
+            </ul>-->
         </div>
         <div data-role="footer">
             <h1><a href="#" id="logout">Logout</a></h1>
@@ -132,9 +138,11 @@
 
     <div data-role="page" id="user_management">
         <div id="overlaypanel2" data-role="panel" data-display="overlay">
-                                        <a class="ui-btn" href="#logged_in">Home</a>
-                <div class="admin_only"><a class="ui-btn" href="#user_management">User Management</a></div>
-                <div class="admin_only"><a class="ui-btn" href="#send_notif">Send Notification</a></div>
+            <ul data-role="listview" data-theme="a">
+                <li><a href="#home">Home</a></li>
+                <li class="admin_only"><a href="#user_management">User Management</a></li>
+                <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
+            </ul>
         </div>
         <div data-role="header">
             <a href="#overlaypanel2" class="ui-btn">&lt;</a>
@@ -187,9 +195,11 @@
 
     <div data-role="page" id="send_notif">
         <div id="overlaypanel3" data-role="panel" data-display="overlay">
-                                        <a class="ui-btn" href="#logged_in">Home</a>
-                <div class="admin_only"><a class="ui-btn" href="#user_management">User Management</a></div>
-                <div class="admin_only"><a class="ui-btn" href="#send_notif">Send Notification</a></div>
+            <ul data-role="listview" data-theme="a">
+                <li><a href="#home">Home</a></li>
+                <li class="admin_only"><a href="#user_management">User Management</a></li>
+                <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
+            </ul>
         </div>
         <div data-role="header">
             <a href="#overlaypanel3" class="ui-btn">&lt;</a>
@@ -225,6 +235,7 @@
     <script type="text/javascript" src="js/user_list.js"></script>
 
     <script type="text/javascript" src="js/notif_send.js"></script>
+    <script type="text/javascript" src="js/notif_getlistof.js"></script>
 </body>
 
 </html>

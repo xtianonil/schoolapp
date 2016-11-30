@@ -34,6 +34,7 @@ $("#login").click(function(){
 						localStorage.login = "true";
 						localStorage.username = username;
 						localStorage.user_type = user_details[0].user_type;
+						localStorage.user_id = user_details[0].user_id;
 
 						//restrict access
 						if (localStorage.user_type === "school_admin")
@@ -41,7 +42,7 @@ $("#login").click(function(){
 						else
 							$(".admin_only").hide();
 
-						window.location.href = "index.html#logged_in";
+						window.location.href = "index.html#home";
 					}
 				}
 				else

@@ -22,6 +22,7 @@ $("#list_users_header")
 				var rowData = $("<td></td>")
 							.attr('id',userid)
 							.addClass('cells')
+							.css('padding','1em')
 							.text(username);
 				row.append(rowData);
 

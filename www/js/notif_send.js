@@ -30,10 +30,22 @@ $('#send_notif').on('pageinit', function() {
 								notif_msg : $("#notif_msg").val()
 
 							}).done(function(res){
-								//alert(res);
+								alert("Notification successfully sent.");
 								window.location.href = "index.html#notif_send";
-								//do something after successful sending of notifs
-								});
+								//do something after successful sending of notifs, save to DB
+								$.post(localStorage.webhost+"notif_save.php",
+									{
+										created_by : localStorage.user_id,
+										payload : $("#notif_msg").val(),
+										target_group : $("#notif_recipient_dropdown").val()
+									})
+									.done(function(save_successful){
+										if (save_successful)
+										{
+											
+										}
+									});//end of localstorage webhost notif save
+								});//end of localstorage webhost send notif gcm
 					});//end of $post group fetch regids
 				});//end of send notif btn click
 		});//end of $.post fetch group list
