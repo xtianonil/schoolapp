@@ -6,7 +6,8 @@ $('#send_notif').on('pageinit', function() {
 			$("#notif_recipient_dropdown").empty();
 			for (var i=0; i<groups.length; i++)
 			{
-				$("#notif_recipient_dropdown").append(new Option(groups[i].group_name+" ("+groups[i].group_type+")",groups[i].group_id))
+				//$('#notif_recipient_dropdown').append('<option value="'+groups[i].group_id+'">'+groups[i].group_name+" ("+groups[i].group_type+")"+'</option>');
+				$("#notif_recipient_dropdown").append(new Option(groups[i].group_name+" ("+groups[i].group_type+")",groups[i].group_id));
 			}
 
 			$("#send_notif_btn").click(function(){
