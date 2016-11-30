@@ -55,13 +55,13 @@
 
     <script type="text/javascript">
         $(function(){
-            if (localStorage.login === "false")
+            if (localStorage.login === "true")
             {
-                window.location.href = "index.html#not_logged_in";
+                window.location.href = "index.html#logged_in";
             }
             else
             {
-                window.location.href = "index.html#logged_in";
+                window.location.href = "index.html#not_logged_in";
             }
         });
     </script>
@@ -198,16 +198,10 @@
 
         <div data-role="main" class="ui-content">
             <label for="notif_recipient" class="select">Send to:</label>
-            <select name="notif_recipient" id="notif_recipient">
-                <!--
-                <option value="standard">School</option>
-                <option value="rush">Rush: 3 days</option>
-                <option value="express">Express: next day</option>
-                <option value="overnight">Overnight</option>
-                -->
-            </select>
-            <label for="msg_notif" class="select">Notification:</label>
-            <textarea cols="40" rows="8" name="msg_notif" id="msg_notif" maxlength="255" style="resize: none"></textarea>
+            <select name="notif_recipient" id="notif_recipient_dropdown"></select>
+            <label for="notif_msg" class="select">Notification:</label>
+            <textarea cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
+            <button id="send_notif_btn">Send</button>
         </div>
 
         <div data-role="footer" class="footer">
@@ -229,6 +223,8 @@
     <script type="text/javascript" src="js/user_add.js"></script>
     <script type="text/javascript" src="js/username_availability.js"></script>
     <script type="text/javascript" src="js/user_list.js"></script>
+
+    <script type="text/javascript" src="js/notif_send.js"></script>
 </body>
 
 </html>
