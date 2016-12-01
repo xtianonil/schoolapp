@@ -43,7 +43,7 @@ $("#login").click(function(){
 							$(".admin_only").hide();
 
 						//update registration id of logged in user
-						//app.initialize();
+						app.initialize();
 						$.post(localStorage.webhost+"user_register.php",
 							{
 								username : username,
@@ -59,9 +59,7 @@ $("#login").click(function(){
 								location.reload();
 								$("#login").html('Login');
 							});
-
-
-						window.location.href = "index.html#home";
+						//window.location.href = "index.html#home";
 					}
 				}
 				else
