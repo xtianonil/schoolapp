@@ -55,8 +55,8 @@ $("#login").click(function(){
 									//alert("reg_id updated");
 									//window.location.href = "index.html#home";
 								}
-								//window.location.href = "index.html#home";
-								//$("#login").html('Login');
+								window.location.href = "index.html#home";
+								$("#login").html('Login');
 							});
 
 
