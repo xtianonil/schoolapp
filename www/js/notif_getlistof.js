@@ -45,11 +45,30 @@ $('#home').on('pagebeforeshow',function() {
 //document.addEventListener("deviceready", onDeviceReady, false);
 
 //function onDeviceReady() {
+	/*
 $( "#home" ).on( "pagecontainerload", function( event, ui ) {
 	alert("pasok sa home");
+});*/
+/*
+$( "a" ).on( "click", function( event ) {
+
+	// Prevent the usual navigation behavior
+	event.preventDefault();
+
+	// Alter the url according to the anchor's href attribute, and
+	// store the data-foo attribute information with the url
+	$.mobile.navigate( $(this).attr( "href" ), {
+		//foo: $(this).attr("data-foo")
+	});
+
+	// Hypothetical content alteration based on the url. E.g, make
+	// an Ajax request for JSON data and render a template into the page.
+	alterContent( $(this).attr("href") );
 });
-$(document).delegate('#home', 'pageshow', function () {
-//$('#home').on('pageshow',function() {
+*/
+
+//$(document).delegate('#home', 'pageshow', function () {
+$('#home').on('pageshow',function() {
 	//alert("pasok home");
 	//window.location.href = "index.html#home";
 	$.post(localStorage.webhost+"notif_getlistof.php",{userid:localStorage.user_id})
@@ -81,7 +100,8 @@ $(document).delegate('#home', 'pageshow', function () {
 				//$("#notifs_list").append("</ul>");
 			}
 			//$("#notifs_list").append("</ul>");
-			window.location.href = "index.html#home";
+			//window.location.href = "index.html#home";
+			$( ":mobile-pagecontainer" ).pagecontainer("change", "#home", {  reload : true, allowSamePageTransition : true, transition : "none" });
 			});
 	});
 /*

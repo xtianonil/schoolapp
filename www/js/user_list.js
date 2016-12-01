@@ -7,8 +7,11 @@ function onDeviceReady() {
     });
 }
 */
-$(document).delegate('#user_management', 'pageshow', function () {
+//$(document).delegate('#user_management', 'pageshow', function () {
 //$("#user_management").on('pageshow',function(){
+$("#user_management_link").click(function(){
+	//alert("ASDF");
+	$(":mobile-pagecontainer").pagecontainer("change", "#user_management", { options });
 	//window.location.href = "index.html#user_management";
 //$("#list_users_header")
 	//.on("collapsibleexpand",function( event, ui ) {
