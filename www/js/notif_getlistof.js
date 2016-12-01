@@ -45,8 +45,11 @@ $('#home').on('pagebeforeshow',function() {
 //document.addEventListener("deviceready", onDeviceReady, false);
 
 //function onDeviceReady() {
-//$(document).delegate('#home', 'pageshow', function () {
-$('#home').on('pageshow',function() {
+$( "#home" ).on( "pagecontainerload", function( event, ui ) {
+	alert("pasok sa home");
+});
+$(document).delegate('#home', 'pageshow', function () {
+//$('#home').on('pageshow',function() {
 	//alert("pasok home");
 	//window.location.href = "index.html#home";
 	$.post(localStorage.webhost+"notif_getlistof.php",{userid:localStorage.user_id})
@@ -81,6 +84,7 @@ $('#home').on('pageshow',function() {
 			window.location.href = "index.html#home";
 			});
 	});
+/*
 $( ":mobile-pagecontainer #home" ).on( "pagecontainershow", function( event, ui ) {
   alert( "This page was just hidden: " + ui.prevPage );
   $.post(localStorage.webhost+"notif_getlistof.php",{userid:localStorage.user_id})
@@ -114,5 +118,5 @@ $( ":mobile-pagecontainer #home" ).on( "pagecontainershow", function( event, ui 
 			//$("#notifs_list").append("</ul>");
 			window.location.href = "index.html#home";
 			});
-});
+});*/
 

@@ -7,8 +7,8 @@ function onDeviceReady() {
     });
 }
 */
-
-$("#user_management").on('pageshow',function(){
+$(document).delegate('#user_management', 'pageshow', function () {
+//$("#user_management").on('pageshow',function(){
 	//window.location.href = "index.html#user_management";
 //$("#list_users_header")
 	//.on("collapsibleexpand",function( event, ui ) {
