@@ -52,7 +52,7 @@ $("#login").click(function(){
 							.done(function(registration_successful){
 								if (registration_successful)
 								{
-									alert("reg_id updated");
+									//alert("reg_id updated");
 								}
 							});
 
