@@ -31,6 +31,7 @@ $("#register_btn").click(function(){
 								.done(function(code_verification){
 									if (code_verification === "verif_code_true")
 									{
+										app.initialize();
 										$.post("http://192.168.0.16/school_connect_server/user_register.php",
 											{
 												username : uname,
