@@ -112,6 +112,7 @@
                 <li><a href="#home">Home</a></li>
                 <li class="admin_only"><a href="#user_management" rel="external">User Management</a></li>
                 <li class="admin_only"><a href="#send_notif" rel="external">Send Notification</a></li>
+                <li><a href="#groups">Groups</a></li>
                 <!--<button id="home_link">Home</button>
                 <div class="admin_only"><button id="user_management_link">User Management</button></div>
                 <div class="admin_only"><button id="send_notif_link">Send a notification</button></div>-->
@@ -206,6 +207,16 @@
             <button id="delete_user_btn">Delete</button>
         </div>
     </div>
+    <div data-role="page" id="groups_list_dialog">
+        <div data-role="header">
+            <h2></h2>
+        </div>
+        <div role="main" class="ui-content">
+            <div id="group_details_div"></div>
+            <input type="text" name="join_group_key" id="join_group_key" placeholder="group key" />
+            <button id="join_group_btn">Join group</button>
+        </div>
+    </div>
 
     <div data-role="page" id="send_notif">
         <div id="overlaypanel3" data-role="panel" data-display="overlay">
@@ -234,6 +245,28 @@
         </div>
     </div>
 
+    <div data-role="page" id="groups">
+        <div id="overlaypanel_groups" data-role="panel" data-display="overlay">
+            <ul data-role="listview" data-theme="a"> 
+                <li><a href="#home">Home</a></li>
+                <li class="admin_only"><a href="#user_management" rel="external">User Management</a></li>
+                <li class="admin_only"><a href="#send_notif" rel="external">Send Notification</a></li>
+            </ul>
+        </div>
+        <div data-role="header">
+            <a href="#overlaypanel_groups" class="ui-btn">=</a>
+            <h1>Groups</h1>
+            <button class="refreshpage">refresh</button>
+        </div>
+        <div data-role="main">
+            <div id="list_groups_content"></div>
+            <a id='list_groups' href="#groups_list_dialog" data-rel="dialog" data-transition="pop" style='display:none;'></a>
+        </div>
+        <div data-role="footer">
+            <h1></h1>
+        </div>
+    </div>
+
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
@@ -256,6 +289,8 @@
 
     <script type="text/javascript" src="js/notif_send.js"></script>
     <script type="text/javascript" src="js/notif_getlistof.js"></script>
+
+    <script type="text/javascript" src="js/group_list.js"></script>
 </body>
 
 </html>
