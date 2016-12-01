@@ -1,3 +1,11 @@
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+    $(document).delegate("#user_management", "pageshow", function() {
+        //console.log("Hello world!");
+    });
+}
+
 $("#user_management").on('pageshow',function(){
 //$("#list_users_header")
 	//.on("collapsibleexpand",function( event, ui ) {

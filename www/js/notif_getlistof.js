@@ -1,3 +1,11 @@
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+    $(document).delegate("#home", "pageshow", function() {
+        //console.log("Hello world!");
+    });
+}
+
 $('#home').on('pageshow',function() {
 	//alert("pasok home");
 	$.post(localStorage.webhost+"notif_getlistof.php",{userid:localStorage.user_id})
