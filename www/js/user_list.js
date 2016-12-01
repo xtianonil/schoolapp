@@ -1,5 +1,4 @@
-$(document)
-	.on('pageshow',"#user_management", function() {
+$("#user_management").on('pageshow',function(){
 //$("#list_users_header")
 	//.on("collapsibleexpand",function( event, ui ) {
 	$.post(localStorage.webhost+"user_list.php")
