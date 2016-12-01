@@ -31,7 +31,7 @@ $("#register_btn").click(function(){
 								.done(function(code_verification){
 									if (code_verification === "verif_code_true")
 									{
-										app.initialize();
+										//app.initialize();
 										$.post(localStorage.webhost+"user_register.php",
 											{
 												username : uname,
