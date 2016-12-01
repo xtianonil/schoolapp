@@ -55,7 +55,9 @@
 
     <script type="text/javascript">
         //on deviceready
+        
         $(function(){
+        //$( document ).on( "mobileinit" , function () {
             if (localStorage.login === "true")
             {
                 window.location.href = "index.html#home";
@@ -65,6 +67,7 @@
                 window.location.href = "index.html#not_logged_in";
             }
         });
+        
         /*
         $(this).on('deviceready',function(){
             //alert('pagebeforeshow');
@@ -105,19 +108,19 @@
 
     <div data-role="page" id="home">
         <div id="overlaypanel" data-role="panel" data-display="overlay">
-            <!--<ul data-role="listview" data-theme="a">-->
-                <!--
+            <ul data-role="listview" data-theme="a"> 
                 <li><a href="#home">Home</a></li>
-                <li class="admin_only"><a href="#user_management">User Management</a></li>
-                <li class="admin_only"><a href="#send_notif">Send Notification</a></li>-->
-                <!--<button id="home_link">Home</button>-->
+                <li class="admin_only"><a href="#user_management" rel="external">User Management</a></li>
+                <li class="admin_only"><a href="#send_notif" rel="external">Send Notification</a></li>
+                <!--<button id="home_link">Home</button>
                 <div class="admin_only"><button id="user_management_link">User Management</button></div>
-                <div class="admin_only"><button id="send_notif_link">Send a notification</button></div>
-            <!--</ul>-->
+                <div class="admin_only"><button id="send_notif_link">Send a notification</button></div>-->
+            </ul>
         </div>
         <div data-role="header">
             <a href="#overlaypanel" class="ui-btn">=</a>
             <h1>Home</h1>
+            <button class="refreshpage">refresh</button>
         </div>
         <div data-role="main" class="ui-content">
             <div id="notifs_list"></div>
@@ -157,6 +160,7 @@
         <div data-role="header">
             <a href="#overlaypanel2" class="ui-btn">=</a>
             <h1>User Management</h1>
+            <button class="refreshpage">refresh</button>
         </div>
         <div data-role="main" class="ui-content">
             <div data-role="collapsible-set" data-theme="c" data-content-theme="d">
@@ -214,6 +218,7 @@
         <div data-role="header">
             <a href="#overlaypanel3" class="ui-btn">=</a>
             <h1>Send Notification</h1>
+            <button class="refreshpage">refresh</button>
         </div>
 
         <div data-role="main" class="ui-content">
@@ -234,6 +239,11 @@
     <script type="text/javascript">
         app.initialize();
         localStorage.webhost = "http://192.168.0.16/school_connect_server/";
+
+        $(".refreshpage").click(function(){
+            location.reload();
+            //location.assign("index.html#home");
+        });
     </script>
     <script type="text/javascript" src="js/restrict_access.js"></script>
     <script type="text/javascript" src="js/register.js"></script>

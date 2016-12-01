@@ -8,10 +8,13 @@ function onDeviceReady() {
 }
 */
 //$(document).delegate('#user_management', 'pageshow', function () {
-//$("#user_management").on('pageshow',function(){
-$("#user_management_link").click(function(){
-	//alert("ASDF");
-	$(":mobile-pagecontainer").pagecontainer("change", "#user_management", { options });
+$(document).on('pagebeforeshow','#user_management',function(){
+	$("#refreshpage").click(function(){
+            location.reload();
+        });
+//$("#user_management_link").click(function(){
+	//alert("pasok user mgnt");
+	//$(":mobile-pagecontainer").pagecontainer("change", "#user_management", { options });
 	//window.location.href = "index.html#user_management";
 //$("#list_users_header")
 	//.on("collapsibleexpand",function( event, ui ) {

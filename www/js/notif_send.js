@@ -1,5 +1,6 @@
 //$(document).delegate('#send_notif', 'pageshow', function () {
-$('#send_notif').on('pageshow', function() {
+$(document).on('pagebeforeshow','#send_notif',function(){
+	
 	//populate target recipients dropbox
 	$.post(localStorage.webhost+"group_fetch_list.php")
 		.done(function(query_result){

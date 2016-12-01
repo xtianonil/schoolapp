@@ -66,11 +66,53 @@ $( "a" ).on( "click", function( event ) {
 	alterContent( $(this).attr("href") );
 });
 */
-
+/*
+$(document).on('pagecontainerbeforeshow', function(e, ui) {
+    var pageId = $('body').pagecontainer('getActivePage').prop('id');
+    if (pageId === "home")
+    {
+    	getlistof_notifs();
+    	//alert(pageId);
+    	//$( ":mobile-pagecontainer" ).pagecontainer( "change", "index.html#home");
+    	//$(document).pagecontainer( "change", "index.html#home",{ role: "page" });
+    	//window.location.href = "index.html#home";
+    	//$.mobile.changePage("index.html#home");
+    }
+});
+*/
 //$(document).delegate('#home', 'pageshow', function () {
-$('#home').on('pageshow',function() {
+//$(document).on('pagebeforeshow','#home',function(){
 	//alert("pasok home");
 	//window.location.href = "index.html#home";
+
+$(document).on('pagecontainerbeforeshow', function (e, ui) {
+	var ThisPage = $(':mobile-pagecontainer').pagecontainer('getActivePage').attr('id');
+	//alert(ThisPage);
+  switch(ThisPage){
+
+    case 'home':
+    	getlistof_notifs();
+    	//$(":mobile-pagecontainer").pagecontainer("change", "index.html#home", {reload: true});
+    	//$("body").pagecontainer("change", "index.html#home", {reload: true});
+    	//$(document).pagecontainer("change", "#home", {reload: true});
+    	//location.href = "index.html#home";
+    	//$(document).pagecontainer( "load" );
+    	break;
+    case 'Page2':
+
+    case 'Page3':
+	}
+});
+//location.reload();
+
+//
+/*
+$(document).on('pagebeforeshow','#home',function(){
+	getlistof_notifs();
+	});
+	*/
+function getlistof_notifs()
+{
 	$.post(localStorage.webhost+"notif_getlistof.php",{userid:localStorage.user_id})
 		.done(function(result){
 			var group_membership = JSON.parse(result);
@@ -101,9 +143,11 @@ $('#home').on('pageshow',function() {
 			}
 			//$("#notifs_list").append("</ul>");
 			//window.location.href = "index.html#home";
-			$( ":mobile-pagecontainer" ).pagecontainer("change", "#home", {  reload : true, allowSamePageTransition : true, transition : "none" });
+			//$(document).pagecontainer( "change", "index.html#home",{reload: true});
+			//location.reload();
+			//$( ":mobile-pagecontainer" ).pagecontainer("change", "#home", {  reload : true, allowSamePageTransition : true, transition : "none" });
 			});
-	});
+}
 /*
 $( ":mobile-pagecontainer #home" ).on( "pagecontainershow", function( event, ui ) {
   alert( "This page was just hidden: " + ui.prevPage );
