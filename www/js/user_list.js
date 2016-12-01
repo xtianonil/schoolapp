@@ -1,3 +1,4 @@
+/*
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
@@ -5,8 +6,10 @@ function onDeviceReady() {
         //console.log("Hello world!");
     });
 }
+*/
 
 $("#user_management").on('pageshow',function(){
+	//window.location.href = "index.html#user_management";
 //$("#list_users_header")
 	//.on("collapsibleexpand",function( event, ui ) {
 	$.post(localStorage.webhost+"user_list.php")
