@@ -56,11 +56,12 @@ $("#login").click(function(){
 									//window.location.href = "index.html#home";
 								}
 								window.location.href = "index.html#home";
+								location.reload();
 								$("#login").html('Login');
 							});
 
 
-						window.location.href = "index.html#home";
+						//window.location.href = "index.html#home";
 					}
 				}
 				else

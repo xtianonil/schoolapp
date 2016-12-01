@@ -42,6 +42,7 @@ $("#register_btn").click(function(){
 												{
 													alert("registration successful");
 													window.location.href = "index.html#not_logged_in";
+													location.reload();
 													$("#login").html('Login');
 												}
 												else
