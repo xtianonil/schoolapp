@@ -1,4 +1,4 @@
-$(document).on('pageshow', '#home', function() {
+$('#home').on('pageshow',function() {
 	//alert("pasok home");
 	$.post(localStorage.webhost+"notif_getlistof.php",{userid:localStorage.user_id})
 		.done(function(result){
