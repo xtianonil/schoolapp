@@ -61,7 +61,7 @@ $("#login").click(function(){
 							});
 
 
-						//window.location.href = "index.html#home";
+						window.location.href = "index.html#home";
 					}
 				}
 				else
