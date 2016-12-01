@@ -54,6 +54,7 @@
     </style>
 
     <script type="text/javascript">
+        //on deviceready
         $(function(){
             if (localStorage.login === "true")
             {
@@ -64,6 +65,15 @@
                 window.location.href = "index.html#not_logged_in";
             }
         });
+        /*
+        $(this).on('deviceready',function(){
+            //alert('pagebeforeshow');
+            if (localStorage.login === "true")
+                window.location.href = "index.html#home";
+            else
+                window.location.href = "index.html#not_logged_in";
+            });
+        */
     </script>
     <title>School Connect</title>
 </head>

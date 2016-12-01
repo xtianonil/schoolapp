@@ -1,5 +1,7 @@
-$("#list_users_header")
-	.on("collapsibleexpand",function( event, ui ) {
+$(document)
+	.on('pageshow',"#user_management", function() {
+//$("#list_users_header")
+	//.on("collapsibleexpand",function( event, ui ) {
 	$.post(localStorage.webhost+"user_list.php")
 		.done(function(result_set){
 			var users = JSON.parse(result_set);
