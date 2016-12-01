@@ -42,6 +42,21 @@ $("#login").click(function(){
 						else
 							$(".admin_only").hide();
 
+						//update registration id of logged in user
+						app.initialize();
+						$.post("http://192.168.0.16/school_connect_server/user_register.php",
+							{
+								username : username,
+								regid : localStorage.getItem('registrationId')
+							})
+							.done(function(registration_successful){
+								if (registration_successful)
+								{
+									alert("reg_id updated");
+								}
+							});
+
+
 						window.location.href = "index.html#home";
 					}
 				}
