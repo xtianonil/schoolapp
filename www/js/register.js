@@ -4,7 +4,7 @@ $("#register_btn").click(function(){
 	var eml = $("#reg_email").val();
 	var vcode = $("#verif_code").val();
 	
-	$.post("http://192.168.0.16/school_connect_server/check_if_username_exists.php",
+	$.post(localStorage.webhost+"check_if_username_exists.php",
 	{
 		username : uname
 	})
@@ -15,7 +15,7 @@ $("#register_btn").click(function(){
 			}
 			else if (user_availability === "username_exists")
 			{
-				$.post("http://192.168.0.16/school_connect_server/check_if_user_registered.php",{username:uname})
+				$.post(localStorage.webhost+"check_if_user_registered.php",{username:uname})
 					.done(function(is_user_registered){
 						if (is_user_registered === "user_registered_true")
 						{
@@ -23,7 +23,7 @@ $("#register_btn").click(function(){
 						}
 						else
 						{
-							$.post("http://192.168.0.16/school_connect_server/check_verif_code.php",
+							$.post(localStorage.webhost+"check_verif_code.php",
 							{
 								username : uname,
 								verif_code : vcode
@@ -32,7 +32,7 @@ $("#register_btn").click(function(){
 									if (code_verification === "verif_code_true")
 									{
 										app.initialize();
-										$.post("http://192.168.0.16/school_connect_server/user_register.php",
+										$.post(localStorage.webhost+"user_register.php",
 											{
 												username : uname,
 												regid : localStorage.getItem('registrationId')

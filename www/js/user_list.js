@@ -9,9 +9,7 @@ function onDeviceReady() {
 */
 //$(document).delegate('#user_management', 'pageshow', function () {
 $(document).on('pagebeforeshow','#user_management',function(){
-	$("#refreshpage").click(function(){
-            location.reload();
-        });
+	
 //$("#user_management_link").click(function(){
 	//alert("pasok user mgnt");
 	//$(":mobile-pagecontainer").pagecontainer("change", "#user_management", { options });

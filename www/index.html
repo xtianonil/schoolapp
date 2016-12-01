@@ -110,8 +110,8 @@
         <div id="overlaypanel" data-role="panel" data-display="overlay">
             <ul data-role="listview" data-theme="a"> 
                 <li><a href="#home">Home</a></li>
-                <li class="admin_only"><a href="#user_management" rel="external">User Management</a></li>
-                <li class="admin_only"><a href="#send_notif" rel="external">Send Notification</a></li>
+                <li class="admin_only"><a href="#user_management">User Management</a></li>
+                <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
                 <li><a href="#groups">Groups</a></li>
                 <!--<button id="home_link">Home</button>
                 <div class="admin_only"><button id="user_management_link">User Management</button></div>
@@ -249,8 +249,8 @@
         <div id="overlaypanel_groups" data-role="panel" data-display="overlay">
             <ul data-role="listview" data-theme="a"> 
                 <li><a href="#home">Home</a></li>
-                <li class="admin_only"><a href="#user_management" rel="external">User Management</a></li>
-                <li class="admin_only"><a href="#send_notif" rel="external">Send Notification</a></li>
+                <li class="admin_only"><a href="#user_management">User Management</a></li>
+                <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
             </ul>
         </div>
         <div data-role="header">
@@ -259,7 +259,10 @@
             <button class="refreshpage">refresh</button>
         </div>
         <div data-role="main">
+            <h4>List of groups (you're not a member of):</h4>
             <div id="list_groups_content"></div>
+            <h4>You're a member of these groups:</h4>
+            <div id="list_groups_memberof_content"></div>
             <a id='list_groups' href="#groups_list_dialog" data-rel="dialog" data-transition="pop" style='display:none;'></a>
         </div>
         <div data-role="footer">
@@ -271,7 +274,8 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
-        localStorage.webhost = "http://192.168.0.16/school_connect_server/";
+        //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
+        localStorage.webhost = "http://192.168.1.14/school_connect_server/";
 
         $(".refreshpage").click(function(){
             location.reload();

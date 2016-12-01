@@ -6,7 +6,7 @@ $("#login").click(function(){
 	{
 		$.ajax({
 			type: "POST",
-			url: "http://192.168.0.16/school_connect_server/login.php",
+			url: localStorage.webhost+"login.php",
 			data: dataString,
 			crossDomain: true,
 			cache: false,
@@ -44,7 +44,7 @@ $("#login").click(function(){
 
 						//update registration id of logged in user
 						app.initialize();
-						$.post("http://192.168.0.16/school_connect_server/user_register.php",
+						$.post(localStorage.webhost+"user_register.php",
 							{
 								username : username,
 								regid : localStorage.getItem('registrationId')
@@ -53,7 +53,10 @@ $("#login").click(function(){
 								if (registration_successful)
 								{
 									//alert("reg_id updated");
+									//window.location.href = "index.html#home";
 								}
+								//window.location.href = "index.html#home";
+								//$("#login").html('Login');
 							});
 
 

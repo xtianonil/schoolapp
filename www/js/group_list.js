@@ -1,9 +1,11 @@
 $(document).on('pagebeforeshow','#groups',function(){
-	$.post(localStorage.webhost+"group_list.php")
+	//alert(localStorage.webhost+"group_list.php");
+	$.post(localStorage.webhost+"group_list.php",{userid:localStorage.user_id })
 		.done(function(result_set){
+			//alert(result_set);
 			var groups = JSON.parse(result_set);
 			var table = $('<table id="groups_table" style="border-collapse:collapse; margin:0;"></table>');
-
+			//alert(result_set);
 			$.each(groups, function(i, field)
 			{
 				var groupid 	= field.group_id;
