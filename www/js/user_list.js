@@ -9,7 +9,11 @@ function onDeviceReady() {
 */
 //$(document).delegate('#user_management', 'pageshow', function () {
 $(document).on('pagebeforeshow','#user_management',function(){
-
+	//restrict access
+	if (localStorage.user_type === "school_admin")
+		$(".admin_only").show();
+	else
+		$(".admin_only").hide();
 //$("#user_management_link").click(function(){
 	//alert("pasok user mgnt");
 	//$(":mobile-pagecontainer").pagecontainer("change", "#user_management", { options });
@@ -18,6 +22,7 @@ $(document).on('pagebeforeshow','#user_management',function(){
 	//.on("collapsibleexpand",function( event, ui ) {
 	$.post(localStorage.webhost+"user_list.php")
 		.done(function(result_set){
+
 			var users = JSON.parse(result_set);
 			var table = $('<table id="users_table" style="border-collapse:collapse; margin:0; table-layout:fixed; width:100%;"></table>');
 
@@ -50,7 +55,6 @@ $(document).on('pagebeforeshow','#user_management',function(){
 
 				table.append(row);
 			});
-
 			$("#list_users_content").empty();
 			$("#list_users_content").append(table);
 

@@ -1,4 +1,9 @@
 $(document).on('pagebeforeshow','#groups',function(){
+	//restrict access
+	if (localStorage.user_type === "school_admin")
+		$(".admin_only").show();
+	else
+		$(".admin_only").hide();
 	//alert(localStorage.webhost+"group_list.php");
 	$.post(localStorage.webhost+"group_list.php",{userid:localStorage.user_id })
 		.done(function(result_set){

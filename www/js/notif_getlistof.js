@@ -115,6 +115,12 @@ function getlistof_notifs()
 {
 	$.post(localStorage.webhost+"notif_getlistof.php",{userid:localStorage.user_id})
 		.done(function(result){
+			//restrict access
+			if (localStorage.user_type === "school_admin")
+				$(".admin_only").show();
+			else
+				$(".admin_only").hide();
+			
 			var group_membership = JSON.parse(result);
 			$("#notifs_list").empty();
 			for (var i=0; i<group_membership.length; i++)
@@ -158,11 +164,7 @@ function getlistof_notifs()
 			location.reload();
 			$("#login").html('Login');
 
-			//restrict access
-			if (localStorage.user_type === "school_admin")
-				$(".admin_only").show();
-			else
-				$(".admin_only").hide();
+			
 			});
 }
 /*
