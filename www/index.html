@@ -68,15 +68,15 @@
             }
         });
         
-        /*
-        $(this).on('deviceready',function(){
+        
+        $(document).on('mobileinit',function(){
             //alert('pagebeforeshow');
             if (localStorage.login === "true")
                 window.location.href = "index.html#home";
             else
                 window.location.href = "index.html#not_logged_in";
             });
-        */
+        
     </script>
     <title>School Connect</title>
 </head>
@@ -93,6 +93,7 @@
     </div>
     <div data-role="page" id="not_logged_in">
         <div data-role="header">
+            <button class="refreshpage">refresh</button>
             <h1></h1>
         </div> 
         <div data-role="main" class="ui-content">
