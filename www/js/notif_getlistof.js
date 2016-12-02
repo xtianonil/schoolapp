@@ -127,11 +127,11 @@ function getlistof_notifs()
 						var notifs = JSON.parse(data);
 						for (var i=0; i<notifs.length; i++)
 						{
-							var li = $("<li><a href='#' style='text-decoration:none'>message: "	+notifs[i].payload+"</a></li>");
+							var li = $("<h2>"				+notifs[i].payload+"</h2>");
 							ul.append(li);
-							var li = $("<li><a href='#' style='text-decoration:none'>posted by: "	+notifs[i].username+"</a></li>");
+							var li = $("<h2>posted by: "	+notifs[i].username+"</h2>");
 							ul.append(li);
-							var li = $("<li><a href='#' style='text-decoration:none'>posted on: "	+notifs[i].created_on+"</a></li>");
+							var li = $("<h2>posted on: "	+notifs[i].created_on+"</h2>");
 							ul.append(li);
 							ul.append("<hr>");
 						}

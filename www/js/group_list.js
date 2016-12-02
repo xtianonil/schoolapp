@@ -2,9 +2,51 @@ $(document).on('pagebeforeshow','#groups',function(){
 	//alert(localStorage.webhost+"group_list.php");
 	$.post(localStorage.webhost+"group_list.php",{userid:localStorage.user_id })
 		.done(function(result_set){
+			var groups = JSON.parse(result_set);
+			var table = $('<table class="groups_table" style="border-collapse:collapse; margin:0;"></table>');
+			//alert(result_set);
+			$.each(groups, function(i, field)
+			{
+				var groupid 	= field.group_id;
+				var grouptype 	= field.group_type;
+				var modid	 	= field.moderator_id;
+				var groupkey 	= field.group_key;
+				var groupname 	= field.group_name;
+				/*
+				var user_status = field.user_status;
+				var email 		= field.email;
+				var first_name 	= field.first_name;
+				var last_name 	= field.last_name;*/
+
+				//$("#list_users_content").append("<ul> <li>"+username+"</li> <li> <ul> <li>"+verif_code+"</li> <li>"+user_status+"</li> </ul></li></ul>");
+				row = $('<tr></tr>');
+				var rowData = $("<td></td>")
+							.attr('id',groupid)
+							.addClass('cells')
+							.css('padding','1em')
+							.text(groupname);
+				row.append(rowData);
+
+				var rowData = $("<td></td>")
+							.attr('id',groupid)
+							.addClass('cells')
+							.text(grouptype);
+				row.append(rowData);
+
+				table.append(row);
+			});
+
+			$("#listall_groups_memberof_content").empty();
+			$("#listall_groups_memberof_content").append(table);
+
+			$(".groups_table tr:even").css("background-color", "#E0E0E0");
+			$(".groups_table tr:odd").css("background-color", "#F6F6F6");
+		});
+	$.post(localStorage.webhost+"group_listall.php")
+		.done(function(result_set){
 			//alert(result_set);
 			var groups = JSON.parse(result_set);
-			var table = $('<table id="groups_table" style="border-collapse:collapse; margin:0;"></table>');
+			var table = $('<table class="groups_table" style="border-collapse:collapse; margin:0;"></table>');
 			//alert(result_set);
 			$.each(groups, function(i, field)
 			{
@@ -40,8 +82,8 @@ $(document).on('pagebeforeshow','#groups',function(){
 			$("#list_groups_content").empty();
 			$("#list_groups_content").append(table);
 
-			$("#groups_table tr:even").css("background-color", "#E0E0E0");
-			$("#groups_table tr:odd").css("background-color", "#F6F6F6");
+			$(".groups_table tr:even").css("background-color", "#E0E0E0");
+			$(".groups_table tr:odd").css("background-color", "#F6F6F6");
 
 			$(".cells").click(function(){
 				var id = $(this).attr('id');
@@ -130,5 +172,5 @@ $(document).on('pagebeforeshow','#groups',function(){
 							});
 					});//end of delete user btn click
 				});//end of .cells click
-		});
+	});
 	});

@@ -259,10 +259,11 @@
             <button class="refreshpage">refresh</button>
         </div>
         <div data-role="main">
-            <h4>List of groups (you're not a member of):</h4>
+            <h4>Member groups:</h4>
+            <div id="listall_groups_memberof_content"></div>
+            <hr>
+            <h4>List of all groups:</h4>
             <div id="list_groups_content"></div>
-            <h4>You're a member of these groups:</h4>
-            <div id="list_groups_memberof_content"></div>
             <a id='list_groups' href="#groups_list_dialog" data-rel="dialog" data-transition="pop" style='display:none;'></a>
         </div>
         <div data-role="footer">
@@ -275,10 +276,15 @@
     <script type="text/javascript">
         app.initialize();
         //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
-        localStorage.webhost = "http://192.168.1.14/school_connect_server/";
+        localStorage.webhost = "http://192.168.0.16/school_connect_server/";
 
         $(".refreshpage").click(function(){
             location.reload();
+            //restrict access
+            if (localStorage.user_type === "school_admin")
+                $(".admin_only").show();
+            else
+                $(".admin_only").hide();
             //location.assign("index.html#home");
         });
     </script>
