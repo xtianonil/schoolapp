@@ -59,6 +59,9 @@ $("#login").click(function(){
 									$(".admin_only").show();
 								else
 									$(".admin_only").hide();
+								$("#logout").empty();
+								$("#logout").val(localStorage.username);
+								//alert(localStorage.username);
 							});
 						//window.location.href = "index.html#home";
 					}

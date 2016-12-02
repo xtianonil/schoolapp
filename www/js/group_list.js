@@ -3,7 +3,7 @@ $(document).on('pagebeforeshow','#groups',function(){
 	$.post(localStorage.webhost+"group_list.php",{userid:localStorage.user_id })
 		.done(function(result_set){
 			var groups = JSON.parse(result_set);
-			var table = $('<table class="groups_table" style="border-collapse:collapse; margin:0;"></table>');
+			var table = $('<table class="groups_table" style="border-collapse:collapse; margin:0; table-layout:fixed; width:100%;"></table>');
 			//alert(result_set);
 			$.each(groups, function(i, field)
 			{
@@ -46,7 +46,7 @@ $(document).on('pagebeforeshow','#groups',function(){
 		.done(function(result_set){
 			//alert(result_set);
 			var groups = JSON.parse(result_set);
-			var table = $('<table class="groups_table" style="border-collapse:collapse; margin:0;"></table>');
+			var table = $('<table class="groups_table" style="border-collapse:collapse; margin:0; table-layout:fixed; width:100%;"></table>');
 			//alert(result_set);
 			$.each(groups, function(i, field)
 			{

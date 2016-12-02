@@ -127,12 +127,12 @@ function getlistof_notifs()
 						var notifs = JSON.parse(data);
 						for (var i=0; i<notifs.length; i++)
 						{
-							var li = $("<h5>"				+notifs[i].payload+"</h5>");
+							var li = $("<h3>"				+notifs[i].payload+"</h3>");
 							ul.append(li);
-							var li = $("<h5>posted by: "	+notifs[i].username+"</h5>");
+							var li = $("<h5>posted by: "	+notifs[i].username+" (<font color='red'>"+notifs[i].created_on+"</font>)</h5>");
 							ul.append(li);
-							var li = $("<h5>posted on: "	+notifs[i].created_on+"</h5>");
-							ul.append(li);
+							//var li = $("<h5>posted on: "	+notifs[i].created_on+"</h5>");
+							//ul.append(li);
 							ul.append("<hr>");
 						}
 					});
@@ -146,6 +146,23 @@ function getlistof_notifs()
 			//$(document).pagecontainer( "change", "index.html#home",{reload: true});
 			//location.reload();
 			//$( ":mobile-pagecontainer" ).pagecontainer("change", "#home", {  reload : true, allowSamePageTransition : true, transition : "none" });
+			});
+		$("#footer_div").empty();
+		var logout = $("<h4> (<a href='#' id='logout'>logout</a>)</h4>");
+		logout.prepend("signed in as: "+localStorage.username);
+		$("#footer_div").append(logout);
+
+		$("#logout").click(function(){
+			localStorage.clear();
+			window.location.href = "index.html#not_logged_in";
+			location.reload();
+			$("#login").html('Login');
+
+			//restrict access
+			if (localStorage.user_type === "school_admin")
+				$(".admin_only").show();
+			else
+				$(".admin_only").hide();
 			});
 }
 /*

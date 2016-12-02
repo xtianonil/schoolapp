@@ -9,7 +9,7 @@ function onDeviceReady() {
 */
 //$(document).delegate('#user_management', 'pageshow', function () {
 $(document).on('pagebeforeshow','#user_management',function(){
-	
+
 //$("#user_management_link").click(function(){
 	//alert("pasok user mgnt");
 	//$(":mobile-pagecontainer").pagecontainer("change", "#user_management", { options });
@@ -19,7 +19,7 @@ $(document).on('pagebeforeshow','#user_management',function(){
 	$.post(localStorage.webhost+"user_list.php")
 		.done(function(result_set){
 			var users = JSON.parse(result_set);
-			var table = $('<table id="users_table" style="border-collapse:collapse; margin:0;"></table>');
+			var table = $('<table id="users_table" style="border-collapse:collapse; margin:0; table-layout:fixed; width:100%;"></table>');
 
 			$.each(users, function(i, field)
 			{
