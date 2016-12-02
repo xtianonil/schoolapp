@@ -22,14 +22,14 @@ $(document).on('pagebeforeshow','#groups',function(){
 				row = $('<tr></tr>');
 				var rowData = $("<td></td>")
 							.attr('id',groupid)
-							.addClass('cells')
+							//.addClass('cells')
 							.css('padding','1em')
 							.text(groupname);
 				row.append(rowData);
 
 				var rowData = $("<td></td>")
 							.attr('id',groupid)
-							.addClass('cells')
+							//.addClass('cells')
 							.text(grouptype);
 				row.append(rowData);
 
