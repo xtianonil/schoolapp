@@ -54,29 +54,21 @@
     </style>
 
     <script type="text/javascript">
-        //on deviceready
-        
-        $(function(){
-        //$( document ).on( "mobileinit" , function () {
-            if (localStorage.login === "true")
-            {
-                window.location.href = "index.html#home";
-            }
-            else
-            {
-                window.location.href = "index.html#not_logged_in";
-            }
-        });
-        
-        
-        $(document).on('mobileinit',function(){
-            //alert('pagebeforeshow');
+        $(function(){   //on deviceready
+        //for debugging purposes only, omit this in production
             if (localStorage.login === "true")
                 window.location.href = "index.html#home";
             else
                 window.location.href = "index.html#not_logged_in";
             });
         
+        
+        $(document).on('mobileinit',function(){
+            if (localStorage.login === "true")
+                window.location.href = "index.html#home";
+            else
+                window.location.href = "index.html#not_logged_in";
+            });
     </script>
     <title>School Connect</title>
 </head>
@@ -119,9 +111,17 @@
                 <div class="admin_only"><button id="send_notif_link">Send a notification</button></div>-->
             </ul>
         </div>
-        <div data-role="header">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" class="ui-btn-active ui-state-persist">Home</a></li>
+                    <li><a href="#groups_mngmnt">Groups</a></li>
+                </ul>
+            </div>
+            <!--
             <a href="#overlaypanel" class="ui-btn">=</a>
             <h1>Home</h1>
+            -->
             <!--<button class="refreshpage">refresh</button>-->
         </div>
         <div data-role="main" class="ui-content">
@@ -130,7 +130,7 @@
             <ul id="notifs_list" data-role="listview" data-theme="a">
             </ul>-->
         </div>
-        <div data-role="footer">
+        <div data-role="footer" data-position="fixed">
             <div id="footer_div" style="text-align:center"></div>
             <!--<h1><a href="#" id="logout">Logout</a></h1>-->
         </div> 
@@ -200,6 +200,39 @@
             <h1></h1>
         </div>
     </div>
+    <div data-role="page" id="groups_mngmnt">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#groups_mngmnt" class="ui-btn-active ui-state-persist">Groups</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="main" class="ui-content">
+            <div data-role="collapsible-set">
+                <div data-role="collapsible" class="collapsible">
+                    <h3>Create a new group</h3>
+                    <input type="text" name="groupname_new" id="groupname_new" placeholder="group name" />
+                    <label for="grouptype_new">group type:</label>
+                    <select id="grouptype_new" name="grouptype_new">
+                        <option val="school">school</option>
+                        <option val="school_section">section</option>
+                        <option val="school_club">club</option>
+                    </select>
+                    <input type="text" id="groupmod_new" placeholder="group moderator" />
+                    <div id="groupmodslist_new"></div>
+                </div>
+                <div data-role="collapsible" class="collapsible">
+                    <h3>Groups list</h3>
+                </div>
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed">
+            <div id="footer_div2" style="text-align:center"></div>
+            <!--<h1><a href="#" id="logout">Logout</a></h1>-->
+        </div> 
+    </div>
 
     <div data-role="page" id="users_list_dialog">
         <div data-role="header">
@@ -207,6 +240,7 @@
         </div>
         <div role="main" class="ui-content">
             <div id="user_details_div"></div>
+            <button id="edit_user_btn">Update</button>
             <button id="delete_user_btn">Delete</button>
         </div>
     </div>
@@ -288,7 +322,6 @@
                 $(".admin_only").show();
             else
                 $(".admin_only").hide();
-            //location.assign("index.html#home");
         });
     </script>
     <script type="text/javascript" src="js/restrict_access.js"></script>
@@ -303,7 +336,12 @@
     <script type="text/javascript" src="js/notif_send.js"></script>
     <script type="text/javascript" src="js/notif_getlistof.js"></script>
 
+    <script type="text/javascript" src="js/group_listmem.js"></script>
+
+    <script type="text/javascript" src="js/group_getlistof.js"></script>
+
     <script type="text/javascript" src="js/group_list.js"></script>
+    <script type="text/javascript" src="js/group_selectmod.js"></script>
 </body>
 
 </html>

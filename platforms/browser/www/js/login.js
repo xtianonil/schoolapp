@@ -6,7 +6,7 @@ $("#login").click(function(){
 	{
 		$.ajax({
 			type: "POST",
-			url: "http://192.168.0.16/school_connect_server/login.php",
+			url: localStorage.webhost+"login.php",
 			data: dataString,
 			crossDomain: true,
 			cache: false,
@@ -15,23 +15,65 @@ $("#login").click(function(){
 				//`alert(dataString);
 			},
 			success: function(data){
-				if(data)
+				if (data === "login_error")
+				{
+					alert("invalid username or password");
+
+				}
+				else if(data !== "login_error")
 				{	// login success
 					var user_details = JSON.parse(data);
-					localStorage.login = "true";
-					localStorage.username = username;
-					localStorage.user_type = user_details[0].user_type;
-					//alert(localStorage.user_type); 
 
-					window.location.href = "index.html#logged_in";
+					if (user_details[0].user_status !== "registered")
+					{
+						alert("Unregistered account");
+						
+					}
+					else
+					{	//registered account
+						localStorage.login = "true";
+						localStorage.username = username;
+						localStorage.user_type = user_details[0].user_type;
+						localStorage.user_id = user_details[0].user_id;
+
+						//update registration id of logged in user
+						app.initialize();
+						$.post(localStorage.webhost+"user_register.php",
+							{
+								username : username,
+								regid : localStorage.getItem('registrationId')
+							})
+							.done(function(registration_successful){
+								if (registration_successful)
+								{
+									//alert("reg_id updated");
+									//window.location.href = "index.html#home";
+								}
+								window.location.href = "index.html#home";
+								location.reload();
+
+								$("#login").html('Login');
+
+								//restrict access
+								if (localStorage.user_type === "school_admin")
+									$(".admin_only").show();
+								else
+									$(".admin_only").hide();
+								$("#logout").empty();
+								$("#logout").val(localStorage.username);
+								//alert(localStorage.username);
+							});
+						//window.location.href = "index.html#home";
+					}
 				}
-				else if(data)
+				else
 				{	//login error
 					alert("Login error");
-					$("#login").html('Login');
+					
 				}
-			}
-		});
+				$("#login").html('Login');
+			}//end of success
+		});//end of ajax
 	}
 	return false;
 });

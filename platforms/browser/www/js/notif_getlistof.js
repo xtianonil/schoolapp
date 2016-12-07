@@ -154,7 +154,7 @@ function getlistof_notifs()
 			//$( ":mobile-pagecontainer" ).pagecontainer("change", "#home", {  reload : true, allowSamePageTransition : true, transition : "none" });
 			});
 		$("#footer_div").empty();
-		var logout = $("<h5> (<a href='#' id='logout'> logout </a>)</h5>");
+		var logout = $("<h5> (<a href='#' id='logout'>logout</a>)</h5>");
 		logout.prepend("signed in as: "+localStorage.username);
 		$("#footer_div").append(logout);
 

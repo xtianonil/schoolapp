@@ -75,7 +75,7 @@ var app = {
             var dataString = "reg_id=" + reg_id + "&register=";
             $.ajax({
                 type: "POST",
-                url: "http://192.168.0.16/school_connect_server/register.php",
+                url: localStorage.webhost+"get_regid.php",
                 data: dataString,
                 crossDomain: true,
                 cache: false,
@@ -108,6 +108,7 @@ var app = {
             //do something when device receives the notification?
             //ts_delivered
             var reg_id = data.registrationId;
+            /*
             var dataString = "reg_id=" + reg_id + "&push_notif_received=";
             $.ajax({
                 type: "POST",
@@ -126,6 +127,7 @@ var app = {
                     }
                 }
             });//end of $,ajax
+            */
        });//end of push.on('notif')
     }//end of setupPush: function()
 };
