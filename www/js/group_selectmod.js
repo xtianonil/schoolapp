@@ -44,12 +44,23 @@ function list_mods(searchstring)
 				row.append(rowData);
 
 				table.append(row);
-			});
+			});	
 			$("#groupmodslist_new").empty();
 			$("#groupmodslist_new").append(table);
 
 			$("#usermods_table tr:even").css("background-color", "#E0E0E0");
 			$("#usermods_table tr:odd").css("background-color", "#F6F6F6");
+
+			$(".cells").click(function(){
+				var selectedid = $(this).attr('id');
+				$("#groupmodslist_new").empty();
+				$.post(localStorage.webhost+"user_listspecific.php",{userid:selectedid})
+					.done(function(data){
+						var usr = JSON.parse(data);
+						$("#groupmod_new").val(usr[0].user_id);
+					});
+
+				});
 		});
 }
 

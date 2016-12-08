@@ -20,7 +20,7 @@ $(document).on('pagebeforeshow','#user_management',function(){
 	//window.location.href = "index.html#user_management";
 //$("#list_users_header")
 	//.on("collapsibleexpand",function( event, ui ) {
-	$.post(localStorage.webhost+"user_list.php")
+	$.post(localStorage.webhost+"user_listnonadmin.php")
 		.done(function(result_set){
 
 			var users = JSON.parse(result_set);
