@@ -90,8 +90,10 @@ $(document).on('pagecontainerbeforeshow', function (e, ui) {
 	//alert(ThisPage);
   switch(ThisPage){
 
+    case 'admin_panel':
     case 'home':
     	getlistof_notifs();
+    	//alert("ASF");
     	//$(":mobile-pagecontainer").pagecontainer("change", "index.html#home", {reload: true});
     	//$("body").pagecontainer("change", "index.html#home", {reload: true});
     	//$(document).pagecontainer("change", "#home", {reload: true});
@@ -141,6 +143,7 @@ function getlistof_notifs()
 							//ul.append(li);
 							ul.append("<hr>");
 						}
+						//alert(notifs.length);
 					});
 				ul_close = $("</ul>");
 				ul.append(ul_close);
@@ -153,19 +156,18 @@ function getlistof_notifs()
 			//location.reload();
 			//$( ":mobile-pagecontainer" ).pagecontainer("change", "#home", {  reload : true, allowSamePageTransition : true, transition : "none" });
 			});
+		/*
 		$("#footer_div").empty();
 		var logout = $("<h5> (<a href='#' id='logout'> logout </a>)</h5>");
 		logout.prepend("signed in as: "+localStorage.username);
 		$("#footer_div").append(logout);
-
 		$("#logout").click(function(){
 			localStorage.clear();
 			window.location.href = "index.html#not_logged_in";
 			location.reload();
 			$("#login").html('Login');
-
-			
 			});
+			*/
 }
 /*
 $( ":mobile-pagecontainer #home" ).on( "pagecontainershow", function( event, ui ) {

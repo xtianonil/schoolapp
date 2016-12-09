@@ -49,11 +49,15 @@ $("#login").click(function(){
 									//alert("reg_id updated");
 									//window.location.href = "index.html#home";
 								}
-								window.location.href = "index.html#home";
+								if (localStorage.user_type === "school_admin")
+									window.location.href = "index.html#admin_panel";
+								else
+									window.location.href = "index.html#home";
 								location.reload();
 
 								$("#login").html('Login');
 
+								/*
 								//restrict access
 								if (localStorage.user_type === "school_admin")
 									$(".admin_only").show();
@@ -61,6 +65,7 @@ $("#login").click(function(){
 									$(".admin_only").hide();
 								$("#logout").empty();
 								$("#logout").val(localStorage.username);
+								*/
 								//alert(localStorage.username);
 							});
 						//window.location.href = "index.html#home";

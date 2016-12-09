@@ -2,22 +2,22 @@
 document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
-    $(document).delegate("#user_management", "pageshow", function() {
+    $(document).delegate("#user_mngmnt", "pageshow", function() {
         //console.log("Hello world!");
     });
 }
 */
-//$(document).delegate('#user_management', 'pageshow', function () {
-$(document).on('pagebeforeshow','#user_management',function(){
+//$(document).delegate('#user_mngmnt', 'pageshow', function () {
+$(document).on('pagebeforeshow','#user_mngmnt',function(){
 	//restrict access
 	if (localStorage.user_type === "school_admin")
 		$(".admin_only").show();
 	else
 		$(".admin_only").hide();
-//$("#user_management_link").click(function(){
+//$("#user_mngmnt_link").click(function(){
 	//alert("pasok user mgnt");
-	//$(":mobile-pagecontainer").pagecontainer("change", "#user_management", { options });
-	//window.location.href = "index.html#user_management";
+	//$(":mobile-pagecontainer").pagecontainer("change", "#user_mngmnt", { options });
+	//window.location.href = "index.html#user_mngmnt";
 //$("#list_users_header")
 	//.on("collapsibleexpand",function( event, ui ) {
 	$.post(localStorage.webhost+"user_listnonadmin.php")
@@ -25,6 +25,8 @@ $(document).on('pagebeforeshow','#user_management',function(){
 
 			var users = JSON.parse(result_set);
 			var table = $('<table id="users_table" style="border-collapse:collapse; margin:0; table-layout:fixed; width:100%;"></table>');
+
+			var users_tbl = $("<ul data-role='listview' data-filter='true'>");
 
 			$.each(users, function(i, field)
 			{
@@ -38,6 +40,7 @@ $(document).on('pagebeforeshow','#user_management',function(){
 				var first_name 	= field.first_name;
 				var last_name 	= field.last_name;
 
+				//var users_tbl = $("<ul data-role='listview'>");
 				//$("#list_users_content").append("<ul> <li>"+username+"</li> <li> <ul> <li>"+verif_code+"</li> <li>"+user_status+"</li> </ul></li></ul>");
 				row = $('<tr></tr>');
 				var rowData = $("<td></td>")
@@ -46,17 +49,39 @@ $(document).on('pagebeforeshow','#user_management',function(){
 							.css('padding','1em')
 							.text(username);
 				row.append(rowData);
+				$("#listahan_users").append($("<li id='"+userid+"'><a href='#user_popup' data-rel='popup'>"+username+" "+user_type+"</a></li>"));
+			
+				//$("#user_details_popup").empty();
+				//$("#user_details_popup").html(username+" "+user_type);
+				//$("#user_details_popup").append($("<h1>"+username+" "+user_type+"</h1>"));
+				$("#listahan_users").listview("refresh");
+				//rown.listview("refresh");
 
 				var rowData = $("<td></td>")
 							.attr('id',userid)
 							.addClass('cells')
 							.text(user_type);
 				row.append(rowData);
-
+				//users_tbl.append($("<li>"+user_type+"</li>"));
+				
 				table.append(row);
+
+				//users_tbl.listview("refresh");
 			});
+
+			$( "#user_popup" ).bind({
+				   popupbeforeposition: function(event, ui)
+				   {
+				   		$("#email_edit").val($(this).attr('id'));
+				   		//$("#lastname_edit").val(last_name);
+				   		//$("#firstname_edit").val(first_name);
+				   }
+				});
+
+
 			$("#list_users_content").empty();
-			$("#list_users_content").append(table);
+			//$("#list_users_content").append(users_tbl);
+			//$("#list_users_content").append(table);
 
 			$("#users_table tr:even").css("background-color", "#E0E0E0");
 			$("#users_table tr:odd").css("background-color", "#F6F6F6");
