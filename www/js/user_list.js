@@ -50,7 +50,11 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 							.text(username);
 				row.append(rowData);
 				$("#listahan_users").append($("<li id='"+userid+"'><a href='#user_popup' data-rel='popup'>"+username+" "+user_type+"</a></li>"));
-			
+				$("#id").on('popupafteropen', function(){
+				    // do whatever here
+				    $(this).append("Add some HTML!");
+				    $(this).html("Or replace the HTML contents.");
+				});
 				//$("#user_details_popup").empty();
 				//$("#user_details_popup").html(username+" "+user_type);
 				//$("#user_details_popup").append($("<h1>"+username+" "+user_type+"</h1>"));
@@ -68,16 +72,16 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 
 				//users_tbl.listview("refresh");
 			});
-
+			/*
 			$( "#user_popup" ).bind({
 				   popupbeforeposition: function(event, ui)
 				   {
-				   		$("#email_edit").val($(this).attr('id'));
+				   		$("#email_edit").val($(this).children());
 				   		//$("#lastname_edit").val(last_name);
 				   		//$("#firstname_edit").val(first_name);
 				   }
 				});
-
+			*/
 
 			$("#list_users_content").empty();
 			//$("#list_users_content").append(users_tbl);
