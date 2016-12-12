@@ -26,7 +26,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 			var users = JSON.parse(result_set);
 			var table = $('<table id="users_table" style="border-collapse:collapse; margin:0; table-layout:fixed; width:100%;"></table>');
 
-			var users_tbl = $("<ul data-role='listview' data-filter='true'>");
+			var users_tbl = $("<ul data-role='listview' data-filter='true' data-inset='true'>");
 
 			$.each(users, function(i, field)
 			{
@@ -37,8 +37,8 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 				var user_type 	= field.user_type;
 				var user_status = field.user_status;
 				var email 		= field.email;
-				var first_name 	= field.first_name;
-				var last_name 	= field.last_name;
+				var fname 		= field.fname;
+				var lname 		= field.lname;
 
 				//var users_tbl = $("<ul data-role='listview'>");
 				//$("#list_users_content").append("<ul> <li>"+username+"</li> <li> <ul> <li>"+verif_code+"</li> <li>"+user_status+"</li> </ul></li></ul>");
@@ -49,12 +49,8 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 							.css('padding','1em')
 							.text(username);
 				row.append(rowData);
-				$("#listahan_users").append($("<li id='"+userid+"'><a href='#user_popup' data-rel='popup'>"+username+" "+user_type+"</a></li>"));
-				$("#id").on('popupafteropen', function(){
-				    // do whatever here
-				    $(this).append("Add some HTML!");
-				    $(this).html("Or replace the HTML contents.");
-				});
+				$("#listahan_users").append($("<li><a href='#user_popup' data-rel='popup' id="+userid+">"+lname+", "+fname+"</a></li>"));
+				
 				//$("#user_details_popup").empty();
 				//$("#user_details_popup").html(username+" "+user_type);
 				//$("#user_details_popup").append($("<h1>"+username+" "+user_type+"</h1>"));
@@ -72,15 +68,60 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 
 				//users_tbl.listview("refresh");
 			});
+			$("li a").click(function(){
+				//alert($(this).attr("id"));
+				$.post(localStorage.webhost+"user_listspecific.php",{userid:$(this).attr("id")})
+					.done(function(data){
+						var user_details = JSON.parse(data);
+						$("#email_edit").val(user_details[0].email);
+						$("#firstname_edit").val(user_details[0].fname);
+						$("#lastname_edit").val(user_details[0].lname);
+						//$("#firstname_edit").val(user_details[0].first_name);
+
+						$(".user_update").click(function(){
+							$.post(localStorage.webhost+"user_update.php",
+							{
+								userid : user_details[0].user_id,
+								lname 	: $("#lastname_edit").val(),
+								fname 	: $("#firstname_edit").val(),
+								email 	: $("#email_edit").val()
+							})
+								.done(function(update_successful){
+									//alert(update_successful);
+									if (update_successful)
+									{
+										alert("User account update successful");
+										location.reload();
+										//close popup
+
+										//$("#users_list_dialog").dialog("close");
+										//$(".collapsible").collapsible('collapse');
+									}
+								});
+							});
+					});
+				});
+
+			$(".user_delete").click(function(){
+				});
+
 			/*
 			$( "#user_popup" ).bind({
 				   popupbeforeposition: function(event, ui)
 				   {
-				   		$("#email_edit").val($(this).children());
+				   		//var parameters = $(this).data("url").split("?")[1];;
+			            //parameter = parameters.replace("id=","");  
+			            //alert(id);
+				   		$("#email_edit").val($(this).attr("id"));
 				   		//$("#lastname_edit").val(last_name);
 				   		//$("#firstname_edit").val(first_name);
 				   }
 				});
+			$(document).on('pagebeforeshow', "#user_mngmnt",function () {
+	            var parameters = $(this).data("url").split("?")[1];;
+	            parameter = parameters.replace("id=","");  
+	            alert(id);
+	        });
 			*/
 
 			$("#list_users_content").empty();
@@ -185,6 +226,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 						$("#user_details_div").empty();
 						$("#user_details_div").append(table);
 					});
+					/*
 				$("#edit_user_btn").click(function(){
 						//alert($("#username_edit").val() + " " + $("#usertype_edit").val() + " " + $("#email_edit").val());
 						$.post(localStorage.webhost+"user_update.php",
@@ -218,7 +260,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 								}
 							});
 					});//end of delete user btn click
-
+				*/
 				});//end of .cells click
 		});
 });

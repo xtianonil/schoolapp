@@ -265,16 +265,16 @@
                 <div data-role="collapsible" class="collapsible" id="list_users_header">
                     <h3>Users list</h3>
                     <div id="list_users_content"></div>
-                    <a href="#user_popup" data-rel="popup" >popup open</a> 
+                    <!--<a href="#user_popup" data-rel="popup" >popup open</a> -->
                     <div data-role="popup" id="user_popup">
                         <div id="user_details_popup">
-                            <ul data-role="listview">
+                            <ul data-role="listview" data-inset="true">
                                 <li><input type="text" name="email_edit" id="email_edit"></li>
                                 <li><input type="text" name="lastname_edit" id="lastname_edit"></li>
                                 <li><input type="text" name="firstname_edit" id="firstname_edit"></li>
                                 <li><input type="text" name="middlename_edit" id="middlename_edit"></li>
-                                <li><a href="#update">Update</a></li>
-                                <li><a href="#delete">Delete</a></li>
+                                <li><a href="#" class="user_update">Update</a></li>
+                                <li><a href="#" class="user_delete">Delete</a></li>
                             </ul>
                         </div>
                     </div>
@@ -408,7 +408,7 @@
     <script type="text/javascript">
         app.initialize();
         //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
-        localStorage.webhost = "http://192.168.0.16/school_connect_server/";
+        localStorage.webhost = "http://192.168.0.18/school_connect_server/";
 
         $(".refreshpage").click(function(){
             location.reload();
