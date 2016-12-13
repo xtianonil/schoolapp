@@ -119,19 +119,19 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 							//$("#user_popup").popup();
 							//$("#user_membership1").popup("open");
 
+							$( "#user_popup" ).on( "popupafterclose", function( event, ui ) {
+							    $("#email_edit").removeAttr('value');
+								$("#firstname_edit").val("");
+								$("#lastname_edit").val("");
+								$("#middlename_edit").val("");
+							});
+
 							setTimeout(function(){
-					          $("#user_membership1").popup();
-					          $("#user_membership1").popup("open");
-					        }, 3100);
+					        	//$("#user_membership1").popup();
+					        	$("#user_membership1").popup("open");
+					        }, 100);
 						});
 
-						$( "#user_popup" ).on( "popupafterclose", function( event, ui ) {
-						    $("#email_edit").removeAttr('value');
-							$("#firstname_edit").val("");
-							$("#lastname_edit").val("");
-							$("#middlename_edit").val("");
-						});
-						
 					});//end of $post userlistpecific
 				});//end of li a click
 
