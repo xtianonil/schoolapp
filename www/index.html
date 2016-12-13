@@ -268,17 +268,25 @@
                     <div id="list_users_content"></div>
                     <!--<a href="#user_popup" data-rel="popup" >popup open</a> -->
                     <div data-role="popup" id="user_popup">
-                        <div id="user_details_popup">
-                            <ul data-role="listview" data-inset="true">
-                                <li><input type="text" name="email_edit" id="email_edit"></li>
-                                <li><input type="text" name="lastname_edit" id="lastname_edit"></li>
-                                <li><input type="text" name="firstname_edit" id="firstname_edit"></li>
-                                <li><input type="text" name="middlename_edit" id="middlename_edit"></li>
-                                <li><a href="#" class="user_update">Update</a></li>
-                                <li><a href="#" class="user_delete">Delete</a></li>
-                            </ul>
-                        </div>
+                        <ul data-role="listview" data-inset="true">
+                            <li>Email:<input type="text" name="email_edit" id="email_edit"></li>
+                            <li>Last name:<input type="text" name="lastname_edit" id="lastname_edit"></li>
+                            <li>First name:<input type="text" name="firstname_edit" id="firstname_edit"></li>
+                            <li>Middle name:<input type="text" name="middlename_edit" id="middlename_edit"></li>
+                            <li><a href="#" data-rel="popup" class="user_membership">User Membership</a></li>
+                            <!--
+                            <li><a href="#" class="user_update">Update</a></li>
+                            <li><a href="#" class="user_delete">Delete</a></li>
+                            -->
+                        </ul>
                     </div>
+                    <div data-role="popup" id="user_membership1">
+                        <ul data-role="listview" data-inset="true">
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                    </div>
+
                     <ul id="listahan_users" data-role="listview" data-filter="true"></ul>
                     
                     <a id='list_users' href="#users_list_dialog" data-rel="dialog" data-transition="pop" style='display:none;'></a>
