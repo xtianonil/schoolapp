@@ -22,7 +22,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 	//.on("collapsibleexpand",function( event, ui ) {
 	$.post(localStorage.webhost+"user_listnonadmin.php")
 		.done(function(result_set){
-
+			//alert(result_set);
 			var users = JSON.parse(result_set);
 			var table = $('<table id="users_table" style="border-collapse:collapse; margin:0; table-layout:fixed; width:100%;"></table>');
 
@@ -90,20 +90,27 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 									//alert(update_successful);
 									if (update_successful)
 									{
-										alert("User account update successful");
+										alert("User account updated successfully");
 										location.reload();
-										//close popup
-
-										//$("#users_list_dialog").dialog("close");
-										//$(".collapsible").collapsible('collapse');
 									}
 								});
 							});
-					});
-				});
-
-			$(".user_delete").click(function(){
-				});
+					
+						$(".user_delete").click(function(){
+							$.post(localStorage.webhost+"user_delete.php",
+							{
+								userid : user_details[0].user_id
+							})
+								.done(function(deletion_successful){
+									if(deletion_successful)
+									{
+										alert("User account deleted successfully");
+										location.reload();
+									}
+								});
+							});//end of user delete click
+					});//end of $post userlistpecific
+				});//end of li a click
 
 			/*
 			$( "#user_popup" ).bind({
