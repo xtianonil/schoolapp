@@ -105,7 +105,7 @@
             <!--<button class="refreshpage">refresh</button>-->
         </div> 
         <div data-role="main" class="ui-content">
-            <input id="username" type="text" placeholder="username" />            
+            <input id="email_login" type="text" placeholder="email" />            
             <input id="password" type="password" placeholder="password" value="" autocomplete="off"/>
             <button id="login" class="ui-btn">Login</button>
             <div style="text-align:center;"><a href="#register">Register</a></div>
@@ -135,6 +135,7 @@
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
                     <li><a href="#register">Registration</a></li>
+                    <li><a href="#not_logged_in">Login</a></li>
                 </ul>
             </div>
             <!--
@@ -177,6 +178,7 @@
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
                     <li><a href="#register">Registration</a></li>
+                    <li><a href="#not_logged_in">Login</a></li>
                 </ul>
             </div>
             <!--
@@ -225,6 +227,7 @@
                     <li><a href="#user_mngmnt" class="ui-btn-active ui-state-persist">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
                     <li><a href="#register">Registration</a></li>
+                    <li><a href="#not_logged_in">Login</a></li>
                 </ul>
             </div>
         </div>
@@ -245,7 +248,7 @@
                     <input class="add_new_user" type="text" name="middle_name_new" id="middle_name_new" placeholder="middle name" />
                     
                     <!--<input class="add_new_user" type="text" name="username_new" id="username_new" placeholder="username"/>-->
-                    <input class="add_new_user" type="password" name="password_new" id="password_new" placeholder="password" />
+                    <!--<input class="add_new_user" type="password" name="password_new" id="password_new" placeholder="password" />-->
                     <!--<input class="add_new_user" type="text" name="verif_code_new" id="verif_code_new" placeholder="verification code" />-->
                     <!--<label for="user_type_new">User type:</label>
                     <select id="user_type_new" name="user_type_new">
@@ -307,6 +310,7 @@
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt" class="ui-btn-active ui-state-persist">Groups</a></li>
                     <li><a href="#register">Registration</a></li>
+                    <li><a href="#not_logged_in">Login</a></li>
                 </ul>
             </div>
         </div>
@@ -420,7 +424,7 @@
     <script type="text/javascript">
         app.initialize();
         //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
-        localStorage.webhost = "http://192.168.0.18/school_connect_server/";
+        localStorage.webhost = "http://192.168.0.12/school_connect_server/";
 
         $(".refreshpage").click(function(){
             location.reload();

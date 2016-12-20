@@ -7,57 +7,32 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 			$.each(users, function(i, field)
 			{
 				var userid 		= field.user_id;
-				var username 	= field.username;
+				//var username 	= field.username;
 				var password 	= field.password;
-				var verif_code 	= field.verif_code;
-				var user_type 	= field.user_type;
-				var user_status = field.user_status;
+				//var verif_code 	= field.verif_code;
+				//var user_type 	= field.user_type;
+				//var user_status = field.user_status;
 				var email 		= field.email;
 				var fname 		= field.fname;
+				var mname 		= field.mname;
 				var lname 		= field.lname;
 
-				$("#listahan_users").append($("<li><a href='#user_popup' data-rel='popup' id="+userid+">"+lname+", "+fname+"</a></li>"));		
+				$("#listahan_users").append($("<li><a href='#user_popup' class='users' data-rel='popup' id="+userid+">"+lname+", "+fname+"</a></li>"));		
 				$("#listahan_users").listview("refresh");
 			});
-			$("li a").click(function(){
-				$.post(localStorage.webhost+"user_listspecific.php",{userid:$(this).attr("id")})
+			
+			$(".users").click(function(event){
+				$.post(localStorage.webhost+"user_listspecificonly.php",{userid:$(this).attr("id")})
 					.done(function(data){
+						//alert(data);
 						var user_details = JSON.parse(data);
 						$("#email_edit").val(user_details[0].email);
 						$("#firstname_edit").val(user_details[0].fname);
 						$("#lastname_edit").val(user_details[0].lname);
-						$("#middlesname_edit").val(user_details[0].middles_name);
+						$("#middlename_edit").val(user_details[0].mname);
 
-						$(".user_update").click(function(){
-							$.post(localStorage.webhost+"user_update.php",
-							{
-								userid : user_details[0].user_id,
-								lname 	: $("#lastname_edit").val(),
-								fname 	: $("#firstname_edit").val(),
-								email 	: $("#email_edit").val()
-							})
-								.done(function(update_successful){
-									if (update_successful)
-									{
-										alert("User account updated successfully");
-										location.reload();
-									}
-								});
-							});
-					
-						$(".user_delete").click(function(){
-							$.post(localStorage.webhost+"user_delete.php",
-							{
-								userid : user_details[0].user_id
-							})
-								.done(function(deletion_successful){
-									if(deletion_successful)
-									{
-										alert("User account deleted successfully");
-										location.reload();
-									}
-								});
-							});//end of user delete click
+						localStorage.usermngntuserid = user_details[0].user_id;
+						//alert(user_details[0].user_id);
 					
 						$(".user_membership").click(function(){
 							$("#user_popup").popup("close");
@@ -75,7 +50,42 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 						});
 
 					});//end of $post userlistpecific
+				//event.stopPropagation();
 				});//end of li a click
+			$(".user_update").click(function(){
+				//alert("update");
+				$.post(localStorage.webhost+"user_update.php",
+				{
+					userid : localStorage.usermngntuserid,
+					lname 	: $("#lastname_edit").val(),
+					fname 	: $("#firstname_edit").val(),
+					mname 	: $("#middlename_edit").val(),
+					email 	: $("#email_edit").val()
+				})
+					.done(function(update_successful){
+						//alert(update_successful);
+						if (update_successful)
+						{
+							alert("User account updated successfully");
+							location.reload();
+						}
+					});
+				});
+		
+			$(".user_delete").click(function(){
+				//alert(localStorage.usermngntuserid);
+				$.post(localStorage.webhost+"user_delete.php",
+				{
+					userid : localStorage.usermngntuserid
+				})
+					.done(function(deletion_successful){
+						if(deletion_successful)
+						{
+							alert("User account deleted successfully");
+							location.reload();
+						}
+					});
+				});//end of user delete click
 
 			$("#list_users_content").empty();
 

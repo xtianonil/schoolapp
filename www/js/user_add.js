@@ -6,13 +6,14 @@ $("#add_user_btn").click(function(){
 	{
 		$.post(localStorage.webhost+"user_add.php",
 		{
-			username : $.trim($("#username_new").val()),
-			password : $.trim($("#password_new").val()),
+			//username : $.trim($("#username_new").val()),
+			//password : $.trim($("#password_new").val()),
 			//verif_code : $.trim($("#verif_code_new").val()),
-			user_type : $.trim($("#user_type_new").val()),
-			user_status : $.trim($("#user_status_new").val()),
+			//user_type : $.trim($("#user_type_new").val()),
+			//user_status : $.trim($("#user_status_new").val()),
 			email : $.trim($("#email_new").val()),
 			first_name : $.trim($("#first_name_new").val()),
+			middle_name : $.trim($("#middle_name_new").val()),
 			last_name : $.trim($("#last_name_new").val())
 			})
 			.done(function(userid_lastinserted){
@@ -20,7 +21,7 @@ $("#add_user_btn").click(function(){
 				if (userid_lastinserted)
 				{
 					//user automatically becomes a member of the school
-					
+					/*
 					$.post(localStorage.webhost+"group_add_member.php",
 						{
 							userid : userid_lastinserted,
@@ -30,7 +31,7 @@ $("#add_user_btn").click(function(){
 						.done(function(){
 
 					});
-
+					*/
 					alert("New user added successfully");
 					window.location.href = "index.html#user_management";
 
