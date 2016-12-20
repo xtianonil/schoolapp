@@ -15,6 +15,8 @@ $("#login").click(function(){
 				//`alert(dataString);
 			},
 			success: function(data){
+				//alert("SFS");
+				alert(device.uuid);
 				if (data === "login_error")
 				{
 					alert("invalid email or password");
@@ -40,7 +42,8 @@ $("#login").click(function(){
 						//update registration id of logged in user
 						app.initialize();
 
-						alert(device.uuid);
+						//alert(device.uuid);
+						//alert("ASDF");
 						$.post(localStorage.webhost+"user_register.php",
 							{
 								email : email_login,
