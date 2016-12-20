@@ -18,8 +18,8 @@ $("#login").click(function(){
 			},
 			success: function(data){
 				//alert("SFS");
-				alert(device.uuid);
-				alert("ASDFa");
+				//alert(device.uuid);
+				//alert("ASDFa");
 				if (data === "login_error")
 				{
 					alert("invalid email or password");

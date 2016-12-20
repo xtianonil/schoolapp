@@ -40,6 +40,7 @@
 
     <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
+    <!--<link rel="stylesheet" type="text/css" href="css/flatui/jquery.mobile.flatui.css" />-->
     <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.min.css" />-->
 
     <!--JQuery Mobile-->
@@ -57,15 +58,24 @@
         $(function(){   //on deviceready
         //for debugging purposes only, omit this in production
             if (localStorage.login === "true")
-                window.location.href = "index.html#home";
+            {
+                if (localStorage.user_type === "school_admin")
+                    //window.location.href = "index.html#admin_panel";
+                    window.location.href = "index.html#user_mngmnt";
+                else
+                    window.location.href = "index.html#home";
+                $("[data-role=footer]").toolbar();
+            }
             else
                 window.location.href = "index.html#not_logged_in";
-            });
-        
+            });     
         
         $(document).on('mobileinit',function(){
             if (localStorage.login === "true")
+            {
                 window.location.href = "index.html#home";
+                $("[data-role=footer]").toolbar();
+            }
             else
                 window.location.href = "index.html#not_logged_in";
             });
@@ -83,39 +93,49 @@
         </div>
         -->
     </div>
+
+    <div data-role="footer" data-position="fixed" class="ui-bar-a">
+        <div id="footer_div" style="text-align:center;"></div>
+        <!--<h1><a href="#" id="logout">Logout</a></h1>-->
+        </div> 
+
     <div data-role="page" id="not_logged_in">
         <div data-role="header">
             <h1></h1>
             <!--<button class="refreshpage">refresh</button>-->
         </div> 
         <div data-role="main" class="ui-content">
-            <input id="username" type="text" placeholder="username" />            
+            <input id="email_login" type="text" placeholder="email" />            
             <input id="password" type="password" placeholder="password" value="" autocomplete="off"/>
             <button id="login" class="ui-btn">Login</button>
             <div style="text-align:center;"><a href="#register">Register</a></div>
         </div>
+        <!--
         <div data-role="footer">
             <h1></h1>
         </div> 
+        -->
     </div>
 
-    <div data-role="page" id="home">
+    <div data-role="page" id="admin_panel">
         <div id="overlaypanel" data-role="panel" data-display="overlay">
             <ul data-role="listview" data-theme="a"> 
-                <!--<li><a href="#home">Home</a></li>-->
-                <li class="admin_only"><a href="#user_management">User Management</a></li>
+                <li class="admin_only"><a href="#user_mngmnt">User Management</a></li>
                 <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
                 <li><a href="#groups">Groups</a></li>
-                <!--<button id="home_link">Home</button>
-                <div class="admin_only"><button id="user_management_link">User Management</button></div>
+                <!--<button id="admin_panel_link">admin_panel</button>
+                <div class="admin_only"><button id="user_mngmnt_link">User Management</button></div>
                 <div class="admin_only"><button id="send_notif_link">Send a notification</button></div>-->
             </ul>
         </div>
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#groups">Groups</a></li>
+                    <li><a href="#admin_panel" class="ui-btn-active ui-state-persist">Home</a></li>
+                    <li><a href="#user_mngmnt">Users</a></li>
+                    <li><a href="#group_mngmnt">Groups</a></li>
+                    <li><a href="#register">Registration</a></li>
+                    <li><a href="#not_logged_in">Login</a></li>
                 </ul>
             </div>
             <!--
@@ -130,10 +150,54 @@
             <ul id="notifs_list" data-role="listview" data-theme="a">
             </ul>-->
         </div>
+        <!--
         <div data-role="footer" data-position="fixed">
             <div id="footer_div" style="text-align:center"></div>
-            <!--<h1><a href="#" id="logout">Logout</a></h1>-->
+            <h1><a href="#" id="logout">Logout</a></h1>
         </div> 
+        -->
+    </div>
+
+    <div data-role="page" id="home">
+        <div id="overlaypanel" data-role="panel" data-display="overlay">
+            <ul data-role="listview" data-theme="a"> 
+                <!--<li><a href="#home">Home</a></li>-->
+                <!--
+                <li class="admin_only"><a href="#user_mngmnt">User Management</a></li>
+                <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
+                <li><a href="#groups">Groups</a></li>-->
+                <!--<button id="home_link">Home</button>
+                <div class="admin_only"><button id="user_mngmnt_link">User Management</button></div>
+                <div class="admin_only"><button id="send_notif_link">Send a notification</button></div>-->
+            </ul>
+        </div>
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" class="ui-btn-active ui-state-persist">Home</a></li>
+                    <li><a href="#user_mngmnt">Users</a></li>
+                    <li><a href="#group_mngmnt">Groups</a></li>
+                    <li><a href="#register">Registration</a></li>
+                    <li><a href="#not_logged_in">Login</a></li>
+                </ul>
+            </div>
+            <!--
+            <a href="#overlaypanel" class="ui-btn">=</a>
+            <h1>Home</h1>
+            -->
+            <!--<button class="refreshpage">refresh</button>-->
+        </div>
+        <div data-role="main" class="ui-content">
+            <div id="notifs_list2"></div>
+            <!--
+            <ul id="notifs_list" data-role="listview" data-theme="a">
+            </ul>-->
+        </div>
+        <!--
+        <div data-role="footer" data-position="fixed">
+            <div id="footer_div" style="text-align:center"></div>
+            <!<h1><a href="#" id="logout">Logout</a></h1>
+        </div> -->
     </div>
 
     <div data-role="page" id="register">
@@ -141,64 +205,144 @@
             <h1>Registration</h1>
         </div>
         <div data-role="main" class="ui-content">
-            <input id="reg_username" type="text" placeholder="username" />
+            <!--<input id="reg_username" type="text" placeholder="username" />-->
             <!--<input id="reg_password" type="password" placeholder="password" /> -->
-            <!--<input id="reg_email" type="email" placeholder="email" />-->
-            <input id="verif_code" type="text" placeholder="verification code" />
-            <button id="register_btn" class="ui-btn">Submit</button>
+            <input id="reg_email" type="email" placeholder="email" />
+            <!--<input id="verif_code" type="text" placeholder="verification code" />-->
+            <button id="register_btn" class="ui-btn">Verify</button>
             <div style="text-align:center;"><a href="#not_logged_in">Back to Log-in</a></div>
         </div>
+        <!--
         <div data-role="footer">
             <h1></h1>
         </div>
+        -->
     </div>
 
-    <div data-role="page" id="user_management">
-        <div id="overlaypanel2" data-role="panel" data-display="overlay">
-            <ul data-role="listview" data-theme="a">
-                <li><a href="#home">Home</a></li>
-                <li class="admin_only"><a href="#user_management">User Management</a></li>
-                <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
-            </ul>
+    <div data-role="page" id="user_mngmnt">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#user_mngmnt" class="ui-btn-active ui-state-persist">Users</a></li>
+                    <li><a href="#group_mngmnt">Groups</a></li>
+                    <li><a href="#register">Registration</a></li>
+                    <li><a href="#not_logged_in">Login</a></li>
+                </ul>
+            </div>
         </div>
+        <!--
         <div data-role="header">
             <a href="#overlaypanel2" class="ui-btn">=</a>
             <h1>User Management</h1>
-            <!--<button class="refreshpage">refresh</button>-->
         </div>
+        -->
         <div data-role="main" class="ui-content">
             <div data-role="collapsible-set" data-theme="c" data-content-theme="d">
                 <div data-role="collapsible" class="collapsible">
                     <h3>Add new user</h3>
                     <div id="username_new_errordiv"></div>
-                    <input class="add_new_user" type="text" name="username_new" id="username_new" placeholder="username"/>
-                    <input class="add_new_user" type="password" name="password_new" id="password_new" placeholder="password" />
-                    <input class="add_new_user" type="text" name="verif_code_new" id="verif_code_new" placeholder="verification code" />
-                    <label for="user_type_new">User type:</label>
+                    <input class="add_new_user" type="email" name="email_new" id="email_new" placeholder="email" />
+                    <input class="add_new_user" type="text" name="last_name_new" id="last_name_new" placeholder="last name" />
+                    <input class="add_new_user" type="text" name="first_name_new" id="first_name_new" placeholder="first name" />
+                    <input class="add_new_user" type="text" name="middle_name_new" id="middle_name_new" placeholder="middle name" />
+                    
+                    <!--<input class="add_new_user" type="text" name="username_new" id="username_new" placeholder="username"/>-->
+                    <!--<input class="add_new_user" type="password" name="password_new" id="password_new" placeholder="password" />-->
+                    <!--<input class="add_new_user" type="text" name="verif_code_new" id="verif_code_new" placeholder="verification code" />-->
+                    <!--<label for="user_type_new">User type:</label>
                     <select id="user_type_new" name="user_type_new">
+                        <option value=""></option>
                         <option value="teacher">teacher</option>
                         <option value="parent">parent</option>
+                        <option value="parent">student</option>
                     </select>
+                    -->
+                    <!--
                     <label for="user_status_new">User status:</label>
                     <select id="user_status_new" name="user_status_new">
                         <option value=""></option>
                         <option value="registered">registered</option>
                     </select>
-                    <input class="add_new_user" type="email" name="email_new" id="email_new" placeholder="email" />
-                    <input class="add_new_user" type="text" name="first_name_new" id="first_name_new" placeholder="first name" />
-                    <input class="add_new_user" type="text" name="last_name_new" id="last_name_new" placeholder="last name" />
+                    -->
+                    <!--<input class="add_new_user" type="email" name="email_new" id="email_new" placeholder="email" />-->                  
                     <button id="add_user_btn" class="ui-btn">Submit</button>
                 </div>
                 <div data-role="collapsible" class="collapsible" id="list_users_header">
                     <h3>Users list</h3>
                     <div id="list_users_content"></div>
+                    <!--<a href="#user_popup" data-rel="popup" >popup open</a> -->
+                    <div data-role="popup" id="user_popup">
+                        <ul data-role="listview" data-inset="true">
+                            <li>Email:<input type="text" name="email_edit" id="email_edit"></li>
+                            <li>Last name:<input type="text" name="lastname_edit" id="lastname_edit"></li>
+                            <li>First name:<input type="text" name="firstname_edit" id="firstname_edit"></li>
+                            <li>Middle name:<input type="text" name="middlename_edit" id="middlename_edit"></li>
+                            <li><a href="#" data-rel="popup" class="user_membership">User Membership</a></li>
+                            
+                            <li><a href="#" class="user_update">Update</a></li>
+                            <li><a href="#" class="user_delete">Delete</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div data-role="popup" id="user_membership1">
+                        <ul data-role="listview" data-inset="true">
+                            <li>1</li>
+                            <li>2</li>
+                        </ul>
+                    </div>
+
+                    <ul id="listahan_users" data-role="listview" data-filter="true"></ul>
+                    
                     <a id='list_users' href="#users_list_dialog" data-rel="dialog" data-transition="pop" style='display:none;'></a>
                 </div>
             </div>
-        </div>
+        </div><!--
         <div data-role="footer">
             <h1></h1>
+        </div>-->
+    </div>
+    <div data-role="page" id="group_mngmnt">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#user_mngmnt">Users</a></li>
+                    <li><a href="#group_mngmnt" class="ui-btn-active ui-state-persist">Groups</a></li>
+                    <li><a href="#register">Registration</a></li>
+                    <li><a href="#not_logged_in">Login</a></li>
+                </ul>
+            </div>
         </div>
+        <div data-role="header">
+            <!--<a href="#overlaypanel2" class="ui-btn">=</a>-->
+            <h1>Group Management</h1>
+        </div>
+        <div data-role="main" class="ui-content">
+            <div data-role="collapsible-set">
+                <div data-role="collapsible" class="collapsible">
+                    <h3>Create a new group</h3>
+                    <input type="text" name="groupname_new" id="groupname_new" placeholder="group name" />
+                    <label for="grouptype_new">group type:</label>
+                    <select id="grouptype_new" name="grouptype_new">
+                        <option val="school">school</option>
+                        <option val="school_section">section</option>
+                        <option val="school_club">club</option>
+                    </select>
+                    <input type="text" id="groupmod_new" placeholder="group moderator" />
+                    <div id="groupmodslist_new"></div>
+                    <button id="group_new_button">Submit</button>
+                </div>
+                <div data-role="collapsible" class="collapsible">
+                    <h3>Groups list</h3>
+                </div>
+            </div>
+        </div>
+        <!--
+        <div data-role="footer" data-position="fixed">
+            <div id="footer_div2" style="text-align:center"></div>
+            <h1><a href="#" id="logout">Logout</a></h1>
+        </div> -->
     </div>
 
     <div data-role="page" id="users_list_dialog">
@@ -226,7 +370,7 @@
         <div id="overlaypanel3" data-role="panel" data-display="overlay">
             <ul data-role="listview" data-theme="a">
                 <li><a href="#home">Home</a></li>
-                <li class="admin_only"><a href="#user_management">User Management</a></li>
+                <li class="admin_only"><a href="#user_mngmnt">User Management</a></li>
                 <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
             </ul>
         </div>
@@ -243,17 +387,17 @@
             <textarea cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
             <button id="send_notif_btn">Send</button>
         </div>
-
+        <!--
         <div data-role="footer" class="footer">
             <h1></h1>
-        </div>
+        </div>-->
     </div>
 
     <div data-role="page" id="groups">
         <div id="overlaypanel_groups" data-role="panel" data-display="overlay">
             <ul data-role="listview" data-theme="a"> 
                 <li><a href="#home">Home</a></li>
-                <li class="admin_only"><a href="#user_management">User Management</a></li>
+                <li class="admin_only"><a href="#user_mngmnt">User Management</a></li>
                 <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
             </ul>
         </div>
@@ -269,10 +413,10 @@
             <h4>List of all groups:</h4>
             <div id="list_groups_content"></div>
             <a id='list_groups' href="#groups_list_dialog" data-rel="dialog" data-transition="pop" style='display:none;'></a>
-        </div>
+        </div><!--
         <div data-role="footer">
             <h1></h1>
-        </div>
+        </div>-->
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
@@ -280,7 +424,7 @@
     <script type="text/javascript">
         app.initialize();
         //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
-        localStorage.webhost = "http://192.168.0.16/school_connect_server/";
+        localStorage.webhost = "http://192.168.0.12/school_connect_server/";
 
         $(".refreshpage").click(function(){
             location.reload();
@@ -292,7 +436,8 @@
         });
     </script>
     <script type="text/javascript" src="js/restrict_access.js"></script>
-    <script type="text/javascript" src="js/register.js"></script>
+    <!--<script type="text/javascript" src="js/register.js"></script>-->
+    <script type="text/javascript" src="js/user_verify.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/logout.js"></script>
 
@@ -305,7 +450,13 @@
 
     <script type="text/javascript" src="js/group_listmem.js"></script>
 
+    <script type="text/javascript" src="js/group_getlistof.js"></script>
 
+    <script type="text/javascript" src="js/group_list.js"></script>
+    <script type="text/javascript" src="js/group_selectmod.js"></script>
+    <script type="text/javascript" src="js/group_add.js"></script>
+
+    <script type="text/javascript" src="js/footer.js"></script>
 </body>
 
 </html>

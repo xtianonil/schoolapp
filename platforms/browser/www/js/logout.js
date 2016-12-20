@@ -6,10 +6,12 @@ $("#logout").click(function(){
 	location.reload();
 	$("#login").html('Login');
 
+	/*
 	//restrict access
 	if (localStorage.user_type === "school_admin")
 		$(".admin_only").show();
 	else
 		$(".admin_only").hide();
+	*/
 	//$(':mobile-pagecontainer').pagecontainer('change', '#not_logged_in');
 });
