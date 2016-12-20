@@ -1,4 +1,5 @@
 $("#login").click(function(){
+	alert(device.uuid);
 	var email_login = $("#email_login").val();
 	var password = $("#password").val();
 	var dataString="email_login="+email_login+"&password="+password+"&login=";
@@ -16,7 +17,7 @@ $("#login").click(function(){
 			},
 			success: function(data){
 				//alert("SFS");
-				alert(device.uuid);
+				//alert(device.uuid);
 				if (data === "login_error")
 				{
 					alert("invalid email or password");
