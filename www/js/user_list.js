@@ -2,16 +2,10 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 	$.post(localStorage.webhost+"user_listnonadmin.php")
 		.done(function(result_set){
 			var users = JSON.parse(result_set);
-			var users_tbl = $("<ul data-role='listview' data-filter='true' data-inset='true'>");
-
+			$("#listahan_users").empty();
 			$.each(users, function(i, field)
 			{
 				var userid 		= field.user_id;
-				//var username 	= field.username;
-				var password 	= field.password;
-				//var verif_code 	= field.verif_code;
-				//var user_type 	= field.user_type;
-				//var user_status = field.user_status;
 				var email 		= field.email;
 				var fname 		= field.fname;
 				var mname 		= field.mname;
@@ -22,6 +16,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 			});
 			
 			var userslist_isclicked = false;
+			var userslistmember_isclicked = false;
 			$(".userslist").click(function(event){
 				userslist_isclicked = true;
 				$.post(localStorage.webhost+"user_listspecificonly.php",{userid:$(this).attr("id")})
@@ -42,7 +37,6 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 				{
 					$.post(localStorage.webhost+"user_update.php",
 					{
-						//userid : localStorage.usermngntuserid,
 						userid  : localStorage.userlistuid,
 						lname 	: $("#lastname_edit").val(),
 						fname 	: $("#firstname_edit").val(),
@@ -76,7 +70,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 				}//end of if userslist_isclicked
 				});//end of user delete click
 			$(".user_membership").click(function(){
-				//alert("membership");
+				userslistmember_isclicked = true;
 				$("#user_popup").popup("close");
 
 				$( "#user_popup" ).on( "popupafterclose", function( event, ui ) {
@@ -89,9 +83,34 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 				setTimeout(function(){
 		        	$("#user_membership1").popup("open");
 
-		        	alert(user_details[0].user_id);
+		        	//alert(localStorage.userlistuid);
+		        	$.post(localStorage.webhost+"user_listgroupsof.php",{userid:localStorage.userlistuid})
+		        		.done(function(res){
+		        			//alert(res);
+		        			var user_groups = JSON.parse(res);
+		        			$("#listahan_groups").empty();
+		        			$.each(user_groups, function(i, field)
+							{
+								$("#listahan_groups").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.group_type+")</a></li>"));		
+								$("#listahan_groups").listview("refresh");
+							});
+		        		});
 		        }, 100);	//delay is 100ms
 			});
+			$("#join_another_group_btn").click(function(){
+				$("#user_membership1").popup("close");
+				setTimeout(function(){
+					$("#join_another_group_div").popup("open");
+				},100);
+				});
+			/*
+			$(".groupslist").click(function(){
+				if ( userslistmember_isclicked )
+				{
+
+				}
+				});
+				*/
 
 			$("#list_users_content").empty();
 

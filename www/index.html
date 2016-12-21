@@ -286,12 +286,21 @@
                         </ul>
                     </div>
                     <div data-role="popup" id="user_membership1">
+                        <a href="#" id="join_another_group_btn">join another group</a>
+                        <ul id="listahan_groups" data-role="listview" data-filter="true"></ul>
                     <!--
                         <ul data-role="listview" data-inset="true">
                             <li>1</li>
                             <li>2</li>
                         </ul>
                     -->
+                    </div>
+                    <div data-role="popup" id="join_another_group_div">
+                        <select id="groups_list_notmember">
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                        <button id="join_another_group_submit_btn">Join this group</button>
                     </div>
 
                     <ul id="listahan_users" data-role="listview" data-filter="true"></ul>
