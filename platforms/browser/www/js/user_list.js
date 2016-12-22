@@ -2,26 +2,23 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 	$.post(localStorage.webhost+"user_listnonadmin.php")
 		.done(function(result_set){
 			var users = JSON.parse(result_set);
-			var users_tbl = $("<ul data-role='listview' data-filter='true' data-inset='true'>");
-
+			$("#listahan_users").empty();
 			$.each(users, function(i, field)
 			{
 				var userid 		= field.user_id;
-				//var username 	= field.username;
-				var password 	= field.password;
-				//var verif_code 	= field.verif_code;
-				//var user_type 	= field.user_type;
-				//var user_status = field.user_status;
 				var email 		= field.email;
 				var fname 		= field.fname;
 				var mname 		= field.mname;
 				var lname 		= field.lname;
 
-				$("#listahan_users").append($("<li><a href='#user_popup' class='users' data-rel='popup' id="+userid+">"+lname+", "+fname+"</a></li>"));		
+				$("#listahan_users").append($("<li><a href='#user_popup' class='userslist' data-rel='popup' id="+userid+">"+lname+", "+fname+"</a></li>"));		
 				$("#listahan_users").listview("refresh");
 			});
 			
-			$(".users").click(function(event){
+			var userslist_isclicked = false;
+			var userslistmember_isclicked = false;
+			$(".userslist").click(function(event){
+				userslist_isclicked = true;
 				$.post(localStorage.webhost+"user_listspecificonly.php",{userid:$(this).attr("id")})
 					.done(function(data){
 						//alert(data);
@@ -31,61 +28,89 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 						$("#lastname_edit").val(user_details[0].lname);
 						$("#middlename_edit").val(user_details[0].mname);
 
-						localStorage.usermngntuserid = user_details[0].user_id;
-						//alert(user_details[0].user_id);
-					
-						$(".user_membership").click(function(){
-							$("#user_popup").popup("close");
-
-							$( "#user_popup" ).on( "popupafterclose", function( event, ui ) {
-							    $("#email_edit").removeAttr('value');
-								$("#firstname_edit").val("");
-								$("#lastname_edit").val("");
-								$("#middlename_edit").val("");
-							});
-
-							setTimeout(function(){
-					        	$("#user_membership1").popup("open");
-					        }, 100);	//delay is 100ms
-						});
-
+						localStorage.userlistuid = user_details[0].user_id;
 					});//end of $post userlistpecific
 				//event.stopPropagation();
 				});//end of li a click
 			$(".user_update").click(function(){
-				//alert("update");
-				$.post(localStorage.webhost+"user_update.php",
+				if ( userslist_isclicked )
 				{
-					userid : localStorage.usermngntuserid,
-					lname 	: $("#lastname_edit").val(),
-					fname 	: $("#firstname_edit").val(),
-					mname 	: $("#middlename_edit").val(),
-					email 	: $("#email_edit").val()
-				})
-					.done(function(update_successful){
-						//alert(update_successful);
-						if (update_successful)
-						{
-							alert("User account updated successfully");
-							location.reload();
-						}
-					});
-				});
-		
+					$.post(localStorage.webhost+"user_update.php",
+					{
+						userid  : localStorage.userlistuid,
+						lname 	: $("#lastname_edit").val(),
+						fname 	: $("#firstname_edit").val(),
+						mname 	: $("#middlename_edit").val(),
+						email 	: $("#email_edit").val()
+					})
+						.done(function(update_successful){
+							//alert(update_successful);
+							if (update_successful)
+							{
+								alert("User account updated successfully");
+								location.reload();
+							}//end of if update_successful
+						});//end of $,post user update
+				}	//end of if userslist_isclicked
+				});//end of user update
 			$(".user_delete").click(function(){
-				//alert(localStorage.usermngntuserid);
-				$.post(localStorage.webhost+"user_delete.php",
+				if ( userslist_isclicked )
 				{
-					userid : localStorage.usermngntuserid
-				})
-					.done(function(deletion_successful){
-						if(deletion_successful)
-						{
-							alert("User account deleted successfully");
-							location.reload();
-						}
-					});
+					$.post(localStorage.webhost+"user_delete.php",
+					{
+						userid : localStorage.userlistuid
+					})
+						.done(function(deletion_successful){
+							if(deletion_successful)
+							{
+								alert("User account deleted successfully");
+								location.reload();
+							}
+						});
+				}//end of if userslist_isclicked
 				});//end of user delete click
+			$(".user_membership").click(function(){
+				userslistmember_isclicked = true;
+				$("#user_popup").popup("close");
+
+				$( "#user_popup" ).on( "popupafterclose", function( event, ui ) {
+				    $("#email_edit").removeAttr('value');
+					$("#firstname_edit").val("");
+					$("#lastname_edit").val("");
+					$("#middlename_edit").val("");
+				});
+
+				setTimeout(function(){
+		        	$("#user_membership1").popup("open");
+
+		        	//alert(localStorage.userlistuid);
+		        	$.post(localStorage.webhost+"user_listgroupsof.php",{userid:localStorage.userlistuid})
+		        		.done(function(res){
+		        			//alert(res);
+		        			var user_groups = JSON.parse(res);
+		        			$("#listahan_groups").empty();
+		        			$.each(user_groups, function(i, field)
+							{
+								$("#listahan_groups").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.group_type+")</a></li>"));		
+								$("#listahan_groups").listview("refresh");
+							});
+		        		});
+		        }, 100);	//delay is 100ms
+			});
+			$("#join_another_group_btn").click(function(){
+				$("#user_membership1").popup("close");
+				setTimeout(function(){
+					$("#join_another_group_div").popup("open");
+				},100);
+				});
+			/*
+			$(".groupslist").click(function(){
+				if ( userslistmember_isclicked )
+				{
+
+				}
+				});
+				*/
 
 			$("#list_users_content").empty();
 

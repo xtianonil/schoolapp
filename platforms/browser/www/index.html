@@ -280,16 +280,27 @@
                             <li>Middle name:<input type="text" name="middlename_edit" id="middlename_edit"></li>
                             <li><a href="#" data-rel="popup" class="user_membership">User Membership</a></li>
                             
-                            <li><a href="#" class="user_update">Update</a></li>
-                            <li><a href="#" class="user_delete">Delete</a></li>
+                            <li><a href="#" data-rel="popup" class="user_update">Update</a></li>
+                            <li><a href="#" data-rel="popup" class="user_delete">Delete</a></li>
                             
                         </ul>
                     </div>
                     <div data-role="popup" id="user_membership1">
+                        <a href="#" id="join_another_group_btn">join another group</a>
+                        <ul id="listahan_groups" data-role="listview" data-filter="true"></ul>
+                    <!--
                         <ul data-role="listview" data-inset="true">
                             <li>1</li>
                             <li>2</li>
                         </ul>
+                    -->
+                    </div>
+                    <div data-role="popup" id="join_another_group_div">
+                        <select id="groups_list_notmember">
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                        <button id="join_another_group_submit_btn">Join this group</button>
                     </div>
 
                     <ul id="listahan_users" data-role="listview" data-filter="true"></ul>
@@ -329,7 +340,7 @@
                         <option val="school_section">section</option>
                         <option val="school_club">club</option>
                     </select>
-                    <input type="text" id="groupmod_new" placeholder="group moderator" />
+                    <!--<input type="text" id="groupmod_new" placeholder="group moderator" />-->
                     <div id="groupmodslist_new"></div>
                     <button id="group_new_button">Submit</button>
                 </div>
@@ -448,7 +459,7 @@
     <script type="text/javascript" src="js/notif_send.js"></script>
     <script type="text/javascript" src="js/notif_getlistof.js"></script>
 
-    <script type="text/javascript" src="js/group_listmem.js"></script>
+    <!--<script type="text/javascript" src="js/group_listmem.js"></script>-->
 
     <script type="text/javascript" src="js/group_getlistof.js"></script>
 

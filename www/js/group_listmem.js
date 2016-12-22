@@ -1,9 +1,11 @@
 $(document).on('pagebeforeshow','#groups',function(){
+	/*
 	//restrict access
 	if (localStorage.user_type === "school_admin")
 		$(".admin_only").show();
 	else
 		$(".admin_only").hide();
+	*/
 	//alert(localStorage.webhost+"group_list.php");
 	$.post(localStorage.webhost+"group_list.php",{userid:localStorage.user_id })
 		.done(function(result_set){
@@ -15,7 +17,7 @@ $(document).on('pagebeforeshow','#groups',function(){
 				var groupid 	= field.group_id;
 				var grouptype 	= field.group_type;
 				var modid	 	= field.moderator_id;
-				var groupkey 	= field.group_key;
+				//var groupkey 	= field.group_key;
 				var groupname 	= field.group_name;
 				/*
 				var user_status = field.user_status;
@@ -58,7 +60,7 @@ $(document).on('pagebeforeshow','#groups',function(){
 				var groupid 	= field.group_id;
 				var grouptype 	= field.group_type;
 				var modid	 	= field.moderator_id;
-				var groupkey 	= field.group_key;
+				//var groupkey 	= field.group_key;
 				var groupname 	= field.group_name;
 				/*
 				var user_status = field.user_status;
@@ -126,11 +128,13 @@ $(document).on('pagebeforeshow','#groups',function(){
 							.addClass('cells')
 							.text("Moderator:");
 						row.append(rowData);
+						/*
 						var rowData = $("<td></td>")
 							.attr('id',group_details[0].group_id)
 							.addClass('cells')
 							.text(group_details[0].username);
 						row.append(rowData);
+						*/
 						table.append(row);
 						/*
 						var row = $('<tr></tr>');
