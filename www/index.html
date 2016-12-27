@@ -231,12 +231,9 @@
                 </ul>
             </div>
         </div>
-        <!--
         <div data-role="header">
-            <a href="#overlaypanel2" class="ui-btn">=</a>
             <h1>User Management</h1>
         </div>
-        -->
         <div data-role="main" class="ui-content">
             <div data-role="collapsible-set" data-theme="c" data-content-theme="d" id="user_mgt_collapsible">
                 <div data-role="collapsible" class="collapsible">
@@ -278,7 +275,7 @@
                             <li>Last name:<input type="text" name="lastname_edit" id="lastname_edit"></li>
                             <li>First name:<input type="text" name="firstname_edit" id="firstname_edit"></li>
                             <li>Middle name:<input type="text" name="middlename_edit" id="middlename_edit"></li>
-                            <li><a href="#" data-rel="popup" class="user_membership">User Membership</a></li>
+                            <li><a href="#" data-rel="popup" class="user_membership">Group membership</a></li>
                             
                             <li><a href="#" data-rel="popup" class="user_update">Update</a></li>
                             <li><a href="#" data-rel="popup" class="user_delete">Delete</a></li>
@@ -288,12 +285,6 @@
                     <div data-role="popup" id="user_membership1">
                         <a href="#" id="join_another_group_btn">join another group</a>
                         <ul id="listahan_groups" data-role="listview" data-filter="true"></ul>
-                    <!--
-                        <ul data-role="listview" data-inset="true">
-                            <li>1</li>
-                            <li>2</li>
-                        </ul>
-                    -->
                     </div>
                     <div data-role="popup" id="join_another_group_div">
                         <select id="groups_list_notmember">
@@ -326,7 +317,6 @@
             </div>
         </div>
         <div data-role="header">
-            <!--<a href="#overlaypanel2" class="ui-btn">=</a>-->
             <h1>Group Management</h1>
         </div>
         <div data-role="main" class="ui-content">
@@ -347,7 +337,7 @@
                 </div>
                 <div data-role="collapsible" class="collapsible">
                     <h3>Groups list</h3>
-                    <ul id="groupslist" data-role="listview" data-inset="true"></ul>
+                    <ul id="groupslist" data-role="listview" data-inset="true" data-filter="true"></ul>
                 </div>
             </div>
         </div>
@@ -437,7 +427,7 @@
     <script type="text/javascript">
         app.initialize();
         //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
-        localStorage.webhost = "http://192.168.0.12/school_connect_server/";
+        localStorage.webhost = "http://192.168.0.19/school_connect_server/";
 
         $(".refreshpage").click(function(){
             location.reload();
@@ -456,7 +446,7 @@
 
     <script type="text/javascript" src="js/user_add.js"></script>
     <script type="text/javascript" src="js/username_availability.js"></script>
-    <script type="text/javascript" src="js/user_list.js"></script>
+    <script type="text/javascript" src="js/user_mngmnt.js"></script>
 
     <script type="text/javascript" src="js/notif_send.js"></script>
     <script type="text/javascript" src="js/notif_getlistof.js"></script>

@@ -33,7 +33,8 @@ $("#add_user_btn").click(function(){
 					});
 					*/
 					alert("New user added successfully");
-					window.location.href = "index.html#user_management";
+					location.reload();
+					//window.location.href = "index.html#user_management";
 
 					$(".collapsible").collapsible('collapse');	//opposite: expand
 					//$(".add_new_user").removeAttr('value');

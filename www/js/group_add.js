@@ -15,6 +15,7 @@ $("#group_new_button").click(function(){
 				if (groupadd_successful)
 				{
 					alert("New group is successfully created.");
+					location.reload();
 					//window.location.href = "index.html#groups";
 					//$(".collapsible").collapsible('collapse');	//opposite: expand
 				}
