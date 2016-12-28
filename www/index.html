@@ -56,7 +56,7 @@
 
     <script type="text/javascript">
         $(function(){   //on deviceready
-            alert(device.uuid);
+            alert("device uuid"+device.uuid);
         //for debugging purposes only, omit this in production
             if (localStorage.login === "true")
             {
@@ -72,7 +72,7 @@
             });     
         
         $(document).on('mobileinit',function(){
-            alert(device.uuid);
+            alert("device uuid"+device.uuid);
             if (localStorage.login === "true")
             {
                 window.location.href = "index.html#home";
