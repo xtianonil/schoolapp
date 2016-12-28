@@ -54,7 +54,7 @@ $("#login").click(function(){
 
 						//check if user has logged in on the device
 						//aka check if uuid exists in user_device table
-						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid})
+						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id})
 							.done(function(data){
 								if (data === "uuid_exists")
 								{	//means user has logged in on this device before, just update device details
