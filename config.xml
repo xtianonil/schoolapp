@@ -20,6 +20,7 @@
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.3" />
     <plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.1" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
+    <plugin name="cordova-plugin-device" source="npm" />
 
     <!--<plugin name="cordova-plugin-device" source="npm" spec="~1.1.5" />-->
     <icon src="icon.png" />
