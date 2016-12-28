@@ -41,6 +41,7 @@ $("#login").click(function(){
 					}
 					else
 					{	//registered account
+						alert("device uuid"+device.uuid);
 
 						localStorage.login = "true";
 						localStorage.email_login = email_login;
