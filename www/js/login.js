@@ -19,14 +19,19 @@ $("#login").click(function(){
 			success: function(data){
 				//alert("SFS");
 				//alert(device.uuid);
-				//alert("ASDFa");
-				if (data === "login_error")
+				//alert(data);
+				if (data === "email_does_not_exist")
 				{
-					alert("invalid email or password");
-
+					alert("Email does not exist");
 				}
-				else if(data !== "login_error")
+				else if ( data === "wrong_password" )
+				{
+					alert("wrong password");
+				}
+				else 
 				{	// login success
+					//alert("ASF");
+					//alert(data);
 					var user_details = JSON.parse(data);
 
 					if (user_details[0].is_active === false)
@@ -36,6 +41,7 @@ $("#login").click(function(){
 					}
 					else
 					{	//registered account
+
 						localStorage.login = "true";
 						localStorage.email_login = email_login;
 						if (user_details[0].is_admin === true)
@@ -49,7 +55,7 @@ $("#login").click(function(){
 						//alert("ASDF");
 						$.post(localStorage.webhost+"user_register.php",
 							{
-								email : email_login,
+								userid : user_details[0].user_id,
 								regid : localStorage.getItem('registrationId')
 							})
 							.done(function(registration_successful){
@@ -82,11 +88,12 @@ $("#login").click(function(){
 						//window.location.href = "index.html#home";
 					}
 				}
+				/*
 				else
 				{	//login error
 					alert("Login error");
 					
-				}
+				}*/
 				$("#login").html('Login');
 			}//end of success
 		});//end of ajax
