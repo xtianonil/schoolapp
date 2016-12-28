@@ -41,7 +41,7 @@ $("#login").click(function(){
 					}
 					else
 					{	//registered account
-						alert("device uuid"+device.uuid);
+						//alert("device uuid:"+device.uuid);
 
 						localStorage.login = "true";
 						localStorage.email_login = email_login;
@@ -52,8 +52,43 @@ $("#login").click(function(){
 						//update registration id of logged in user
 						app.initialize();
 
-						//alert(device.uuid);
-						//alert("ASDF");
+						//check if user has logged in on the device
+						//aka check if uuid exists in user_device table
+						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid})
+							.done(function(data){
+								if (data === "uuid_exists")
+								{	//means user has logged in on this device before, just update device details
+									$.post(localStorage.webhost+"user_update_device.php",
+										{
+											userid 	: user_details[0].user_id,
+											uuid 	: device.uuid,
+											platform: device.platform,
+											model	: device.model,
+											regid 	: localStorage.getItem('registrationId')
+										})
+										.done(function(){
+											location.reload();
+											$("#login").html('Login');
+										});
+								}
+								else
+								{	//means users has not logged in on this device before, create a new record for device details
+									$.post(localStorage.webhost+"user_add_device.php",
+										{
+											userid 	: user_details[0].user_id,
+											uuid 	: device.uuid,
+											platform: device.platform,
+											model	: device.model,
+											regid 	: localStorage.getItem('registrationId')
+										})
+										.done(function(){
+											location.reload();
+											$("#login").html('Login');
+										});
+								}
+							});
+						/*
+
 						$.post(localStorage.webhost+"user_register.php",
 							{
 								userid : user_details[0].user_id,
@@ -83,10 +118,11 @@ $("#login").click(function(){
 									$(".admin_only").hide();
 								$("#logout").empty();
 								$("#logout").val(localStorage.email_login);
-								*/
+								
 								//alert(localStorage.email_login);
 							});
 						//window.location.href = "index.html#home";
+						*/
 					}
 				}
 				/*
