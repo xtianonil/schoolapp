@@ -1,4 +1,6 @@
 $("#login").click(function(){
+	localStorage.registrationId = '';
+	localStorage.login = 'false';
 	//var element = document.getElementById('deviceProperties');
 	//alert(device.uuid);
 	var email_login = $("#email_login").val();
@@ -19,7 +21,7 @@ $("#login").click(function(){
 			success: function(data){
 				//alert("SFS");
 				//alert(device.uuid);
-				//alert(data);
+				alert(data);
 				if (data === "email_does_not_exist")
 				{
 					alert("Email does not exist");
