@@ -21,9 +21,8 @@ function showNotifsFeed()
 							ul.append(li);
 							var li = $("<li><h5>posted by: "	+notifs[i].username+" (<font color='red'>"+notifs[i].created_on+"</font>)</h5></li>");
 							ul.append(li);
-
-							ul.append("<hr>");
 							$(".notifs_list").append(ul);
+							$("#notifs_list").listview("refresh");
 						}
 					});
 			}
