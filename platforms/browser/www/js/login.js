@@ -1,4 +1,6 @@
 $("#login").click(function(){
+	localStorage.registrationId = '';
+	localStorage.login = 'false';
 	//var element = document.getElementById('deviceProperties');
 	//alert(device.uuid);
 	var email_login = $("#email_login").val();
@@ -19,14 +21,24 @@ $("#login").click(function(){
 			success: function(data){
 				//alert("SFS");
 				//alert(device.uuid);
-				//alert("ASDFa");
-				if (data === "login_error")
+				//alert(data);
+				if (data === "email_does_not_exist")
 				{
-					alert("invalid email or password");
-
+					alert("Email does not exist");
 				}
-				else if(data !== "login_error")
+				else if ( data === "wrong_password" )
+				{
+					alert("wrong password");
+				}
+				else if ( data === "unregistered" )
+				{
+					alert("Unregistered account.");
+				}
+
+				else 
 				{	// login success
+					//alert("ASF");
+					//alert(data);
 					var user_details = JSON.parse(data);
 
 					if (user_details[0].is_active === false)
@@ -36,20 +48,61 @@ $("#login").click(function(){
 					}
 					else
 					{	//registered account
+						//alert("device uuid:"+device.uuid);
+
 						localStorage.login = "true";
 						localStorage.email_login = email_login;
 						if (user_details[0].is_admin === true)
 							localStorage.is_admin = "true";
+						else
+							localStorage.is_admin = "false";
 						localStorage.user_id = user_details[0].user_id;
+
+						localStorage.name = user_details[0].lname + " " + user_details[0].fname + " " + user_details[0].mname;
 
 						//update registration id of logged in user
 						app.initialize();
 
-						//alert(device.uuid);
-						//alert("ASDF");
+						//check if user has logged in on the device
+						//aka check if uuid exists in user_device table
+						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.getItem('registrationId')})
+							.done(function(data){
+								if (data === "uuid_exists")
+								{	//means user has logged in on this device before, just update device details
+									$.post(localStorage.webhost+"user_update_device.php",
+										{
+											userid 	: user_details[0].user_id,
+											uuid 	: device.uuid,
+											platform: device.platform,
+											model	: device.model,
+											regid 	: localStorage.getItem('registrationId')
+										})
+										.done(function(){
+											location.reload();
+											$("#login").html('Login');
+										});
+								}
+								else
+								{	//means users has not logged in on this device before, create a new record for device details
+									$.post(localStorage.webhost+"user_add_device.php",
+										{
+											userid 	: user_details[0].user_id,
+											uuid 	: device.uuid,
+											platform: device.platform,
+											model	: device.model,
+											regid 	: localStorage.getItem('registrationId')
+										})
+										.done(function(){
+											location.reload();
+											$("#login").html('Login');
+										});
+								}
+							});
+						/*
+
 						$.post(localStorage.webhost+"user_register.php",
 							{
-								email : email_login,
+								userid : user_details[0].user_id,
 								regid : localStorage.getItem('registrationId')
 							})
 							.done(function(registration_successful){
@@ -76,17 +129,19 @@ $("#login").click(function(){
 									$(".admin_only").hide();
 								$("#logout").empty();
 								$("#logout").val(localStorage.email_login);
-								*/
+								
 								//alert(localStorage.email_login);
 							});
 						//window.location.href = "index.html#home";
+						*/
 					}
 				}
+				/*
 				else
 				{	//login error
 					alert("Login error");
 					
-				}
+				}*/
 				$("#login").html('Login');
 			}//end of success
 		});//end of ajax
