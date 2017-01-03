@@ -1,6 +1,7 @@
 $("#group_new_button").click(function(){
 	if ( $.trim($("#groupname_new").val()) < 1 )
 	{
+		alert($("#groupname_new").val());
 		alert("Group name cannot be left empty.");
 	}//end of if
 	else

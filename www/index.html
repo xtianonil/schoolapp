@@ -129,7 +129,7 @@
             </div>
         </div>
         <div data-role="main" class="ui-content">
-            <div class="notifs_list"></div>
+            <ul id="notifs_list_admin" data-role='listview'></ul>
         </div>
     </div>
 
@@ -147,7 +147,7 @@
             </div>
         </div>
         <div data-role="main" class="ui-content">
-            <div class="notifs_list"></div>
+            <ul id="notifs_list" data-role='listview'></ul>
         </div>
     </div>
 
@@ -276,7 +276,6 @@
                 <div data-role="collapsible" class="collapsible" id="list_users_header">
                     <h3>Users list</h3>
                     <div id="list_users_content"></div>
-                    <!--<a href="#user_popup" data-rel="popup" >popup open</a> -->
                     <div data-role="popup" id="user_popup">
                         <ul data-role="listview" data-inset="true">
                             <li>Email:<input type="text" name="email_edit" id="email_edit"></li>
@@ -284,7 +283,7 @@
                             <li>First name:<input type="text" name="firstname_edit" id="firstname_edit"></li>
                             <li>Middle name:<input type="text" name="middlename_edit" id="middlename_edit"></li>
                             <li><a href="#" data-rel="popup" class="user_membership">Group membership</a></li>
-                            
+                            <li><a href="#" data-rel="popup" class="user_affinity">User Affinity</a></li>
                             <li><a href="#" data-rel="popup" class="user_update">Update</a></li>
                             <li><a href="#" data-rel="popup" class="user_delete">Delete</a></li>
                         </ul>
@@ -296,6 +295,18 @@
                     <div data-role="popup" id="join_another_group_div">
                         <select id="groups_list_notmember"></select>
                         <button id="join_another_group_submit_btn">Join this group</button>
+                    </div>
+                    <div data-role="popup" id="user_affinity">
+                        <ul data-role="listview" data-inset="true">
+                            <li>User:<input type="text" id="affinity_nameofuser" disabled="true"><!--<select id="affinity_nameofuser"></select>--></li>
+                            <li>Role:<select id="affinity_roleofuser"></select></li>
+                            <!--if role is parent, show child-->
+                            <li class="affinity_student">Child:<select id="affinity_child"></select></li>
+                            <!--if role is student, show parents-->
+                            <li class="affinity_parent">Father:<select id="affinity_father"></select></li>
+                            <li class="affinity_parent">Mother:<select id="affinity_mother"></select></li>
+                            <li class="affinity_parent">Guardian:<select id="affinity_guardian"></select></li>
+                        </ul>
                     </div>
 
                     <ul id="listahan_users" data-role="listview" data-filter="true"></ul>
@@ -325,7 +336,7 @@
             <div data-role="collapsible-set">
                 <div data-role="collapsible" class="collapsible">
                     <h3>Create a new group</h3>
-                    <input type="text" name="groupname_new" id="groupname_new" placeholder="group name" />
+                    <input type="text" name="groupname_new" id="groupname_new_admin" placeholder="group name" />
                     <label for="grouptype_new">group type:</label>
                     <select id="grouptype_new" name="grouptype_new">
                         <option val="school">school</option>
@@ -342,6 +353,29 @@
                     <ul id="groupslist" data-role="listview" data-inset="true" data-filter="true"></ul>
                 </div>
             </div>
+            <div data-role="popup" id="group_popup">
+                <ul data-role="listview" data-inset="true">
+                    <li>Group name: <input type="text" id="group_name_update"/></li>
+                    <li>Group type: <select id="group_type_update"></select></li>
+                    <li>Moderator:  <select id="mod_id_update"></select></li>
+                    <li><a href="#" data-rel="popup" class="group_update">Update</a></li>
+                    <li><a href="#" data-rel="popup" class="group_delete">Delete</a></li>
+                </ul>
+            </div>
+            <!--
+            <div data-role="popup" id="user_popup">
+                <ul data-role="listview" data-inset="true">
+                    <li>Email:<input type="text" name="email_edit" id="email_edit"></li>
+                    <li>Last name:<input type="text" name="lastname_edit" id="lastname_edit"></li>
+                    <li>First name:<input type="text" name="firstname_edit" id="firstname_edit"></li>
+                    <li>Middle name:<input type="text" name="middlename_edit" id="middlename_edit"></li>
+                    <li><a href="#" data-rel="popup" class="user_membership">Group membership</a></li>
+                    <li><a href="#" data-rel="popup" class="user_affinity">User Affinity</a></li>
+                    <li><a href="#" data-rel="popup" class="user_update">Update</a></li>
+                    <li><a href="#" data-rel="popup" class="user_delete">Delete</a></li>
+                </ul>
+            </div>
+            -->
         </div>
     </div>
 
@@ -369,7 +403,7 @@
     <div data-role="page" id="send_notif">
         <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed">notifs_feed</a></li>
+                    <li><a href="#notifs_feed">Notifications</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt" >Groups</a></li>
                     <li><a href="#register">Registration</a></li>
@@ -402,7 +436,7 @@
             <h1></h1>
         </div>-->
     </div>
-
+    <!--
     <div data-role="page" id="groups">
         <div id="overlaypanel_groups" data-role="panel" data-display="overlay">
             <ul data-role="listview" data-theme="a"> 
@@ -414,7 +448,7 @@
         <div data-role="header">
             <a href="#overlaypanel_groups" class="ui-btn">=</a>
             <h1>Groups</h1>
-            <!--<button class="refreshpage">refresh</button>-->
+            <button class="refreshpage">refresh</button>
         </div>
         <div data-role="main">
             <h4>Member of:</h4>
@@ -423,18 +457,18 @@
             <h4>List of all groups:</h4>
             <div id="list_groups_content"></div>
             <a id='list_groups' href="#groups_list_dialog" data-rel="dialog" data-transition="pop" style='display:none;'></a>
-        </div><!--
+        </div>
         <div data-role="footer">
             <h1></h1>
-        </div>-->
+        </div>
     </div>
-
+    -->
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
         //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
-        localStorage.webhost = "http://192.168.1.11/school_connect_server/";
+        localStorage.webhost = "http://192.168.0.11/school_connect_server/";
 
         /*
         $(".refreshpage").click(function(){
@@ -462,7 +496,7 @@
 
     <!--<script type="text/javascript" src="js/group_listmem.js"></script>-->
 
-    <!--<script type="text/javascript" src="js/group_getlistof.js"></script>-->
+    <script type="text/javascript" src="js/group_mngmnt.js"></script>
     <script type="text/javascript" src="js/group_userprofile.js"></script>
 
     <!--<script type="text/javascript" src="js/group_list.js"></script>-->

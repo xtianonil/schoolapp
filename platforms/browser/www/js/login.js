@@ -49,24 +49,25 @@ $("#login").click(function(){
 					else
 					{	//registered account
 						//alert("device uuid:"+device.uuid);
-
 						localStorage.login = "true";
 						localStorage.email_login = email_login;
-						if (user_details[0].is_admin === true)
+						if (user_details[0].is_admin === '1')
 							localStorage.is_admin = "true";
 						else
 							localStorage.is_admin = "false";
 						localStorage.user_id = user_details[0].user_id;
-
 						localStorage.name = user_details[0].lname + " " + user_details[0].fname + " " + user_details[0].mname;
+
 
 						//update registration id of logged in user
 						app.initialize();
 
 						//check if user has logged in on the device
 						//aka check if uuid exists in user_device table
+						//alert(localStorage.registrationId);
 						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.getItem('registrationId')})
 							.done(function(data){
+								//alert(data);
 								if (data === "uuid_exists")
 								{	//means user has logged in on this device before, just update device details
 									$.post(localStorage.webhost+"user_update_device.php",

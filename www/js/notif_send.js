@@ -6,11 +6,12 @@ $(document).on('pagebeforeshow','#send_notif',function(){
 		.done(function(query_result){
 			var groups = JSON.parse(query_result);
 			$("#notif_recipient_dropdown").empty();
-			$("#notif_recipient_dropdown").append(new Option("",""));
+			//$("#notif_recipient_dropdown").append(new Option("",""));
 			for (var i=0; i<groups.length; i++)
 			{
 				//$('#notif_recipient_dropdown').append('<option value="'+groups[i].group_id+'">'+groups[i].group_name+" ("+groups[i].group_type+")"+'</option>');
 				$("#notif_recipient_dropdown").append(new Option(groups[i].group_name+" ("+groups[i].group_type+")",groups[i].group_id));
+				$("#notif_recipient_dropdown").selectmenu("refresh");
 			}
 
 			$("#send_notif_btn").click(function(){
@@ -44,7 +45,7 @@ $(document).on('pagebeforeshow','#send_notif',function(){
 									.done(function(save_successful){
 										if (save_successful)
 										{
-
+											location.reload();
 										}
 									});//end of localstorage webhost notif save
 								});//end of localstorage webhost send notif gcm

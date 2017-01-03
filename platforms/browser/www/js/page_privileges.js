@@ -1,7 +1,13 @@
 if ( localStorage.login === "true" )
 {
 	if ( localStorage.is_admin === "true" )
-		alert("admin");
+	{
+		window.location.href = "index.html#admin_panel";
+		//alert("SDF");
+	}
 	else
-		alert("non admin");
+	{
+		window.location.href = "index.html#home";
+	}
+	//location.reload();
 }

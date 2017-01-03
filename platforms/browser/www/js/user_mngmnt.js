@@ -10,7 +10,6 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 				var fname 		= field.fname;
 				var mname 		= field.mname;
 				var lname 		= field.lname;
-
 				$("#listahan_users").append($("<li><a href='#user_popup' class='userslist' data-rel='popup' id="+userid+">"+lname+", "+fname+"</a></li>"));		
 				$("#listahan_users").listview("refresh");
 			});
@@ -86,7 +85,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 			        	$("#user_membership1").popup("open");
 
 			        	//alert(localStorage.userlistuid);
-			        	$.post(localStorage.webhost+"user_listgroupsof.php",{userid:localStorage.userlistuid})
+			        	$.post(localStorage.webhost+"user_showlistofgroupsjoined.php",{userid:localStorage.userlistuid})
 			        		.done(function(res){
 			        			//alert(res);
 			        			var user_groups = JSON.parse(res);
@@ -99,6 +98,61 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 			        		});
 			        }, 100);	//delay is 100ms
 				}
+				});//end of user membership clicked
+			$(".user_affinity").click(function(){
+				if ( userslist_isclicked )
+				{
+					$("#user_popup").popup("close");
+					//alert(localStorage.userlistuid);
+					
+					$.post(localStorage.webhost+"user_listspecific.php",{userid:localStorage.userlistuid})
+						.done(function(data){
+							var user_details = JSON.parse(data);
+							//alert(user_details[0].user_id);
+							//$("#affinity_nameofuser").empty();
+							$("#affinity_nameofuser").val(user_details[0].lname+", "+user_details[0].fname);
+							$("#affinity_roleofuser").empty();
+							var roles = ["student","father","mother","guardian"];
+							for ( var i=0; i<roles.length; i++ )
+							{
+								if ( user_details[0].role === roles[i] && roles[i] === "student" )
+								{
+									$("#affinity_roleofuser").append( new Option( roles[i],roles[i],true,true ) );
+									$(".affinity_parent").show();
+									$(".affinity_student").hide();
+								}
+								else if ( user_details[0].role === "parent" )
+									if ( user_details[0].parent_type === roles[i] )
+									{
+										$("#affinity_roleofuser").append( new Option( roles[i],roles[i],true,true ) );
+										$(".affinity_student").show();
+										$(".affinity_parent").hide();
+									}
+								else
+									$("#affinity_roleofuser").append( new Option( roles[i],roles[i] ) );
+								$("#affinity_roleofuser").selectmenu("refresh");
+							}
+							/*
+							$.post(localStorage.webhost+"user_listall.php")
+								.done(function(data1){
+									var users = JSON.parse(data1);
+									$.each(users, function(i, field)
+									{
+										if ( user_details[0].user_id === field.user_id )
+											$("#affinity_nameofuser").append( new Option(field.lname+","+field.fname,field.user_id,true,true) );
+										else
+											$("#affinity_nameofuser").append( new Option(field.lname+","+field.fname,field.user_id) );
+										$("#affinity_nameofuser").selectmenu("refresh");
+
+										
+									});
+								});*/
+						});
+						
+					setTimeout(function(){
+			        	$("#user_affinity").popup("open");
+			        },100);
+				}
 				});
 			$("#join_another_group_btn").click(function(){
 				$("#user_membership1").popup("close");
@@ -106,7 +160,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 					$("#join_another_group_div").popup("open");
 				},100);
 
-				$.post(localStorage.webhost+"user_listgroupsof_not.php",{userid:localStorage.userlistuid})
+				$.post(localStorage.webhost+"user_showlistofgroupsnotjoined.php",{userid:localStorage.userlistuid})
 					.done(function(res){
 						var user_groups = JSON.parse(res);
 						$("#groups_list_notmember").empty();
