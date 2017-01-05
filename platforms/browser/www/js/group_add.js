@@ -1,14 +1,13 @@
 $("#group_new_button").click(function(){
-	if ( $.trim($("#groupname_new").val()) < 1 )
+	if ( $.trim($("#groupname_new_admin").val()) < 1 )
 	{
-		alert($("#groupname_new").val());
-		alert("Group name cannot be left empty.");
+		alert("Group name cannot be empty.");
 	}//end of if
 	else
 	{
 		$.post(localStorage.webhost+"group_add.php",
 		{
-			groupname 	: $("#groupname_new").val(),
+			groupname 	: $("#groupname_new_admin").val(),
 			grouptype 	: $("#grouptype_new").val(),
 			groupmod	: $("#groupmodslist_new").val()
 		}

@@ -82,6 +82,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 					});
 
 					setTimeout(function(){
+						$("#listahan_groups").empty();
 			        	$("#user_membership1").popup("open");
 
 			        	//alert(localStorage.userlistuid);
@@ -89,7 +90,6 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 			        		.done(function(res){
 			        			//alert(res);
 			        			var user_groups = JSON.parse(res);
-			        			$("#listahan_groups").empty();
 			        			$.each(user_groups, function(i, field)
 								{
 									$("#listahan_groups").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.group_type+")</a></li>"));		
@@ -154,7 +154,9 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 			        },100);
 				}
 				});
+			var join_another_isclicked = false;
 			$("#join_another_group_btn").click(function(){
+				join_another_isclicked = true;
 				$("#user_membership1").popup("close");
 				setTimeout(function(){
 					$("#join_another_group_div").popup("open");
@@ -167,6 +169,7 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 						$.each(user_groups,function(i,field)
 						{
 							$("#groups_list_notmember").append(new Option(field.group_name,field.group_id));
+							$("#groups_list_notmember").selectmenu("refresh");
 						});//end of each
 					});//end of $.post user_listgroupsof_not
 				});//end of $join_another_group_btn
@@ -178,6 +181,16 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 				}
 				});
 				*/
+			$("#join_another_group_submit_btn").click(function(){
+				if ( join_another_isclicked )
+				{
+					$.post(localStorage.webhost+"group_add_member.php",{userid:localStorage.userlistuid,groupid:$("#groups_list_notmember").val()})
+						.done(function(groupmember_added){
+							alert("Successfully added member to group.");
+							location.reload();
+						});
+				}
+				});
 
 			$("#list_users_content").empty();
 

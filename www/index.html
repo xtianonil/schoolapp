@@ -358,8 +358,23 @@
                     <li>Group name: <input type="text" id="group_name_update"/></li>
                     <li>Group type: <select id="group_type_update"></select></li>
                     <li>Moderator:  <select id="mod_id_update"></select></li>
-                    <li><a href="#" data-rel="popup" class="group_update">Update</a></li>
+                    <li><a href="#" data-rel="popup" class="group_update">Update details</a></li>
+                    <li><a href="#" data-rel="popup" class="group_memberslist">Members list</a></li>
+                    <li><a href="#" data-rel="popup" class="group_joinrequests">Join requests</a></li>
                     <li><a href="#" data-rel="popup" class="group_delete">Delete</a></li>
+                </ul>
+            </div>
+            <div data-role="popup" id="groupmembers_popup">
+                <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
+            </div>
+            <div data-role="popup" id="groupmembers_joinrequest_popup">
+                <ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>
+            </div>
+            <div data-role="popup" id="groupmembers_joinrequest_approve_popup">
+                <h3>Approve join request?</h3>
+                <ul data-role="listview">
+                    <li id="joinrequest_approve_admin">Approve</li>
+                    <li id="joinrequest_cancel_admin">Cancel</li>
                 </ul>
             </div>
             <!--
@@ -406,8 +421,6 @@
                     <li><a href="#notifs_feed">Notifications</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt" >Groups</a></li>
-                    <li><a href="#register">Registration</a></li>
-                    <li><a href="#not_logged_in">Login</a></li>
                     <li><a href="#send_notif" class="ui-btn-active ui-state-persist">Send Notification</a></li>
                 </ul>
             </div>
@@ -428,7 +441,7 @@
             <label for="notif_recipient" class="select">Send to:</label>
             <select name="notif_recipient" id="notif_recipient_dropdown"></select>
             <label for="notif_msg" class="select">Notification:</label>
-            <textarea cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
+            <textarea rows="5" cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
             <button id="send_notif_btn">Send</button>
         </div>
         <!--

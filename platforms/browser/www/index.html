@@ -336,7 +336,7 @@
             <div data-role="collapsible-set">
                 <div data-role="collapsible" class="collapsible">
                     <h3>Create a new group</h3>
-                    <input type="text" name="groupname_new" id="groupname_new" placeholder="group name" />
+                    <input type="text" name="groupname_new" id="groupname_new_admin" placeholder="group name" />
                     <label for="grouptype_new">group type:</label>
                     <select id="grouptype_new" name="grouptype_new">
                         <option val="school">school</option>
@@ -358,8 +358,23 @@
                     <li>Group name: <input type="text" id="group_name_update"/></li>
                     <li>Group type: <select id="group_type_update"></select></li>
                     <li>Moderator:  <select id="mod_id_update"></select></li>
-                    <li><a href="#" data-rel="popup" class="user_update">Update</a></li>
-                    <li><a href="#" data-rel="popup" class="user_delete">Delete</a></li>
+                    <li><a href="#" data-rel="popup" class="group_update">Update details</a></li>
+                    <li><a href="#" data-rel="popup" class="group_memberslist">Members list</a></li>
+                    <li><a href="#" data-rel="popup" class="group_joinrequests">Join requests</a></li>
+                    <li><a href="#" data-rel="popup" class="group_delete">Delete</a></li>
+                </ul>
+            </div>
+            <div data-role="popup" id="groupmembers_popup">
+                <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
+            </div>
+            <div data-role="popup" id="groupmembers_joinrequest_popup">
+                <ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>
+            </div>
+            <div data-role="popup" id="groupmembers_joinrequest_approve_popup">
+                <h3>Approve join request?</h3>
+                <ul data-role="listview">
+                    <li id="joinrequest_approve_admin">Approve</li>
+                    <li id="joinrequest_cancel_admin">Cancel</li>
                 </ul>
             </div>
             <!--
