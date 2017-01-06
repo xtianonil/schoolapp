@@ -21,7 +21,7 @@ $("#login").click(function(){
 			success: function(data){
 				//alert("SFS");
 				//alert(device.uuid);
-				//alert(data);
+				alert(data);
 				if (data === "email_does_not_exist")
 				{
 					alert("Email does not exist");
