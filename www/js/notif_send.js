@@ -18,7 +18,6 @@ $(document).on('pagebeforeshow','#send_notif',function(){
 				//get reg IDs of those members of the chosen group
 				$.post(localStorage.webhost+"group_fetch_regids.php",{groupid:$("#notif_recipient_dropdown").val()})
 					.done(function(data){
-						alert(data);
 						var regids = JSON.parse(data);
 						var regids_array = [];
 						for (var i=0; i<regids.length; i++)
