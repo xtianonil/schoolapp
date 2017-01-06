@@ -69,12 +69,13 @@ $("#login").click(function(){
 						$.post(localStorage.webhost+"user_add_device.php",
 							{
 								userid 	: user_details[0].user_id,
-								uuid 	: device.uuid,
-								platform: device.platform,
-								model	: device.model,
+								//uuid 	: device.uuid,
+								//platform: device.platform,
+								//model	: device.model,
 								regid 	: localStorage.reg_id
 							})
-							.done(function(){
+							.done(function(data){
+								alert(data);
 								location.reload();
 								$("#login").html('Login');
 							});
