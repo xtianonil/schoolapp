@@ -126,6 +126,7 @@ $(document).on('pagebeforeshow','#group_userprofile',function(){
 	$("#start_new_group").click(function(){
 		$.post(localStorage.webhost+"group_add.php",{groupname:$("#groupname_new").val(),grouptype:$("#grouptype_new").val(),groupmod:localStorage.user_id})
 			.done(function(last_inserted_groupid){
+				//alert(last_inserted_groupid);
 				if ( last_inserted_groupid )
 				{
 					$.post(localStorage.webhost+"group_add_member.php",{userid:localStorage.user_id,groupid:last_inserted_groupid})

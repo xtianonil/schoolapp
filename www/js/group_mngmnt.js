@@ -81,7 +81,7 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 							$("#groupmembers_list").append($("<li><h3>GROUP: "+localStorage.grouplistname+"</h3></li>"));
 							$("#groupmembers_list").append($("<li>List of Members</li>"));
 							//alert(groupmembers);
-							if ( jQuery.isEmptyObject(groupmembers) )
+							if ( !jQuery.isEmptyObject(groupmembers) )
 							{
 								$.each(groupmembers,function(i,field){
 									$("#groupmembers_list").append($("<li><a href='#' class='groupmembers' data-rel='popup' id="+field.user_id+">"+field.lname+", "+field.fname+"</a></li>"));		
@@ -117,12 +117,13 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 					$("#groupmembers_joinrequest_list").empty();
 					$.post(localStorage.webhost+"group_listmembers_joinrequest.php",{groupid:localStorage.grouplistgid})
 						.done(function(data){
+							//alert(data);
 							var groupmembers = JSON.parse(data);
 
 							$("#groupmembers_joinrequest_list").append($("<li><h3>GROUP: "+localStorage.grouplistname+"</h3></li>"));
 							$("#groupmembers_joinrequest_list").append($("<li>Pending requests to join group</li>"));
 
-							if ( jQuery.isEmptyObject(groupmembers) )
+							if ( !jQuery.isEmptyObject(groupmembers) )
 							{
 								$.each(groupmembers,function(i,field){
 									$("#groupmembers_joinrequest_list").append($("<li><a href='#' class='groupmembers_joinreq' data-rel='popup' id="+field.user_id+">"+field.lname+", "+field.fname+"</a></li>"));		
