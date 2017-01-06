@@ -1,6 +1,6 @@
 $("#footer_div").empty();
 var logout = $("<p><a href='#' id='logout'> logout </a></p>");
-logout.prepend("signed in as: "+localStorage.user_id);
+//logout.prepend("signed in as: "+localStorage.user_id);
 $("#footer_div").append(logout);
 $("#logout").click(function(){
 	localStorage.clear();
