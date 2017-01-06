@@ -24,7 +24,6 @@ $(document).on('pagebeforeshow','#send_notif',function(){
 						{
 							regids_array.push(regids[i].reg_id);
 						}
-						//alert(regids_array);
 
 						//send msg
 						$.post(localStorage.webhost+"send_notif_gcm.php",

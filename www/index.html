@@ -122,8 +122,6 @@
                     <li><a href="#admin_panel" class="ui-btn-active ui-state-persist">Notifications</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
-                    <li><a href="#register">Registration</a></li>
-                    <li><a href="#not_logged_in">Login</a></li>
                     <li><a href="#send_notif">Send Notification</a></li>
                 </ul>
             </div>
@@ -142,7 +140,9 @@
             <div data-role="navbar">
                 <ul>
                     <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist">Notifications</a></li>
+                    <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_userprofile">Groups</a></li>
+                    <li><a href="#send_notif">Send Notification</a></li>
                 </ul>
             </div>
         </div>
@@ -233,8 +233,6 @@
                     <li><a href="#notifs_feed">Notifications</a></li>
                     <li><a href="#user_mngmnt" class="ui-btn-active ui-state-persist">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
-                    <li><a href="#register">Registration</a></li>
-                    <li><a href="#not_logged_in">Login</a></li>
                     <li><a href="#send_notif">Send Notification</a></li>
                 </ul>
             </div>
@@ -323,8 +321,6 @@
                     <li><a href="#notifs_feed">Notifications</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt" class="ui-btn-active ui-state-persist">Groups</a></li>
-                    <li><a href="#register">Registration</a></li>
-                    <li><a href="#not_logged_in">Login</a></li>
                     <li><a href="#send_notif">Send Notification</a></li>
                 </ul>
             </div>
@@ -441,6 +437,7 @@
             <label for="notif_recipient" class="select">Send to:</label>
             <select name="notif_recipient" id="notif_recipient_dropdown"></select>
             <label for="notif_msg" class="select">Notification:</label>
+            <textarea rows="5" cols="40" rows="8" name="notif_msg_title" id="notif_msg_title" maxlength="255" style="resize: none"></textarea>
             <textarea rows="5" cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
             <button id="send_notif_btn">Send</button>
         </div>
@@ -517,6 +514,7 @@
     <script type="text/javascript" src="js/group_add.js"></script>
 
     <script type="text/javascript" src="js/notifs_feed.js"></script>
+    <script type="text/javascript" src="js/notifs_feedadmin.js"></script>
     <script type="text/javascript" src="js/footer.js"></script>
 </body>
 

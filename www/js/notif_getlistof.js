@@ -91,7 +91,7 @@ $(document).on('pagecontainerbeforeshow', function (e, ui) {
   switch(ThisPage){
 
     case 'admin_panel':
-    case 'home':
+    case 'notifs_feed':
     	getlistof_notifs();
     	//alert("ASF");
     	//$(":mobile-pagecontainer").pagecontainer("change", "index.html#home", {reload: true});
