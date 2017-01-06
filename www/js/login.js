@@ -65,8 +65,8 @@ $("#login").click(function(){
 						//check if user has logged in on the device
 						//aka check if uuid exists in user_device table
 						//alert(localStorage.registrationId);
-						alert(localStorage.reg_id);
-						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.getItem('registrationId')})
+						//alert(localStorage.reg_id);
+						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.reg_id})
 							.done(function(data){
 								//alert(data);
 								if (data === "uuid_exists")
@@ -77,7 +77,7 @@ $("#login").click(function(){
 											uuid 	: device.uuid,
 											platform: device.platform,
 											model	: device.model,
-											regid 	: localStorage.getItem('registrationId')
+											regid 	: localStorage.reg_id
 										})
 										.done(function(){
 											location.reload();
@@ -92,7 +92,7 @@ $("#login").click(function(){
 											uuid 	: device.uuid,
 											platform: device.platform,
 											model	: device.model,
-											regid 	: localStorage.getItem('registrationId')
+											regid 	: localStorage.reg_id
 										})
 										.done(function(){
 											location.reload();
