@@ -65,9 +65,10 @@ $("#login").click(function(){
 						//check if user has logged in on the device
 						//aka check if uuid exists in user_device table
 						//alert(localStorage.registrationId);
+						alert(device.uuid+"<br>"+user_details[0].user_id+"<br>"+localStorage.getItem('registrationId'));
 						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.getItem('registrationId')})
 							.done(function(data){
-								alert(data);
+								//alert(data);
 								if (data === "uuid_exists")
 								{	//means user has logged in on this device before, just update device details
 									$.post(localStorage.webhost+"user_update_device.php",
