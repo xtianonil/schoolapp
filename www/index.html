@@ -359,11 +359,12 @@
                 </ul>
             </div>
             <div data-role="popup" id="groupmembers_popup">
-                <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
+                <!--<ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>-->
             </div>
             <div data-role="popup" id="groupmembers_joinrequest_popup">
-                <ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>
+                <!--<ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>-->
             </div>
+            <!--
             <div data-role="popup" id="groupmembers_joinrequest_approve_popup">
                 <h3>Approve join request?</h3>
                 <ul data-role="listview">
@@ -371,6 +372,7 @@
                     <li id="joinrequest_cancel_admin">Cancel</li>
                 </ul>
             </div>
+            -->
             <!--
             <div data-role="popup" id="user_popup">
                 <ul data-role="listview" data-inset="true">
@@ -471,6 +473,22 @@
         </div>
     </div>
     -->
+    <div data-role="page" id="members_list" class="admin_panel">
+        Members list
+        <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
+    </div>
+    <div data-role="page" id="joinrequests_list" class="admin_panel">
+        Join Requests
+        <ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>
+        <div data-role="popup" id="groupmembers_joinrequest_approve_popup">
+            <h3>Approve join request?</h3>
+            <ul data-role="listview">
+                <li id="joinrequest_approve_admin">Approve</li>
+                <li id="joinrequest_cancel_admin">Cancel</li>
+            </ul>
+        </div>
+    </div>
+
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
@@ -505,6 +523,9 @@
     <!--<script type="text/javascript" src="js/group_listmem.js"></script>-->
 
     <script type="text/javascript" src="js/group_mngmnt.js"></script>
+    <script type="text/javascript" src="js/group_memberslist.js"></script>
+    <script type="text/javascript" src="js/group_joinrequestslist.js"></script>
+
     <script type="text/javascript" src="js/group_userprofile.js"></script>
 
     <!--<script type="text/javascript" src="js/group_list.js"></script>-->

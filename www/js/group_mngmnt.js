@@ -68,6 +68,7 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 							});		
 					});
 				});
+			/*
 			$(".group_memberslist").click(function(){
 				$("#group_popup").popup("close");
 				if ( groupslist_isclicked )
@@ -107,8 +108,9 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 						});
 				}
 				});
-			
+			*/
 			var group_joinrequests_isclicked = false;
+			/*
 			$(".group_joinrequests").click(function(){
 				group_joinrequests_isclicked = true;
 				$("#group_popup").popup("close");
@@ -169,7 +171,7 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 						});//group_listmembers_joinrequest.php
 				}
 				});
-			
+			*/
 			$(".group_update").click(function(){
 				if ( groupslist_isclicked )
 				{

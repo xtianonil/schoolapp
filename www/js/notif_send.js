@@ -42,6 +42,7 @@ $(document).on('pagebeforeshow','#send_notif',function(){
 										target_group : $("#notif_recipient_dropdown").val()
 									})
 									.done(function(save_successful){
+										alert(save_successful);
 										if (save_successful)
 										{
 											location.reload();
