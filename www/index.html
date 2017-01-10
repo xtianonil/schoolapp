@@ -119,7 +119,7 @@
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#admin_panel" class="ui-btn-active ui-state-persist">Notifications</a></li>
+                    <li><a href="#admin_panel" class="ui-btn-active ui-state-persist">Transactions</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
                     <li><a href="#send_notif">Send Notification</a></li>
@@ -178,8 +178,8 @@
                 <div data-role="collapsible" class="collapsible">
                     <h3>Start a new group</h3>
                     <input type="text" name="groupname_new" id="groupname_new" placeholder="group name" />
-                    <label for="grouptype_new">group type:</label>
-                    <select id="grouptype_new" name="grouptype_new">
+                    <label for="grouptype_new_nonadmin">group type:</label>
+                    <select id="grouptype_new_nonadmin" name="grouptype_new_nonadmin">
                         <option val="school_section">section</option>
                         <option val="school_club">club</option>
                     </select>
@@ -228,7 +228,7 @@
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
+                    <li><a href="#admin_panel">Notifications</a></li>
                     <li><a href="#user_mngmnt" class="ui-btn-active ui-state-persist">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
                     <li><a href="#send_notif">Send Notification</a></li>
@@ -316,7 +316,7 @@
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
+                    <li><a href="#admin_panel">Notifications</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt" class="ui-btn-active ui-state-persist">Groups</a></li>
                     <li><a href="#send_notif">Send Notification</a></li>
@@ -330,22 +330,30 @@
             <div data-role="collapsible-set">
                 <div data-role="collapsible" class="collapsible">
                     <h3>Create a new group</h3>
-                    <input type="text" name="groupname_new_admin" id="groupname_new_admin" placeholder="group name" />
-                    <label for="grouptype_new">group type:</label>
-                    <select id="grouptype_new" name="grouptype_new">
-                        <option val="school">school</option>
-                        <option val="school_section">section</option>
-                        <option val="school_club">club</option>
-                    </select>
-                    <!--<input type="text" id="groupmod_new" placeholder="group moderator" />-->
-                    <label for="groupmodslist_new">group moderator:</label>
-                    <select id="groupmodslist_new"></select>
-                    <button id="group_new_button">Submit</button>
+                    <ul data-role="listview" id="creategroup_admin">
+                        <li><input type="text" name="groupname_new_admin" id="groupname_new_admin" placeholder="group name" /></li>
+                        <li id="groupmodslist_new_li">
+                            <label for="grouptype_new">group type:</label>
+                            <select id="grouptype_new" name="grouptype_new">
+                                <option val="school">school</option>
+                                <option val="school_section">section</option>
+                                <option val="school_club">club</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="groupmodslist_new">group moderator:</label>
+                            <select id="groupmodslist_new"></select>
+                        </li>
+                        <li>
+                            <button id="group_new_button">Submit</button>
+                        </li>
+                    </ul>
                 </div>
                 <div data-role="collapsible" class="collapsible">
                     <h3>Groups list</h3>
                     <ul id="groupslist" data-role="listview" data-inset="true" data-filter="true"></ul>
                 </div>
+                
             </div>
             <div data-role="popup" id="group_popup">
                 <ul data-role="listview" data-inset="true">
@@ -414,7 +422,7 @@
     <div data-role="page" id="send_notif">
         <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
+                    <li><a href="#admin_panel">Notifications</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt" >Groups</a></li>
                     <li><a href="#send_notif" class="ui-btn-active ui-state-persist">Send Notification</a></li>
@@ -474,10 +482,12 @@
     </div>
     -->
     <div data-role="page" id="members_list" class="admin_panel">
+        <ul data-role="listview"><li><a href="index.html#group_mngmnt">&#8592; Back</a></li></ul>
         Members list
         <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
     </div>
     <div data-role="page" id="joinrequests_list" class="admin_panel">
+        <ul data-role="listview"><li><a href="index.html#group_mngmnt">&#8592; Back</a></li></ul>
         Join Requests
         <ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>
         <div data-role="popup" id="groupmembers_joinrequest_approve_popup">
@@ -529,7 +539,7 @@
     <script type="text/javascript" src="js/group_userprofile.js"></script>
 
     <!--<script type="text/javascript" src="js/group_list.js"></script>-->
-    <script type="text/javascript" src="js/group_selectmod.js"></script>
+    <!--<script type="text/javascript" src="js/group_selectmod.js"></script>-->
     <script type="text/javascript" src="js/group_add.js"></script>
 
     <script type="text/javascript" src="js/notifs_feed.js"></script>

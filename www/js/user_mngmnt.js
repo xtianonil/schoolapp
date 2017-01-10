@@ -82,14 +82,11 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 					});
 
 					setTimeout(function(){
-						$("#listahan_groups").empty();
 			        	$("#user_membership1").popup("open");
-
-			        	//alert(localStorage.userlistuid);
 			        	$.post(localStorage.webhost+"user_showlistofgroupsjoined.php",{userid:localStorage.userlistuid})
 			        		.done(function(res){
-			        			//alert(res);
 			        			var user_groups = JSON.parse(res);
+			        			$("#listahan_groups").empty();
 			        			$.each(user_groups, function(i, field)
 								{
 									$("#listahan_groups").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.group_type+")</a></li>"));		

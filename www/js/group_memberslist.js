@@ -6,13 +6,13 @@ $(".group_memberslist").click(function(){
 			var groupmembers = JSON.parse(data);
 
 			$("#groupmembers_list").append($("<li><h3>GROUP: "+localStorage.grouplistname+"</h3></li>"));
-			$("#groupmembers_list").append($("<li>List of Members</li>"));
+			//$("#groupmembers_list").append($("<li>List of Members</li>"));
 			if ( !jQuery.isEmptyObject(groupmembers) )
 			{
 				$.each(groupmembers,function(i,field){
 					$("#groupmembers_list").append($("<li><a href='#' class='groupmembers' data-rel='popup' id="+field.user_id+">"+field.lname+", "+field.fname+"</a></li>"));		
 				});
-				$("#groupmembers_list").append($("<li><button id='flush_members_admin'>Flush members</button></li>"));
+				$("#groupmembers_list").append($("<li><a href='#' id='flush_members_admin'>Flush members</a></li>"));
 			}
 			else
 				$("#groupmembers_list").append($("<li>n/a</li>"));
