@@ -1,5 +1,6 @@
 //$(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
-showNotifsFeedAdmin();
+if ( localStorage.login === 'true' && localStorage.is_admin === 'true' )
+	showNotifsFeedAdmin();
 function showNotifsFeedAdmin()
 {
 	//alert("show notifs feed");

@@ -16,11 +16,8 @@ $("#login").click(function(){
 			cache: false,
 			beforeSend: function(){ 
 				$("#login").html('Connecting...');
-				//`alert(dataString);
 			},
 			success: function(data){
-				//alert("SFS");
-				//alert(device.uuid);
 				//alert(data);
 				if (data === "email_does_not_exist")
 				{
