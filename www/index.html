@@ -147,15 +147,25 @@
         </div>
         <div data-role="main" class="ui-content">
             <ul id="notifs_list" data-role='listview'></ul>
-            <div data-role="popup" id="notif_details_popup">
+            <div data-role="popup" id="notif_details_popup_options">
                 <ul data-role="listview">
                     <li>
                         <div class='ui-grid-b my-breakpoint'>
                             <div id="notif_expanded_details"></div>
+
                             <div class='ui-block-a' style='display: inline-block; width: 140px; text-decoration: none !important; text-align: center;'><a href='#' id='notif_toggleread'>Mark as read</a></div>
                             <div class='ui-block-b' style='display: inline-block; width: 140px; text-decoration: none !important; text-align: center;'><a href='#' id='notif_removefromfeed'>Remove from feed</a></div>
                         </div>
                     </li>
+                </ul>
+            </div>
+            <div data-role="popup" id="notif_details_popup">
+                <ul data-role="listview">
+                        <div class='ui-grid-b my-breakpoint'>
+                            <div id="notif_expanded_details"></div>
+
+                            <div id='notif_details_list' class='ui-block-a' style='display: inline-block; width: 100%; text-decoration: none !important; text-align: center;'></div>
+                        </div>
                 </ul>
             </div>
         </div>

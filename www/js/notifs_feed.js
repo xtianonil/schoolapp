@@ -19,12 +19,13 @@ function showNotifsFeed()
 						{
 							//alert(field.status_onfeed);
 							if (field.status_onfeed === 'unread')
-								$("#notifs_list").append( $("<li><a href='#' style='font-weight:900;' class='notif_item unread' id="+field.notif_id+">"+field.payload+" </font>("+field.notif_id+")<br>posted by: "+field.lname+", "+field.fname+" (<font color='red'>"+field.created_on+"</font>)"+"</a></li>") );		
+								$("#notifs_list").append( $("<li data-icon='false'><a href='#' style='font-weight:900;' class='notif_item unread' id="+field.notif_id+">"+field.payload+" </font>("+field.notif_id+")<br>posted by: "+field.lname+", "+field.fname+" (<font color='red'>"+field.created_on+"</font>)"+"</a></li>") );		
 							else if (field.status_onfeed === 'read')
-								$("#notifs_list").append( $("<li><a href='#' style='font-weight:100;' class='notif_item read' id="+field.notif_id+">"+field.payload+" ("+field.notif_id+")<br>posted by: "+field.lname+", "+field.fname+" (<font color='red'>"+field.created_on+"</font>)"+"</a></li>") );		
+								$("#notifs_list").append( $("<li data-icon='false'><a href='#' style='font-weight:100;' class='notif_item read' id="+field.notif_id+">"+field.payload+" ("+field.notif_id+")<br>posted by: "+field.lname+", "+field.fname+" (<font color='red'>"+field.created_on+"</font>)"+"</a></li>") );		
 						});
 						$("#notifs_list").listview("refresh");
 
+						/*
 						$(".notif_item").click(function(){
 							//alert($(this).attr('id'));
 							localStorage.notifid_selected = $(this).attr('id');
@@ -33,7 +34,48 @@ function showNotifsFeed()
 							else if ( $(this).hasClass('read') )
 								$("#notif_toggleread").text("Mark as unread");
 							setTimeout(function(){$("#notif_details_popup").popup("open");},100);
+							});*/
+						//on tap, show full notification details
+						$( ".notif_item" ).on( "tap", tapHandler );
+						function tapHandler( event ){
+							//alert("swiped");
+						    //$( event.target ).addClass( "swipe" );
+						    localStorage.notifid_selected = $(this).attr('id');
+						    $("#notif_details_list").empty();
+						    $.post(localStorage.webhost+"notif_listspecific.php",{notifid:localStorage.notifid_selected})
+						    	.done(function(data){
+						    		var notif = JSON.parse(data);
+						    		$("#notif_details_list").append( $("<li>From: "+notif[0].lname+", "+notif[0].fname+" ("+notif[0].created_on+")</li>") );
+						    		//$("#notif_details_list").append( $("<li>("+notif[0].created_on+")</li>") );
+						    		$("#notif_details_list").append( $("<li>"+notif[0].payload+"</li>") );
+						    		$("#notif_details_list").listview("refresh");
+						    	});
+
+						    $(document).on('popupafterclose','#notif_details_popup',function(){
+								$.post(localStorage.webhost+"notif_toggleread.php",{userid:localStorage.user_id,notifid:localStorage.notifid_selected,toggleoption:"unread"})
+						    	.done(function(){
+						    		//location.reload();
+						    		location.reload();
+						    	});
 							});
+						    
+
+							setTimeout(function(){$("#notif_details_popup").popup("open");},100);
+						}
+						
+
+						//on taphold, show notification options
+						$( ".notif_item" ).on( "taphold", tapholdHandler );
+						function tapholdHandler( event ){
+							//alert("swiped");
+						    //$( event.target ).addClass( "swipe" );
+						    localStorage.notifid_selected = $(this).attr('id');
+							if ( $(this).hasClass('unread') )
+								$("#notif_toggleread").text("Mark as read");
+							else if ( $(this).hasClass('read') )
+								$("#notif_toggleread").text("Mark as unread");
+							setTimeout(function(){$("#notif_details_popup_options").popup("open");},100);
+						}
 						$("#notif_toggleread").click(function(){
 							//alert($(this).text());
 							if ( $(this).text() === "Mark as read" )
@@ -44,7 +86,7 @@ function showNotifsFeed()
 								.done(function(toggleread_success){
 									if (toggleread_success)
 									{
-										alert("Notif marked successfully.");
+										//alert("Notif marked successfully.");
 										location.reload();
 									}
 								});
@@ -56,6 +98,12 @@ function showNotifsFeed()
 									location.reload();
 								});
 							});//end of notif_removefromfeed
+						/*
+						$( ".notif_item" ).on( "swipe", swipeHandler );
+						function swipeHandler( event ){
+							alert("swiped");
+						    $( event.target ).addClass( "swipe" );
+						  }*/
 					});
 			});//end of each
 		});
