@@ -28,7 +28,7 @@ $(document).on('pagebeforeshow','#group_userprofile',function(){
 			$("#groupslist_niuser").empty();
 			$.each(user_groups, function(i, field)
 			{
-				$("#groupslist_niuser").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.group_type+")</a></li>"));		
+				$("#groupslist_niuser").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.notif_subs+")</a></li>"));		
 				$("#groupslist_niuser").listview("refresh");
 			});
 		});

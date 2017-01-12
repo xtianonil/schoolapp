@@ -20,7 +20,7 @@ $(".group_joinrequests").click(function(){
 					*/
 					var x = $("<div class='ui-block-a'>A</div>");
 					x.append( $("<div class='ui-block-b'>B</div>") );
-					$("#groupmembers_joinrequest_list").append( $("<li><div class='ui-grid-b my-breakpoint'><div class='ui-block-a'>"+field.lname+", "+field.fname+"</div><div class='ui-block-c' style='float:right	'><input type='checkbox' id='"+field.user_id+"' /></div></div></li>") );
+					$("#groupmembers_joinrequest_list").append( $("<li><div class='ui-grid-b my-breakpoint'><div class='ui-block-a'>"+field.lname+", "+field.fname+"</div><div class='ui-block-c' style='float:right'><input type='checkbox' id='"+field.user_id+"' /></div></div></li>") );
 					//$("#groupmembers_joinrequest_list").append($("<li><a href='#' class='groupmembers_joinreq' data-rel='popup' id="+field.user_id+">"+field.lname+", "+field.fname+"</a><a href='#'>A</a><a href='#'>B</a></li>"));		
 				});
 				$("#groupmembers_joinrequest_list").append( $("<li><a href='#' id='approve_joinrequest_btn'>Approve join request</a ></li>") );
