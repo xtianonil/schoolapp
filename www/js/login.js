@@ -18,7 +18,7 @@ $("#login").click(function(){
 				$("#login").html('Connecting...');
 			},
 			success: function(data){
-				//alert(data);
+				alert(data);
 				if (data === "email_does_not_exist")
 				{
 					alert("Email does not exist");
