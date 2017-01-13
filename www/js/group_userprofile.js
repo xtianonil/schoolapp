@@ -28,9 +28,98 @@ $(document).on('pagebeforeshow','#group_userprofile',function(){
 			$("#groupslist_niuser").empty();
 			$.each(user_groups, function(i, field)
 			{
-				$("#groupslist_niuser").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.notif_subs+")</a></li>"));		
+				$("#groupslist_niuser").append( $("<li><div id="+field.group_id+" class='ui-grid-b my-breakpoint group_joined'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b'>"+((field.notif_subs==='1')?"subscribed; able to receive notifications from this group":"not subscribed") +"</div><div class='ui-block-c'></div></li>") );
+				//$("#groupslist_niuser").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.notif_subs+")</a></li>"));		
+				//$("#groupslist_niuser").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.notif_subs+")</a></li>"));		
 				$("#groupslist_niuser").listview("refresh");
+				//$("#groupslist_niuser").append( $("<li><div class='ui-grid-b my-breakpoint'><div class='ui-block-a'>"+field.lname+"</div><div class='ui-block-c'><input type='checkbox' id='"+field.user_id+"' /></div></div></li>") );
 			});
+
+			$( ".group_joined" ).on( "taphold", tapholdHandler_notif );
+			function tapholdHandler_notif( event ){
+				//$("#group_subscriptiontoggle").empty();
+				localStorage.groupidtemp = $(this).attr('id');
+				$.post(localStorage.webhost+"group_listspecific_joined.php",{groupid:$(this).attr('id'),userid:localStorage.user_id})
+					.done(function(data){
+						var grp = JSON.parse(data);
+						if ( grp[0].notif_subs === '1' )
+						{	//user is subscribed
+							$("#group_subscribe").hide();
+							$("#group_unsubscribe").show();
+						}
+						else
+						{
+							$("#group_subscribe").show();
+							$("#group_unsubscribe").hide();
+						}
+					});
+				$("#group_subscriptiontoggle").popup("open");
+			}
+			$("#group_cancelsub").click(function(){
+				setTimeout(function(){$("#group_subscriptiontoggle").popup("close");},100)
+				});
+			$("#group_subscribe").click(function(){
+				$.post(localStorage.webhost+"notif_subscriptiontoggle.php",
+					{
+						groupid 		: localStorage.groupidtemp,
+						userid  		: localStorage.user_id,
+						toggleoption 	: "subscribe"
+					})
+					.done(function(success){
+						if ( success )
+						{
+							location.href = "index.html#group_userprofile";
+						}
+					});
+				});
+			$("#group_unsubscribe").click(function(){
+				$.post(localStorage.webhost+"notif_subscriptiontoggle.php",
+					{
+						groupid 		: localStorage.groupidtemp,
+						userid  		: localStorage.user_id,
+						toggleoption 	: "unsubscribe"
+					})
+					.done(function(success){
+						if ( success )
+						{
+							//location.href = "index.html#group_userprofile";
+							location.reload();
+						}
+					});
+				});
+			/*
+			var groupjoined_isclicked = false;
+			$(".group_joined").click(function(){
+				//alert($(this).attr('id'));
+				groupjoined_isclicked = true;
+				$("#group_subscriptiontoggle").empty();
+				$.post(localStorage.webhost+"group_listspecific_joined.php",{groupid:$(this).attr('id'),userid:localStorage.user_id})
+					.done(function(data){
+						var grp = JSON.parse(data);
+						//alert(grp[0].notif_subs);
+						$("#group_subscriptiontoggle").append( $("<h3>What do you want to do?</h3>") );
+						if ( grp[0].notif_subs === '1' )
+						{
+							$("#group_subscriptiontoggle").append( $("<li id='unsubscribe_fromlist'>Unsubscribe</li>") );
+							
+						}
+						else
+						{
+							$("#group_subscriptiontoggle").append( $("<li id='subscribe_tolist'>Subscribe to list</li>") );
+						}
+						$("#group_subscriptiontoggle").append( $("<li><a href='#' class='cancel_subs'>Cancel</a></li>") );
+						$("#group_subscriptiontoggle").listview("refresh");
+
+						$(".cancel_subs").click(function(){
+							if( groupjoined_isclicked )
+								alert("cancel subs");
+							});
+					});
+				
+				$("#group_subscriptiontoggle").popup("open");
+
+				});//end of groupjoined.click
+			*/
 		});
 
 	$.post(localStorage.webhost+"user_showlistofgroupsnotjoined.php",{userid:localStorage.user_id})
