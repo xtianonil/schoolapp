@@ -129,7 +129,27 @@
             <ul id="notifs_list_admin" data-role='listview'></ul>
         </div>
     </div>
+    <div data-role="page" id="support_page">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#notifs_feed">Notifications</a></li>
+                    <li><a href="#group_userprofile">Groups</a></li>
+                    <li><a href="#support_page" class="ui-btn-active ui-state-persist">Contact Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="main" class="ui-content">
+            <label for="email_subject">Subject:</label>
+            <input type="text" name="email_subject" id="email_subject"/>
 
+            <label for="email_body">Message:</label>
+            <textarea rows="6" cols="50" name="email_body" id="email_body">
+            
+            </textarea>
+            <button id="email_send">Send</button>
+        </div>
+    </div>
     <div data-role="page" id="notifs_feed">
         <!--
         <div id="overlaypanel" data-role="panel" data-display="overlay">
@@ -142,6 +162,7 @@
                 <ul>
                     <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist">Notifications</a></li>
                     <li><a href="#group_userprofile">Groups</a></li>
+                    <li><a href="#support_page">Contact Support</a></li>
                 </ul>
             </div>
         </div>
@@ -154,7 +175,7 @@
                             <div id="notif_expanded_details"></div>
 
                             <div class='ui-block-a' style='display: inline-block; width: 140px; text-decoration: none !important; text-align: center;'><a href='#' id='notif_toggleread'>Mark as read</a></div>
-                            <div class='ui-block-b' style='display: inline-block; width: 140px; text-decoration: none !important; text-align: center;'><a href='#' id='notif_removefromfeed'>Send to archives</a></div>
+                            <div class='ui-block-b' style='display: inline-block; width: 140px; text-decoration: none !important; text-align: center;'><a href='#' id='notif_removefromfeed'>Archive</a></div>
                         </div>
                     </li>
                 </ul>
@@ -177,6 +198,7 @@
                 <ul>
                     <li><a href="#notifs_feed">Notifications</a></li>
                     <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist">Groups</a></li>
+                    <li><a href="#support_page">Contact Support</a></li>
                 </ul>
             </div>
         </div>
@@ -572,6 +594,8 @@
     <!--<script type="text/javascript" src="js/group_list.js"></script>-->
     <!--<script type="text/javascript" src="js/group_selectmod.js"></script>-->
     <script type="text/javascript" src="js/group_add.js"></script>
+
+    <script type="text/javascript" src="js/email_support.js"></script>
 
     <script type="text/javascript" src="js/notifs_feed.js"></script>
     <script type="text/javascript" src="js/notifs_feedadmin.js"></script>

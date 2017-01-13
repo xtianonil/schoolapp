@@ -39,7 +39,7 @@ function showNotifsFeed()
 							setTimeout(function(){$("#notif_details_popup").popup("open");},100);
 							});*/
 						//on tap, show full notification details
-						$( ".notif_item" ).on( "tap", tapHandler );
+						$( ".notif_item" ).on( "click", tapHandler );
 						function tapHandler( event ){
 							//alert("swiped");
 						    //$( event.target ).addClass( "swipe" );

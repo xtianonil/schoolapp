@@ -18,7 +18,7 @@ $("#login").click(function(){
 				$("#login").html('Connecting...');
 			},
 			success: function(data){
-				alert(data);
+				//alert(data);
 				if (data === "email_does_not_exist")
 				{
 					alert("Email does not exist");
@@ -53,7 +53,7 @@ $("#login").click(function(){
 						else
 							localStorage.is_admin = "false";
 						localStorage.user_id = user_details[0].user_id;
-						localStorage.name = user_details[0].lname + " " + user_details[0].fname + " " + user_details[0].mname;
+						localStorage.name = user_details[0].lname + " " + user_details[0].fname;
 
 
 						//update registration id of logged in user
@@ -82,7 +82,7 @@ $("#login").click(function(){
 						
 						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.reg_id})
 							.done(function(data){
-								alert(data);
+								//alert(data);
 								if (data === "uuid_exists")
 								{	//means user has logged in on this device before, just update device details
 									$.post(localStorage.webhost+"user_update_device.php",

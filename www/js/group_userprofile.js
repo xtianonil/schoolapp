@@ -28,15 +28,15 @@ $(document).on('pagebeforeshow','#group_userprofile',function(){
 			$("#groupslist_niuser").empty();
 			$.each(user_groups, function(i, field)
 			{
-				$("#groupslist_niuser").append( $("<li><div id="+field.group_id+" class='ui-grid-b my-breakpoint group_joined'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b'>"+((field.notif_subs==='1')?"subscribed; able to receive notifications from this group":"not subscribed") +"</div><div class='ui-block-c'></div></li>") );
+				$("#groupslist_niuser").append( $("<li><div id="+field.group_id+" class='ui-grid-b my-breakpoint group_joined'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b'>"+((field.notif_subs==='1')?"subscribed to notifs":"not subscribed") +"</div><div class='ui-block-c'></div></li>") );
 				//$("#groupslist_niuser").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.notif_subs+")</a></li>"));		
 				//$("#groupslist_niuser").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.notif_subs+")</a></li>"));		
 				$("#groupslist_niuser").listview("refresh");
 				//$("#groupslist_niuser").append( $("<li><div class='ui-grid-b my-breakpoint'><div class='ui-block-a'>"+field.lname+"</div><div class='ui-block-c'><input type='checkbox' id='"+field.user_id+"' /></div></div></li>") );
 			});
 
-			$( ".group_joined" ).on( "taphold", tapholdHandler_notif );
-			function tapholdHandler_notif( event ){
+			$( ".group_joined" ).on( "tap", tapHandler_notif );
+			function tapHandler_notif( event ){
 				//$("#group_subscriptiontoggle").empty();
 				localStorage.groupidtemp = $(this).attr('id');
 				$.post(localStorage.webhost+"group_listspecific_joined.php",{groupid:$(this).attr('id'),userid:localStorage.user_id})
