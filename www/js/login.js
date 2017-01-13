@@ -64,6 +64,7 @@ $("#login").click(function(){
 						//alert(localStorage.registrationId);
 						//alert(localStorage.reg_id);
 						
+						/*
 						$.post(localStorage.webhost+"user_add_device.php",
 							{
 								userid 	: user_details[0].user_id,
@@ -77,7 +78,8 @@ $("#login").click(function(){
 								location.reload();
 								//$("#login").html('Login');
 							});
-						/*
+							*/
+						
 						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.reg_id})
 							.done(function(data){
 								alert(data);
@@ -113,7 +115,7 @@ $("#login").click(function(){
 								}
 							});
 						$("#login").html('Login');
-						*/
+						
 						/*
 
 						$.post(localStorage.webhost+"user_register.php",
