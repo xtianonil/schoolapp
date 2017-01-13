@@ -75,9 +75,9 @@ $("#login").click(function(){
 							.done(function(data){
 								//alert(data);
 								location.reload();
-								$("#login").html('Login');
+								//$("#login").html('Login');
 							});
-							
+						/*
 						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.reg_id})
 							.done(function(data){
 								alert(data);
@@ -113,6 +113,7 @@ $("#login").click(function(){
 								}
 							});
 						$("#login").html('Login');
+						*/
 						/*
 
 						$.post(localStorage.webhost+"user_register.php",
