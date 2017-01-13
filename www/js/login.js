@@ -18,7 +18,7 @@ $("#login").click(function(){
 				$("#login").html('Connecting...');
 			},
 			success: function(data){
-				alert(data);
+				//alert(data);
 				if (data === "email_does_not_exist")
 				{
 					alert("Email does not exist");
@@ -45,7 +45,7 @@ $("#login").click(function(){
 					}
 					else
 					{	//registered account
-						alert("device uuid:"+device.uuid);
+						//alert("device uuid:"+device.uuid);
 						localStorage.login = "true";
 						localStorage.email_login = email_login;
 						if (user_details[0].is_admin === '1')
