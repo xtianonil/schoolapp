@@ -73,7 +73,7 @@ $("#login").click(function(){
 								regid 	: localStorage.reg_id
 							})
 							.done(function(data){
-								//alert(data);
+								alert(data);
 								location.reload();
 								//$("#login").html('Login');
 							});
