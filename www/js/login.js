@@ -38,7 +38,7 @@ $("#login").click(function(){
 					//alert(data);
 					var user_details = JSON.parse(data);
 
-					if (user_details[0].is_active === false)
+					if (user_details[0].is_active === 0)
 					{
 						alert("Unregistered account");
 						
@@ -112,6 +112,7 @@ $("#login").click(function(){
 										});
 								}
 							});
+						$("#login").html('Login');
 						/*
 
 						$.post(localStorage.webhost+"user_register.php",
