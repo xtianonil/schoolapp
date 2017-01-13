@@ -4,7 +4,7 @@ var logout = $("<p><a href='#' id='logout'> logout </a></p>");
 $("#footer_div").append(logout);
 $("#logout").click(function(){
 	window.location.href = "index.html#not_logged_in";
-	//location.reload();
+	location.reload();
 	$("#login").html('Login');
 	localStorage.clear();
 	$("#footer_div").empty();
