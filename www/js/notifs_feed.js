@@ -69,7 +69,7 @@ function showNotifsFeed()
 						    	});
 							});
 
-							setTimeout(function(){$("#notif_details_popup").popup("open");},100);
+							setTimeout(function(){$("#notif_details_popup").popup("open",'positionTo: window');},100);
 						}
 						
 
