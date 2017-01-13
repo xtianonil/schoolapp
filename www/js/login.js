@@ -6,8 +6,8 @@ $("#login").click(function(){
 	var email_login = $("#email_login").val();
 	var password = $("#password").val();
 	var dataString="email_login="+email_login+"&password="+password+"&login=";
-	if($.trim(email_login).length>0 & $.trim(password).length>0)
-	{
+	//if($.trim(email_login).length>0 & $.trim(password).length>0)
+	//{
 		$.ajax({
 			type: "POST",
 			url: localStorage.webhost+"login.php",
@@ -161,6 +161,6 @@ $("#login").click(function(){
 				$("#login").html('Login');
 			}//end of success
 		});//end of ajax
-	}
-	return false;
+	//}
+	//return false;
 });
