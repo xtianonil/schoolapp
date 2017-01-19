@@ -3,15 +3,53 @@ if ( localStorage.login === 'true' )
 	showNotifs();
 function showNotifs()
 {
+	//alert(moment().format());
 	$.post(localStorage.webhost+"notifs_fetchbyuser.php",{userid:localStorage.user_id})
 		.done(function(result_set){
+			//alert(result_set);
 			var notifs = JSON.parse(result_set);
 			$("#notifs_list").empty();
 			$.each(notifs,function(i,field){
+				var sender = "<a>"+field.lname+" "+field.fname;
+				var message = field.payload+"</a>";
+
+				// Split timestamp into [ Y, M, D, h, m, s ]
+				var t = field.created_on.split(/[- :]/);
+				// Apply each element to the Date function
+				var adjusted_date = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+				var x = field.created_on;
+				x.replace('-','');
+				x.replace('/','');
+				var d = new Date((field.created_on).replace(' ', 'T')).getTime();
+
+				//var date_a = field.created_on;
+				//var date_b = moment();
+
+				//var diff_in_date = date_b.clone().substract(date_a.clone());
+
+				//moment().format('MMMM Do YYYY, h:mm:ss a'
+				if ( moment().diff(field.created_on,'hours') < 24 )
+					adjusted_date = moment(field.created_on).format('h:mm:ss a');
+				else if ( moment().diff(field.created_on,'days') < 7 )
+					adjusted_date = moment(field.created_on).format('MMMM Do');
+				else if ( moment().diff(field.created_on,'weeks') < 4 )
+					adjusted_date = moment(field.created_on).format('MMMM Do');
+				//else if ( moment().diff(field.created_on,'years') < 1 )
+					//adjusted_date = moment(field.created_on).format('MMMM Do');
+				else
+					adjusted_date = moment(field.created_on).format('MMMM Do YYYY');
+				//alert(adjusted_date);
+				//alert(moment().subtract(1, 'days'));	
+				//alert(moment("20120620", "YYYYMMDD").fromNow());
+				//alert(new Date((field.created_on).replace(' ', 'T')).getMonth());
+				//alert(jQuery.now()+"\n"+d);
+					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:900;' class='notif_item unread' id="+field.notif_id+">"+field.lname+"</a></li>") );		
 				if (field.status_onfeed === 'unread')
-					$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:900;' class='notif_item unread' id="+field.notif_id+">"+field.payload+"</a></li>") );		
+					$("#notifs_list").append($("<li class='notif_item unread' data-icon='true' id="+field.notif_id+"><a><div style='font-weight:900'>"+field.lname+" "+field.fname+"</div><div style='float:right;'>"+adjusted_date+"</div><br><div style='font-weight:900'>"+field.payload+"</div></a></li>"));
+					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:900;' class='notif_item unread' id="+field.notif_id+">"+field.payload+"</a></li>") );		
 				else if (field.status_onfeed === 'read')
-					$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:100;' class='notif_item read' id="+field.notif_id+">"+field.payload+"</a></li>") );		
+					$("#notifs_list").append($("<li class='notif_item read' data-icon='true' id="+field.notif_id+"><a><div style='font-weight:100;'>"+field.lname+" "+field.fname+"</div><div style='float:right;'>"+adjusted_date+"</div><br><div style='font-weight:100'>"+field.payload+"</div></a></li>"));
+					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:100;' class='notif_item read' id="+field.notif_id+">"+field.payload+"</a></li>") );		
 			});
 			$("#notifs_list").listview("refresh");
 
@@ -31,7 +69,7 @@ function showNotifs()
 					        transition: "slide",
 					        reverse: false	//from right
 					    });
-				    $(document).on("pagebeforeshow" , function() {
+				    $(document).on("pagebeforeshow",function() {
 						showNotifs();
 					});
 				    //showNotifs();
@@ -57,7 +95,10 @@ function showNotifs()
 						.done(function(toggleread_success){
 							if (toggleread_success)
 							{
-								location.reload();
+								//location.reload();
+								$("#notifs_list").empty();
+								showNotifs();
+								$("#notif_details_popup_options").popup("close");
 							}
 						});
 					});//end of notif_toggleread
