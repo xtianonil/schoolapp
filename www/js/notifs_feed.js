@@ -101,8 +101,8 @@ function showNotifs()
 					adjusted_date = date.format('dddd');
 				else if ( moment().diff(field.created_on,'weeks') < 4 )
 					adjusted_date = date.format('MMMM D');
-				//else if ( moment().diff(field.created_on,'years') < 1 )
-				//	adjusted_date = moment(field.created_on).format('MMMM Do');
+				else if ( moment().diff(field.created_on,'years') < 1 )
+					adjusted_date = moment(field.created_on).format('MMMM D');
 				else
 					adjusted_date = date.format('MMMM D, YYYY');
 				//alert(adjusted_date);
@@ -162,12 +162,9 @@ function showNotifs()
 					setTimeout(function(){
 						//$(this).attr('id')
 						//alert(localStorage.notifid_selected);
-						
-						$("#notif_details_popup_options").popup("open",{positionTo: '#'+localStorage.notifid_selected});
-						//$("#notif_details_popup_options").popup("open",{positionTo: '#'+localStorage.notifid_selected});
 
-						//setTimeout(function(){},100);
-						//$("#notif_details_popup_options").popup("reposition", {positionTo: 'origin' });
+						$("#notif_details_popup_options").popup("open",{positionTo: '#'+localStorage.notifid_selected});
+						$("#notif_details_popup_options").popup("reposition", {positionTo: '#'+localStorage.notifid_selected});
 					},100);
 				}
 				$("#notif_toggleread").click(function(){
