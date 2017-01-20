@@ -8,15 +8,15 @@
 
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
-    	//alert(data.groupid);
-    	alert(data.userid);
-    	prependNotif(data.notifid,data.userid);
+    	alert(data.notifid);
+    	alert(data.groupid);
+    	prependNotif(data.notifid,data.groupid);
       //prepend(data.notifid);
       //$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+group_id+">"+group_id+"</li>"));
     });
-    function prependNotif(notif_id,user_id)
+    function prependNotif(notif_id,group_id)
     {
-    	$.post(localStorage.webhost+"notif_listforspecuser.php",{notifid:notif_id,userid:user_id})
+    	$.post(localStorage.webhost+"notif_listforspecuser.php",{notifid:notif_id,groupid:group_id})
     		.done(function(data){
     			alert(data);
     			var notif = JSON.parse(data);

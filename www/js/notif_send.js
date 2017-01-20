@@ -46,7 +46,8 @@ $(document).on('pagebeforeshow','#send_notif',function(){
 										//alert(notif_id);
 										if (notif_id)
 										{
-											$.post(localStorage.webhost+"websock.php",{notifid:notif_id,userid:localStorage.user_id})
+											//notif_id, saka group_id
+											$.post(localStorage.webhost+"websock.php",{notifid:notif_id,groupid:$("#notif_recipient_dropdown").val()})
 												.done(function(data){
 													//alert(data);
 												});
