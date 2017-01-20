@@ -42,10 +42,14 @@ $(document).on('pagebeforeshow','#send_notif',function(){
 										payload : $("#notif_msg").val(),
 										target_group : $("#notif_recipient_dropdown").val()
 									})
-									.done(function(save_successful){
-										//alert(save_successful);
-										if (save_successful)
+									.done(function(notif_id){
+										//alert(notif_id);
+										if (notif_id)
 										{
+											$.post(localStorage.webhost+"websock.php",{notifid:notif_id,userid:localStorage.user_id})
+												.done(function(data){
+													//alert(data);
+												});
 											location.reload();
 										}
 									});//end of localstorage webhost notif save

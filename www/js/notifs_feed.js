@@ -1,9 +1,60 @@
-//$(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
-if ( localStorage.login === 'true' )
-	showNotifs();
+	// Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('d13c29fea61746c0bf48', {
+      cluster: 'ap1',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+    	//alert(data.groupid);
+    	alert(data.userid);
+    	prependNotif(data.notifid,data.userid);
+      //prepend(data.notifid);
+      //$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+group_id+">"+group_id+"</li>"));
+    });
+    function prependNotif(notif_id,user_id)
+    {
+    	$.post(localStorage.webhost+"notif_listforspecuser.php",{notifid:notif_id,userid:user_id})
+    		.done(function(data){
+    			alert(data);
+    			var notif = JSON.parse(data);
+    			if ( moment().diff(notif[0].created_on,'hours') < 16 )
+					adjusted_date = moment(notif[0].created_on).zone("+08:00").calendar();
+				else if ( moment().diff(notif[0].created_on,'hours') >=16 && moment().diff(notif[0].created_on,'days') < 7 )
+					adjusted_date = moment(notif[0].created_on).zone("+08:00").calendar();
+				else if ( moment().diff(notif[0].created_on,'days') < 7 )
+					adjusted_date = moment(notif[0].created_on).zone("+08:00").format('dddd');
+				else if ( moment().diff(notif[0].created_on,'weeks') < 4 )
+					adjusted_date = moment(notif[0].created_on).zone("+08:00").format('MMMM D');
+				//else if ( moment().diff(notif[0].created_on,'years') < 1 )
+					//adjusted_date = moment(notif[0].created_on).format('MMMM Do');
+				else
+					adjusted_date = moment(notif[0].created_on).zone("+08:00").format('MMMM D, YYYY');
+
+				if ( notif[0].payload.length < 25 )
+					var short_payload = notif[0].payload;
+				else
+					var short_payload = (notif[0].payload).substring(0,25)+"...";
+				$("#notifs_list").append($("<li class='notif_item unread' data-icon='false' id="+notif[0].notif_id+"><a><div style='font-weight:900'>"+notif[0].lname+" "+notif[0].fname+"</div><div style='float:right;'>"+adjusted_date+"</div><br><div style='font-weight:900'>"+short_payload+"</div></a></li>"));
+    			alert("pasok dito");
+    		});
+    	//$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+group_id+">"+group_id+"</li>"));
+    }
+
+$(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
+	if ( localStorage.login === 'true' )
+		showNotifs();
+});
+/*
+function prependNotif(group_id)
+{
+	alert(group_id);
+	$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+group_id+"><a>"+group_id+"</a></li>"));
+}*/
 function showNotifs()
 {
-	//alert(moment().format());
 	$.post(localStorage.webhost+"notifs_fetchbyuser.php",{userid:localStorage.user_id})
 		.done(function(result_set){
 			//alert(result_set);
@@ -13,43 +64,37 @@ function showNotifs()
 				var sender = "<a>"+field.lname+" "+field.fname;
 				var message = field.payload+"</a>";
 
-				// Split timestamp into [ Y, M, D, h, m, s ]
-				var t = field.created_on.split(/[- :]/);
-				// Apply each element to the Date function
-				var adjusted_date = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
-				var x = field.created_on;
-				x.replace('-','');
-				x.replace('/','');
-				var d = new Date((field.created_on).replace(' ', 'T')).getTime();
-
-				//var date_a = field.created_on;
-				//var date_b = moment();
-
-				//var diff_in_date = date_b.clone().substract(date_a.clone());
-
+				//alert( isYesterday(field.created_on) );
 				//moment().format('MMMM Do YYYY, h:mm:ss a'
-				if ( moment().diff(field.created_on,'hours') < 24 )
-					adjusted_date = moment(field.created_on).format('h:mm:ss a');
+				if ( moment().diff(field.created_on,'hours') < 16 )
+					adjusted_date = moment(field.created_on).zone("+08:00").calendar();
+				else if ( moment().diff(field.created_on,'hours') >=16 && moment().diff(field.created_on,'days') < 7 )
+					adjusted_date = moment(field.created_on).zone("+08:00").calendar();
 				else if ( moment().diff(field.created_on,'days') < 7 )
-					adjusted_date = moment(field.created_on).format('MMMM Do');
+					adjusted_date = moment(field.created_on).zone("+08:00").format('dddd');
 				else if ( moment().diff(field.created_on,'weeks') < 4 )
-					adjusted_date = moment(field.created_on).format('MMMM Do');
+					adjusted_date = moment(field.created_on).zone("+08:00").format('MMMM D');
 				//else if ( moment().diff(field.created_on,'years') < 1 )
 					//adjusted_date = moment(field.created_on).format('MMMM Do');
 				else
-					adjusted_date = moment(field.created_on).format('MMMM Do YYYY');
+					adjusted_date = moment(field.created_on).zone("+08:00").format('MMMM D, YYYY');
 				//alert(adjusted_date);
 				//alert(moment().subtract(1, 'days'));	
 				//alert(moment("20120620", "YYYYMMDD").fromNow());
 				//alert(new Date((field.created_on).replace(' ', 'T')).getMonth());
 				//alert(jQuery.now()+"\n"+d);
+
+				if ( field.payload.length < 25 )
+					var short_payload = field.payload;
+				else
+					var short_payload = (field.payload).substring(0,25)+"...";
 					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:900;' class='notif_item unread' id="+field.notif_id+">"+field.lname+"</a></li>") );		
 				if (field.status_onfeed === 'unread')
-					$("#notifs_list").append($("<li class='notif_item unread' data-icon='true' id="+field.notif_id+"><a><div style='font-weight:900'>"+field.lname+" "+field.fname+"</div><div style='float:right;'>"+adjusted_date+"</div><br><div style='font-weight:900'>"+field.payload+"</div></a></li>"));
-					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:900;' class='notif_item unread' id="+field.notif_id+">"+field.payload+"</a></li>") );		
+					$("#notifs_list").append($("<li class='notif_item unread' data-icon='false' id="+field.notif_id+"><a><div style='font-weight:900'>"+field.lname+" "+field.fname+"</div><div style='float:right;'>"+adjusted_date+"</div><br><div style='font-weight:900'>"+short_payload+"</div></a></li>"));
+					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:900;' class='notif_item unread' id="+field.notif_id+">"+short_payload+"</a></li>") );		
 				else if (field.status_onfeed === 'read')
-					$("#notifs_list").append($("<li class='notif_item read' data-icon='true' id="+field.notif_id+"><a><div style='font-weight:100;'>"+field.lname+" "+field.fname+"</div><div style='float:right;'>"+adjusted_date+"</div><br><div style='font-weight:100'>"+field.payload+"</div></a></li>"));
-					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:100;' class='notif_item read' id="+field.notif_id+">"+field.payload+"</a></li>") );		
+					$("#notifs_list").append($("<li class='notif_item read' data-icon='false' id="+field.notif_id+"><a><div style='font-weight:100;'>"+field.lname+" "+field.fname+"</div><div style='float:right;'>"+adjusted_date+"</div><br><div style='font-weight:100'>"+short_payload+"</div></a></li>"));
+					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:100;' class='notif_item read' id="+field.notif_id+">"+short_payload+"</a></li>") );		
 			});
 			$("#notifs_list").listview("refresh");
 
@@ -60,8 +105,10 @@ function showNotifs()
 				    	.done(function(data){
 				    		var notif = JSON.parse(data);
 				    		$("#notif_details_list").empty();
-				    		$("#notif_details_list").append( $("<li>From: "+notif[0].lname+", "+notif[0].fname+" ("+notif[0].created_on+")</li>") );
-				    		$("#notif_details_list").append( $("<li>"+notif[0].payload+"</li>") );
+				    		//$("#notif_details_list").append( $("<ul data-role='listview'></ul>") ); 
+				    		$("#notif_details_list").append( $("<li>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+"</li>") );
+				    		$("#notif_details_list").append( $("<li>Posted: "+moment(notif[0].created_on).format('h:mm:ss a MMMM D')+"</li>") );
+				    		$("#notif_details_list").append( $("<br><ul><li>"+notif[0].payload+"</li></ul>") );
 				    		$("#notif_details_list").listview("refresh");
 				    	});
 				    //setTimeout(showNotifs,100);
@@ -86,6 +133,21 @@ function showNotifs()
 						$("#notif_toggleread").text("Mark as unread");
 					setTimeout(function(){$("#notif_details_popup_options").popup("open");},100);
 				}
+				//on swipeleft, show notification options
+				$( ".notif_item" ).on( "swipeleft", swipeleftHandler );
+				function swipeleftHandler( event ){
+				    localStorage.notifid_selected = $(this).attr('id');
+				    $(this).empty();
+				    $(this).append( $("<li>A</li>") );
+				    /*
+					if ( $(this).hasClass('unread') )
+						$("#notif_toggleread").text("Mark as read");
+					else if ( $(this).hasClass('read') )
+						$("#notif_toggleread").text("Mark as unread");
+					setTimeout(function(){$("#notif_details_popup_options").popup("open");},100);
+					*/
+					//event.preventDefault();
+				}
 				$("#notif_toggleread").click(function(){
 					if ( $(this).text() === "Mark as read" )
 						var toggle_option = "unread";
@@ -109,7 +171,7 @@ function showNotifs()
 						});
 					});//end of notif_removefromfeed
 		});
-	setTimeout(showNotifs,60000);	//refreshes every 5m...1minute = 60000ms
+	//setTimeout(showNotifs,60000);	//refreshes every 5m...1minute = 60000ms
 }
 function showNotifsFeed2()
 {
@@ -159,7 +221,8 @@ function showNotifsFeed2()
 						    		//alert(data);
 						    		var notif = JSON.parse(data);
 						    		$("#notif_details_list").empty();
-						    		$("#notif_details_list").append( $("<li>From: "+notif[0].lname+", "+notif[0].fname+" ("+notif[0].created_on+")</li>") );
+						    		$("#notif_details_list").append( $("<li>From: "+notif[0].lname+", "+notif[0].fname+"</li>") );
+						    		$("#notif_details_list").append( $("<li>Posted:"+notif[0].created_on+"</li>") );
 						    		$("#notif_details_list").append( $("<li>"+notif[0].payload+"</li>") );
 						    		$("#notif_details_list").listview("refresh");
 						    	});
@@ -171,7 +234,7 @@ function showNotifsFeed2()
 						}//end of tapHandler function
 
 						//on taphold, show notification options
-						$( ".notif_item" ).on( "taphold", tapholdHandler );
+						$( ".XXXX" ).on( "taphold", tapholdHandler );
 						function tapholdHandler( event ){
 							//alert("swiped");
 						    //$( event.target ).addClass( "swipe" );
