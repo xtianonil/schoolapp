@@ -205,8 +205,11 @@ $("#notif_back_btn").click(function(){
 
 //	});
 
-$("#notifs_list").pullToRefresh();
-$("#notifs_list").on("refresh.pulltorefresh", function ($element, y){
-	alert("pull to refresh");
+//from https://github.com/luis-kaufmann-silva/jquery-p2r
+//on pull-to-refresh, refresh showNotifs()
+$(".pullable_div").on("refresh.pulltorefresh", function (evt, percent)
+{
+	$("#notifs_list").empty();
+	showNotifs();
 });
 

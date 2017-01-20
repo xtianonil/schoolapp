@@ -56,6 +56,7 @@
 
     <script type="text/javascript">
         $(function(){   //on deviceready
+            $(".pullable_div").pullToRefresh();
         //for debugging purposes only, omit this in production
             if (localStorage.login === "true")
             {
@@ -75,6 +76,7 @@
             });     
         
         $(document).on('mobileinit',function(){
+            $(".pullable_div").pullToRefresh();
             if (localStorage.login === "true")
             {
                 if ( localStorage.is_admin === "true" )
@@ -161,7 +163,9 @@
             </div>
         </div>
         <div data-role="main" class="ui-content">
+            <div class="pullable_div">
             <ul id="notifs_list" data-role='listview'></ul>
+            </div>
             <div data-role="popup" id="notif_details_popup_options" >
             <ul data-role="listview" style="display: flex;flex-direction:row;">
                 <li data-icon="false" style="width: 150px"><a style="background-color:#FF6347;color:white;text-align: center;" href='#' id='notif_toggleread'>Mark as read</a></li>
@@ -568,8 +572,8 @@
     <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
 
     <!-- pull to refresh js plugin-->
-    <script src="jquery.p2r.min.js"></script>
-    
+    <script src="js/jquery.p2r.min.js"></script>
+
     <script type="text/javascript">
         app.initialize();
         //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
