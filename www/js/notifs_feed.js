@@ -162,8 +162,10 @@ function showNotifs()
 					setTimeout(function(){
 						//$(this).attr('id')
 						//alert(localStorage.notifid_selected);
-						$("#notif_details_popup_options").popup("open",{positionTo: '#'+localStorage.notifid_selected});
 						
+						$("#notif_details_popup_options").popup("open",{positionTo: '#'+localStorage.notifid_selected});
+						//$("#notif_details_popup_options").popup("open",{positionTo: '#'+localStorage.notifid_selected});
+
 						//setTimeout(function(){},100);
 						//$("#notif_details_popup_options").popup("reposition", {positionTo: 'origin' });
 					},100);

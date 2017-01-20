@@ -162,10 +162,10 @@
         </div>
         <div data-role="main" class="ui-content">
             <ul id="notifs_list" data-role='listview'></ul>
-            <div data-role="popup" id="notif_details_popup_options" style="display: inline;">
-            <ul data-role="listview">
+            <div data-role="popup" id="notif_details_popup_options" >
+            <ul data-role="listview" style="display: flex;">
                 <li data-icon="false" style="width: 150px"><a href='#' id='notif_toggleread'>Mark as read</a></li>
-                <li data-icon="false" style="width: 150px"><a href='#' id='notif_removefromfeed'>Archive</a></li>
+                <li data-icon="false" style="width: 150px"><a style="background-color:#FF6347;color:white;text-align: center;" href='#' id='notif_removefromfeed'>Archive</a></li>
                 </ul>
                 <!--
                 <ul data-role="listview">
