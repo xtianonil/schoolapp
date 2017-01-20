@@ -204,3 +204,9 @@ $("#notif_back_btn").click(function(){
 	});
 
 //	});
+
+$("#notifs_list").pullToRefresh();
+$("#notifs_list").on("refresh.pulltorefresh", function ($element, y){
+	alert("pull to refresh");
+});
+
