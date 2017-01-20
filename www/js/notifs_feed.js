@@ -8,8 +8,8 @@
 
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
-    	alert(data.notifid);
-    	alert(data.groupid);
+    	//alert(data.notifid);
+    	//alert(data.groupid);
     	prependNotif(data.notifid,data.groupid);
       //prepend(data.notifid);
       //$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+group_id+">"+group_id+"</li>"));
@@ -18,27 +18,59 @@
     {
     	$.post(localStorage.webhost+"notif_listforspecuser.php",{notifid:notif_id,groupid:group_id})
     		.done(function(data){
-    			alert(data);
+    			//alert(data);
     			var notif = JSON.parse(data);
-    			if ( moment().diff(notif[0].created_on,'hours') < 16 )
-					adjusted_date = moment(notif[0].created_on).zone("+08:00").calendar();
-				else if ( moment().diff(notif[0].created_on,'hours') >=16 && moment().diff(notif[0].created_on,'days') < 7 )
-					adjusted_date = moment(notif[0].created_on).zone("+08:00").calendar();
-				else if ( moment().diff(notif[0].created_on,'days') < 7 )
-					adjusted_date = moment(notif[0].created_on).zone("+08:00").format('dddd');
-				else if ( moment().diff(notif[0].created_on,'weeks') < 4 )
-					adjusted_date = moment(notif[0].created_on).zone("+08:00").format('MMMM D');
-				//else if ( moment().diff(notif[0].created_on,'years') < 1 )
-					//adjusted_date = moment(notif[0].created_on).format('MMMM Do');
-				else
-					adjusted_date = moment(notif[0].created_on).zone("+08:00").format('MMMM D, YYYY');
+				adjusted_date = moment(notif[0].created_on).add(1,'days').utcOffset('-0200').format('h:mm:ss a');
 
 				if ( notif[0].payload.length < 25 )
 					var short_payload = notif[0].payload;
 				else
 					var short_payload = (notif[0].payload).substring(0,25)+"...";
-				$("#notifs_list").append($("<li class='notif_item unread' data-icon='false' id="+notif[0].notif_id+"><a><div style='font-weight:900'>"+notif[0].lname+" "+notif[0].fname+"</div><div style='float:right;'>"+adjusted_date+"</div><br><div style='font-weight:900'>"+short_payload+"</div></a></li>"));
-    			alert("pasok dito");
+				$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+notif[0].notif_id+"><a><div style='font-weight:900'>"+notif[0].lname+" "+notif[0].fname+"</div><div style='float:right;'>"+adjusted_date+"</div><br><div style='font-weight:900'>"+short_payload+"</div></a></li>"));
+    			//alert("pasok dito");
+    			$("#notifs_list").listview("refresh");
+
+    			$( ".notif_item" ).on( "tap", tapHandler );
+				function tapHandler( event ){
+				    localStorage.notifid_selected = $(this).attr('id');
+				    $.post(localStorage.webhost+"notif_listspecific.php",{notifid:localStorage.notifid_selected})
+				    	.done(function(data){
+				    		var notif = JSON.parse(data);
+				    		$("#notif_details_list").empty();
+				    		//$("#notif_details_list").append( $("<ul data-role='listview'></ul>") ); 
+				    		$("#notif_details_list").append( $("<li>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+" "+notif[0].fname+"</li>") );
+				    		$("#notif_details_list").append( $("<li>Posted: "+moment(notif[0].created_on).add(1,'days').utcOffset('-0200').format('h:mm:ss a MMMM D')+"</li>") );
+				    		$("#notif_details_list").append( $("<br><ul><li>"+notif[0].payload+"</li></ul>") );
+				    		$("#notif_details_list").listview("refresh");
+				    	});
+				    //setTimeout(showNotifs,100);
+				    $.mobile.changePage("index.html#notif_view", {
+					        transition: "slide",
+					        reverse: false	//from right
+					    });
+				    $(document).on("pagebeforeshow",function() {
+						showNotifs();
+					});
+				    //showNotifs();
+					//setTimeout(function(){$("#notif_details_popup").popup("open",'positionTo: window');},100);
+				}//end of tapHandler function
+    			//on taphold, show notification options
+				$( ".notif_item" ).on( "taphold", tapholdHandler );
+				function tapholdHandler( event ){
+				    localStorage.notifid_selected = $(this).attr('id');
+					if ( $(this).hasClass('unread') )
+						$("#notif_toggleread").text("Mark as read");
+					else if ( $(this).hasClass('read') )
+						$("#notif_toggleread").text("Mark as unread");
+					setTimeout(function(){$("#notif_details_popup_options").popup("open");},100);
+				}
+				//on swipeleft, show notification options
+				$( ".notif_item" ).on( "swipeleft", swipeleftHandler );
+				function swipeleftHandler( event ){
+				    localStorage.notifid_selected = $(this).attr('id');
+				    $(this).empty();
+				    $(this).append( $("<li>A</li>") );
+				}
     		});
     	//$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+group_id+">"+group_id+"</li>"));
     }
@@ -66,18 +98,20 @@ function showNotifs()
 
 				//alert( isYesterday(field.created_on) );
 				//moment().format('MMMM Do YYYY, h:mm:ss a'
-				if ( moment().diff(field.created_on,'hours') < 16 )
-					adjusted_date = moment(field.created_on).zone("+08:00").calendar();
-				else if ( moment().diff(field.created_on,'hours') >=16 && moment().diff(field.created_on,'days') < 7 )
-					adjusted_date = moment(field.created_on).zone("+08:00").calendar();
+
+				var date = moment(field.created_on).add(1,'days').utcOffset('-0200');
+				if ( moment().diff(field.created_on,'days') < 1 )
+					adjusted_date = date.format('h:mm:ss a');
+				else if ( moment().diff(field.created_on,'days') >=1 && moment().diff(field.created_on,'days') < 2 )
+					adjusted_date = date.calendar();
 				else if ( moment().diff(field.created_on,'days') < 7 )
-					adjusted_date = moment(field.created_on).zone("+08:00").format('dddd');
+					adjusted_date = date.format('dddd');
 				else if ( moment().diff(field.created_on,'weeks') < 4 )
-					adjusted_date = moment(field.created_on).zone("+08:00").format('MMMM D');
+					adjusted_date = date.format('MMMM D');
 				//else if ( moment().diff(field.created_on,'years') < 1 )
-					//adjusted_date = moment(field.created_on).format('MMMM Do');
+				//	adjusted_date = moment(field.created_on).format('MMMM Do');
 				else
-					adjusted_date = moment(field.created_on).zone("+08:00").format('MMMM D, YYYY');
+					adjusted_date = date.format('MMMM D, YYYY');
 				//alert(adjusted_date);
 				//alert(moment().subtract(1, 'days'));	
 				//alert(moment("20120620", "YYYYMMDD").fromNow());
@@ -106,8 +140,8 @@ function showNotifs()
 				    		var notif = JSON.parse(data);
 				    		$("#notif_details_list").empty();
 				    		//$("#notif_details_list").append( $("<ul data-role='listview'></ul>") ); 
-				    		$("#notif_details_list").append( $("<li>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+"</li>") );
-				    		$("#notif_details_list").append( $("<li>Posted: "+moment(notif[0].created_on).format('h:mm:ss a MMMM D')+"</li>") );
+				    		$("#notif_details_list").append( $("<li>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+" "+notif[0].fname+"</li>") );
+				    		$("#notif_details_list").append( $("<li>Posted: "+moment(notif[0].created_on).add(1,'days').utcOffset('-0200').format('h:mm:ss a MMMM D')+"</li>") );
 				    		$("#notif_details_list").append( $("<br><ul><li>"+notif[0].payload+"</li></ul>") );
 				    		$("#notif_details_list").listview("refresh");
 				    	});
