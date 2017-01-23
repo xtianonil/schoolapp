@@ -1,8 +1,20 @@
 $("#login").click(function(){
+	if ( $.trim( $("#email_login").val() ).length > 0 && $.trim( $("#password").val() ).length > 0 )
+	{
+		$.post(localStorage.webhost+"login.php",{email_login:$.trim($("#email_login").val()),password:$.trim($("#password").val())})
+			.done(function(data){
+				alert(data);
+			});
+	}
+	else
+	{
+		alert("Email or password fields cannot be empty.");
+	}
+});
+
+$("#login2").click(function(){
 	localStorage.registrationId = '';
 	localStorage.login = 'false';
-	//var element = document.getElementById('deviceProperties');
-	//alert(device.uuid);
 	var email_login = $("#email_login").val();
 	var password = $("#password").val();
 	var dataString="email_login="+email_login+"&password="+password+"&login=";
@@ -18,7 +30,7 @@ $("#login").click(function(){
 				$("#login").html('Connecting...');
 			},
 			success: function(data){
-				//alert(data);
+				alert(data);
 				if (data === "email_does_not_exist")
 				{
 					alert("Email does not exist");
