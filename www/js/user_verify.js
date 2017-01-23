@@ -10,8 +10,9 @@ $("#register_btn").click(function()
 				else
 				{
 					var user = JSON.parse(data);
-					if ( user[0].is_active )
+					if ( user[0].is_active === '1' )
 					{
+						//alert(user[0].email);
 						alert("Account is already active. You may now log in.");
 						window.location.href = "index.html#not_logged_in";
 					}

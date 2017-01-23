@@ -3,7 +3,37 @@ $("#login").click(function(){
 	{
 		$.post(localStorage.webhost+"login.php",{email_login:$.trim($("#email_login").val()),password:$.trim($("#password").val())})
 			.done(function(data){
-				alert(data);
+				if (data === "unregistered")
+				{
+					alert("Unregistered email address.");
+				}
+				else if (data === "email_or_pass_incorrect")
+				{
+					alert("Invalid email or password.");
+				}
+				else
+				{
+					var user_details = JSON.parse(data);
+					if (!user_details[0].is_active)
+					{
+						alert("Your account is inactive. You must first verify your email address.");
+						
+					}
+					else
+					{
+						localStorage.login = "true";
+						localStorage.email_login = email_login;
+						if (user_details[0].is_admin === '1')
+							localStorage.is_admin = "true";
+						else
+							localStorage.is_admin = "false";
+						localStorage.user_id = user_details[0].user_id;
+						localStorage.name = user_details[0].lname + " " + user_details[0].fname;
+
+						//update registration id of logged in user
+						app.initialize();
+					}
+				}
 			});
 	}
 	else
