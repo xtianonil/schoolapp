@@ -25,13 +25,19 @@ $("#login").click(function(){
 					localStorage.login = "true";
 					localStorage.email_login = email_login;
 					if (user_details[0].is_admin === '1')
+					{
 						localStorage.is_admin = "true";
+						window.location.href = "index.html#admin_panel";
+					}
 					else
+					{
+						window.location.href = "index.html#notifs_feed";
 						localStorage.is_admin = "false";
+					}
 					localStorage.user_id = user_details[0].user_id;
 					localStorage.name = user_details[0].lname + " " + user_details[0].fname;
 
-					window.location.href = "index.html#notifs_feed";
+					
 					$("[data-role=footer]").toolbar();
 
 					//update registration id of logged in user
