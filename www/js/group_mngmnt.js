@@ -14,6 +14,7 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 	//populate list of groups
 	$.post(localStorage.webhost+"group_listallnonschool.php")
 		.done(function(data_result){
+			//alert(data_result);
 			var groups = JSON.parse(data_result);
 			$("#groupslist").empty();
 			$.each(groups,function(i,field){
@@ -25,7 +26,13 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 				//alert($(this).attr('id'));
 				localStorage.grouplistgid = $(this).attr('id');
 				groupslist_isclicked = true;
-				$("#group_popup").popup("open");
+
+				//$("#group_popup_opt").popup("open");
+				$.mobile.changePage("index.html#group_popup_opt", {
+			        //transition: "slide",
+			        reverse: false	//from right
+			    });
+
 				$.post(localStorage.webhost+"group_listspecific.php",{groupid:$(this).attr('id')})
 					.done(function(data){
 						//alert(data);

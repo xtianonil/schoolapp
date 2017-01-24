@@ -4,6 +4,20 @@ $("#add_user_btn").click(function(){
 		alert("Email field cannot be empty.");
 	else
 	{
+		$.post(localStorage.webhost+"email_check_if_existing.php",{email:$.trim($("#email_new").val())})
+			.done(function(data){
+				if ( data !== "email_available" )
+				{
+					alert("Email is already in use.");
+					$("#email_new").focus();
+				}
+				else
+				{	//email address is available
+					
+				}
+			});
+
+		/*
 		$.post(localStorage.webhost+"user_add.php",
 		{
 			//username : $.trim($("#username_new").val()),
@@ -32,6 +46,7 @@ $("#add_user_btn").click(function(){
 
 					});
 					*/
+					/*
 					alert("New user added successfully");
 					location.reload();
 					//window.location.href = "index.html#user_management";
@@ -41,5 +56,6 @@ $("#add_user_btn").click(function(){
 					$(".add_new_user").val('');
 				}		
 		});
+		*/
 	}//end of else 
 });

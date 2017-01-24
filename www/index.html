@@ -376,17 +376,7 @@
                 </div>
                 
             </div>
-            <div data-role="popup" id="group_popup">
-                <ul data-role="listview" data-inset="true">
-                    <li>Group name: <input type="text" id="group_name_update"/></li>
-                    <li>Group type: <select id="group_type_update"></select></li>
-                    <li>Moderator:  <select id="mod_id_update"></select></li>
-                    <li><a href="#" data-rel="popup" class="group_update">Update details</a></li>
-                    <li><a href="#" data-rel="popup" class="group_memberslist">Members list</a></li>
-                    <li><a href="#" data-rel="popup" class="group_joinrequests">Join requests</a></li>
-                    <li><a href="#" data-rel="popup" class="group_delete">Delete</a></li>
-                </ul>
-            </div>
+            
             <div data-role="popup" id="groupmembers_popup">
                 <!--<ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>-->
             </div>
@@ -394,6 +384,22 @@
                 <!--<ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>-->
             </div>
         </div>
+    </div>
+
+    <div data-role="page" id="group_popup_opt">
+        <div data-role="header">
+            <ul data-role="listview"><li data-icon="false"><a href="index.html#group_mngmnt">&#8592; Back</a></li></ul>
+        </div>
+        
+        <ul data-role="listview" data-inset="true">
+            <li>Group name: <input type="text" id="group_name_update"/></li>
+            <li>Group type: <select id="group_type_update"></select></li>
+            <li>Moderator:  <select id="mod_id_update"></select></li>
+            <li><a href="#" data-rel="popup" class="group_update">Update details</a></li>
+            <li><a href="#" data-rel="popup" class="group_memberslist">Members list</a></li>
+            <li><a href="#" data-rel="popup" class="group_joinrequests">Join requests</a></li>
+            <li><a href="#" data-rel="popup" class="group_delete">Delete</a></li>
+        </ul>
     </div>
 
     <div data-role="page" id="users_list_dialog">
