@@ -109,7 +109,6 @@
             <div style="text-align:center;"><a href="#register">Register</a></div>
         </div>
     </div>
-
     <div data-role="page" id="admin_panel">
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
@@ -190,30 +189,44 @@
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
-                    <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist">Groups</a></li>
-                    <li><a href="#support_page">Support</a></li>
+                    <li><a href="#notifs_feed"><h3>Notifications</h3></a></li>
+                    <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist"><h3>Groups</h3></a></li>
+                    <li><a href="#support_page"><h3>Support</h3></a></li>
                 </ul>
             </div>
-        </div>
-        
-        <div data-role="header">
-            <h3>Joined Groups</h3>
-        </div>
+        </div>      
         <div data-role="main" class="ui-content">
-            <ul id="groupslist_niuser" data-role="listview" data-inset="true"></ul>
+            <div data-role="header">
+                <h3>My groups</h3>
+            </div>
+            <ul id="groups_joined" data-role="listview" data-inset="true">n/a</ul>
+            <div data-role="header">
+                <h3>Pending join requests</h3>
+            </div>
+            <ul id="groups_pendingrequests" data-role="listview" data-inset="true">n/a</ul>
             <div data-role="popup" id="group_subscriptiontoggle">
-                <h3>What do you want to do?</h3>
-                <button id="group_subscribe">Subscribe</button>
-                <button id="group_unsubscribe">Unsubscribe</button>
-                <button id="group_cancelsub">Cancel</button>
+                <ul data-role="listview" style="text-align: center;" data-icon="false">
+                    <li id="group_subscribe">
+                        <a href="#" style="text-align: center;">Subscribe to notifs</a>
+                    </li>
+                    <li id="group_unsubscribe">
+                        <a href="#" style="text-align: center;">Unsubscribe from notifs</a>
+                    </li>
+                    <li>
+                        <a id="group_leave" style="text-align: center;">Leave group</a>
+                    </li>
+                    <li>
+                        <a id="group_cancelsub" style="text-align: center;">Cancel</a>
+                    </li>
+                </ul>
+                
                 <!--<h3>Approve join request?</h3>
                 <button id="approve_join_request">OK</button>
                 <button id="ignore_join_request">Ignore</button>-->
             </div>
 
             <div data-role="collapsible-set">
-                <div data-role="collapsible" class="collapsible">
+                <div data-role="collapsible" class="collapsible" id="join_another_group_collapsible">
                     <h3>Join another group</h3>
                     <ul id="groupslist_niuser_not" data-role="listview" data-inset="true" data-filter="true"></ul>
                     <div data-role="popup" id="user_join_another_group">
@@ -236,7 +249,7 @@
                     <button id="start_new_group">Submit</button>
                 </div>
                 <div data-role="collapsible" class="collapsible">
-                    <h3>Groups you own</h3>
+                    <h3>Group/s you own</h3>
                     <ul id="groupslist_niuser_modsya" data-role="listview" data-inset="true">n/a</ul>
                     <div data-role="popup" id="check_pending_join_requests">
                         <h3>Approve join requests</h3>

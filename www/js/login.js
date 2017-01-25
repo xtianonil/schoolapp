@@ -28,6 +28,7 @@ $("#login").click(function(){
 					{
 						localStorage.is_admin = "true";
 						window.location.href = "index.html#admin_panel";
+						//window.location.href = "index.html#notifs_feed";
 					}
 					else
 					{

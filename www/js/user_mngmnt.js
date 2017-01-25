@@ -1,4 +1,10 @@
 $(document).on('pagebeforeshow','#user_mngmnt',function(){
+//$(document).on('pagebeforechange','#user_mngmnt',function(){
+	showUsersManagement();
+});//end of $document pagebeforeshow
+
+function showUsersManagement()
+{
 	$.post(localStorage.webhost+"user_listnonadmin.php")
 		.done(function(result_set){
 			var users = JSON.parse(result_set);
@@ -63,7 +69,9 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 							if(deletion_successful)
 							{
 								alert("User account deleted successfully");
-								location.reload();
+	
+							    showUsersManagement();
+							    setTimeout(function(){$("#user_popup").popup("close");},100);
 							}
 						});
 				}//end of if userslist_isclicked
@@ -195,4 +203,4 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 			$("#users_table tr:odd").css("background-color", "#F6F6F6");
 
 		});//end of $post localstorage.webhost user_listnonadmin
-});//end of $document pagebeforeshow
+}
