@@ -97,6 +97,7 @@
     <div data-role="footer" data-position="fixed" class="ui-bar-a">
         <div id="footer_div" style="text-align:center;"></div>
     </div> 
+    
 
     <div data-role="page" id="not_logged_in">
         <div data-role="header">
@@ -199,6 +200,9 @@
             <div data-role="header">
                 <h3>My groups</h3>
             </div>
+
+            
+
             <ul id="groups_joined" data-role="listview" data-inset="true">n/a</ul>
             <div data-role="header">
                 <h3>Pending join requests</h3>
@@ -276,6 +280,15 @@
             <!--<input id="verif_code" type="text" placeholder="verification code" />-->
             <button id="register_btn" class="ui-btn">Verify</button>
             <div style="text-align:center;"><a href="#not_logged_in">Back to Log-in</a></div>
+        </div>
+    </div>
+
+    <div data-role="dialog" id="confirm_dialog" data-title="Are you sure?">
+        <div data-role="content">
+            <h3 class="confirm-1" style="text-align:center">???</h3>
+            <p class="confirm-2" style="text-align:center">???</p>
+            <a href="#" class="confirm-do" data-role="button" data-theme="b" data-rel="back">Yes</a>
+            <a href="#" data-role="button" data-theme="c" data-rel="back">No</a>
         </div>
     </div>
 
@@ -531,6 +544,8 @@
 
     <script type="text/javascript" src="js/notifs_feed.js"></script>
     <script type="text/javascript" src="js/notifs_feedadmin.js"></script>
+
+    <script type="text/javascript" src="js/confirm_dialog.js"></script>
     <script type="text/javascript" src="js/footer.js"></script>
 </body>
 
