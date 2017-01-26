@@ -46,7 +46,7 @@ $("#login").click(function(){
 					//update registration id of logged in user
 					app.initialize();
 
-					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
+					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{userid:user_details[0].user_id,regid:localStorage.reg_id})
 						.done(function(data){
 							if (data === "logged_in_previously")
 							{	//means user has logged in on this device before, just update device details

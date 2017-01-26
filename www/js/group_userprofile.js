@@ -15,21 +15,18 @@ $(document).on('pagebeforeshow','#group_userprofile',function(){
 	});//end of pagebeforeshow
 function showGroupsTab()
 {
-	
+	$("#groups_joined").empty();
+	$("#groups_joined").listview("refresh");
+
+	$("#groups_pendingrequests").empty();
+	$("#groups_pendingrequests").listview("refresh");
+
+	$("#groupslist_niuser_not").empty();
+	$("#groupslist_niuser_modsya").empty();
+	$("#pending_join_requests").empty();
 
 	$.post(localStorage.webhost+"user_showlistofgroupsjoinedpending.php",{userid:localStorage.user_id})
 		.done(function(result_set){
-
-			$("#groups_joined").empty();
-			$("#groups_joined").listview("refresh");
-
-			$("#groups_pendingrequests").empty();
-			$("#groups_pendingrequests").listview("refresh");
-
-			$("#groupslist_niuser_not").empty();
-			$("#groupslist_niuser_modsya").empty();
-			$("#pending_join_requests").empty();
-			
 			var group_pending_requests = JSON.parse(result_set);
 			$.each(group_pending_requests,function(i,field){
 				$("#groups_pendingrequests").append( $("<li><div id="+field.group_id+" class='ui-grid-a my-breakpoint group_pendingrequests'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b' style='text-align:right;'><a href='#' class='cancel_joinrequest' id="+field.group_id+">Cancel</a></div></div></li>") );
