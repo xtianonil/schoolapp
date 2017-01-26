@@ -58,7 +58,11 @@ $("#login").click(function(){
 										model	: device.model,
 										regid 	: localStorage.reg_id
 									})
-									.done(function(){
+									.done(function(user_device_updated){
+										if (user_device_updated)
+										{
+											alert(user_device_updated);
+										}
 										//location.reload();
 										//$("#login").html('Login');
 									});
