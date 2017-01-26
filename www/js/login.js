@@ -13,10 +13,12 @@ $("#login").click(function(){
 				else if (data === "incorrect_password")
 				{
 					alert("Incorrect password.");
+					$("#password").focus();
 				}
 				else if (data === "unregistered_email")
 				{
 					alert("Unregistered email address.");
+					$("#email_login").focus();
 				}
 				else
 				{
@@ -44,9 +46,9 @@ $("#login").click(function(){
 					//update registration id of logged in user
 					app.initialize();
 
-					$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.reg_id})
+					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 						.done(function(data){
-							if (data === "uuid_exists")
+							if (data === "logged_in_previously")
 							{	//means user has logged in on this device before, just update device details
 								$.post(localStorage.webhost+"user_update_device.php",
 									{
@@ -61,7 +63,7 @@ $("#login").click(function(){
 										//$("#login").html('Login');
 									});
 							}
-							else
+							else if (data === "new_login")
 							{	//means users has not logged in on this device before, create a new record for device details
 								$.post(localStorage.webhost+"user_add_device.php",
 									{
