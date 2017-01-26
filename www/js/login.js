@@ -61,7 +61,7 @@ $("#login").click(function(){
 									.done(function(user_device_updated){
 										if (user_device_updated)
 										{
-											alert(user_device_updated);
+											//alert(user_device_updated);
 										}
 										//location.reload();
 										//$("#login").html('Login');
