@@ -1,3 +1,16 @@
+//showGroupsTab();
+var pusher = new Pusher('d13c29fea61746c0bf48', {
+    	cluster: 'ap1',
+    	encrypted: true
+    });
+var channel = pusher.subscribe('my-channel');
+channel.bind('group_mngmnt', function(data) {
+	if ( data.userid === localStorage.user_id )
+	{	//refresh user's groups tab
+		showGroupsTab();
+	}
+	});
+
 $(document).on('pagebeforeshow','#group_userprofile',function(){
 	showGroupsTab();
 	});//end of pagebeforeshow
