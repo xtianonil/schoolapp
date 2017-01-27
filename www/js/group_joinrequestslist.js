@@ -32,11 +32,11 @@ $(".group_joinrequests").click(function(){
 					    if ( this.checked )
 					    {
 					    	alert($(this).attr('id'));
-					    	$.post(localStorage.webhost+"websock_groupsmngmnt.php",{userid:$(this).attr('id')})
+					    	$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:$(this).attr('id'),context:"approved_request"})
 			    				.done(function(){
-			    					
+
 			    				});
-					    	
+
 					    	$.post(localStorage.webhost+"group_approvejoinrequest.php",{userid:$(this).attr('id'),groupid:localStorage.grouplistgid})
 						    	.done(function(data){
 						    		//alert(data);
@@ -45,7 +45,6 @@ $(".group_joinrequests").click(function(){
 						    			alert("Member/s successfully added to group.");
 						    			window.location.href = "index.html#group_mngmnt";
 
-						    			
 						    		}
 						    	});
 					    }

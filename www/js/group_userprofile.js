@@ -1,4 +1,3 @@
-//showGroupsTab();
 var pusher = new Pusher('d13c29fea61746c0bf48', {
     	cluster: 'ap1',
     	encrypted: true
@@ -7,7 +6,14 @@ var channel = pusher.subscribe('my-channel');
 channel.bind('group_mngmnt', function(data) {
 	if ( data.userid === localStorage.user_id )
 	{	//refresh user's groups tab
-		showGroupsTab();
+		//showGroupsTab();
+
+		if ( data.context === "approved_request" )
+		{
+			showGroupsJoined();
+			showPendingJoinRequests();
+			showGroupsJoinedNot();
+		}
 	}
 	});
 
@@ -17,6 +23,8 @@ $(document).on('pagebeforeshow','#group_userprofile',function(){
 
 function showPendingJoinRequests()
 {
+	$("#groups_pendingrequests").empty();
+	$("#groups_pendingrequests").listview("refresh");
 	$.post(localStorage.webhost+"user_showlistofgroupsjoinedpending.php",{userid:localStorage.user_id})
 		.done(function(result_set){
 			var group_pending_requests = JSON.parse(result_set);
@@ -40,6 +48,8 @@ function showPendingJoinRequests()
 }
 function showGroupsJoined()
 {
+	$("#groups_joined").empty();
+	$("#groups_joined").listview("refresh");
 	$.post(localStorage.webhost+"user_showlistofgroupsjoined.php",{userid:localStorage.user_id})
 		.done(function(res){
 			var user_groups = JSON.parse(res);
@@ -66,7 +76,6 @@ function showGroupsJoined()
 							$("#group_subscribe").show();
 							$("#group_unsubscribe").hide();
 						}
-						//leftswiped = false; //reset swipe
 					});
 				//$("#group_subscriptiontoggle").popup("open");
 				$("#group_subscriptiontoggle").popup("open",{positionTo: '#'+$(this).attr('id')});
@@ -90,10 +99,7 @@ function showGroupsJoined()
 			$("#group_cancelsub").click(function(){
 				setTimeout(function(){$("#group_subscriptiontoggle").popup("close");},100)
 				});
-			/*
-			$("#group_leave").click(function(){
 
-				});*/
 			$("#group_subscribe").click(function(){
 				$.post(localStorage.webhost+"notif_subscriptiontoggle.php",
 					{
@@ -169,6 +175,9 @@ function showGroupsJoinedNot()
 }
 function showGroupsYouOwn()
 {
+	$("#groupslist_niuser_not").empty();
+	$("#groupslist_niuser_modsya").empty();
+	$("#pending_join_requests").empty();
 	$.post(localStorage.webhost+"user_showgroupsyoureamoderatorof.php",{userid:localStorage.user_id})
 		.done(function(data){
 			var user_groups = JSON.parse(data);
@@ -227,25 +236,14 @@ function showGroupsYouOwn()
 			}
 		});
 }
-
 function showGroupsTab()
 {
-	$("#groups_joined").empty();
-	$("#groups_joined").listview("refresh");
-
-	$("#groups_pendingrequests").empty();
-	$("#groups_pendingrequests").listview("refresh");
-
-	$("#groupslist_niuser_not").empty();
-	$("#groupslist_niuser_modsya").empty();
-	$("#pending_join_requests").empty();
-
 	showPendingJoinRequests();
 
-	var leftswiped = false;
+	var leftswiped = false;		//left swipe false;
 	showGroupsJoined();
 
-	var join_request = false; //join request sent; default value is false
+	var join_request = false; 	//join request sent; default value is false
 	showGroupsJoinedNot();
 
 	showGroupsYouOwn();
