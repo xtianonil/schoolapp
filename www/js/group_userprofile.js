@@ -7,7 +7,6 @@ channel.bind('group_mngmnt', function(data) {
 	if ( data.userid === localStorage.user_id )
 	{	//refresh user's groups tab
 		//showGroupsTab();
-
 		if ( data.context === "approved_request" )
 		{
 			showGroupsJoined();
@@ -189,8 +188,23 @@ function showGroupsYouOwn()
 			});
 
 			$(".groupslist_mod").click(function(){
+				//alert("Group ID: "+$(this).attr('id'));
+				/*
 				checkPendingJoinRequests($(this).attr('id'));
 				$("#check_pending_join_requests").popup("open");
+				*/
+
+				showJoinRequests();
+				location.href = "index.html#joinrequests_list";
+				$("#back_btn").empty();
+				$("#back_btn_ul").empty();
+
+				$("#back_btn").append( $('<ul id="back_btn_ul"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>') );
+				//$("#back_btn").append( $("<ul id='back_btn_ul'/>",{ 'data-role' : 'listview' }).append( $("<li><a href='index.html#group_userprofile'>&#8592; Back</a></li>") ) );
+				//$("#back_btn").append($("<ul data-role='listview' id='back_btn_ul'><li><a href='index.html#group_userprofile'>&#8592; Back</a></li></ul>"));
+				$("#back_btn_ul").listview("refresh");
+
+				//$('ul').append('<li><a>hello</a></li>').listview('refresh');
 				});
 
 			function checkPendingJoinRequests(group_id)
@@ -212,7 +226,6 @@ function showGroupsYouOwn()
 							});
 						function approveGroupJoinRequest(user_id,group_id)
 						{
-							//alert("userid:"+user_id+" groupid:"+group_id);
 							
 							setTimeout(function(){
 								$("#approve_request_popup").popup("open");

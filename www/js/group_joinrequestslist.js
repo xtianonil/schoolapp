@@ -1,5 +1,6 @@
-$(".group_joinrequests").click(function(){
-	//alert("group join requests list clicked");
+
+function showJoinRequests()
+{
 	$("#groupmembers_joinrequest_list").empty();
 	$.post(localStorage.webhost+"group_listmembers_joinrequest.php",{groupid:localStorage.grouplistgid})
 		.done(function(data){
@@ -90,5 +91,9 @@ $(".group_joinrequests").click(function(){
 				}
 				});//joinrequest_approve_admin
 		});//group_listmembers_joinrequest.php
+}
+$(".group_joinrequests").click(function(){
+	//alert("group join requests list clicked");
+	showJoinRequests();
 	location.href = "index.html#joinrequests_list";
 	});
