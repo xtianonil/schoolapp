@@ -158,7 +158,7 @@
         </div>
         <div data-role="main" class="ui-content">
             <div class="pullable_div">
-            <ul id="notifs_list" data-role='listview'></ul>
+                <ul id="notifs_list" data-role='listview'></ul>
             </div>
             <div data-role="popup" id="notif_details_popup_options" >
                 <ul data-role="listview" style="display: flex;flex-direction:row;">
@@ -485,9 +485,9 @@
         <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
     </div>
     <div data-role="page" id="joinrequests_list">
-        <div id="back_btn"></div>
+        <ul data-role="listview" data-icon="false"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
         <!--<ul data-role="listview"><li><a href="index.html#group_mngmnt">&#8592; Back</a></li></ul>-->
-        Join Requests
+        <ul data-role="listview"><li style="text-align: center;">Join Requests</li></ul>
         <ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>
         <div data-role="popup" id="groupmembers_joinrequest_approve_popup">
             <h3>Approve join request?</h3>
@@ -529,7 +529,7 @@
 
     <!--<script type="text/javascript" src="js/group_listmem.js"></script>-->
 
-    <script type="text/javascript" src="js/group_mngmnt.js"></script>
+    <!--<script type="text/javascript" src="js/group_mngmnt.js"></script>-->
     <script type="text/javascript" src="js/group_memberslist.js"></script>
     <script type="text/javascript" src="js/group_joinrequestslist.js"></script>
 

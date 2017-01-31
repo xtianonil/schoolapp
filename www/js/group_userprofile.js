@@ -4,10 +4,30 @@ var pusher = new Pusher('d13c29fea61746c0bf48', {
     });
 var channel = pusher.subscribe('my-channel');
 channel.bind('group_mngmnt', function(data) {
+	//alert(data.context);
 	if ( data.userid === localStorage.user_id )
 	{	//refresh user's groups tab
 		//showGroupsTab();
-		if ( data.context === "approved_request" )
+
+		if ( data.context === "request_approved" )
+		{
+			showGroupsJoined();
+			showPendingJoinRequests();
+			showGroupsJoinedNot();
+		}
+		else if ( data.context === "request_canceled" )
+		{
+			//showGroupsJoined();
+			showPendingJoinRequests();
+			showGroupsJoinedNot();
+		}
+		else if ( data.context === "request_sent" )
+		{
+			//showGroupsJoined();
+			showPendingJoinRequests();
+			showGroupsJoinedNot();
+		}
+		else if ( data.context === "group_leave" )
 		{
 			showGroupsJoined();
 			showPendingJoinRequests();
@@ -40,6 +60,11 @@ function showPendingJoinRequests()
 						{
 							alert("Join request canceled.");
 							showGroupsTab();
+
+							$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"request_canceled"})
+			    				.done(function(){
+
+			    				});
 						}
 					});
 			});
@@ -90,6 +115,10 @@ function showGroupsJoined()
 					 			{
 					 				alert("You have left the group.");
 					 				showGroupsTab();
+
+					 				$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"group_leave"})
+				    					.done(function(){
+				    				});
 					 			}
 					 		});
 					});
@@ -159,6 +188,10 @@ function showGroupsJoinedNot()
 								alert("You requested to join group; awaiting group moderator's approval.");
 								showGroupsTab();
 								$("#join_another_group_collapsible").collapsible("collapse");
+
+								$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"request_sent"})
+				    				.done(function(){
+				    				});
 							}
 						});
 						$("#user_join_another_group").popup("close");
@@ -167,7 +200,9 @@ function showGroupsJoinedNot()
 				});//end of user_join_group click
 
 			$("#user_cancel_join_group").click(function(){
+				//alert("ASDF");
 				$("#user_join_another_group").popup("close");
+				
 				});
 				
 		});//end of $.post user_listgroupsof_not
@@ -183,7 +218,7 @@ function showGroupsYouOwn()
 			//alert(data);
 			$.each(user_groups, function(i, field)
 			{
-				$("#groupslist_niuser_modsya").append($("<li><a href='#' class='groupslist_mod' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.group_type+")</a></li>"));		
+				$("#groupslist_niuser_modsya").append($("<li><a href='#' class='groupslist_mod' data-rel='popup' id="+field.group_id+" name="+field.group_name+">"+field.group_name+" ("+field.group_type+")</a></li>"));		
 				$("#groupslist_niuser_modsya").listview("refresh");
 			});
 
@@ -193,16 +228,29 @@ function showGroupsYouOwn()
 				checkPendingJoinRequests($(this).attr('id'));
 				$("#check_pending_join_requests").popup("open");
 				*/
-
+				localStorage.grouprequestedtojoin = $(this).attr('id');
+				//alert( $(this).attr('name') );
+				localStorage.groupnamerequestedtojoin = $(this).attr('name');
 				showJoinRequests();
 				location.href = "index.html#joinrequests_list";
+				/*
 				$("#back_btn").empty();
 				$("#back_btn_ul").empty();
+				//$("#back_btn_ul").listview("refresh");
 
-				$("#back_btn").append( $('<ul id="back_btn_ul"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>') );
+				var ul = $('<ul data-role="listview" data-icon="false" id="back_btn_ul"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>');
+				//ul.listview("refresh");
+				$("#back_btn").append( ul );
 				//$("#back_btn").append( $("<ul id='back_btn_ul'/>",{ 'data-role' : 'listview' }).append( $("<li><a href='index.html#group_userprofile'>&#8592; Back</a></li>") ) );
 				//$("#back_btn").append($("<ul data-role='listview' id='back_btn_ul'><li><a href='index.html#group_userprofile'>&#8592; Back</a></li></ul>"));
 				$("#back_btn_ul").listview("refresh");
+
+				$("#back_btn_ul").click(function(){
+					alert("ASDF");
+					$("#back_btn_ul").listview("refresh");
+					location.href = "index.html#group_userprofile";
+					});
+				*/
 
 				//$('ul').append('<li><a>hello</a></li>').listview('refresh');
 				});

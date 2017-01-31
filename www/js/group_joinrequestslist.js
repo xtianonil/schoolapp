@@ -2,14 +2,12 @@
 function showJoinRequests()
 {
 	$("#groupmembers_joinrequest_list").empty();
-	$.post(localStorage.webhost+"group_listmembers_joinrequest.php",{groupid:localStorage.grouplistgid})
+	$.post(localStorage.webhost+"group_listmembers_joinrequest.php",{groupid:localStorage.grouprequestedtojoin})
 		.done(function(data){
-			//alert(data);
 			var groupmembers = JSON.parse(data);
 
-			$("#groupmembers_joinrequest_list").append($("<li><h3>GROUP: "+localStorage.grouplistname+"</h3></li>"));
+			$("#groupmembers_joinrequest_list").append($("<li><h3>Group name: "+localStorage.groupnamerequestedtojoin+"</h3></li>"));
 			//$("#groupmembers_joinrequest_list").append($("<li>Pending requests to join group</li>"));
-
 			if ( !jQuery.isEmptyObject(groupmembers) )
 			{
 				$.each(groupmembers,function(i,field){
@@ -27,13 +25,13 @@ function showJoinRequests()
 				$("#groupmembers_joinrequest_list").append( $("<li><a href='#' id='approve_joinrequest_btn'>Approve join request</a ></li>") );
 
 				$("#approve_joinrequest_btn").click(function(){
-					var sList = "";
+					//var sList = "";
 					$('input[type=checkbox]').each(function () {
 					    //sList += "(" + $(this).attr('id') + "-" + (this.checked ? "checked" : "not checked") + ")";
 					    if ( this.checked )
 					    {
-					    	alert($(this).attr('id'));
-					    	$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:$(this).attr('id'),context:"approved_request"})
+					    	//alert($(this).attr('id'));
+					    	$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:$(this).attr('id'),context:"request_approved"})
 			    				.done(function(){
 
 			    				});
@@ -50,7 +48,6 @@ function showJoinRequests()
 						    	});
 					    }
 						});
-					//alert(sList);
 					});
 			}
 			else
@@ -63,7 +60,6 @@ function showJoinRequests()
 			$(".groupmembers_joinreq").click(function(){
 
 				joinrequest_click = true;
-				//alert($(this).attr('id'));
 				localStorage.userlistuid = $(this).attr('id');
 
 				$("#groupmembers_joinrequest_popup").popup("close");
@@ -84,16 +80,21 @@ function showJoinRequests()
 					});//group_approvejoinrequest.php
 				}
 				});//joinrequest_approve_admin
+			/*
 			$("#joinrequest_cancel_admin").click(function(){
 				if ( joinrequest_click )
 				{
 					$("#groupmembers_joinrequest_approve_popup").popup("close");
+					$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"request_canceled"})
+	    				.done(function(){
+
+	    				});
 				}
 				});//joinrequest_approve_admin
+			*/
 		});//group_listmembers_joinrequest.php
 }
 $(".group_joinrequests").click(function(){
-	//alert("group join requests list clicked");
 	showJoinRequests();
 	location.href = "index.html#joinrequests_list";
 	});

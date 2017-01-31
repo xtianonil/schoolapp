@@ -121,7 +121,7 @@ function showNotifs()
 					$("#notifs_list").append($("<li class='notif_item unread' data-icon='false' id="+field.notif_id+"><a><div style='font-weight:900'>"+field.lname+" "+field.fname+"<div style='float:right;'>"+adjusted_date+"</div></div><br><div style='font-weight:900'>"+short_payload+"</div></a></li>"));
 					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:900;' class='notif_item unread' id="+field.notif_id+">"+short_payload+"</a></li>") );		
 				else if (field.status_onfeed === 'read')
-					$("#notifs_list").append($("<li class='notif_item read' data-icon='false' id="+field.notif_id+"><a style='background-color:#E8E8E8'><div style='font-weight:100;'>"+field.lname+" "+field.fname+"<div style='float:right;'>"+adjusted_date+"</div></div><br><div style='font-weight:100'>"+short_payload+"</div></a></li>"));
+					$("#notifs_list").append($("<li class='notif_item read' data-icon='false' id="+field.notif_id+"><a style='background-color:#E8E8E8'><div style='font-weight:400;'>"+field.lname+" "+field.fname+"<div style='float:right;'>"+adjusted_date+"</div></div><br><div style='font-weight:100'>"+short_payload+"</div></a></li>"));
 					//$("#notifs_list").append( $("<li data-icon='true'><a href='#' style='font-weight:100;' class='notif_item read' id="+field.notif_id+">"+short_payload+"</a></li>") );		
 			});
 			$("#notifs_list").listview("refresh");
@@ -211,8 +211,8 @@ $("#notif_back_btn").click(function(){
 
 $(".pullable_div").on("refresh.pulltorefresh", function (evt, percent)
 {
-	//$("#notifs_list").empty();
-	//showNotifs();
-	location.reload();
+	$("#notifs_list").empty();
+	showNotifs();
+	//location.reload();
 });
 
