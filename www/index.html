@@ -239,7 +239,7 @@
                         <button id="user_join_group">Join</button>
                         <button id="user_cancel_join_group">Cancel</button>
                     </div>
-                    
+
                 </div>
                 <div data-role="collapsible" class="collapsible" id="start_new_group_collapsible">
                     <h3>Start a new group</h3>
@@ -518,6 +518,10 @@
         //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
         localStorage.webhost = "http://schoolapp.benfrancia.org/school_connect_server/";
     </script>
+
+    <!-- initialize hosted websocket service-->
+    <script type="text/javascript" src="js/pusher_init.js"></script>
+
     <!--<script type="text/javascript" src="js/restrict_access.js"></script>-->
     <!--<script type="text/javascript" src="js/register.js"></script>-->
     <script type="text/javascript" src="js/user_verify.js"></script>
@@ -552,6 +556,7 @@
 
     <script type="text/javascript" src="js/confirm_dialog.js"></script>
     <script type="text/javascript" src="js/footer.js"></script>
+
 </body>
 
 </html>

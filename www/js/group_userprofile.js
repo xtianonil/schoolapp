@@ -1,8 +1,9 @@
+/*
 var pusher = new Pusher('d13c29fea61746c0bf48', {
     	cluster: 'ap1',
     	encrypted: true
     });
-var channel = pusher.subscribe('my-channel');
+var channel = pusher.subscribe('my-channel');*/
 channel.bind('group_mngmnt', function(data) {
 	//alert(data.context);
 	if ( data.userid === localStorage.user_id )
@@ -193,17 +194,18 @@ function showGroupsJoinedNot()
 			{
 				if ( join_request )
 				{
+					join_request = false; //reset join_request flag to not clicked
 					showConfirmDialog("Join this group?", localStorage.groupname_joinreq, "Okay", function() {
 						$.post(localStorage.webhost+"group_join.php",{groupid:localStorage.groupid_joinreq,userid:localStorage.user_id})
 							.done(function(join_group_success){
 								if ( join_group_success )
 								{
-									alert("You requested to join the group "+localStorage.groupname_joinreq);
+									//alert("You requested to join the group "+localStorage.groupname_joinreq);
 									$("#join_another_group_collapsible").collapsible("collapse");
 									$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"request_sent"})
 					    				.done(function(){
 					    					//showGroupsTab();
-					    					join_request = false; //reset join_request flag to not clicked
+					    					
 					    				});
 								}
 							});

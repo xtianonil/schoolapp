@@ -1,19 +1,18 @@
 	// Enable pusher logging - don't include this in production
     //Pusher.logToConsole = true;
-
+/*
     var pusher = new Pusher('d13c29fea61746c0bf48', {
     	cluster: 'ap1',
     	encrypted: true
     });
 
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('notifs_feed', function(data) {
-    	//alert(data.notifid);
-    	//alert(data.groupid);
-    	prependNotif(data.notifid,data.groupid);
-      //prepend(data.notifid);
-      //$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+group_id+">"+group_id+"</li>"));
-    });
+    var channel = pusher.subscribe('my-channel');*/
+
+//bind notifs_feed as event
+channel.bind('notifs_feed', function(data)
+	{
+		prependNotif(data.notifid,data.groupid);
+	});
 $(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
 	if ( localStorage.login === 'true' )
 		showNotifs();
