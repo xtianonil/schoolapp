@@ -34,6 +34,12 @@ channel.bind('group_mngmnt', function(data) {
 			showGroupsJoined();
 		}
 	}
+	if ( data.context === "group_flushed" )
+		{
+			showGroupsJoined();
+			showPendingJoinRequests();
+			showGroupsJoinedNot();
+		}
 	});
 /*
 $( "#join_another_group_collapsible" ).on( "collapsibleexpand", function( event, ui ) {
@@ -263,7 +269,7 @@ function showGroupsYouOwn()
 			$(".groupslist_mod").click(function(){
 				localStorage.grouprequestedtojoin = $(this).attr('id');
 				localStorage.groupnamerequestedtojoin = $(this).attr('name');
-				dialogOptions3("","","Members List","Join Requests",function(option){
+				dialogOptions3("Group Options",localStorage.groupnamerequestedtojoin,"Members List","Join Requests","Invite new members","Flush members",function(option){
 					//alert(opt);
 					if ( option === "members_list" )
 					{
@@ -279,6 +285,10 @@ function showGroupsYouOwn()
 						        //transition: "slide",
 						        //reverse: false	//from right
 						    });*/
+					}
+					else if ( option === "flush_group" )
+					{
+						flushGroupMembers();
 					}
 					});//end of dialogOptions3
 				});
@@ -327,7 +337,6 @@ function showGroupsYouOwn()
 }
 function showGroupsTab()
 {
-	//$("ul").empty();
 	showPendingJoinRequests();
 
 	var leftswiped = false;		//left swipe false;
@@ -341,7 +350,6 @@ function showGroupsTab()
 	$("#start_new_group").click(function(){
 		$.post(localStorage.webhost+"group_add.php",{groupname:$("#groupname_new").val(),grouptype:"club",groupmod:localStorage.user_id})
 			.done(function(last_inserted_groupid){
-				//alert(last_inserted_groupid);
 				if ( last_inserted_groupid )
 				{
 					$.post(localStorage.webhost+"group_add_member.php",{userid:localStorage.user_id,groupid:last_inserted_groupid})

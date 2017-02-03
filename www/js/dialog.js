@@ -18,7 +18,7 @@ function showAlertDialog(text1, text2, button, callback) {
   		});
  	$.mobile.changePage("#alert_dialog");
 }
-function dialogOptions3(text1, text2, button1, button2, callback) {
+function dialogOptions3(text1, text2, button1, button2, button3, button4, callback) {
 	$("#dialogOptions3 .confirm-1").text(text1);	//first line of text
 	$("#dialogOptions3 .confirm-2").text(text2);	//2nd
 
@@ -32,7 +32,21 @@ function dialogOptions3(text1, text2, button1, button2, callback) {
 	$("#dialogOptions3 .option2").text(button2).on("click.confirm", function() {
 		//alert("button2");
     	callback("join_requests");
+
+    	$(this).off("click.confirm");
     	
+  		});
+	$("#dialogOptions3 .option3").text(button3).on("click.confirm", function() {
+		//alert("button2");
+    	callback("invite_requests");
+
+    	$(this).off("click.confirm");
+    	
+  		});
+	$("#dialogOptions3 .option4").text(button4).on("click.confirm", function() {
+		//alert("button2");
+    	callback("flush_group");
+
     	$(this).off("click.confirm");
     	
   		});

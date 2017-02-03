@@ -1,5 +1,4 @@
 $(".group_memberslist").click(function(){
-	//alert("group members list clicked");
 	$("#groupmembers_list").empty();
 	$.post(localStorage.webhost+"group_listmembers.php",{groupid:localStorage.grouprequestedtojoin})
 		.done(function(data){
@@ -21,20 +20,30 @@ $(".group_memberslist").click(function(){
 			setTimeout(function(){$("#groupmembers_popup").popup("open");},100);
 
 			$("#flush_members_admin").click(function(){
-				$.post(localStorage.webhost+"group_flushmembers.php",{groupid:localStorage.grouprequestedtojoin})
-					.done(function(flush_successful){
-						if ( flush_successful )
-						{
-							alert("All members were removed from the group.");
-							//location.reload();
-						}
-					});
-				});
+				flushGroupMembers();
+				});//end of flush members
 		});
 
 	//location.href = "index.html#members_list";
 	$.mobile.changePage("index.html#members_list", {
         //transition: "slide",
         //reverse: true	//from left
-    });
+    	});
 	});
+
+function flushGroupMembers()
+{
+	$.post(localStorage.webhost+"group_flushmembers.php",{groupid:localStorage.grouprequestedtojoin})
+		.done(function(flush_successful){
+			//alert(flush_successful);
+			if ( flush_successful )
+			{
+				alert("All members were removed from the group.");
+				//location.reload();
+				$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"group_flushed"})
+					.done(function(){
+				});
+			}
+		});
+}
+
