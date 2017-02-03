@@ -1,11 +1,12 @@
 $("#logout").click(function(){
 	//localStorage.clear();
-	alert("ASDF");
+	//alert("ASDF");
 	localStorage.clear();
 	localStorage.login = "false";
 	window.location.href = "index.html#not_logged_in";
 	location.reload();
 	$("#login").html('Login');
+
 
 	/*
 	//restrict access

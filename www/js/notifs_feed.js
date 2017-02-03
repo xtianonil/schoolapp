@@ -1,13 +1,3 @@
-	// Enable pusher logging - don't include this in production
-    //Pusher.logToConsole = true;
-/*
-    var pusher = new Pusher('d13c29fea61746c0bf48', {
-    	cluster: 'ap1',
-    	encrypted: true
-    });
-
-    var channel = pusher.subscribe('my-channel');*/
-
 //bind notifs_feed as event
 channel.bind('notifs_feed', function(data)
 	{
@@ -72,12 +62,6 @@ function prependNotif(notif_id,group_id)
 	//$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+group_id+">"+group_id+"</li>"));
 }
 
-/*
-function prependNotif(group_id)
-{
-	alert(group_id);
-	$("#notifs_list").prepend($("<li class='notif_item unread' data-icon='false' id="+group_id+"><a>"+group_id+"</a></li>"));
-}*/
 function showNotifs()
 {
 	$.post(localStorage.webhost+"notifs_fetchbyuser.php",{userid:localStorage.user_id})
@@ -88,9 +72,6 @@ function showNotifs()
 			$.each(notifs,function(i,field){
 				var sender = "<a>"+field.lname+" "+field.fname;
 				var message = field.payload+"</a>";
-
-				//alert( isYesterday(field.created_on) );
-				//moment().format('MMMM Do YYYY, h:mm:ss a'
 
 				var date = moment(field.created_on).add(1,'days').utcOffset('-0200');
 				if ( moment().diff(field.created_on,'days') < 1 )
@@ -105,11 +86,6 @@ function showNotifs()
 					adjusted_date = moment(field.created_on).format('MMMM D');
 				else
 					adjusted_date = date.format('MMMM D, YYYY');
-				//alert(adjusted_date);
-				//alert(moment().subtract(1, 'days'));	
-				//alert(moment("20120620", "YYYYMMDD").fromNow());
-				//alert(new Date((field.created_on).replace(' ', 'T')).getMonth());
-				//alert(jQuery.now()+"\n"+d);
 
 				if ( field.payload.length < 25 )
 					var short_payload = field.payload;
@@ -132,7 +108,6 @@ function showNotifs()
 				    	.done(function(data){
 				    		var notif = JSON.parse(data);
 				    		$("#notif_details_list").empty();
-				    		//$("#notif_details_list").append( $("<ul data-role='listview'></ul>") ); 
 				    		$("#notif_details_list").append( $("<li>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+" "+notif[0].fname+"</li>") );
 				    		$("#notif_details_list").append( $("<li>Posted: "+moment(notif[0].created_on).add(1,'days').utcOffset('-0200').format('h:mm:ss a, MMMM D, YYYY')+"</li>") );
 				    		$("#notif_details_list").append( $("<br><ul><li>"+notif[0].payload+"</li></ul>") );
@@ -176,7 +151,6 @@ function showNotifs()
 						.done(function(toggleread_success){
 							if (toggleread_success)
 							{
-								//location.reload();
 								$("#notifs_list").empty();
 								showNotifs();
 								$("#notif_details_popup_options").popup("close");

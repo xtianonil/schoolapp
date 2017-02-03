@@ -1,7 +1,7 @@
 $(".group_memberslist").click(function(){
 	//alert("group members list clicked");
 	$("#groupmembers_list").empty();
-	$.post(localStorage.webhost+"group_listmembers.php",{groupid:localStorage.grouplistgid})
+	$.post(localStorage.webhost+"group_listmembers.php",{groupid:localStorage.grouprequestedtojoin})
 		.done(function(data){
 			var groupmembers = JSON.parse(data);
 
@@ -21,16 +21,20 @@ $(".group_memberslist").click(function(){
 			setTimeout(function(){$("#groupmembers_popup").popup("open");},100);
 
 			$("#flush_members_admin").click(function(){
-				$.post(localStorage.webhost+"group_flushmembers.php",{groupid:localStorage.grouplistgid})
+				$.post(localStorage.webhost+"group_flushmembers.php",{groupid:localStorage.grouprequestedtojoin})
 					.done(function(flush_successful){
 						if ( flush_successful )
 						{
 							alert("All members were removed from the group.");
-							location.reload();
+							//location.reload();
 						}
 					});
 				});
 		});
 
-	location.href = "index.html#members_list";
+	//location.href = "index.html#members_list";
+	$.mobile.changePage("index.html#members_list", {
+        //transition: "slide",
+        //reverse: true	//from left
+    });
 	});

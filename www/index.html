@@ -53,6 +53,7 @@
     </style>
 
     <script type="text/javascript">
+        
         $(function(){   //on deviceready
             $(".pullable_div").pullToRefresh();
         //for debugging purposes only, omit this in production
@@ -66,7 +67,9 @@
                 {
                     window.location.href = "index.html#notifs_feed";
                 }
-                $("[data-role=footer]").toolbar();
+                //var button = $("<button id='btn1'>Dialog</button>");
+                $("[data-role=footer]").toolbar();//.append( button );
+
             }
             else
                 window.location.href = "index.html#not_logged_in";
@@ -94,11 +97,11 @@
 </head>
 
 <body>
+    
     <div data-role="footer" data-position="fixed" class="ui-bar-a">
         <div id="footer_div" style="text-align:center;"></div>
     </div> 
     
-
     <div data-role="page" id="not_logged_in">
         <div data-role="header">
             <h1></h1>
@@ -196,14 +199,16 @@
                 </ul>
             </div>
         </div>      
+        <div class="pullable_div">
         <div data-role="main" class="ui-content">
             <div data-role="header">
                 <h3>My groups</h3>
-            </div>
-
-            
-
+            </div>   
             <ul id="groups_joined" data-role="listview" data-inset="true">n/a</ul>
+            <div data-role="header">
+                <h3>Group invites</h3>
+            </div>
+            <ul id="groups_groupinvites" data-role="listview" data-inset="true">&nbsp;</ul>
             <div data-role="header">
                 <h3>Pending join requests</h3>
             </div>
@@ -223,7 +228,6 @@
                         <a id="group_cancelsub" style="text-align: center;">Cancel</a>
                     </li>
                 </ul>
-                
                 <!--<h3>Approve join request?</h3>
                 <button id="approve_join_request">OK</button>
                 <button id="ignore_join_request">Ignore</button>-->
@@ -271,6 +275,7 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 
     <div data-role="page" id="register">
@@ -291,8 +296,27 @@
         <div data-role="content">
             <h3 class="confirm-1" style="text-align:center">???</h3>
             <p class="confirm-2" style="text-align:center">???</p>
+            <!-- text that entails affirmation -->
             <a href="#" class="confirm-do" data-role="button" data-theme="b" data-rel="back">Yes</a>
+            <!-- cancel button -->
             <a href="#" data-role="button" data-theme="c" data-rel="back">No</a>
+        </div>
+    </div>
+    <div data-role="dialog" id="alert_dialog" data-title="Are you sure?">
+        <div data-role="content">
+            <h3 class="confirm-1" style="text-align:center">???</h3>
+            <p class="confirm-2" style="text-align:center">???</p>
+            <a href="#" class="confirm-do" data-role="button" data-theme="b" data-rel="back">Yes</a>
+            <!--<a href="#" data-role="button" data-theme="c" data-rel="back">No</a>-->
+        </div>
+    </div>
+    <div data-role="dialog" id="dialogOptions3" data-title="Are you sure?">
+        <div data-role="content">
+            <h3 class="confirm-1" style="text-align:center">???</h3>
+            <p class="confirm-2" style="text-align:center">???</p>
+            <a href="#" class="option1" data-role="button" data-theme="b">Option1</a>
+            <a href="#" class="option2" data-role="button" data-theme="b">Option2</a>
+            <a href="#" data-role="button" data-theme="c" data-rel="back">Cancel</a>
         </div>
     </div>
 
@@ -484,7 +508,7 @@
         </div>
     </div>
     <div data-role="page" id="members_list" class="admin_panel">
-        <ul data-role="listview"><li><a href="index.html#group_mngmnt">&#8592; Back</a></li></ul>
+        <ul data-role="listview" id="backbtn_mlist"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
         Members list
         <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
     </div>
@@ -521,6 +545,8 @@
 
     <!-- initialize hosted websocket service-->
     <script type="text/javascript" src="js/pusher_init.js"></script>
+    <!-- helper dialogs (confirm, alert, etc) -->
+    <script type="text/javascript" src="js/dialog.js"></script>
 
     <!--<script type="text/javascript" src="js/restrict_access.js"></script>-->
     <!--<script type="text/javascript" src="js/register.js"></script>-->
@@ -554,7 +580,6 @@
     <script type="text/javascript" src="js/notifs_feed.js"></script>
     <script type="text/javascript" src="js/notifs_feedadmin.js"></script>
 
-    <script type="text/javascript" src="js/confirm_dialog.js"></script>
     <script type="text/javascript" src="js/footer.js"></script>
 
 </body>

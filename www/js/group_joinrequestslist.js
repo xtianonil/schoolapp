@@ -1,9 +1,17 @@
-
+/*
+$(document).on('pagebeforeshow','#joinrequests_list',function(){
+	//showGroupsTab();
+	showJoinRequests();
+	});//end of pagebeforeshow
+*/
 function showJoinRequests()
 {
+	//alert(localStorage.grouprequestedtojoin);
 	$("#groupmembers_joinrequest_list").empty();
+	//$("#groupmembers_joinrequest_list").listview("refresh");
 	$.post(localStorage.webhost+"group_listmembers_joinrequest.php",{groupid:localStorage.grouprequestedtojoin})
 		.done(function(data){
+			//alert(localStorage.grouprequestedtojoin);
 			var groupmembers = JSON.parse(data);
 
 			$("#groupmembers_joinrequest_list").append($("<li><h3>Group name: "+localStorage.groupnamerequestedtojoin+"</h3></li>"));
@@ -36,7 +44,7 @@ function showJoinRequests()
 
 			    				});
 
-					    	$.post(localStorage.webhost+"group_approvejoinrequest.php",{userid:$(this).attr('id'),groupid:localStorage.grouplistgid})
+					    	$.post(localStorage.webhost+"group_approvejoinrequest.php",{userid:$(this).attr('id'),groupid:localStorage.grouprequestedtojoin})
 						    	.done(function(data){
 						    		//alert(data);
 						    		if (data)
@@ -70,12 +78,12 @@ function showJoinRequests()
 			$("#joinrequest_approve_admin").click(function(){
 				if ( joinrequest_click )
 				{
-					$.post(localStorage.webhost+"group_approvejoinrequest.php",{userid:localStorage.userlistuid,groupid:localStorage.grouplistgid})
+					$.post(localStorage.webhost+"group_approvejoinrequest.php",{userid:localStorage.userlistuid,groupid:localStorage.grouprequestedtojoin})
 						.done(function(member_added_to_group){
 						if ( member_added_to_group )
 						{
 							alert("Member is added to group successfully.");
-							location.reload();
+							//location.reload();
 						}
 					});//group_approvejoinrequest.php
 				}
