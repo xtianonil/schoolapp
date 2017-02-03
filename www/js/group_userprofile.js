@@ -35,12 +35,18 @@ channel.bind('group_mngmnt', function(data) {
 		}
 	}
 	if ( data.context === "group_flushed" )
-		{
-			//alert(data.groupid);
-			showGroupsJoined();
-			showPendingJoinRequests();
-			showGroupsJoinedNot();
-		}
+	{
+		//check if user is a member of the group that has been flushed
+		$.post(localStorage.webhost+"group_checkifuserbelongs.php",{userid:data.userid,groupid:data.groupid})
+			.done(function(member_of_group){
+				if ( member_of_group )
+				{
+					showGroupsJoined();
+					showPendingJoinRequests();
+					showGroupsJoinedNot();
+				}//end of member_of_group
+			});//end user_checkifuserbelongs
+	}//end of if 
 	});
 /*
 $( "#join_another_group_collapsible" ).on( "collapsibleexpand", function( event, ui ) {
