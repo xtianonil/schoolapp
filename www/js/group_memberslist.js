@@ -36,12 +36,14 @@ function flushGroupMembers()
 	$.post(localStorage.webhost+"group_flushmembers.php",{groupid:localStorage.grouprequestedtojoin})
 		.done(function(flush_successful){
 			//alert(flush_successful);
+			//alert(flush_successful);
 			if ( flush_successful )
 			{
 				alert("All members were removed from the group.");
 				//location.reload();
-				$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"group_flushed"})
+				$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"group_flushed",groupid:localStorage.grouprequestedtojoin})
 					.done(function(){
+						//alert(localStorage.grouprequestedtojoin);
 				});
 			}
 		});

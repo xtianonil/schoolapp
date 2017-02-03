@@ -36,6 +36,7 @@ channel.bind('group_mngmnt', function(data) {
 	}
 	if ( data.context === "group_flushed" )
 		{
+			//alert(data.groupid);
 			showGroupsJoined();
 			showPendingJoinRequests();
 			showGroupsJoinedNot();
