@@ -8,7 +8,7 @@ $("#register_btn").click(function()
 					if ( data === "email_available" )
 					{
 						alert("Email is invalid.");
-						window.open("http://www.google.com/", "_blank");
+						window.open("http://www.gmail.com/", "_self");
 					}
 					else
 					{
