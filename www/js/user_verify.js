@@ -12,7 +12,8 @@ $("#register_btn").click(function()
 						var url = 'http://www.gmail.com/';
 						var target = '_blank';
 						var options = 'location=yes';
-						var ref = cordova.InAppBrowser.open(url, target, options);
+						cordova.InAppBrowser.open(url, target, options);
+						var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
 					}
 					else
 					{

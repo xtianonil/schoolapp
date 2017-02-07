@@ -55,6 +55,7 @@
     <script type="text/javascript">
         
         $(function(){   //on deviceready
+            var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
             $(".pullable_div").pullToRefresh();
         //for debugging purposes only, omit this in production
             if (localStorage.login === "true")
