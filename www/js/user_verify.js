@@ -9,11 +9,11 @@ $("#register_btn").click(function()
 					{
 						alert("Email is invalid.");
 						//window.open("http://www.gmail.com/", "_self");
-						var url = 'http://www.gmail.com/';
-						var target = '_blank';
-						var options = 'location=yes';
-						cordova.InAppBrowser.open(url, target, options);
-						var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
+						//var url = 'http://www.gmail.com/';
+						//var target = '_blank';
+						//var options = 'location=yes';
+						//cordova.InAppBrowser.open(url, target, options);
+						var ref = cordova.InAppBrowser.open('http://gmail.com', '_blank', 'location=yes');
 					}
 					else
 					{
