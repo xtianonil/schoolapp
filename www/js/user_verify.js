@@ -13,7 +13,6 @@ $("#register_btn").click(function()
 						//var target = '_blank';
 						//var options = 'location=yes';
 						//cordova.InAppBrowser.open(url, target, options);
-						var ref = cordova.InAppBrowser.open('http://gmail.com', '_self', 'location=yes');
 					}
 					else
 					{
@@ -26,7 +25,8 @@ $("#register_btn").click(function()
 						}
 						else
 						{	
-							alert("Please check your email for instructions on how to activate your account.")
+							alert("Please check your email for instructions on how to activate your account.");
+							var ref = cordova.InAppBrowser.open('http://gmail.com', '_self', 'location=yes');
 							$.post(localStorage.webhost+"user_listspecific_by_email.php",{email:$("#reg_email").val()})
 								.done(function(data2){
 									var user_details = JSON.parse(data2);
