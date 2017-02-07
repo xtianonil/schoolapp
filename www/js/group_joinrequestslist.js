@@ -36,7 +36,7 @@ function showJoinRequests()
 						    		if (data)
 						    		{
 						    			alert("Member/s successfully added to group.");
-						    			window.location.href = "index.html#group_mngmnt";
+						    			window.location.href = "index.html#group_userprofile";
 						    		}
 						    	});
 					    }

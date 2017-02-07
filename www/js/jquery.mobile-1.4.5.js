@@ -14181,7 +14181,7 @@ $.mobile.filterable.prototype.options.filterCallback = function( index, searchVa
 
 $.widget( "mobile.filterable", $.mobile.filterable, {
 	options: {
-		filterPlaceholder: "Filter items...",
+		filterPlaceholder: "Search",
 		filterTheme: null
 	},
 

@@ -1,5 +1,6 @@
 //bind group_mngmnt as event
 channel.bind('group_mngmnt', function(data) {
+	//alert(data.context);
 	if ( data.userid === localStorage.user_id )
 	{	//refresh only specified user's groups tab
 		//alert(data.context);
@@ -33,20 +34,26 @@ channel.bind('group_mngmnt', function(data) {
 		{
 			showGroupsJoined();
 		}
+		else if ( data.context === "group_flushed" )
+		{
+			//check if user is a member of the group that has been flushed
+			$.post(localStorage.webhost+"group_checkifuserbelongs.php",{userid:data.userid,groupid:data.groupid})
+				.done(function(member_of_group){
+					if ( member_of_group )
+					{
+						alert("member of group: "+member_of_group);
+						showGroupsJoined();
+						showPendingJoinRequests();
+						showGroupsJoinedNot();
+					}//end of member_of_group
+					else
+					{
+						alert("not a member: "+member_of_group);
+					}
+				});//end user_checkifuserbelongs
+		}//end of if 
 	}
-	if ( data.context === "group_flushed" )
-	{
-		//check if user is a member of the group that has been flushed
-		$.post(localStorage.webhost+"group_checkifuserbelongs.php",{userid:data.userid,groupid:data.groupid})
-			.done(function(member_of_group){
-				if ( member_of_group )
-				{
-					showGroupsJoined();
-					showPendingJoinRequests();
-					showGroupsJoinedNot();
-				}//end of member_of_group
-			});//end user_checkifuserbelongs
-	}//end of if 
+	
 	});
 /*
 $( "#join_another_group_collapsible" ).on( "collapsibleexpand", function( event, ui ) {
@@ -202,9 +209,7 @@ function showGroupsJoinedNot()
 				join_request = true;	//set join request button to clicked(true)
 				localStorage.groupid_joinreq = $(this).attr('id');
 				localStorage.groupname_joinreq = $(this).attr('name');
-				//alert(join_request);
 				confirmToJoinGroup();
-				//alert(join_request);
 				});	//end of groupslist_niuser_not
 			function confirmToJoinGroup()
 			{
@@ -214,10 +219,8 @@ function showGroupsJoinedNot()
 					showConfirmDialog("Join this group?", localStorage.groupname_joinreq, "Okay", function() {
 						$.post(localStorage.webhost+"group_join.php",{groupid:localStorage.groupid_joinreq,userid:localStorage.user_id})
 							.done(function(join_group_success){
-								//alert(join_group_success);
 								if ( join_group_success )
 								{
-									//alert("You requested to join the group "+localStorage.groupname_joinreq);
 									$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"request_sent"})
 					    				.done(function(){
 					    					//showGroupsTab();
@@ -255,8 +258,7 @@ function showGroupsJoinedNot()
 			$("#user_cancel_join_group").click(function(){
 				$("#user_join_another_group").popup("close");
 				
-				});
-				
+				});			
 		});//end of $.post user_listgroupsof_not
 }
 function showGroupsYouOwn()
@@ -276,7 +278,7 @@ function showGroupsYouOwn()
 			$(".groupslist_mod").click(function(){
 				localStorage.grouprequestedtojoin = $(this).attr('id');
 				localStorage.groupnamerequestedtojoin = $(this).attr('name');
-				dialogOptions3("Group Options",localStorage.groupnamerequestedtojoin,"Members List","Join Requests","Invite new members","Flush members",function(option){
+				dialogOptions3("Group Options",localStorage.groupnamerequestedtojoin,"Members List","Join Requests","Invite New Members","Flush All Members",function(option){
 					//alert(opt);
 					if ( option === "members_list" )
 					{

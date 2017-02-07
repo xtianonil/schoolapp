@@ -41,6 +41,7 @@ function flushGroupMembers()
 			{
 				alert("All members were removed from the group.");
 				//location.reload();
+				//alert(localStorage.grouprequestedtojoin);
 				$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"group_flushed",groupid:localStorage.grouprequestedtojoin})
 					.done(function(){
 						//alert(localStorage.grouprequestedtojoin);

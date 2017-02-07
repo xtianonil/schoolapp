@@ -160,7 +160,7 @@
             </div>
         </div>
         <div data-role="main" class="ui-content">
-            <div class="pullable_div">
+            <div class="pullable_div notifs_feed">
                 <ul id="notifs_list" data-role='listview'></ul>
             </div>
             <div data-role="popup" id="notif_details_popup_options" >
@@ -199,82 +199,82 @@
                 </ul>
             </div>
         </div>      
-        <div class="pullable_div">
-        <div data-role="main" class="ui-content">
-            <div data-role="header">
-                <h3>My groups</h3>
-            </div>   
-            <ul id="groups_joined" data-role="listview" data-inset="true">n/a</ul>
-            <div data-role="header">
-                <h3>Group invites</h3>
-            </div>
-            <ul id="groups_groupinvites" data-role="listview" data-inset="true">&nbsp;</ul>
-            <div data-role="header">
-                <h3>Pending join requests</h3>
-            </div>
-            <ul id="groups_pendingrequests" data-role="listview" data-inset="true">n/a</ul>
-            <div data-role="popup" id="group_subscriptiontoggle">
-                <ul data-role="listview" style="text-align: center;" data-icon="false">
-                    <li id="group_subscribe">
-                        <a href="#" style="text-align: center;">Subscribe to notifs</a>
-                    </li>
-                    <li id="group_unsubscribe">
-                        <a href="#" style="text-align: center;">Unsubscribe from notifs</a>
-                    </li>
-                    <li>
-                        <a id="group_leave" style="text-align: center;">Leave group</a>
-                    </li>
-                    <li>
-                        <a id="group_cancelsub" style="text-align: center;">Cancel</a>
-                    </li>
-                </ul>
-                <!--<h3>Approve join request?</h3>
-                <button id="approve_join_request">OK</button>
-                <button id="ignore_join_request">Ignore</button>-->
-            </div>
-
-            <div data-role="collapsible-set">
-                <div data-role="collapsible" class="collapsible" id="join_another_group_collapsible">
-                    <h3>Join another group</h3>
-                    <ul id="groupslist_niuser_not" data-role="listview" data-inset="true" data-filter="true"></ul>
-
-                    <div data-role="popup" id="user_join_another_group">
-                        <h3>Join this group?</h3>
-                        <button id="user_join_group">Join</button>
-                        <button id="user_cancel_join_group">Cancel</button>
-                    </div>
-
+        <div class="pullable_div groups_tab">
+            <div data-role="main" class="ui-content">
+                <div data-role="header">
+                    <h3>My groups</h3>
+                </div>   
+                <ul id="groups_joined" data-role="listview" data-inset="true">n/a</ul>
+                <div data-role="header">
+                    <h3>Group invites</h3>
                 </div>
-                <div data-role="collapsible" class="collapsible" id="start_new_group_collapsible">
-                    <h3>Start a new group</h3>
-                    <input type="text" name="groupname_new" id="groupname_new" placeholder="group name" />
-                    <!--
-                    <label for="grouptype_new_nonadmin">group type:</label>
-                    <select id="grouptype_new_nonadmin" name="grouptype_new_nonadmin">
-                        <option val="school_section">section</option>
-                        <option val="school_club">club</option>
-                    </select>
-                    -->
-                    <!--
-                    <label for="groupmodslist_new2">group moderator:</label>
-                    <select id="groupmodslist_new2"></select>-->
-                    <button id="start_new_group">Submit</button>
+                <ul id="groups_groupinvites" data-role="listview" data-inset="true">&nbsp;</ul>
+                <div data-role="header">
+                    <h3>Pending join requests</h3>
                 </div>
-                <div data-role="collapsible" class="collapsible">
-                    <h3>Group/s you own</h3>
-                    <ul id="groupslist_niuser_modsya" data-role="listview" data-inset="true">n/a</ul>
-                    <div data-role="popup" id="check_pending_join_requests">
-                        <h3>Approve join requests</h3>
-                        <ul id="pending_join_requests" data-role="listview" data-inset="true"></ul>
+                <ul id="groups_pendingrequests" data-role="listview" data-inset="true">n/a</ul>
+                <div data-role="popup" id="group_subscriptiontoggle">
+                    <ul data-role="listview" style="text-align: center;" data-icon="false">
+                        <li id="group_subscribe">
+                            <a href="#" style="text-align: center;">Subscribe to notifs</a>
+                        </li>
+                        <li id="group_unsubscribe">
+                            <a href="#" style="text-align: center;">Unsubscribe from notifs</a>
+                        </li>
+                        <li>
+                            <a id="group_leave" style="text-align: center;">Leave group</a>
+                        </li>
+                        <li>
+                            <a id="group_cancelsub" style="text-align: center;">Cancel</a>
+                        </li>
+                    </ul>
+                    <!--<h3>Approve join request?</h3>
+                    <button id="approve_join_request">OK</button>
+                    <button id="ignore_join_request">Ignore</button>-->
+                </div>
+
+                <div data-role="collapsible-set">
+                    <div data-role="collapsible" class="collapsible" id="join_another_group_collapsible">
+                        <h3>Join another group</h3>
+                        <ul id="groupslist_niuser_not" data-role="listview" data-inset="true" data-filter="true"></ul>
+
+                        <div data-role="popup" id="user_join_another_group">
+                            <h3>Join this group?</h3>
+                            <button id="user_join_group">Join</button>
+                            <button id="user_cancel_join_group">Cancel</button>
+                        </div>
+
                     </div>
-                    <div data-role="popup" id="approve_request_popup">
-                        <h3>Approve join request?</h3>
-                        <button id="approve_join_request">OK</button>
-                        <button id="ignore_join_request">Ignore</button>
+                    <div data-role="collapsible" class="collapsible" id="start_new_group_collapsible">
+                        <h3>Start a new group</h3>
+                        <input type="text" name="groupname_new" id="groupname_new" placeholder="group name" />
+                        <!--
+                        <label for="grouptype_new_nonadmin">group type:</label>
+                        <select id="grouptype_new_nonadmin" name="grouptype_new_nonadmin">
+                            <option val="school_section">section</option>
+                            <option val="school_club">club</option>
+                        </select>
+                        -->
+                        <!--
+                        <label for="groupmodslist_new2">group moderator:</label>
+                        <select id="groupmodslist_new2"></select>-->
+                        <button id="start_new_group">Submit</button>
+                    </div>
+                    <div data-role="collapsible" class="collapsible">
+                        <h3>Group/s you own</h3>
+                        <ul id="groupslist_niuser_modsya" data-role="listview" data-inset="true">n/a</ul>
+                        <div data-role="popup" id="check_pending_join_requests">
+                            <h3>Approve join requests</h3>
+                            <ul id="pending_join_requests" data-role="listview" data-inset="true"></ul>
+                        </div>
+                        <div data-role="popup" id="approve_request_popup">
+                            <h3>Approve join request?</h3>
+                            <button id="approve_join_request">OK</button>
+                            <button id="ignore_join_request">Ignore</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
 
@@ -549,6 +549,8 @@
     <script type="text/javascript" src="js/pusher_init.js"></script>
     <!-- helper dialogs (confirm, alert, etc) -->
     <script type="text/javascript" src="js/dialog.js"></script>
+    <!-- pull to refresh module -->
+    <script type="text/javascript" src="js/pull_refresh.js"></script>
 
     <!--<script type="text/javascript" src="js/restrict_access.js"></script>-->
     <!--<script type="text/javascript" src="js/register.js"></script>-->
