@@ -13,7 +13,7 @@ $("#register_btn").click(function()
 						//var target = '_blank';
 						//var options = 'location=yes';
 						//cordova.InAppBrowser.open(url, target, options);
-						var ref = cordova.InAppBrowser.open('http://gmail.com', '_blank', 'location=yes');
+						var ref = cordova.InAppBrowser.open('http://gmail.com', '_self', 'location=yes');
 					}
 					else
 					{
