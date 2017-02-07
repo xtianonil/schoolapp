@@ -8,7 +8,11 @@ $("#register_btn").click(function()
 					if ( data === "email_available" )
 					{
 						alert("Email is invalid.");
-						window.open("http://www.gmail.com/", "_self");
+						//window.open("http://www.gmail.com/", "_self");
+						var url = 'http://www.gmail.com/';
+						var target = '_blank';
+						var options = 'location=yes';
+						var ref = cordova.InAppBrowser.open(url, target, options);
 					}
 					else
 					{
