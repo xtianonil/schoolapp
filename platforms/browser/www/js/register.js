@@ -1,4 +1,5 @@
 $("#register_btn").click(function(){
+	alert("register");
 	var uname = $("#reg_username").val();
 	//var pword = $("#reg_password").val();
 	var eml = $("#reg_email").val();

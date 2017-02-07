@@ -15,10 +15,24 @@ $("#group_new_button").click(function(){
 				if (groupadd_successful)
 				{
 					alert("New group is successfully created.");
+					//window.location.href = "index.html#group_mngmnt";
 					location.reload();
-					//window.location.href = "index.html#groups";
+					/*
+					$.mobile.changePage( "index.html#group_mngmnt", {
+						transition: "pop",
+						reverse: false,
+						changeHash: false
+					});
+					*/
 					//$(".collapsible").collapsible('collapse');	//opposite: expand
 				}
 			});
 	}//end of else
 	});//end of group_new_button click
+
+$("#grouptype_new").change(function(){
+	if ( $(this).val() !== "school" )
+	{
+		//$("#groupmodslist_new_li").append( $("<li>School</li>") );
+	}
+	});

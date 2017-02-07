@@ -1,4 +1,10 @@
 $(document).on('pagebeforeshow','#user_mngmnt',function(){
+//$(document).on('pagebeforechange','#user_mngmnt',function(){
+	showUsersManagement();
+});//end of $document pagebeforeshow
+
+function showUsersManagement()
+{
 	$.post(localStorage.webhost+"user_listnonadmin.php")
 		.done(function(result_set){
 			var users = JSON.parse(result_set);
@@ -63,7 +69,9 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 							if(deletion_successful)
 							{
 								alert("User account deleted successfully");
-								location.reload();
+	
+							    showUsersManagement();
+							    setTimeout(function(){$("#user_popup").popup("close");},100);
 							}
 						});
 				}//end of if userslist_isclicked
@@ -82,14 +90,11 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 					});
 
 					setTimeout(function(){
-						$("#listahan_groups").empty();
 			        	$("#user_membership1").popup("open");
-
-			        	//alert(localStorage.userlistuid);
 			        	$.post(localStorage.webhost+"user_showlistofgroupsjoined.php",{userid:localStorage.userlistuid})
 			        		.done(function(res){
-			        			//alert(res);
 			        			var user_groups = JSON.parse(res);
+			        			$("#listahan_groups").empty();
 			        			$.each(user_groups, function(i, field)
 								{
 									$("#listahan_groups").append($("<li><a href='#' class='groupslist' data-rel='popup' id="+field.group_id+">"+field.group_name+" ("+field.group_type+")</a></li>"));		
@@ -198,4 +203,4 @@ $(document).on('pagebeforeshow','#user_mngmnt',function(){
 			$("#users_table tr:odd").css("background-color", "#F6F6F6");
 
 		});//end of $post localstorage.webhost user_listnonadmin
-});//end of $document pagebeforeshow
+}

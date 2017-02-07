@@ -37,8 +37,6 @@
     * Create your own at http://cspisawesome.com
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
-
-    <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
     <!--<link rel="stylesheet" type="text/css" href="css/flatui/jquery.mobile.flatui.css" />-->
     <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.min.css" />-->
@@ -55,33 +53,35 @@
     </style>
 
     <script type="text/javascript">
+        
         $(function(){   //on deviceready
-
+            $(".pullable_div").pullToRefresh();
         //for debugging purposes only, omit this in production
             if (localStorage.login === "true")
             {
                 if ( localStorage.is_admin === "true" )
                 {
                     window.location.href = "index.html#admin_panel";
-                    //alert("SDF");
                 }
                 else
                 {
                     window.location.href = "index.html#notifs_feed";
                 }
-                $("[data-role=footer]").toolbar();
+                //var button = $("<button id='btn1'>Dialog</button>");
+                $("[data-role=footer]").toolbar();//.append( button );
+
             }
             else
                 window.location.href = "index.html#not_logged_in";
             });     
         
         $(document).on('mobileinit',function(){
+            $(".pullable_div").pullToRefresh();
             if (localStorage.login === "true")
             {
                 if ( localStorage.is_admin === "true" )
                 {
                     window.location.href = "index.html#admin_panel";
-                    //alert("SDF");
                 }
                 else
                 {
@@ -97,15 +97,14 @@
 </head>
 
 <body>
+    
     <div data-role="footer" data-position="fixed" class="ui-bar-a">
         <div id="footer_div" style="text-align:center;"></div>
-        <!--<h1><a href="#" id="logout">Logout</a></h1>-->
-        </div> 
-
+    </div> 
+    
     <div data-role="page" id="not_logged_in">
         <div data-role="header">
             <h1></h1>
-            <!--<button class="refreshpage">refresh</button>-->
         </div> 
         <div data-role="main" class="ui-content">
             <input id="email_login" type="text" placeholder="email" />            
@@ -114,12 +113,11 @@
             <div style="text-align:center;"><a href="#register">Register</a></div>
         </div>
     </div>
-
     <div data-role="page" id="admin_panel">
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#admin_panel" class="ui-btn-active ui-state-persist">Notifications</a></li>
+                    <li><a href="#admin_panel" class="ui-btn-active ui-state-persist">Transactions</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
                     <li><a href="#send_notif">Send Notification</a></li>
@@ -130,24 +128,64 @@
             <ul id="notifs_list_admin" data-role='listview'></ul>
         </div>
     </div>
-
-    <div data-role="page" id="notifs_feed">
-        <div id="overlaypanel" data-role="panel" data-display="overlay">
-            <ul data-role="listview" data-theme="a"> 
-            </ul>
-        </div>
+    <div data-role="page" id="support_page">
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist">Notifications</a></li>
-                    <li><a href="#user_mngmnt">Users</a></li>
+                    <li><a href="#notifs_feed">Notifications</a></li>
                     <li><a href="#group_userprofile">Groups</a></li>
-                    <li><a href="#send_notif">Send Notification</a></li>
+                    <li><a href="#support_page" class="ui-btn-active ui-state-persist">Support</a></li>
                 </ul>
             </div>
         </div>
         <div data-role="main" class="ui-content">
-            <ul id="notifs_list" data-role='listview'></ul>
+            <label for="email_subject">Subject:</label>
+            <input type="text" name="email_subject" id="email_subject"/>
+
+            <label for="email_body">Message:</label>
+            <textarea rows="6" cols="50" name="email_body" id="email_body">
+            
+            </textarea>
+            <button id="email_send">Send</button>
+        </div>
+    </div>
+    <div data-role="page" id="notifs_feed">
+        <div data-role="header" data-position="fixed">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist">Notifications</a></li>
+                    <li><a href="#group_userprofile">Groups</a></li>
+                    <li><a href="#support_page">Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div data-role="main" class="ui-content">
+            <div class="pullable_div notifs_feed">
+                <ul id="notifs_list" data-role='listview'></ul>
+            </div>
+            <div data-role="popup" id="notif_details_popup_options" >
+                <ul data-role="listview" style="display: flex;flex-direction:row;">
+                    <li data-icon="false" style="width: 150px"><a style="background-color:#FF6347;color:white;text-align: center;" href='#' id='notif_toggleread'>Mark as read</a></li>
+                    <li data-icon="false" style="width: 150px"><a style="text-align: center;" href='#' id='notif_removefromfeed'>Archive</a></li>
+                </ul>
+            </div>
+            <div data-role="popup" id="notif_details_popup">
+                <ul data-role="listview">
+                    <div class='ui-grid-b my-breakpoint'>
+                        <!--<div id="notif_expanded_details"></div>-->
+                        <!--<div id='notif_details_list' class='ui-block-a' style='margin: 0;text-decoration: none !important;'></div>-->
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-role="page" id="notif_view">
+        <div data-role="header" data-position="fixed">
+            <ul data-role="listview"><li data-icon="false"><a style="background-color: #e9e9e9" id="notif_back_btn" href="#">&#8592; Back</a></li></ul>
+        </div>
+        <div data-role="main" class="ui-content">
+            <div id="notif_expanded_details"></div>
+            <ul data-role="listview" id='notif_details_list'></ul>
         </div>
     </div>
 
@@ -155,52 +193,85 @@
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
-                    <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist">Groups</a></li>
+                    <li><a href="#notifs_feed"><h3>Notifications</h3></a></li>
+                    <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist"><h3>Groups</h3></a></li>
+                    <li><a href="#support_page"><h3>Support</h3></a></li>
                 </ul>
             </div>
-        </div>
-        
-        <div data-role="header">
-            <h3>Joined Groups</h3>
-        </div>
-        <div data-role="main" class="ui-content">
-            <ul id="groupslist_niuser" data-role="listview" data-inset="true"></ul>
+        </div>      
+        <div class="pullable_div groups_tab">
+            <div data-role="main" class="ui-content">
+                <div data-role="header">
+                    <h3>My groups</h3>
+                </div>   
+                <ul id="groups_joined" data-role="listview" data-inset="true">n/a</ul>
+                <div data-role="header">
+                    <h3>Group invites</h3>
+                </div>
+                <ul id="groups_groupinvites" data-role="listview" data-inset="true">&nbsp;</ul>
+                <div data-role="header">
+                    <h3>Pending join requests</h3>
+                </div>
+                <ul id="groups_pendingrequests" data-role="listview" data-inset="true">n/a</ul>
+                <div data-role="popup" id="group_subscriptiontoggle">
+                    <ul data-role="listview" style="text-align: center;" data-icon="false">
+                        <li id="group_subscribe">
+                            <a href="#" style="text-align: center;">Subscribe to notifs</a>
+                        </li>
+                        <li id="group_unsubscribe">
+                            <a href="#" style="text-align: center;">Unsubscribe from notifs</a>
+                        </li>
+                        <li>
+                            <a id="group_leave" style="text-align: center;">Leave group</a>
+                        </li>
+                        <li>
+                            <a id="group_cancelsub" style="text-align: center;">Cancel</a>
+                        </li>
+                    </ul>
+                    <!--<h3>Approve join request?</h3>
+                    <button id="approve_join_request">OK</button>
+                    <button id="ignore_join_request">Ignore</button>-->
+                </div>
 
-            <div data-role="collapsible-set">
-                <div data-role="collapsible" class="collapsible">
-                    <h3>Join another group</h3>
-                    <ul id="groupslist_niuser_not" data-role="listview" data-inset="true" data-filter="true"></ul>
-                    <div data-role="popup" id="user_join_another_group">
-                        <h3>Join this group?</h3>
-                        <button id="user_join_group">Join</button>
-                        <button id="user_cancel_join_group">Cancel</button>
+                <div data-role="collapsible-set">
+                    <div data-role="collapsible" class="collapsible" id="join_another_group_collapsible">
+                        <h3>Join another group</h3>
+                        <ul id="groupslist_niuser_not" data-role="listview" data-inset="true" data-filter="true"></ul>
+
+                        <div data-role="popup" id="user_join_another_group">
+                            <h3>Join this group?</h3>
+                            <button id="user_join_group">Join</button>
+                            <button id="user_cancel_join_group">Cancel</button>
+                        </div>
+
                     </div>
-                </div>
-                <div data-role="collapsible" class="collapsible">
-                    <h3>Start a new group</h3>
-                    <input type="text" name="groupname_new" id="groupname_new" placeholder="group name" />
-                    <label for="grouptype_new">group type:</label>
-                    <select id="grouptype_new" name="grouptype_new">
-                        <option val="school_section">section</option>
-                        <option val="school_club">club</option>
-                    </select>
-                    <!--
-                    <label for="groupmodslist_new2">group moderator:</label>
-                    <select id="groupmodslist_new2"></select>-->
-                    <button id="start_new_group">Submit</button>
-                </div>
-                <div data-role="collapsible" class="collapsible">
-                    <h3>Group/s you're a moderator of</h3>
-                    <ul id="groupslist_niuser_modsya" data-role="listview" data-inset="true">n/a</ul>
-                    <div data-role="popup" id="check_pending_join_requests">
-                        <h3>Approve join requests</h3>
-                        <ul id="pending_join_requests" data-role="listview" data-inset="true"></ul>
+                    <div data-role="collapsible" class="collapsible" id="start_new_group_collapsible">
+                        <h3>Start a new group</h3>
+                        <input type="text" name="groupname_new" id="groupname_new" placeholder="group name" />
+                        <!--
+                        <label for="grouptype_new_nonadmin">group type:</label>
+                        <select id="grouptype_new_nonadmin" name="grouptype_new_nonadmin">
+                            <option val="school_section">section</option>
+                            <option val="school_club">club</option>
+                        </select>
+                        -->
+                        <!--
+                        <label for="groupmodslist_new2">group moderator:</label>
+                        <select id="groupmodslist_new2"></select>-->
+                        <button id="start_new_group">Submit</button>
                     </div>
-                    <div data-role="popup" id="approve_request_popup">
-                        <h3>Approve join request?</h3>
-                        <button id="approve_join_request">OK</button>
-                        <button id="ignore_join_request">Ignore</button>
+                    <div data-role="collapsible" class="collapsible">
+                        <h3>Group/s you own</h3>
+                        <ul id="groupslist_niuser_modsya" data-role="listview" data-inset="true">n/a</ul>
+                        <div data-role="popup" id="check_pending_join_requests">
+                            <h3>Approve join requests</h3>
+                            <ul id="pending_join_requests" data-role="listview" data-inset="true"></ul>
+                        </div>
+                        <div data-role="popup" id="approve_request_popup">
+                            <h3>Approve join request?</h3>
+                            <button id="approve_join_request">OK</button>
+                            <button id="ignore_join_request">Ignore</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -219,18 +290,43 @@
             <button id="register_btn" class="ui-btn">Verify</button>
             <div style="text-align:center;"><a href="#not_logged_in">Back to Log-in</a></div>
         </div>
-        <!--
-        <div data-role="footer">
-            <h1></h1>
+    </div>
+
+    <div data-role="dialog" id="confirm_dialog" data-title="Are you sure?">
+        <div data-role="content">
+            <h3 class="confirm-1" style="text-align:center">???</h3>
+            <p class="confirm-2" style="text-align:center">???</p>
+            <!-- text that entails affirmation -->
+            <a href="#" class="confirm-do" data-role="button" data-theme="b" data-rel="back">Yes</a>
+            <!-- cancel button -->
+            <a href="#" data-role="button" data-theme="c" data-rel="back">No</a>
         </div>
-        -->
+    </div>
+    <div data-role="dialog" id="alert_dialog" data-title="Are you sure?">
+        <div data-role="content">
+            <h3 class="confirm-1" style="text-align:center">???</h3>
+            <p class="confirm-2" style="text-align:center">???</p>
+            <a href="#" class="confirm-do" data-role="button" data-theme="b" data-rel="back">Yes</a>
+            <!--<a href="#" data-role="button" data-theme="c" data-rel="back">No</a>-->
+        </div>
+    </div>
+    <div data-role="dialog" id="dialogOptions3" data-title="Are you sure?">
+        <div data-role="content">
+            <h3 class="confirm-1" style="text-align:center">???</h3>
+            <p class="confirm-2" style="text-align:center">???</p>
+            <a href="#" class="option1" data-role="button" data-theme="b">Option1</a>
+            <a href="#" class="option2" data-role="button" data-theme="b">Option2</a>
+            <a href="#" class="option3" data-role="button" data-theme="b">Option3</a>
+            <a href="#" class="option4" data-role="button" data-theme="b">Option4</a>
+            <a href="#" data-role="button" data-theme="c" data-rel="back">Cancel</a>
+        </div>
     </div>
 
     <div data-role="page" id="user_mngmnt">
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
+                    <li><a href="#admin_panel">Notifications</a></li>
                     <li><a href="#user_mngmnt" class="ui-btn-active ui-state-persist">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
                     <li><a href="#send_notif">Send Notification</a></li>
@@ -248,27 +344,7 @@
                     <input class="add_new_user" type="email" name="email_new" id="email_new" placeholder="email" />
                     <input class="add_new_user" type="text" name="last_name_new" id="last_name_new" placeholder="last name" />
                     <input class="add_new_user" type="text" name="first_name_new" id="first_name_new" placeholder="first name" />
-                    <input class="add_new_user" type="text" name="middle_name_new" id="middle_name_new" placeholder="middle name" />
-                    
-                    <!--<input class="add_new_user" type="text" name="username_new" id="username_new" placeholder="username"/>-->
-                    <!--<input class="add_new_user" type="password" name="password_new" id="password_new" placeholder="password" />-->
-                    <!--<input class="add_new_user" type="text" name="verif_code_new" id="verif_code_new" placeholder="verification code" />-->
-                    <!--<label for="user_type_new">User type:</label>
-                    <select id="user_type_new" name="user_type_new">
-                        <option value=""></option>
-                        <option value="teacher">teacher</option>
-                        <option value="parent">parent</option>
-                        <option value="parent">student</option>
-                    </select>
-                    -->
-                    <!--
-                    <label for="user_status_new">User status:</label>
-                    <select id="user_status_new" name="user_status_new">
-                        <option value=""></option>
-                        <option value="registered">registered</option>
-                    </select>
-                    -->
-                    <!--<input class="add_new_user" type="email" name="email_new" id="email_new" placeholder="email" />-->                  
+                    <input class="add_new_user" type="text" name="middle_name_new" id="middle_name_new" placeholder="middle name" />                
                     <button id="add_user_btn" class="ui-btn">Submit</button>
                 </div>
                 <div data-role="collapsible" class="collapsible" id="list_users_header">
@@ -307,8 +383,7 @@
                         </ul>
                     </div>
 
-                    <ul id="listahan_users" data-role="listview" data-filter="true"></ul>
-                    
+                    <ul id="listahan_users" data-role="listview" data-filter="true"></ul>                 
                     <a id='list_users' href="#users_list_dialog" data-rel="dialog" data-transition="pop" style='display:none;'></a>
                 </div>
             </div>
@@ -318,7 +393,7 @@
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
+                    <li><a href="#admin_panel">Notifications</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt" class="ui-btn-active ui-state-persist">Groups</a></li>
                     <li><a href="#send_notif">Send Notification</a></li>
@@ -332,62 +407,55 @@
             <div data-role="collapsible-set">
                 <div data-role="collapsible" class="collapsible">
                     <h3>Create a new group</h3>
-                    <input type="text" name="groupname_new" id="groupname_new_admin" placeholder="group name" />
-                    <label for="grouptype_new">group type:</label>
-                    <select id="grouptype_new" name="grouptype_new">
-                        <option val="school">school</option>
-                        <option val="school_section">section</option>
-                        <option val="school_club">club</option>
-                    </select>
-                    <!--<input type="text" id="groupmod_new" placeholder="group moderator" />-->
-                    <label for="groupmodslist_new">group moderator:</label>
-                    <select id="groupmodslist_new"></select>
-                    <button id="group_new_button">Submit</button>
+                    <ul data-role="listview" id="creategroup_admin">
+                        <li><input type="text" name="groupname_new_admin" id="groupname_new_admin" placeholder="group name" /></li>
+                        <li id="groupmodslist_new_li">
+                            <label for="grouptype_new">group type:</label>
+                            <select id="grouptype_new" name="grouptype_new">
+                                <option val="school">school</option>
+                                <option val="school_section">section</option>
+                                <option val="school_club">club</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="groupmodslist_new">group moderator:</label>
+                            <select id="groupmodslist_new"></select>
+                        </li>
+                        <li>
+                            <button id="group_new_button">Submit</button>
+                        </li>
+                    </ul>
                 </div>
                 <div data-role="collapsible" class="collapsible">
                     <h3>Groups list</h3>
                     <ul id="groupslist" data-role="listview" data-inset="true" data-filter="true"></ul>
                 </div>
+                
             </div>
-            <div data-role="popup" id="group_popup">
-                <ul data-role="listview" data-inset="true">
-                    <li>Group name: <input type="text" id="group_name_update"/></li>
-                    <li>Group type: <select id="group_type_update"></select></li>
-                    <li>Moderator:  <select id="mod_id_update"></select></li>
-                    <li><a href="#" data-rel="popup" class="group_update">Update details</a></li>
-                    <li><a href="#" data-rel="popup" class="group_memberslist">Members list</a></li>
-                    <li><a href="#" data-rel="popup" class="group_joinrequests">Join requests</a></li>
-                    <li><a href="#" data-rel="popup" class="group_delete">Delete</a></li>
-                </ul>
-            </div>
+            
             <div data-role="popup" id="groupmembers_popup">
-                <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
+                <!--<ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>-->
             </div>
             <div data-role="popup" id="groupmembers_joinrequest_popup">
-                <ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>
+                <!--<ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>-->
             </div>
-            <div data-role="popup" id="groupmembers_joinrequest_approve_popup">
-                <h3>Approve join request?</h3>
-                <ul data-role="listview">
-                    <li id="joinrequest_approve_admin">Approve</li>
-                    <li id="joinrequest_cancel_admin">Cancel</li>
-                </ul>
-            </div>
-            <!--
-            <div data-role="popup" id="user_popup">
-                <ul data-role="listview" data-inset="true">
-                    <li>Email:<input type="text" name="email_edit" id="email_edit"></li>
-                    <li>Last name:<input type="text" name="lastname_edit" id="lastname_edit"></li>
-                    <li>First name:<input type="text" name="firstname_edit" id="firstname_edit"></li>
-                    <li>Middle name:<input type="text" name="middlename_edit" id="middlename_edit"></li>
-                    <li><a href="#" data-rel="popup" class="user_membership">Group membership</a></li>
-                    <li><a href="#" data-rel="popup" class="user_affinity">User Affinity</a></li>
-                    <li><a href="#" data-rel="popup" class="user_update">Update</a></li>
-                    <li><a href="#" data-rel="popup" class="user_delete">Delete</a></li>
-                </ul>
-            </div>
-            -->
         </div>
+    </div>
+
+    <div data-role="page" id="group_popup_opt">
+        <div data-role="header">
+            <ul data-role="listview"><li data-icon="false"><a href="index.html#group_mngmnt">&#8592; Back</a></li></ul>
+        </div>
+        
+        <ul data-role="listview" data-inset="true">
+            <li>Group name: <input type="text" id="group_name_update"/></li>
+            <li>Group type: <select id="group_type_update"></select></li>
+            <li>Moderator:  <select id="mod_id_update"></select></li>
+            <li><a href="#" data-rel="popup" class="group_update">Update details</a></li>
+            <li><a href="#" data-rel="popup" class="group_memberslist">Members list</a></li>
+            <li><a href="#" data-rel="popup" class="group_joinrequests">Join requests</a></li>
+            <li><a href="#" data-rel="popup" class="group_delete">Delete</a></li>
+        </ul>
     </div>
 
     <div data-role="page" id="users_list_dialog">
@@ -414,7 +482,7 @@
     <div data-role="page" id="send_notif">
         <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
+                    <li><a href="#admin_panel">Notifications</a></li>
                     <li><a href="#user_mngmnt">Users</a></li>
                     <li><a href="#group_mngmnt" >Groups</a></li>
                     <li><a href="#send_notif" class="ui-btn-active ui-state-persist">Send Notification</a></li>
@@ -430,92 +498,94 @@
         <div data-role="header">
             <a href="#overlaypanel3" class="ui-btn">=</a>
             <h1>Send Notification</h1>
-            <!--<button class="refreshpage">refresh</button>-->
         </div>
 
         <div data-role="main" class="ui-content">
             <label for="notif_recipient" class="select">Send to:</label>
             <select name="notif_recipient" id="notif_recipient_dropdown"></select>
             <label for="notif_msg" class="select">Notification:</label>
-            <textarea rows="5" cols="40" rows="8" name="notif_msg_title" id="notif_msg_title" maxlength="255" style="resize: none"></textarea>
+            <!--<textarea rows="5" cols="40" rows="8" name="notif_msg_title" id="notif_msg_title" maxlength="255" style="resize: none"></textarea>-->
             <textarea rows="5" cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
             <button id="send_notif_btn">Send</button>
         </div>
-        <!--
-        <div data-role="footer" class="footer">
-            <h1></h1>
-        </div>-->
     </div>
-    <!--
-    <div data-role="page" id="groups">
-        <div id="overlaypanel_groups" data-role="panel" data-display="overlay">
-            <ul data-role="listview" data-theme="a"> 
-                <li><a href="#notifs_feed">Notifications</a></li>
-                <li class="admin_only"><a href="#user_mngmnt">User Management</a></li>
-                <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
+    <div data-role="page" id="members_list" class="admin_panel">
+        <ul data-role="listview" id="backbtn_mlist"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
+        Members list
+        <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
+    </div>
+    <div data-role="page" id="joinrequests_list">
+        <ul data-role="listview" data-icon="false"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
+        <!--<ul data-role="listview"><li><a href="index.html#group_mngmnt">&#8592; Back</a></li></ul>-->
+        <ul data-role="listview"><li style="text-align: center;">Join Requests</li></ul>
+        <ul data-role="listview" data-inset="true" id="groupmembers_joinrequest_list"></ul>
+        <div data-role="popup" id="groupmembers_joinrequest_approve_popup">
+            <h3>Approve join request?</h3>
+            <ul data-role="listview">
+                <li id="joinrequest_approve_admin">Approve</li>
+                <li id="joinrequest_cancel_admin">Cancel</li>
             </ul>
         </div>
-        <div data-role="header">
-            <a href="#overlaypanel_groups" class="ui-btn">=</a>
-            <h1>Groups</h1>
-            <button class="refreshpage">refresh</button>
-        </div>
-        <div data-role="main">
-            <h4>Member of:</h4>
-            <div id="listall_groups_memberof_content"></div>
-            <hr>
-            <h4>List of all groups:</h4>
-            <div id="list_groups_content"></div>
-            <a id='list_groups' href="#groups_list_dialog" data-rel="dialog" data-transition="pop" style='display:none;'></a>
-        </div>
-        <div data-role="footer">
-            <h1></h1>
-        </div>
     </div>
-    -->
+    <!-- responsible for device-related functions-->
     <script type="text/javascript" src="cordova.js"></script>
+    <!-- date manipulation -->
+    <script type="text/javascript" src="js/moment.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+
+    <!-- pusher websockets-->
+    <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+
+    <!-- pull to refresh js plugin-->
+    <script src="js/jquery.p2r.min.js"></script>
+
     <script type="text/javascript">
         app.initialize();
         //localStorage.webhost = "http://192.168.0.16/school_connect_server/";
-        localStorage.webhost = "http://192.168.0.11/school_connect_server/";
-
-        /*
-        $(".refreshpage").click(function(){
-            location.reload();
-            //restrict access
-            if (localStorage.user_type === "school_admin")
-                $(".admin_only").show();
-            else
-                $(".admin_only").hide();
-        });
-        */
+        localStorage.webhost = "http://schoolapp.benfrancia.org/school_connect_server/";
     </script>
-    <script type="text/javascript" src="js/restrict_access.js"></script>
+
+    <!-- initialize hosted websocket service-->
+    <script type="text/javascript" src="js/pusher_init.js"></script>
+    <!-- helper dialogs (confirm, alert, etc) -->
+    <script type="text/javascript" src="js/dialog.js"></script>
+    <!-- pull to refresh module -->
+    <script type="text/javascript" src="js/pull_refresh.js"></script>
+
+    <!--<script type="text/javascript" src="js/restrict_access.js"></script>-->
     <!--<script type="text/javascript" src="js/register.js"></script>-->
     <script type="text/javascript" src="js/user_verify.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-    <script type="text/javascript" src="js/logout.js"></script>
+    <!--<script type="text/javascript" src="js/logout.js"></script>-->
 
     <script type="text/javascript" src="js/user_add.js"></script>
     <script type="text/javascript" src="js/username_availability.js"></script>
     <script type="text/javascript" src="js/user_mngmnt.js"></script>
 
     <script type="text/javascript" src="js/notif_send.js"></script>
-    <script type="text/javascript" src="js/notif_getlistof.js"></script>
+    <!--<script type="text/javascript" src="js/notif_getlistof.js"></script>-->
 
     <!--<script type="text/javascript" src="js/group_listmem.js"></script>-->
 
     <script type="text/javascript" src="js/group_mngmnt.js"></script>
+    <script type="text/javascript" src="js/group_memberslist.js"></script>
+    <script type="text/javascript" src="js/group_joinrequestslist.js"></script>
+
     <script type="text/javascript" src="js/group_userprofile.js"></script>
 
     <!--<script type="text/javascript" src="js/group_list.js"></script>-->
-    <script type="text/javascript" src="js/group_selectmod.js"></script>
+    <!--<script type="text/javascript" src="js/group_selectmod.js"></script>-->
     <script type="text/javascript" src="js/group_add.js"></script>
+
+    <script type="text/javascript" src="js/email_support.js"></script>
+
+    <!--<script type="text/javascript" src="js/pusher_init.js"></script>-->
 
     <script type="text/javascript" src="js/notifs_feed.js"></script>
     <script type="text/javascript" src="js/notifs_feedadmin.js"></script>
+
     <script type="text/javascript" src="js/footer.js"></script>
+
 </body>
 
 </html>

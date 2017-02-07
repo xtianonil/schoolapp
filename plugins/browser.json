@@ -25,6 +25,9 @@
         },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.school.connect"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.school.connect"
         }
     },
     "dependent_plugins": {}

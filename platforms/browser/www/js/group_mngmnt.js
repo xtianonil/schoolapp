@@ -14,6 +14,7 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 	//populate list of groups
 	$.post(localStorage.webhost+"group_listallnonschool.php")
 		.done(function(data_result){
+			//alert(data_result);
 			var groups = JSON.parse(data_result);
 			$("#groupslist").empty();
 			$.each(groups,function(i,field){
@@ -25,7 +26,13 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 				//alert($(this).attr('id'));
 				localStorage.grouplistgid = $(this).attr('id');
 				groupslist_isclicked = true;
-				$("#group_popup").popup("open");
+
+				//$("#group_popup_opt").popup("open");
+				$.mobile.changePage("index.html#group_popup_opt", {
+			        //transition: "slide",
+			        reverse: false	//from right
+			    });
+
 				$.post(localStorage.webhost+"group_listspecific.php",{groupid:$(this).attr('id')})
 					.done(function(data){
 						//alert(data);
@@ -68,6 +75,7 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 							});		
 					});
 				});
+			/*
 			$(".group_memberslist").click(function(){
 				$("#group_popup").popup("close");
 				if ( groupslist_isclicked )
@@ -81,7 +89,7 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 							$("#groupmembers_list").append($("<li><h3>GROUP: "+localStorage.grouplistname+"</h3></li>"));
 							$("#groupmembers_list").append($("<li>List of Members</li>"));
 							//alert(groupmembers);
-							if ( jQuery.isEmptyObject(groupmembers) )
+							if ( !jQuery.isEmptyObject(groupmembers) )
 							{
 								$.each(groupmembers,function(i,field){
 									$("#groupmembers_list").append($("<li><a href='#' class='groupmembers' data-rel='popup' id="+field.user_id+">"+field.lname+", "+field.fname+"</a></li>"));		
@@ -107,8 +115,9 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 						});
 				}
 				});
-			
+			*/
 			var group_joinrequests_isclicked = false;
+			/*
 			$(".group_joinrequests").click(function(){
 				group_joinrequests_isclicked = true;
 				$("#group_popup").popup("close");
@@ -117,12 +126,13 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 					$("#groupmembers_joinrequest_list").empty();
 					$.post(localStorage.webhost+"group_listmembers_joinrequest.php",{groupid:localStorage.grouplistgid})
 						.done(function(data){
+							//alert(data);
 							var groupmembers = JSON.parse(data);
 
 							$("#groupmembers_joinrequest_list").append($("<li><h3>GROUP: "+localStorage.grouplistname+"</h3></li>"));
 							$("#groupmembers_joinrequest_list").append($("<li>Pending requests to join group</li>"));
 
-							if ( jQuery.isEmptyObject(groupmembers) )
+							if ( !jQuery.isEmptyObject(groupmembers) )
 							{
 								$.each(groupmembers,function(i,field){
 									$("#groupmembers_joinrequest_list").append($("<li><a href='#' class='groupmembers_joinreq' data-rel='popup' id="+field.user_id+">"+field.lname+", "+field.fname+"</a></li>"));		
@@ -168,7 +178,7 @@ $(document).on('pagebeforeshow','#group_mngmnt',function(){
 						});//group_listmembers_joinrequest.php
 				}
 				});
-			
+			*/
 			$(".group_update").click(function(){
 				if ( groupslist_isclicked )
 				{

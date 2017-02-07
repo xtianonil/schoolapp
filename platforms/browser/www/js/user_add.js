@@ -4,42 +4,50 @@ $("#add_user_btn").click(function(){
 		alert("Email field cannot be empty.");
 	else
 	{
-		$.post(localStorage.webhost+"user_add.php",
-		{
-			//username : $.trim($("#username_new").val()),
-			//password : $.trim($("#password_new").val()),
-			//verif_code : $.trim($("#verif_code_new").val()),
-			//user_type : $.trim($("#user_type_new").val()),
-			//user_status : $.trim($("#user_status_new").val()),
-			email : $.trim($("#email_new").val()),
-			first_name : $.trim($("#first_name_new").val()),
-			middle_name : $.trim($("#middle_name_new").val()),
-			last_name : $.trim($("#last_name_new").val())
-			})
-			.done(function(userid_lastinserted){
-				//alert("last inserted id: "+userid_lastinserted);
-				if (userid_lastinserted)
+		$.post(localStorage.webhost+"email_check_if_existing.php",{email:$.trim($("#email_new").val())})
+			.done(function(data){
+				if ( data !== "email_available" )
 				{
-					//user automatically becomes a member of the school
-					/*
-					$.post(localStorage.webhost+"group_add_member.php",
-						{
-							userid : userid_lastinserted,
-							groupid : "1"
-						}
+					alert("Email is already in use.");
+					$("#email_new").focus();
+				}
+				else
+				{	//email address is available
+					$.post(localStorage.webhost+"user_add.php",
+					{
+						email : $.trim($("#email_new").val()),
+						first_name : $.trim($("#first_name_new").val()),
+						middle_name : $.trim($("#middle_name_new").val()),
+						last_name : $.trim($("#last_name_new").val())
+					}
 						)
-						.done(function(){
+						.done(function(userid_lastinserted){
+							if (userid_lastinserted)
+							{
+								//user automatically becomes a member of the school
+								$.post(localStorage.webhost+"group_add_member.php",
+									{
+										userid : userid_lastinserted,
+										groupid : "1"	//poveda school
+									}
+									)
+									.done(function()
+									{
+										alert("New user added successfully");
+										
+										showUsersManagement();
 
+										$("#list_users_header").collapsible('expand');	//opposite: expand
+										$(".add_new_user").val('');
+
+									});
+							}		
 					});
-					*/
-					alert("New user added successfully");
-					location.reload();
-					//window.location.href = "index.html#user_management";
+				}
+			});
 
-					$(".collapsible").collapsible('collapse');	//opposite: expand
-					//$(".add_new_user").removeAttr('value');
-					$(".add_new_user").val('');
-				}		
-		});
+		/*
+		
+		*/
 	}//end of else 
 });
