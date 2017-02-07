@@ -22,6 +22,7 @@
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
 
     <!--<plugin name="Device" value="org.apache.cordova.Device" />-->
+    <plugin name="cordova-plugin-inappbrowser" source="npm" version="1.0.1" />
 
     <plugin name="cordova-plugin-device" source="npm"/>
     <icon src="icon.png" />
