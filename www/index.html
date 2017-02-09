@@ -55,7 +55,6 @@
     <script type="text/javascript">
         
         $(function(){   //on deviceready
-            var ref = cordova.InAppBrowser.open('http://apache.org', '_blank', 'location=yes');
             $(".pullable_div").pullToRefresh();
         //for debugging purposes only, omit this in production
             if (localStorage.login === "true")
@@ -510,6 +509,11 @@
             <button id="send_notif_btn">Send</button>
         </div>
     </div>
+    <div data-role="page" id="members_invite">
+        <ul data-role="listview" data-icon="false"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
+        <ul data-role="listview" data-icon="false"><li><a href='#' id='add_email'>ADD</a></li></ul>
+        <ul data-role="listview" data-icon="false" id="mi_emailslist"></ul>
+    </div>
     <div data-role="page" id="members_list" class="admin_panel">
         <ul data-role="listview" id="backbtn_mlist"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
         Members list
@@ -571,6 +575,7 @@
     <script type="text/javascript" src="js/group_mngmnt.js"></script>
     <script type="text/javascript" src="js/group_memberslist.js"></script>
     <script type="text/javascript" src="js/group_joinrequestslist.js"></script>
+    <script type="text/javascript" src="js/group_newmembers.js"></script>
 
     <script type="text/javascript" src="js/group_userprofile.js"></script>
 

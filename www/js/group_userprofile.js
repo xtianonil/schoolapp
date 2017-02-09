@@ -79,7 +79,7 @@ function showPendingJoinRequests()
 				$("#groups_pendingrequests").listview("refresh");
 			});//end of $each
 
-			$(".cancel_joinrequest").click(function(){
+			$(".cancel_joinrequest").off().on('click',function(){
 				localStorage.groupname_joinreq_cncl = $(this).attr('name');
 				$.post(localStorage.webhost+"group_leave.php",{userid:localStorage.user_id,groupid:$(this).attr('id')})
 					.done(function(delete_successful){
@@ -149,11 +149,11 @@ function showGroupsJoined()
 					leftswiped = false;
 				}
 			});
-			$("#group_cancelsub").click(function(){
+			$("#group_cancelsub").off().on('click',function(){
 				setTimeout(function(){$("#group_subscriptiontoggle").popup("close");},100)
 				});
 
-			$("#group_subscribe").click(function(){
+			$("#group_subscribe").off().on('click',function(){
 				$.post(localStorage.webhost+"notif_subscriptiontoggle.php",
 					{
 						groupid 		: localStorage.groupidtemp,
@@ -170,7 +170,7 @@ function showGroupsJoined()
 						}
 					});
 				});
-			$("#group_unsubscribe").click(function(){
+			$("#group_unsubscribe").off().on('click',function(){
 				$.post(localStorage.webhost+"notif_subscriptiontoggle.php",
 					{
 						groupid 		: localStorage.groupidtemp,
@@ -205,7 +205,7 @@ function showGroupsJoinedNot()
 
 			var join_request = false;
 
-			$(".groupslist_niuser_not").click(function(){
+			$(".groupslist_niuser_not").off().on('click',function(){
 				join_request = true;	//set join request button to clicked(true)
 				localStorage.groupid_joinreq = $(this).attr('id');
 				localStorage.groupname_joinreq = $(this).attr('name');
@@ -232,7 +232,7 @@ function showGroupsJoinedNot()
 				}//end of if ( join_request )
 			}//end of confirmToJoinGroup
 					
-			//$("#user_join_group").click(function(){
+			//$("#user_join_group").off().on('click',function(){
 				/*
 				if ( join_request )
 				{
@@ -255,7 +255,7 @@ function showGroupsJoinedNot()
 				*/
 				//});//end of user_join_group click
 
-			$("#user_cancel_join_group").click(function(){
+			$("#user_cancel_join_group").off().on('click',function(){
 				$("#user_join_another_group").popup("close");
 				
 				});			
@@ -275,7 +275,7 @@ function showGroupsYouOwn()
 				$("#groupslist_niuser_modsya").listview("refresh");
 			});
 
-			$(".groupslist_mod").click(function(){
+			$(".groupslist_mod").off().on('click',function(){
 				localStorage.grouprequestedtojoin = $(this).attr('id');
 				localStorage.groupnamerequestedtojoin = $(this).attr('name');
 				dialogOptions3("Group Options",localStorage.groupnamerequestedtojoin,"Members List","Join Requests","Invite New Members","Flush All Members",function(option){
@@ -289,6 +289,16 @@ function showGroupsYouOwn()
 					{
 						showJoinRequests();
 						window.location.href = "index.html#joinrequests_list";
+						/*
+						$.mobile.changePage("index.html#joinrequests_list", {
+						        //transition: "slide",
+						        //reverse: false	//from right
+						    });*/
+					}
+					else if ( option === "invite_members" )
+					{
+						inviteNewMembers();
+						window.location.href = "index.html#members_invite";
 						/*
 						$.mobile.changePage("index.html#joinrequests_list", {
 						        //transition: "slide",
@@ -314,7 +324,7 @@ function showGroupsYouOwn()
 							$("#pending_join_requests").listview("refresh");
 						});
 
-						$(".join_requests").click(function(){
+						$(".join_requests").off().on('click',function(){
 							//checkPendingJoinRequests($(this).attr('id'));
 							$("#check_pending_join_requests").popup("close");
 							approveGroupJoinRequest($(this).attr('id'),group_id);
@@ -325,7 +335,7 @@ function showGroupsYouOwn()
 							setTimeout(function(){
 								$("#approve_request_popup").popup("open");
 							},100);
-							$("#approve_join_request").click(function(){
+							$("#approve_join_request").off().on('click',function(){
 								$.post(localStorage.webhost+"user_modapprovejoinrequest.php",{userid:user_id,groupid:group_id})
 									.done(function(request_approved){
 										if ( request_approved )
@@ -335,7 +345,7 @@ function showGroupsYouOwn()
 										}
 									});
 							});
-							$("#ignore_join_request").click(function(){
+							$("#ignore_join_request").off().on('click',function(){
 								$("#approve_request_popup").popup("close");
 							});
 						}
@@ -356,7 +366,7 @@ function showGroupsTab()
 
 	showGroupsYouOwn();
 
-	$("#start_new_group").click(function(){
+	$("#start_new_group").off().on('click',function(){
 		$.post(localStorage.webhost+"group_add.php",{groupname:$("#groupname_new").val(),grouptype:"club",groupmod:localStorage.user_id})
 			.done(function(last_inserted_groupid){
 				if ( last_inserted_groupid )

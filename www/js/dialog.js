@@ -38,7 +38,7 @@ function dialogOptions3(text1, text2, button1, button2, button3, button4, callba
   		});
 	$("#dialogOptions3 .option3").text(button3).on("click.confirm", function() {
 		//alert("button2");
-    	callback("invite_requests");
+    	callback("invite_members");
 
     	$(this).off("click.confirm");
     	
