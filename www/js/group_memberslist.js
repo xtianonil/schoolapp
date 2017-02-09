@@ -1,4 +1,4 @@
-$(".group_memberslist").click(function(){
+$(".group_memberslist").off().on('click',function(){
 	$("#groupmembers_list").empty();
 	$.post(localStorage.webhost+"group_listmembers.php",{groupid:localStorage.grouprequestedtojoin})
 		.done(function(data){
@@ -19,7 +19,7 @@ $(".group_memberslist").click(function(){
 			
 			setTimeout(function(){$("#groupmembers_popup").popup("open");},100);
 
-			$("#flush_members_admin").click(function(){
+			$("#flush_members_admin").off().on('click',function(){
 				flushGroupMembers();
 				});//end of flush members
 		});
