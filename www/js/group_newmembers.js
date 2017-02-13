@@ -1,19 +1,31 @@
 $(document).on('pagebeforeshow',"#members_invite",function(){
 	//inviteNewMembers();
-	inviteMembers();
+	//inviteMembers();
 });
 
 //delegate
-$(document).off().on('click','.delete_emailrow',function() {
+/*
+$(document).on('click','.delete_emailrow',function() {
     var id = $(this).attr('id');
     var x = document.getElementById("li"+id.substring(3));
     //alert($(x).attr('id'));
     $(x).remove();
-});
+});*/
 
 function inviteMembers()
 {
+	//alert("local"+localStorage.groupnamerequestedtojoin);
+	$("#group_invites").empty();
+	$.post(localStorage.webhost+"group_showlistofnonmembers.php",{groupid:localStorage.grouprequestedtojoin})
+		.done(function(data){
+			//alert(data);
+			var groups = JSON.parse(data);
 
+			$.each(groups,function(i,field){
+				$("#group_invites").append($("<li><a href='#'>"+field.lname+" "+field.fname+"</a></li>"));
+			});
+			$("#group_invites").listview("refresh");
+		});
 }
 
 function inviteNewMembers()
@@ -27,7 +39,7 @@ function inviteNewMembers()
 	$("#mi_emailslist :text").textinput();
 	setTimeout(function(){$("#mi_emailslist").listview("refresh");},100); 
 
-	$("#add_email").off().on('click',function(){
+	$("#add_email").on('click',function(){
 		ctr++;
 		var button = "<button id=row"+ctr+" class='delete_emailrow'>X</button>";
 		var textbox = "<input class='email_invites' type='text' placeholder='email address' />";
@@ -37,7 +49,7 @@ function inviteNewMembers()
 		$("#mi_emailslist").listview("refresh");
 	});
 
-	$(".send_invite").off().on('click',function(){
+	$(".send_invite").on('click',function(){
 		$(".email_invites").each(function(){
 			//alert($(this).val());
 			if ( $.trim( $(this).val() ).length > 0 )
@@ -46,8 +58,4 @@ function inviteNewMembers()
 			}
 		});//end of input type=text
 	});//end of .send_invite
-
-	$(".email_invites").off().on('focusin',function(){
-		alert("focus in");
-	});
 }

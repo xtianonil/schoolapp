@@ -103,13 +103,14 @@
     </div> 
     
     <div data-role="page" id="not_logged_in">
-        <div data-role="header">
-            <h1></h1>
-        </div> 
+        <h1></h1>
+        <div style="text-align: center;">
+            <img src="img/logo_schoolalert.png"/>
+        </div>
         <div data-role="main" class="ui-content">
             <input id="email_login" type="text" placeholder="email" />            
             <input id="password" type="password" placeholder="password" value="" autocomplete="off"/>
-            <button id="login" class="ui-btn">Login</button>
+            <button id="login" class="ui-btn ui-corner-all ui-btn-b" >Log In</button>
             <div style="text-align:center;"><a href="#register">Register</a></div>
         </div>
     </div>
@@ -514,10 +515,15 @@
         <div data-role="header" style="text-align: center">
             Send Group Invites
         </div>
+        <!--
         <ul data-role="listview" data-icon="false"><li><a href='#' id='add_email'>+ Email Address/es</a></li></ul>
         <ul data-role="listview" data-icon="false" id="mi_emailslist"></ul>
         <ul data-role="listview" data-icon="false"><li><a href="#" style="text-align: center" class="members_invite send_invite">Submit</a></li></ul>
+        <ul id="groupslist_niuser_not" data-role="listview" data-inset="true" data-filter="true"></ul>
+        -->
+        <ul id="group_invites" data-role="listview" data-inset="true" data-filter="true"></ul>
     </div>
+
     <div data-role="page" id="members_list" class="admin_panel">
         <ul data-role="listview" id="backbtn_mlist"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
         Members list
