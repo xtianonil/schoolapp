@@ -25,7 +25,18 @@ $("#register_btn").click(function()
 						else
 						{	
 							alert("Please check your email for instructions on how to activate your account.");
-							var ref = cordova.InAppBrowser.open('http://gmail.com', '_self', 'location=no');
+							if( $("#reg_email").val().slice(-9).substr(0,5) === 'yahoo' )
+							{
+								var ref = cordova.InAppBrowser.open('http://ymail.com', '_self', 'location=yes');
+							}
+							else if( $("#reg_email").val().slice(-9).substr(0,5) === 'gmail' )
+							{
+								var ref = cordova.InAppBrowser.open('http://gmail.com', '_self', 'location=yes');
+							}
+							else
+							{
+								var ref = cordova.InAppBrowser.open('http://google.com', '_self', 'location=yes');
+							}						
 							$.post(localStorage.webhost+"user_listspecific_by_email.php",{email:$("#reg_email").val()})
 								.done(function(data2){
 									var user_details = JSON.parse(data2);
