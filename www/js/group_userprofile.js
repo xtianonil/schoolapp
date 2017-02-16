@@ -1,7 +1,7 @@
 //bind group_mngmnt as event
 channel.bind('group_mngmnt', function(data) {
 	alert(data.context);
-	if ( data.userid === localStorage.user_id )
+	if ( data.userid === localStorage.user_id && localStorage.login === "true" )
 	{	//refresh only specified user's groups tab
 		//alert(data.context);
 		if ( data.context === "request_approved" )

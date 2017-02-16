@@ -25,6 +25,16 @@ $("#register_btn").click(function()
 						else
 						{	
 							alert("Please check your email for instructions on how to activate your account.");
+							$.post(localStorage.webhost+"user_listspecific_by_email.php",{email:$("#reg_email").val()})
+								.done(function(data2){
+									var user_details = JSON.parse(data2);
+									$.post(localStorage.webhost+"email_send_activationlink.php",{email:$("#reg_email").val(),userid:user_details[0].user_id})
+										.done(function(data3){
+											alert(data3);
+											//window.location.href = "index.html#home";
+											//window.open("http://www.google.com/", "_blank");
+										});
+								});
 							if( $("#reg_email").val().slice(-9).substr(0,5) === 'yahoo' )
 							{
 								var ref = cordova.InAppBrowser.open('http://ymail.com', '_self', 'location=yes');
@@ -37,15 +47,6 @@ $("#register_btn").click(function()
 							{
 								var ref = cordova.InAppBrowser.open('http://google.com', '_self', 'location=yes');
 							}						
-							$.post(localStorage.webhost+"user_listspecific_by_email.php",{email:$("#reg_email").val()})
-								.done(function(data2){
-									var user_details = JSON.parse(data2);
-									$.post(localStorage.webhost+"email_send_activationlink.php",{email:$("#reg_email").val(),userid:user_details[0].user_id})
-										.done(function(data3){
-											//window.location.href = "index.html#home";
-											//window.open("http://www.google.com/", "_blank");
-										});
-								});
 						}//end of else
 					}
 				});
