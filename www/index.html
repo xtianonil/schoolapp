@@ -68,8 +68,9 @@
                     window.location.href = "index.html#notifs_feed";
                 }
                 //var button = $("<button id='btn1'>Dialog</button>");
+                $("[data-role=header]").toolbar();
                 $("[data-role=footer]").toolbar();//.append( button );
-
+                $.mobile.resetActivePageHeight();
             }
             else
                 window.location.href = "index.html#not_logged_in";
@@ -97,8 +98,11 @@
 </head>
 
 <body>
-    
-    <div data-role="footer" data-position="fixed" class="ui-bar-a">
+    <div data-role="header" data-position="fixed" class="ui-bar-a logged_in" style="height: 10px;">
+        <h3><button>&#9776;</button></h3>
+    </div>
+
+    <div data-role="footer" data-position="fixed" class="ui-bar-a logged_in">
         <div id="footer_div" style="text-align:center;"></div>
     </div> 
     
@@ -156,17 +160,23 @@
             <button id="email_send">Send</button>
         </div>
     </div>
+
+    
+    
+
     <div data-role="page" id="notifs_feed">
-        <div data-role="header" data-position="fixed">
+    <div style="height: 60px;"></div>
             <div data-role="navbar">
                 <ul>
-                    <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist">Notifications</a></li>
-                    <li><a href="#group_userprofile">Groups</a></li>
-                    <li><a href="#support_page">Support</a></li>
+                    <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist"><h3>Notifications</h3></a></li>
+                    <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
+                    <li><a href="#support_page"><h3>Support</h3></a></li>
                 </ul>
             </div>
-        </div>
+
+            
         <div data-role="main" class="ui-content">
+            
             <div class="pullable_div notifs_feed">
                 <ul id="notifs_list" data-role='listview'></ul>
             </div>
@@ -336,7 +346,7 @@
                     <li><a href="#admin_panel">Notifications</a></li>
                     <li><a href="#user_mngmnt" class="ui-btn-active ui-state-persist">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
-                    <li><a href="#send_notif">Send Notification</a></li>
+                    <li><a href="#send_notif">Notification</a></li>
                 </ul>
             </div>
         </div>
