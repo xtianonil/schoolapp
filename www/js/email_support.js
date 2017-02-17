@@ -1,5 +1,5 @@
 $(document).on('pagebeforeshow','#support_page',function(){
-
+	burgerMenu();
 	$("#email_send").click(function(){
 		//alert("ASDFSA");
 		$.post(localStorage.webhost+"email_support.php",

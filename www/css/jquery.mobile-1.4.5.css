@@ -1447,6 +1447,7 @@ div.ui-mobile-viewport {
 	overflow: hidden;
 	display: block;
 	clear: both;
+
 }
 .ui-bar h1,
 .ui-bar h2,
@@ -2837,12 +2838,14 @@ li.ui-block-e {
 	margin: 0;
 	padding: 0;
 	position: relative;
+
 }
 .ui-collapsible-heading .ui-btn {
 	text-align: left;
 	margin: 0;
 	border-left-width: 0;
 	border-right-width: 0;
+	
 }
 .ui-collapsible-heading .ui-btn-icon-top,
 .ui-collapsible-heading .ui-btn-icon-bottom {

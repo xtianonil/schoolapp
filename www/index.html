@@ -38,6 +38,7 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
     <!--<link rel="stylesheet" type="text/css" href="css/flatui/jquery.mobile.flatui.css" />-->
     <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.min.css" />-->
 
@@ -50,12 +51,32 @@
         input {
             -webkit-user-select: auto;
         }
+        .ui-page .ui-header 
+        {
+            background: #0099cc !important;
+            color: white;
+            text-shadow: none;
+            border-radius: 10px;
+        }
+        .ui-collapsible-heading .ui-btn {
+            text-align: left;
+            margin: 0;
+            border-left-width: 0;
+            border-right-width: 0;
+            border: none;
+            /*
+            background-color: #0099cc;
+            color: white;*/
+        }
     </style>
 
     <script type="text/javascript">
         
         $(function(){   //on deviceready
+            //init pull to refresh library
             $(".pullable_div").pullToRefresh();
+            //init overlay panel 
+            $( "#overlaypanel_user" ).panel();
         //for debugging purposes only, omit this in production
             if (localStorage.login === "true")
             {
@@ -68,16 +89,21 @@
                     window.location.href = "index.html#notifs_feed";
                 }
                 //var button = $("<button id='btn1'>Dialog</button>");
-                $("[data-role=header]").toolbar();
-                $("[data-role=footer]").toolbar();//.append( button );
-                $.mobile.resetActivePageHeight();
+                //$("[data-role=header]").toolbar();
+                //$("[data-role=footer]").toolbar();//.append( button );
+                //$(".overlaypanel_menu").listview();
+                //$.mobile.resetActivePageHeight();
+                burgerMenu();
             }
             else
                 window.location.href = "index.html#not_logged_in";
             });     
         
         $(document).on('mobileinit',function(){
+            //init pull to refresh library
             $(".pullable_div").pullToRefresh();
+            //init overlay panel 
+            $( "#overlaypanel_user" ).panel();
             if (localStorage.login === "true")
             {
                 if ( localStorage.is_admin === "true" )
@@ -88,7 +114,10 @@
                 {
                     window.location.href = "index.html#notifs_feed";
                 }
-                $("[data-role=footer]").toolbar();
+                //$("[data-role=header]").toolbar();
+                //$("[data-role=footer]").toolbar();//.append( button );
+                //$(".overlaypanel_menu").listview();
+                burgerMenu();
             }
             else
                 window.location.href = "index.html#not_logged_in";
@@ -98,13 +127,19 @@
 </head>
 
 <body>
-    <div data-role="header" data-position="fixed" class="ui-bar-a logged_in" style="height: 10px;">
-        <h3><button>&#9776;</button></h3>
+    <div data-role="header" data-position="fixed" class="ui-bar-a logged_in">
+        <h3 style="position: absolute; margin-left: 20px; margin-top: 8px;"><a href="#overlaypanel_user" class="burger_menu" style="text-decoration: none;">&#9776;</a></h3>
     </div>
 
     <div data-role="footer" data-position="fixed" class="ui-bar-a logged_in">
         <div id="footer_div" style="text-align:center;"></div>
     </div> 
+
+    <div data-role="panel" id="overlaypanel_user" data-display="overlay" data-theme="a">
+        <ul data-role="listview" class="overlaypanel_menu">
+            <li data-icon="false"><a href="#" class="logout" style="text-align: center;">Log out</a></li>
+        </ul>
+    </div>
     
     <div data-role="page" id="not_logged_in">
         <!--<div style="position: absolute; margin: auto; width: 400px; height: 700px; top: 0; bottom: 0; left: 0; right: 0">-->
@@ -140,14 +175,13 @@
         </div>
     </div>
     <div data-role="page" id="support_page">
-        <div data-role="header" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
-                    <li><a href="#group_userprofile">Groups</a></li>
-                    <li><a href="#support_page" class="ui-btn-active ui-state-persist">Support</a></li>
-                </ul>
-            </div>
+        <div style="height: 60px;background-color: white;"></div>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#notifs_feed"><h3>Notifications</h3></a></li>
+                <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
+                <li><a href="#support_page" class="ui-btn-active ui-state-persist"><h3>Support</h3></a></li>
+            </ul>
         </div>
         <div data-role="main" class="ui-content">
             <label for="email_subject">Subject:</label>
@@ -161,20 +195,17 @@
         </div>
     </div>
 
-    
-    
 
     <div data-role="page" id="notifs_feed">
-    <div style="height: 60px;"></div>
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist"><h3>Notifications</h3></a></li>
-                    <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
-                    <li><a href="#support_page"><h3>Support</h3></a></li>
-                </ul>
-            </div>
+        <div style="height: 60px;background-color: white;"></div>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist"><h3>Notifications</h3></a></li>
+                <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
+                <li><a href="#support_page"><h3>Support</h3></a></li>
+            </ul>
+        </div>
 
-            
         <div data-role="main" class="ui-content">
             
             <div class="pullable_div notifs_feed">
@@ -207,15 +238,15 @@
     </div>
 
     <div data-role="page" id="group_userprofile">
-        <div data-role="header" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#notifs_feed"><h3>Notifications</h3></a></li>
-                    <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist"><h3>Groups</h3></a></li>
-                    <li><a href="#support_page"><h3>Support</h3></a></li>
-                </ul>
-            </div>
-        </div>      
+        <div style="height: 60px;background-color: white;"></div>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#notifs_feed"><h3>Notifications</h3></a></li>
+                <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist"><h3>Groups</h3></a></li>
+                <li><a href="#support_page"><h3>Support</h3></a></li>
+            </ul>
+        </div>
+            
         <div class="pullable_div groups_tab">
             <div data-role="main" class="ui-content">
                 <div data-role="header">
@@ -583,11 +614,14 @@
     <!-- pull to refresh module -->
     <script type="text/javascript" src="js/pull_refresh.js"></script>
 
+    <!--  burger menu -->
+    <script type="text/javascript" src="js/burger_menu.js"></script>
+
     <!--<script type="text/javascript" src="js/restrict_access.js"></script>-->
     <!--<script type="text/javascript" src="js/register.js"></script>-->
     <script type="text/javascript" src="js/user_verify.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-    <!--<script type="text/javascript" src="js/logout.js"></script>-->
+    <script type="text/javascript" src="js/logout.js"></script>
 
     <script type="text/javascript" src="js/user_add.js"></script>
     <script type="text/javascript" src="js/username_availability.js"></script>

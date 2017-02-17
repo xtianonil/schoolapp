@@ -1,6 +1,6 @@
 //bind group_mngmnt as event
 channel.bind('group_mngmnt', function(data) {
-	alert(data.context);
+	//alert(data.context);
 	if ( data.userid === localStorage.user_id && localStorage.login === "true" )
 	{	//refresh only specified user's groups tab
 		//alert(data.context);
@@ -67,6 +67,7 @@ $( "#join_another_group_collapsible" ).on( "collapsiblecollapse", function( even
 */
 $(document).on('pagebeforeshow','#group_userprofile',function(){
 	//alert("SDFs");
+	burgerMenu();
 	showGroupsTab();
 	});//end of pagebeforeshow
 function showPendingJoinRequests()
@@ -108,7 +109,14 @@ function showGroupsJoined()
 			$.each(user_groups, function(i, field)
 			{
 				//group options popup
-				$("#groups_joined").append( $("<li><div id="+field.group_id+" class='ui-grid-a my-breakpoint group_joined'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b'>"+((field.notif_subs==='1')?"(subscribed to notifs)":"(not subscribed)") +"</div><div class='ui-block-c'></div></li>") );
+				if ( field.group_type === 'school' )
+				{
+					$("#groups_joined").append( $("<li><div id="+field.group_id+" class='ui-grid-a my-breakpoint'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b' style='text-align:right;'></div><div class='ui-block-c'></div></li>") );
+				}
+				else
+				{
+					$("#groups_joined").append( $("<li><div id="+field.group_id+" class='ui-grid-a my-breakpoint group_joined'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b' style='text-align:right;'>"+((field.notif_subs==='1')?"subscribed to notifs":"notifs muted") +"</div><div class='ui-block-c'></div></li>") );
+				}
 				$("#groups_joined").listview("refresh");
 			});
 			$( ".group_joined" ).on( "swipeleft", swipeleftHandler_notif );

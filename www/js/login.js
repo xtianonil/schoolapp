@@ -40,8 +40,7 @@ $("#login").click(function(){
 					localStorage.user_id = user_details[0].user_id;
 					localStorage.name = user_details[0].lname + " " + user_details[0].fname;
 
-					
-					$("[data-role=footer]").toolbar();
+                	burgerMenu();
 
 					//update registration id of logged in user
 					app.initialize();
@@ -92,7 +91,7 @@ $("#login").click(function(){
 		alert("Email or password field cannot be empty.");
 	}
 });
-
+/*
 $("#login2").click(function(){
 	localStorage.registrationId = '';
 	localStorage.login = 'false';
@@ -171,7 +170,7 @@ $("#login2").click(function(){
 								location.reload();
 								//$("#login").html('Login');
 							});
-							*/
+							
 						
 						$.post(localStorage.webhost+"user_check_if_uuid_exists.php",{uuid:device.uuid,userid:user_details[0].user_id,regid:localStorage.reg_id})
 							.done(function(data){
@@ -244,7 +243,7 @@ $("#login2").click(function(){
 								//alert(localStorage.email_login);
 							});
 						//window.location.href = "index.html#home";
-						*/
+						
 					}
 				}
 				/*
@@ -252,10 +251,10 @@ $("#login2").click(function(){
 				{	//login error
 					alert("Login error");
 					
-				}*/
+				}
 				$("#login").html('Login');
 			}//end of success
 		});//end of ajax
 	//}
 	//return false;
-});
+});*/
