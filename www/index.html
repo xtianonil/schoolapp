@@ -58,12 +58,12 @@
             text-shadow: none;
             border-radius: 10px;
         }
-        .ui-collapsible-heading .ui-btn {
+        .ui-collapsible-heading .ui-btn 
+        {
             text-align: left;
             margin: 0;
             border-left-width: 0;
             border-right-width: 0;
-            border: none;
             /*
             background-color: #0099cc;
             color: white;*/
@@ -129,6 +129,7 @@
 <body>
     <div data-role="header" data-position="fixed" class="ui-bar-a logged_in">
         <h3 style="position: absolute; margin-left: 20px; margin-top: 8px;"><a href="#overlaypanel_user" class="burger_menu" style="text-decoration: none;">&#9776;</a></h3>
+        
     </div>
 
     <div data-role="footer" data-position="fixed" class="ui-bar-a logged_in">
@@ -137,7 +138,8 @@
 
     <div data-role="panel" id="overlaypanel_user" data-display="overlay" data-theme="a">
         <ul data-role="listview" class="overlaypanel_menu">
-            <li data-icon="false"><a href="#" class="logout" style="text-align: center;">Log out</a></li>
+            <li data-icon="false"><a href="#support_page" style="text-align: center;">Contact Support</a></li>
+            <li data-icon="false"><a href="#" class="logout" style="text-align: center;">Log Out</a></li>
         </ul>
     </div>
     
@@ -198,11 +200,11 @@
 
     <div data-role="page" id="notifs_feed">
         <div style="height: 60px;background-color: white;"></div>
-        <div data-role="navbar">
+        <div data-role="navbar" data-position="fixed">
             <ul>
                 <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist"><h3>Notifications</h3></a></li>
                 <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
-                <li><a href="#support_page"><h3>Support</h3></a></li>
+                <!--<li><a href="#support_page"><h3>Support</h3></a></li>-->
             </ul>
         </div>
 
@@ -228,8 +230,9 @@
         </div>
     </div>
     <div data-role="page" id="notif_view">
+        <div style="height: 30px;background-color: white;"></div>
         <div data-role="header" data-position="fixed">
-            <ul data-role="listview"><li data-icon="false"><a style="background-color: #e9e9e9" id="notif_back_btn" href="#">&#8592; Back</a></li></ul>
+            <ul data-role="listview"><li data-icon="false"><a style="background-color: #e9e9e9;" id="notif_back_btn" href="#">&#8592; Back</a></li></ul>
         </div>
         <div data-role="main" class="ui-content">
             <div id="notif_expanded_details"></div>
@@ -237,13 +240,13 @@
         </div>
     </div>
 
-    <div data-role="page" id="group_userprofile">
+    <div data-role="page" id="group_userprofile" data-position="fixed">
         <div style="height: 60px;background-color: white;"></div>
         <div data-role="navbar">
             <ul>
                 <li><a href="#notifs_feed"><h3>Notifications</h3></a></li>
                 <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist"><h3>Groups</h3></a></li>
-                <li><a href="#support_page"><h3>Support</h3></a></li>
+                <!--<li><a href="#support_page"><h3>Support</h3></a></li>-->
             </ul>
         </div>
             
@@ -366,6 +369,17 @@
             <a href="#" class="option2" data-role="button" data-theme="b">Option2</a>
             <a href="#" class="option3" data-role="button" data-theme="b">Option3</a>
             <a href="#" class="option4" data-role="button" data-theme="b">Option4</a>
+            <a href="#" data-role="button" data-theme="c" data-rel="back">Cancel</a>
+        </div>
+    </div>
+    <div data-role="dialog" id="group_admin">
+        <div data-role="content">
+            <h3 class="confirm-1 group_name" style="text-align: center;"></h3>
+            <p class="confirm-2" style="text-align: center;"></p>
+
+            <a id="group_memberslist" href="#" data-role="button" data-theme="b">Members List</a>
+            <a id="group_joinrequests" href="#" data-role="button" data-theme="b">Join Requests</a>
+
             <a href="#" data-role="button" data-theme="c" data-rel="back">Cancel</a>
         </div>
     </div>

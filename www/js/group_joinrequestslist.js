@@ -4,6 +4,10 @@ $(document).on('pagebeforeshow','#joinrequests_list',function(){
 	showJoinRequests();
 	});//end of pagebeforeshow
 */
+$("#group_joinrequests").on('click',function(){
+	showJoinRequests();
+	location.href = "index.html#joinrequests_list";
+});
 function showJoinRequests()
 {
 	$("#groupmembers_joinrequest_list").empty();
@@ -74,7 +78,9 @@ function showJoinRequests()
 				});//joinrequest_approve_admin
 		});//group_listmembers_joinrequest.php
 }
+/*
 $(".group_joinrequests").click(function(){
 	showJoinRequests();
 	location.href = "index.html#joinrequests_list";
 	});
+*/

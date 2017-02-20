@@ -36,7 +36,7 @@ channel.bind('group_mngmnt', function(data) {
 		}
 		else if ( data.context === "group_flushed" )
 		{
-			alert(data.groupid);
+			//alert(data.groupid);
 			//check if user is a member of the group that has been flushed
 			$.post(localStorage.webhost+"group_checkifuserbelongs.php",{userid:data.userid,groupid:data.groupid})
 				.done(function(member_of_group){
@@ -288,6 +288,13 @@ function showGroupsYouOwn()
 			$(".groupslist_mod").on('click',function(){
 				localStorage.grouprequestedtojoin = $(this).attr('id');
 				localStorage.groupnamerequestedtojoin = $(this).attr('name');
+
+				$.mobile.changePage("index.html#group_admin", {
+			        //transition: "slide",
+			        //reverse: false	//from right
+			    });
+			    $(".group_name").text( "Group: " + $(this).attr('name') );
+				/*
 				dialogOptions3("Group Options",localStorage.groupnamerequestedtojoin,"Members List","Join Requests","Invite New Members","Flush All Members",function(option){
 					//alert(opt);
 					if ( option === "members_list" )
@@ -303,7 +310,7 @@ function showGroupsYouOwn()
 						$.mobile.changePage("index.html#joinrequests_list", {
 						        //transition: "slide",
 						        //reverse: false	//from right
-						    });*/
+						    });
 					}
 					else if ( option === "invite_members" )
 					{
@@ -315,13 +322,14 @@ function showGroupsYouOwn()
 						$.mobile.changePage("index.html#joinrequests_list", {
 						        //transition: "slide",
 						        //reverse: false	//from right
-						    });*/
+						    });
 					}
 					else if ( option === "flush_group" )
 					{
 						flushGroupMembers();
 					}
 					});//end of dialogOptions3
+				*/
 				});
 
 			function checkPendingJoinRequests(group_id)
@@ -383,14 +391,14 @@ function showGroupsTab()
 			.done(function(last_inserted_groupid){
 				if ( last_inserted_groupid )
 				{
-					$.post(localStorage.webhost+"group_add_member.php",{userid:localStorage.user_id,groupid:last_inserted_groupid})
-						.done(function(){
+					//$.post(localStorage.webhost+"group_add_member.php",{userid:localStorage.user_id,groupid:last_inserted_groupid})
+					//	.done(function(){
 							alert("New group created successfully.");
 							$("#groupname_new").val("");
 							$("#start_new_group_collapsible").collapsible("collapse");
 							//location.reload();
 							showGroupsTab();
-					});
+					//});
 				}
 			});
 		});

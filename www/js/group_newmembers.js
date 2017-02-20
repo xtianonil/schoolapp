@@ -20,7 +20,7 @@ function inviteMembers()
 		.done(function(data){
 			//alert(data);
 			var groups = JSON.parse(data);
-
+			alert(groups.length); //3990
 			$.each(groups,function(i,field){
 				$("#group_invites").append($("<li><a href='#'>"+field.lname+" "+field.fname+"</a></li>"));
 			});

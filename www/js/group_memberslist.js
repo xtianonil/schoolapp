@@ -1,10 +1,11 @@
-$(".group_memberslist").on('click',function(){
+$("#group_memberslist").on('click',function(){
+//$(".group_memberslist").on('click',function(){	
 	$("#groupmembers_list").empty();
 	$.post(localStorage.webhost+"group_listmembers.php",{groupid:localStorage.grouprequestedtojoin})
 		.done(function(data){
 			var groupmembers = JSON.parse(data);
 
-			$("#groupmembers_list").append($("<li><h3>GROUP: "+localStorage.grouplistname+"</h3></li>"));
+			$("#groupmembers_list").append($("<li><h3>GROUP: "+localStorage.groupnamerequestedtojoin+"</h3></li>"));
 			//$("#groupmembers_list").append($("<li>List of Members</li>"));
 			if ( !jQuery.isEmptyObject(groupmembers) )
 			{
