@@ -1,8 +1,10 @@
 //bind notifs_feed as event
 channel.bind('notifs_feed', function(data)
 	{
+		//alert("ASDFS");
 		prependNotif(data.notifid,data.groupid);
 	});
+//alert("AFSDFas");
 $(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
 	if ( localStorage.login === 'true' )
 		showNotifs();

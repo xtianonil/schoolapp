@@ -31,6 +31,7 @@ $(document).on('pagebeforeshow','#send_notif',function(){
 									notif_msg  : $("#notif_msg").val(),
 									created_by : localStorage.name
 								}).done(function(res){
+									//alert(res);
 									alert("Notification successfully sent.");
 									window.location.href = "index.html#notif_send";
 									//do something after successful sending of notifs, save to DB
