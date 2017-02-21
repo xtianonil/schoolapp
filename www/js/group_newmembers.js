@@ -1,7 +1,12 @@
-$(document).on('pagebeforeshow',"#members_invite",function(){
-	//inviteNewMembers();
-	//inviteMembers();
+$("#group_invitenew").on('click',function(){
+	inviteMembers();
+	location.href = "index.html#members_invite";
 });
+/*
+$(document).on('pagebeforeshow',"#group_invitenew",function(){
+	//inviteNewMembers();
+	inviteMembers();
+});*/
 
 //delegate
 /*
@@ -20,7 +25,7 @@ function inviteMembers()
 		.done(function(data){
 			//alert(data);
 			var groups = JSON.parse(data);
-			alert(groups.length); //3990
+			//alert(groups.length); //3990
 			$.each(groups,function(i,field){
 				$("#group_invites").append($("<li><a href='#'>"+field.lname+" "+field.fname+"</a></li>"));
 			});

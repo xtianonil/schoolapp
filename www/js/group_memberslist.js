@@ -31,6 +31,9 @@ $("#group_memberslist").on('click',function(){
         //reverse: true	//from left
     	});
 	});
+$("#group_flush").click(function(){
+	flushGroupMembers();
+});
 
 function flushGroupMembers()
 {

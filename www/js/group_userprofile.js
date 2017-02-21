@@ -286,6 +286,7 @@ function showGroupsYouOwn()
 			});
 
 			$(".groupslist_mod").on('click',function(){
+				//alert("asdf");
 				localStorage.grouprequestedtojoin = $(this).attr('id');
 				localStorage.groupnamerequestedtojoin = $(this).attr('name');
 
