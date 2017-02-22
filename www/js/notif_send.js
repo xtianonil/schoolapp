@@ -1,5 +1,11 @@
 //$(document).delegate('#send_notif', 'pageshow', function () {
-$(document).on('pagebeforeshow','#send_notif',function(){
+$("#group_sendnotif").click(function(){
+	location.href = "index.html#group_sendnotif";
+});
+
+$(document).on('pagebeforeshow','#group_sendnotif',function(){
+	$("[data-role=header]").hide();	//hide burger icon
+	$("#notif_recipient_textinput").val(localStorage.groupnamerequestedtojoin);
 	//populate target recipients dropbox
 	$.post(localStorage.webhost+"group_fetch_list.php")
 		.done(function(query_result){

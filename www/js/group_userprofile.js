@@ -67,6 +67,7 @@ $( "#join_another_group_collapsible" ).on( "collapsiblecollapse", function( even
 */
 $(document).on('pagebeforeshow','#group_userprofile',function(){
 	//alert("SDFs");
+	$("[data-role=header]").show();	//show burger icon
 	burgerMenu();
 	showGroupsTab();
 	});//end of pagebeforeshow

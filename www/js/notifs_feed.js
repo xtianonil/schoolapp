@@ -6,6 +6,8 @@ channel.bind('notifs_feed', function(data)
 	});
 //alert("AFSDFas");
 $(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
+	//alert("back");
+	//$("[data-role=header]").toolbar();
 	if ( localStorage.login === 'true' )
 		showNotifs();
 });

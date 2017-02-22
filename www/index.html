@@ -127,9 +127,8 @@
 </head>
 
 <body>
-    <div data-role="header" data-position="fixed" class="ui-bar-a logged_in">
-        <h3 style="position: absolute; margin-left: 20px; margin-top: 8px;"><a href="#overlaypanel_user" class="burger_menu" style="text-decoration: none;">&#9776;</a></h3>
-        
+    <div data-role="header" data-position="fixed" class="ui-bar-a logged_in" data-display="overlay">
+        <h3 style="position: absolute; margin-left: 20px; margin-top: 8px;"><a href="#overlaypanel_user" class="burger_menu" style="text-decoration: none;">&#9776;</a></h3>  
     </div>
 
     <div data-role="footer" data-position="fixed" class="ui-bar-a logged_in">
@@ -147,7 +146,7 @@
         <!--<div style="position: absolute; margin: auto; width: 400px; height: 700px; top: 0; bottom: 0; left: 0; right: 0">-->
             <br><br><br>
             <div style="text-align: center;">
-                <img src="img/logo_schoolalert.png"/>
+                <img src="img/logo.png"/>
             </div>
             <div data-role="main" class="ui-content">
                 <input id="email_login" type="text" placeholder="email" />            
@@ -377,10 +376,11 @@
             <h3 class="confirm-1 group_name" style="text-align: center;"></h3>
             <p class="confirm-2" style="text-align: center;"></p>
 
+            <a id="group_sendnotif" href="#" data-role="button" data-theme="b">Send a Notification</a>
             <a id="group_memberslist" href="#" data-role="button" data-theme="b">Members List</a>
             <a id="group_joinrequests" href="#" data-role="button" data-theme="b">Join Requests</a>
             <a id="group_invitenew" href="#" data-role="button" data-theme="b">Invite New Members</a>
-            <a id="group_flush" href="#" data-role="button" data-theme="b">Flush Members</a>
+            <a id="group_flush" href="#" data-role="button" data-theme="b">Flush All Members</a>
 
             <a href="#" data-role="button" data-theme="c" data-rel="back">Cancel</a>
         </div>
@@ -543,6 +543,19 @@
         </div>
     </div>
 
+    <div data-role="page" id="group_sendnotif">
+        <a data-role="button" data-icon="false" href="index.html#group_userprofile"><div style="float: left;">&#8592; Back</div></a>
+        <div data-role="main" class="ui-content">
+            <label for="notif_recipient" class="select">Send notification to group:</label>
+            <!--<select name="notif_recipient" id="notif_recipient_dropdown"></select>-->
+            <input type="text" name="notif_recipient" id="notif_recipient_textinput" disabled="true" />
+            <label for="notif_msg" class="select">Message:</label>
+            <!--<textarea rows="5" cols="40" rows="8" name="notif_msg_title" id="notif_msg_title" maxlength="255" style="resize: none"></textarea>-->
+            <textarea rows="5" cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
+            <button id="send_notif_btn">Send</button>
+        </div>
+    </div>
+
     <div data-role="page" id="send_notif">
         <div data-role="navbar">
                 <ul>
@@ -552,6 +565,7 @@
                     <li><a href="#send_notif" class="ui-btn-active ui-state-persist">Send Notification</a></li>
                 </ul>
             </div>
+        <!--
         <div id="overlaypanel3" data-role="panel" data-display="overlay">
             <ul data-role="listview" data-theme="a">
                 <li><a href="#notifs_feed">notifs_feed</a></li>
@@ -559,18 +573,19 @@
                 <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
             </ul>
         </div>
+        -->
         <div data-role="header">
             <a href="#overlaypanel3" class="ui-btn">=</a>
             <h1>Send Notification</h1>
         </div>
 
         <div data-role="main" class="ui-content">
-            <label for="notif_recipient" class="select">Send to:</label>
-            <select name="notif_recipient" id="notif_recipient_dropdown"></select>
+            <label for="notif_recipient2" class="select">Send to:</label>
+            <select name="notif_recipient2" id="notif_recipient_dropdown2"></select>
             <label for="notif_msg" class="select">Notification:</label>
             <!--<textarea rows="5" cols="40" rows="8" name="notif_msg_title" id="notif_msg_title" maxlength="255" style="resize: none"></textarea>-->
             <textarea rows="5" cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
-            <button id="send_notif_btn">Send</button>
+            <button id="send_notif_btn2">Send</button>
         </div>
     </div>
     <div data-role="page" id="members_invite">
