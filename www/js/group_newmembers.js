@@ -1,4 +1,5 @@
 $("#group_invitenew").on('click',function(){
+	$("[data-role=header]").hide();	//hide burger icon
 	inviteMembers();
 	location.href = "index.html#members_invite";
 });
@@ -27,7 +28,9 @@ function inviteMembers()
 			var groups = JSON.parse(data);
 			//alert(groups.length); //3990
 			$.each(groups,function(i,field){
-				$("#group_invites").append($("<li><a href='#'>"+field.lname+" "+field.fname+"</a></li>"));
+				//$("#group_invites").append($("<li><a href='#'>"+field.lname+" "+field.fname+"</a></li>"));
+				$("#group_invites").append($("<li><div id="+field.user_id+" class='ui-grid-a my-breakpoint group_joined'><div class='ui-block-a'>"+field.lname+", "+field.fname+"</div><div class='ui-block-b' style='text-align:right;'><input type='checkbox' id='"+field.user_id+"' /></div><div class='ui-block-c'></div></li>"));
+				//"<li><div id="+field.group_id+" class='ui-grid-a my-breakpoint group_joined'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b' style='text-align:right;'>"+((field.notif_subs==='1')?"subscribed to notifs":"notifs muted") +"</div><div class='ui-block-c'></div></li>"
 			});
 			$("#group_invites").listview("refresh");
 		});

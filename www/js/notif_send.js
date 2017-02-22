@@ -20,7 +20,7 @@ $(document).on('pagebeforeshow','#group_sendnotif',function(){
 			}
 			$("#send_notif_btn").click(function(){
 				//get reg IDs of those members of the chosen group
-				$.post(localStorage.webhost+"group_fetch_regids.php",{groupid:$("#notif_recipient_dropdown").val()})
+				$.post(localStorage.webhost+"group_fetch_regids.php",{groupid:$("#notif_recipient_textinput").val()})
 					.done(function(data){
 						//alert(data);
 						var regids = JSON.parse(data);
@@ -45,12 +45,12 @@ $(document).on('pagebeforeshow','#group_sendnotif',function(){
 										{
 											created_by : localStorage.user_id,
 											payload : $("#notif_msg").val(),
-											target_group : $("#notif_recipient_dropdown").val()
+											target_group : $("#notif_recipient_textinput").val()
 										})
 										.done(function(notif_id){
 											if (notif_id)
 											{
-												$.post(localStorage.webhost+"websock_notifsfeed.php",{notifid:notif_id,groupid:$("#notif_recipient_dropdown").val()})
+												$.post(localStorage.webhost+"websock_notifsfeed.php",{notifid:notif_id,groupid:$("#notif_recipient_textinput").val()})
 													.done(function(data){
 													});
 												location.reload();

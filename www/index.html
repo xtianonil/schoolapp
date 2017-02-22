@@ -590,8 +590,8 @@
     </div>
     <div data-role="page" id="members_invite">
         <ul data-role="listview" data-icon="false"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
-        <div data-role="header" style="text-align: center">
-            Send Group Invites
+        <div data-role="main" style="text-align: center">
+            <h3>Send Group Invites</h3>
         </div>
         <!--
         <ul data-role="listview" data-icon="false"><li><a href='#' id='add_email'>+ Email Address/es</a></li></ul>
@@ -599,7 +599,10 @@
         <ul data-role="listview" data-icon="false"><li><a href="#" style="text-align: center" class="members_invite send_invite">Submit</a></li></ul>
         <ul id="groupslist_niuser_not" data-role="listview" data-inset="true" data-filter="true"></ul>
         -->
-        <ul id="group_invites" data-role="listview" data-inset="true" data-filter="true"></ul>
+        <ul id="group_invites" data-role="listview" data-inset="true" data-filter="true" data-icon="false"></ul>
+        <div data-role="footer" data-position="fixed">
+            <ul data-role="listview" data-icon="false"><li><a href="#" data-role="button" style="text-align: center;"><h3>Send Invite</h3></a></li></ul>
+        </div>
     </div>
 
     <div data-role="page" id="members_list" class="admin_panel">
