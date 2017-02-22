@@ -3,6 +3,35 @@ $("#group_invitenew").on('click',function(){
 	inviteMembers();
 	location.href = "index.html#members_invite";
 });
+
+
+$("#group_sendinvite").click(function(){
+	$('input[type=checkbox]').each(function () {
+		if ( this.checked && $(this).hasClass("group_invited") )
+		{
+			//alert($(this).attr('id')); //localStorage.grouprequestedtojoin
+			$.post(localStorage.webhost+"group_invite.php",{userid:$(this).attr('id'),groupid:localStorage.grouprequestedtojoin})
+		    	.done(function(data){
+		    		if (data)
+		    		{
+		    			/*
+		    			email this user, tell user that user is invited to the group
+		    			*/
+		    			//alert(data);
+
+		    			//alert("Member/s successfully added to group.");
+		    			//window.location.href = "index.html#group_userprofile";
+		    		}
+		    	});
+		}
+	});
+	alert("Group invites sent.");
+	$.mobile.changePage("index.html#group_admin", {
+        //transition: "slide",
+        //reverse: false	//from right
+    });
+    $(".group_name").text( "Group: " + localStorage.groupnamerequestedtojoin );
+});	
 /*
 $(document).on('pagebeforeshow',"#group_invitenew",function(){
 	//inviteNewMembers();
@@ -24,12 +53,10 @@ function inviteMembers()
 	$("#group_invites").empty();
 	$.post(localStorage.webhost+"group_showlistofnonmembers.php",{groupid:localStorage.grouprequestedtojoin})
 		.done(function(data){
-			//alert(data);
 			var groups = JSON.parse(data);
-			//alert(groups.length); //3990
 			$.each(groups,function(i,field){
 				//$("#group_invites").append($("<li><a href='#'>"+field.lname+" "+field.fname+"</a></li>"));
-				$("#group_invites").append($("<li><div id="+field.user_id+" class='ui-grid-a my-breakpoint group_joined'><div class='ui-block-a'>"+field.lname+", "+field.fname+"</div><div class='ui-block-b' style='text-align:right;'><input type='checkbox' id='"+field.user_id+"' /></div><div class='ui-block-c'></div></li>"));
+				$("#group_invites").append($("<li><div id="+field.user_id+" class='ui-grid-a my-breakpoint group_joined'><div class='ui-block-a'>"+field.lname+", "+field.fname+"</div><div class='ui-block-b' style='text-align:right;'><input class='group_invited' type='checkbox' id='"+field.user_id+"' /></div><div class='ui-block-c'></div></li>"));
 				//"<li><div id="+field.group_id+" class='ui-grid-a my-breakpoint group_joined'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b' style='text-align:right;'>"+((field.notif_subs==='1')?"subscribed to notifs":"notifs muted") +"</div><div class='ui-block-c'></div></li>"
 			});
 			$("#group_invites").listview("refresh");

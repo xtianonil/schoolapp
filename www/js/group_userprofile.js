@@ -1,6 +1,6 @@
 //bind group_mngmnt as event
 channel.bind('group_mngmnt', function(data) {
-	alert(data.context);
+	//alert(data.context);
 	if ( data.userid === localStorage.user_id && localStorage.login === "true" )
 	{	//refresh only specified user's groups tab
 		//alert(data.context);
@@ -34,6 +34,16 @@ channel.bind('group_mngmnt', function(data) {
 		{
 			showGroupsJoined();
 		}
+		else if ( data.context === "invite_sent" )
+		{
+			showGroupInvites();
+			showGroupsJoined();
+		}
+		else if ( data.context === "invite_accepted" )
+		{
+			showGroupInvites();
+			showGroupsJoined();
+		}
 		else if ( data.context === "group_flushed" )
 		{
 			//alert(data.groupid);
@@ -42,14 +52,14 @@ channel.bind('group_mngmnt', function(data) {
 				.done(function(member_of_group){
 					if ( member_of_group )
 					{
-						alert("member of group: "+member_of_group);
+						//alert("member of group: "+member_of_group);
 						showGroupsJoined();
 						showPendingJoinRequests();
 						showGroupsJoinedNot();
 					}//end of member_of_group
 					else
 					{
-						alert("not a member: "+member_of_group);
+						//alert("not a member: "+member_of_group);
 					}
 				});//end user_checkifuserbelongs
 		}//end of if 
@@ -202,6 +212,35 @@ function showGroupsJoined()
 				});
 		});
 }
+function showGroupInvites()
+{
+	$("#groups_groupinvites").empty();
+	$("#groups_groupinvites").listview("refresh");
+	$.post(localStorage.webhost+"user_showlistofgroupsinvited.php",{userid:localStorage.user_id})
+		.done(function(result_set){
+			var group_pending_requests = JSON.parse(result_set);
+			$.each(group_pending_requests,function(i,field){
+				$("#groups_groupinvites").append( $("<li><div id="+field.group_id+" class='ui-grid-a my-breakpoint group_pendingrequests'><div class='ui-block-a'>"+field.group_name+"</div><div class='ui-block-b' style='text-align:right;'><a href='#' name="+field.group_name+" class='accept_groupinvite' id="+field.group_id+">Accept</a></div></div></li>") );
+				$("#groups_groupinvites").listview("refresh");
+			});//end of $each
+			
+			$(".accept_groupinvite").on('click',function(){
+				localStorage.groupname_inviteaccepted = $(this).attr('name');
+				$.post(localStorage.webhost+"user_modapprovejoinrequest.php",{userid:localStorage.user_id,groupid:$(this).attr('id')})
+					.done(function(group_invite_accepted){
+						if(group_invite_accepted)
+						{
+							//alert("Join request canceled.");
+							showAlertDialog("You have accepted the request to join this group:", localStorage.groupname_inviteaccepted, "Okay", function() {
+								$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"invite_accepted"})
+				    				.done(function(){
+				    				});
+								});
+						}
+					});
+			});
+		});//end of invite post
+}
 function showGroupsJoinedNot()
 {
 	$("#groupslist_niuser_not").empty();
@@ -295,7 +334,7 @@ function showGroupsYouOwn()
 			        //transition: "slide",
 			        //reverse: false	//from right
 			    });
-			    $(".group_name").text( "Group: " + $(this).attr('name') );
+			    $(".group_name").text( "Group: " + localStorage.groupnamerequestedtojoin );
 				/*
 				dialogOptions3("Group Options",localStorage.groupnamerequestedtojoin,"Members List","Join Requests","Invite New Members","Flush All Members",function(option){
 					//alert(opt);
@@ -379,6 +418,7 @@ function showGroupsYouOwn()
 function showGroupsTab()
 {
 	showPendingJoinRequests();
+	showGroupInvites();
 
 	var leftswiped = false;		//left swipe false;
 	showGroupsJoined();

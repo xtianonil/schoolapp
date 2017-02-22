@@ -30,7 +30,7 @@ $("#register_btn").click(function()
 									var user_details = JSON.parse(data2);
 									$.post(localStorage.webhost+"email_send_activationlink.php",{email:$("#reg_email").val(),userid:user_details[0].user_id})
 										.done(function(data3){
-											alert(data3);
+											//alert(data3);
 											//window.location.href = "index.html#home";
 											//window.open("http://www.google.com/", "_blank");
 										});
