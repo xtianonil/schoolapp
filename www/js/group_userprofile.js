@@ -77,6 +77,9 @@ $( "#join_another_group_collapsible" ).on( "collapsiblecollapse", function( even
 */
 $(document).on('pagebeforeshow','#group_userprofile',function(){
 	//alert("SDFs");
+	$(".header_navbar").empty();
+	$(".header_navbar").append("<div data-role='navbar'><ul><li><a href='#notifs_feed'><h3>Notifications</h3></a></li><li><a href='#group_userprofile' class='ui-btn-active ui-state-persist'><h3>Groups</h3></a></li></ul></div>");
+
 	$("[data-role=header]").show();	//show burger icon
 	burgerMenu();
 	showGroupsTab();
