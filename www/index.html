@@ -58,6 +58,12 @@
             text-shadow: none;
             border-radius: 10px;
         }
+        .btn 
+        {
+            background: #0099cc !important;
+            color: white;
+            text-shadow: none;
+        }
         .ui-collapsible-heading .ui-btn 
         {
             text-align: left;
@@ -67,6 +73,18 @@
             /*
             background-color: #0099cc;
             color: white;*/
+        }
+        .overlay1
+        {
+            background: #0099cc !important;
+            color: white;
+            text-shadow: none;
+        }
+        .overlaymenu .option1
+        {
+            background: #0099cc !important;
+            color: white;
+            text-shadow: none;
         }
     </style>
 
@@ -136,9 +154,11 @@
     </div> 
 
     <div data-role="panel" id="overlaypanel_user" data-display="overlay" data-theme="a">
+        <div id="overlaypanel_userdetails"></div>
+        <div style="height: 50px;"></div>
         <ul data-role="listview" class="overlaypanel_menu">
-            <li data-icon="false"><a href="#support_page" style="text-align: center;">Contact Support</a></li>
-            <li data-icon="false"><a href="#" class="logout" style="text-align: center;">Log Out</a></li>
+            <li data-icon="false"><a href="#support_page" data-role="button" style="background:#0099CC; color: white;text-shadow: none;">Contact Support</a></li>
+            <li data-icon="false"><a href="#" class="logout">Log Out</a></li>
         </ul>
     </div>
     
@@ -176,14 +196,18 @@
         </div>
     </div>
     <div data-role="page" id="support_page">
-        <div style="height: 60px;background-color: white;"></div>
+        <ul data-role="listview"><li data-icon="false"><a id="notif_back_btn" href="index.html#notifs_feed">&#8592; Back</a></li></ul>
+        <ul data-role="listview" data-icon="false">
+            <li style="background-color:#0099cc;color:white;text-align: center;text-shadow: none;">Contact Support</li>
+        </ul>
+        <!--
         <div data-role="navbar">
             <ul>
                 <li><a href="#notifs_feed"><h3>Notifications</h3></a></li>
                 <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
                 <li><a href="#support_page" class="ui-btn-active ui-state-persist"><h3>Support</h3></a></li>
             </ul>
-        </div>
+        </div>-->
         <div data-role="main" class="ui-content">
             <label for="email_subject">Subject:</label>
             <input type="text" name="email_subject" id="email_subject"/>
@@ -214,7 +238,7 @@
             </div>
             <div data-role="popup" id="notif_details_popup_options" >
                 <ul data-role="listview" style="display: flex;flex-direction:row;">
-                    <li data-icon="false" style="width: 150px"><a style="background-color:#FF6347;color:white;text-align: center;" href='#' id='notif_toggleread'>Mark as read</a></li>
+                    <li data-icon="false" style="width: 150px"><a style="background-color:#0099cc;color:white;text-align: center;" href='#' id='notif_toggleread'>Mark as read</a></li>
                     <li data-icon="false" style="width: 150px"><a style="text-align: center;" href='#' id='notif_removefromfeed'>Archive</a></li>
                 </ul>
             </div>
@@ -229,13 +253,13 @@
         </div>
     </div>
     <div data-role="page" id="notif_view">
-        <div style="height: 30px;background-color: white;"></div>
-        <div data-role="header" data-position="fixed">
-            <ul data-role="listview"><li data-icon="false"><a style="background-color: #e9e9e9;" id="notif_back_btn" href="#">&#8592; Back</a></li></ul>
-        </div>
+        
+        
+        <ul data-role="listview"><li data-icon="false"><a style="background-color: #0099cc;" id="notif_back_btn" href="#">&#8592; Back</a></li></ul>
+        
         <div data-role="main" class="ui-content">
             <div id="notif_expanded_details"></div>
-            <ul data-role="listview" id='notif_details_list'></ul>
+            <ul data-role="listview" id='notif_details_list' data-icon="false"></ul>
         </div>
     </div>
 
@@ -380,7 +404,7 @@
             <a id="group_memberslist" href="#" data-role="button" data-theme="b">Members List</a>
             <a id="group_joinrequests" href="#" data-role="button" data-theme="b">Join Requests</a>
             <a id="group_invitenew" href="#" data-role="button" data-theme="b">Invite New Members</a>
-            <a id="group_flush" href="#" data-role="button" data-theme="b">Flush All Members</a>
+            <a id="group_flush" href="#" data-role="button" data-theme="b" style="background-color: red;border: none;text-shadow: none;">Flush All Members</a>
 
             <a href="#" data-role="button" data-theme="c" data-rel="back">Cancel</a>
         </div>
@@ -552,7 +576,7 @@
             <label for="notif_msg" class="select">Message:</label>
             <!--<textarea rows="5" cols="40" rows="8" name="notif_msg_title" id="notif_msg_title" maxlength="255" style="resize: none"></textarea>-->
             <textarea rows="5" cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
-            <button id="send_notif_btn">Send</button>
+            <button id="send_notif_btn" class="btn" style="color: white;">Send</button>
         </div>
     </div>
 
@@ -593,6 +617,7 @@
         <div data-role="main" style="text-align: center">
             <h3>Send Group Invites</h3>
         </div>
+        <ul data-role="listview" id="groupsendinvites" data-icon="false"></ul>
         <!--
         <ul data-role="listview" data-icon="false"><li><a href='#' id='add_email'>+ Email Address/es</a></li></ul>
         <ul data-role="listview" data-icon="false" id="mi_emailslist"></ul>
@@ -601,16 +626,18 @@
         -->
         <ul id="group_invites" data-role="listview" data-inset="true" data-filter="true" data-icon="false"></ul>
         <div data-role="footer" data-position="fixed">
-            <ul data-role="listview" data-icon="false"><li><a id="group_sendinvite" href="#" data-role="button" style="text-align: center;"><h3>Send Invite</h3></a></li></ul>
+            <ul data-role="listview" data-icon="false"><li><a id="group_sendinvite" class="btn" href="#" data-role="button" style="text-align: center;"><h3 class="btn">Send Invite</h3></a></li></ul>
         </div>
     </div>
 
     <div data-role="page" id="members_list" class="admin_panel">
-        <ul data-role="listview" id="backbtn_mlist"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
-        Members list
-        <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
+        <!--<div style="height: 60px;"></div>-->
+        <ul data-role="listview" id="backbtn_mlist" data-icon="false"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
+        <h3 style="text-align: center;"> Members list</h3>
+        <ul data-role="listview" data-inset="true" id="groupmembers_list" data-icon="false"></ul>
     </div>
     <div data-role="page" id="joinrequests_list">
+        <!--<div style="height: 60px;"></div>-->
         <ul data-role="listview" data-icon="false"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
         <!--<ul data-role="listview"><li><a href="index.html#group_mngmnt">&#8592; Back</a></li></ul>-->
         <ul data-role="listview"><li style="text-align: center;">Join Requests</li></ul>
@@ -650,6 +677,7 @@
 
     <!--  burger menu -->
     <script type="text/javascript" src="js/burger_menu.js"></script>
+    <script type="text/javascript" src="js/overlaymenu.js"></script>
 
     <!--<script type="text/javascript" src="js/restrict_access.js"></script>-->
     <!--<script type="text/javascript" src="js/register.js"></script>-->
@@ -666,6 +694,7 @@
 
     <!--<script type="text/javascript" src="js/group_listmem.js"></script>-->
 
+    <script type="text/javascript" src="js/group_admin.js"></script>
     <script type="text/javascript" src="js/group_mngmnt.js"></script>
     <script type="text/javascript" src="js/group_memberslist.js"></script>
     <script type="text/javascript" src="js/group_joinrequestslist.js"></script>

@@ -15,7 +15,7 @@ function showJoinRequests()
 		.done(function(data){
 			var groupmembers = JSON.parse(data);
 
-			$("#groupmembers_joinrequest_list").append($("<li><h3>Group name: "+localStorage.groupnamerequestedtojoin+"</h3></li>"));
+			$("#groupmembers_joinrequest_list").append($("<li style='background:#0099cc;color:white;text-shadow:none;'><h3>Group name: "+localStorage.groupnamerequestedtojoin+"</h3></li>"));
 			if ( !jQuery.isEmptyObject(groupmembers) )
 			{
 				$.each(groupmembers,function(i,field){

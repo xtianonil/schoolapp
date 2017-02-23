@@ -12,7 +12,7 @@ $(document).on('pagebeforeshow','#group_sendnotif',function(){
 		//get reg IDs of those members of the chosen group
 		$.post(localStorage.webhost+"group_fetch_regids.php",{groupid:localStorage.grouprequestedtojoin})
 			.done(function(data){
-				alert(data);
+				//alert(data);
 				var regids = JSON.parse(data);
 
 				if ( !jQuery.isEmptyObject(regids) )

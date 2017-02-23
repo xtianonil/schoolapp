@@ -2,12 +2,13 @@
 channel.bind('notifs_feed', function(data)
 	{
 		//alert("ASDFS");
+
 		prependNotif(data.notifid,data.groupid);
 	});
 //alert("AFSDFas");
 $(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
 	//alert("back");
-	//$("[data-role=header]").toolbar();
+	$("[data-role=header]").show();
 	if ( localStorage.login === 'true' )
 		showNotifs();
 });
@@ -107,12 +108,13 @@ function showNotifs()
 
 			$( ".notif_item" ).on( "tap", tapHandler );
 				function tapHandler( event ){
+					$("[data-role=header]").hide();	//hide burger icon
 				    localStorage.notifid_selected = $(this).attr('id');
 				    $.post(localStorage.webhost+"notif_listspecific.php",{notifid:localStorage.notifid_selected})
 				    	.done(function(data){
 				    		var notif = JSON.parse(data);
 				    		$("#notif_details_list").empty();
-				    		$("#notif_details_list").append( $("<li>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+" "+notif[0].fname+"</li>") );
+				    		$("#notif_details_list").append( $("<li data-icon='false'>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+" "+notif[0].fname+"</li>") );
 				    		$("#notif_details_list").append( $("<li>Posted: "+moment(notif[0].created_on).add(1,'days').utcOffset('-0200').format('h:mm:ss a, MMMM D, YYYY')+"</li>") );
 				    		$("#notif_details_list").append( $("<br><ul><li>"+notif[0].payload+"</li></ul>") );
 				    		$("#notif_details_list").listview("refresh");

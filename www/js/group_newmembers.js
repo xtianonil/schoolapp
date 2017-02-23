@@ -1,6 +1,9 @@
 $("#group_invitenew").on('click',function(){
 	$("[data-role=header]").hide();	//hide burger icon
 	inviteMembers();
+	$("#groupsendinvites").empty();
+	$("#groupsendinvites").append($("<li style='background:#0099cc;color:white;text-shadow:none;' class='ui-bar-a'><h3>Group name: "+localStorage.groupnamerequestedtojoin+"</h3></li>"));
+	//$("#groupsendinvites").listview("refresh");
 	location.href = "index.html#members_invite";
 });
 
@@ -10,6 +13,7 @@ $("#group_sendinvite").click(function(){
 		if ( this.checked && $(this).hasClass("group_invited") )
 		{
 			//alert($(this).attr('id')); //localStorage.grouprequestedtojoin
+			localStorage.invited_userid = $(this).attr('id');
 			$.post(localStorage.webhost+"group_invite.php",{userid:$(this).attr('id'),groupid:localStorage.grouprequestedtojoin})
 		    	.done(function(data){
 		    		if (data)
@@ -21,6 +25,24 @@ $("#group_sendinvite").click(function(){
 
 		    			//alert("Member/s successfully added to group.");
 		    			//window.location.href = "index.html#group_userprofile";
+		    			$.post(localStorage.webhost+"user_get_email.php",{userid:localStorage.invited_userid})
+		    				.done(function(email){
+		    					//alert(email);
+		    					localStorage.invited_email = email;
+		    				});
+		    			$.post(localStorage.webhost+"user_get_name.php",{userid:localStorage.invited_userid})
+		    				.done(function(name){
+		    					//alert(name);
+		    					localStorage.invited_name = name;
+		    				});
+
+		    			$.post(localStorage.webhost+"email_send_invite.php",{username:localStorage.invited_name,email:localStorage.invited_email,groupname:localStorage.groupnamerequestedtojoin})
+    						.done(function(email_successful){
+    							//alert(email_successful);
+    							/*
+    							websocket
+    							*/
+    						});
 		    		}
 		    	});
 		}

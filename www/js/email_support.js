@@ -1,4 +1,5 @@
 $(document).on('pagebeforeshow','#support_page',function(){
+	$("[data-role=header]").hide();	//hide burger icon
 	burgerMenu();
 	$("#email_send").click(function(){
 		//alert("ASDFSA");
