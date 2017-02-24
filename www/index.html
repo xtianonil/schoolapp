@@ -110,6 +110,11 @@
                 //$(".overlaypanel_menu").listview();
                 //$.mobile.resetActivePageHeight();
                 burgerMenu();
+                $("#overlaypanel_userdetails").empty();
+                //$("#overlaypanel_userdetails").append("<ul class='userloggedin' data-role='listview' data-icon='false'><li>Logged in as:</li><li>"+localStorage.name+"</li></ul>");
+                $("#overlaypanel_userdetails").append("<ul class='userloggedin' data-role='listview' data-icon='false'><li>Logged in as: "+localStorage.uname+"</li></ul>");
+                $("#overlaypanel_userdetails").trigger("create");
+                $(".userloggedin ul").listview("refresh");
             }
             else
                 window.location.href = "index.html#not_logged_in";
@@ -134,6 +139,12 @@
                 //$("[data-role=footer]").toolbar();//.append( button );
                 //$(".overlaypanel_menu").listview();
                 burgerMenu();
+                $("#overlaypanel_userdetails").empty();
+                //$("#overlaypanel_userdetails").append("<ul class='userloggedin' data-role='listview' data-icon='false'><li>Logged in as:</li><li>"+localStorage.name+"</li></ul>");
+                $("#overlaypanel_userdetails").append("<ul class='userloggedin' data-role='listview' data-icon='false'><li>Logged in as: "+localStorage.uname+"</li></ul>");
+                $("#overlaypanel_userdetails").trigger("create");
+                $(".userloggedin ul").listview("refresh");
+
             }
             else
                 window.location.href = "index.html#not_logged_in";
@@ -678,12 +689,15 @@
 
     <!--  burger menu -->
     <script type="text/javascript" src="js/burger_menu.js"></script>
-    <script type="text/javascript" src="js/overlaymenu.js"></script>
+    
 
     <!--<script type="text/javascript" src="js/restrict_access.js"></script>-->
     <!--<script type="text/javascript" src="js/register.js"></script>-->
     <script type="text/javascript" src="js/user_verify.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
+
+    <script type="text/javascript" src="js/overlaymenu.js"></script>
+
     <script type="text/javascript" src="js/logout.js"></script>
 
     <script type="text/javascript" src="js/user_add.js"></script>
