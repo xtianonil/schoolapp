@@ -12,6 +12,9 @@ $(".pullable_div.notifs_feed").on("refresh.pulltorefresh", function (evt, percen
 $(".pullable_div.groups_tab").on("refresh.pulltorefresh", function (evt, percent)
 {
 	//alert("groups tab pulled");
-	$("#notifs_list").empty();
-	showNotifs();
+	//$("#notifs_list").empty();
+	$.mobile.changePage("index.html#group_userprofile", {
+        //transition: "slide",
+        //reverse: false	//from right
+    });
 });

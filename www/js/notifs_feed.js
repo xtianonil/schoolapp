@@ -15,6 +15,7 @@ $(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
 		showNotifs();
 });
 
+
 function prependNotif(notif_id,group_id)
 {
 	$.post(localStorage.webhost+"notif_listforspecuser.php",{notifid:notif_id,groupid:group_id})

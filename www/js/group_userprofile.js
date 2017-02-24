@@ -84,6 +84,7 @@ $(document).on('pagebeforeshow','#group_userprofile',function(){
 	burgerMenu();
 	showGroupsTab();
 	});//end of pagebeforeshow
+
 function showPendingJoinRequests()
 {
 	$("#groups_pendingrequests").empty();
