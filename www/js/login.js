@@ -38,7 +38,7 @@ $("#login").click(function(){
 						localStorage.is_admin = "false";
 					}
 					localStorage.user_id = user_details[0].user_id;
-					localStorage.name = user_details[0].lname + ", " + user_details[0].fname;
+					localStorage.uname = user_details[0].lname + ", " + user_details[0].fname;
 
                 	burgerMenu();
 

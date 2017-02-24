@@ -105,6 +105,7 @@ function showPendingJoinRequests()
 						{
 							//alert("Join request canceled.");
 							showAlertDialog("You have canceled your request to join this group:", localStorage.groupname_joinreq_cncl, "Okay", function() {
+								$("[data-role=header]").hide();	//hide burger icon
 								$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"request_canceled"})
 				    				.done(function(){
 				    				});
@@ -236,6 +237,7 @@ function showGroupInvites()
 						{
 							//alert("Join request canceled.");
 							showAlertDialog("You have accepted the request to join this group:", localStorage.groupname_inviteaccepted, "Okay", function() {
+								$("[data-role=header]").hide();	//hide burger icon
 								$.post(localStorage.webhost+"websock_groupsmgt.php",{userid:localStorage.user_id,context:"invite_accepted"})
 				    				.done(function(){
 				    				});
