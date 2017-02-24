@@ -262,6 +262,7 @@ function showGroupsJoinedNot()
 			var join_request = false;
 
 			$(".groupslist_niuser_not").on('click',function(){
+				$("[data-role=header]").hide();	//hide burger icon
 				join_request = true;	//set join request button to clicked(true)
 				localStorage.groupid_joinreq = $(this).attr('id');
 				localStorage.groupname_joinreq = $(this).attr('name');
