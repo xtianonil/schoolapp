@@ -43,6 +43,10 @@ $("#register_btn").click(function()
 							{
 								var ref = cordova.InAppBrowser.open('http://gmail.com', '_self', 'location=yes');
 							}
+							else if( $("#reg_email").val().slice(-8).substr(0,4) === '20xe' )
+							{
+								var ref = cordova.InAppBrowser.open('http://gmail.com', '_self', 'location=yes');
+							}
 							else
 							{
 								var ref = cordova.InAppBrowser.open('http://google.com', '_self', 'location=yes');
