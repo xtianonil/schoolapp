@@ -118,8 +118,9 @@ function showNotifs()
 				    		var notif = JSON.parse(data);
 				    		$("#notif_details_list").empty();
 				    		$("#notif_details_list").append( $("<li data-icon='false'>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+" "+notif[0].fname+"</li>") );
-				    		$("#notif_details_list").append( $("<li>Posted: "+moment(notif[0].created_on).add(1,'days').utcOffset('-0200').format('h:mm:ss a, MMMM D, YYYY')+"</li>") );
-				    		$("#notif_details_list").append( $("<br><ul><li>"+notif[0].payload+"</li></ul>") );
+				    		$("#notif_details_list").append( $("<li data-icon='false'>Posted: "+moment(notif[0].created_on).add(1,'days').utcOffset('-0200').format('h:mm:ss a, MMMM D, YYYY')+"</li>") );
+				    		$("#notif_details_list").append( $("<br><ul><li data-icon='false'>"+notif[0].payload+"</li></ul>") );
+				    		//$("#notif_details_list").trigger("create");
 				    		$("#notif_details_list").listview("refresh");
 				    	});
 				    //setTimeout(showNotifs,100);
@@ -132,6 +133,15 @@ function showNotifs()
 					});
 				    //showNotifs();
 					//setTimeout(function(){$("#notif_details_popup").popup("open",'positionTo: window');},100);
+					$.post(localStorage.webhost+"notif_toggleread.php",{userid:localStorage.user_id,notifid:localStorage.notifid_selected,toggleoption:"unread"})
+						.done(function(toggleread_success){
+							if (toggleread_success)
+							{
+								$("#notifs_list").empty();
+								showNotifs();
+								$("#notif_details_popup_options").popup("close");
+							}
+						});
 				}//end of tapHandler function
 
 				//on swipeleft, show notification options
