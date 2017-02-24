@@ -145,7 +145,7 @@
 <body>
     <div data-role="header" data-position="fixed" class="ui-bar-a logged_in" style="background: white; ">
         <div style="float:left; margin-left: 20px;"><h3><a href="#overlaypanel_user" class="burger_menu" style="text-decoration: none;"><img src="img/burger-icon.png"/></a></h3></div>
-        <div class="header_navbar"></div>  
+        <!--<div class="header_navbar"></div> --> 
     </div>
 
     <div data-role="footer" data-position="fixed" class="ui-bar-a logged_in">
@@ -221,16 +221,16 @@
 
 
     <div data-role="page" id="notifs_feed">
-        <div style="height: 140px;background-color: white;"></div>
-        <!--
+        <div style="height: 70px;background-color: white;"></div>
+        
         <div data-role="navbar" data-position="fixed">
             <ul>
                 <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist"><h3>Notifications</h3></a></li>
                 <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
-                <li><a href="#support_page"><h3>Support</h3></a></li>
+                <!--<li><a href="#support_page"><h3>Support</h3></a></li>-->
             </ul>
         </div>
-        -->
+        
         <div data-role="main" class="ui-content">
             
             <div class="pullable_div notifs_feed">
@@ -264,8 +264,15 @@
     </div>
 
     <div data-role="page" id="group_userprofile" data-position="fixed">
-        <div style="height: 140px;background-color: white;"></div>
+        <div style="height: 70px;background-color: white;"></div>
         
+        <div data-role="navbar" data-position="fixed">
+            <ul>
+                <li><a href="#notifs_feed" ><h3>Notifications</h3></a></li>
+                <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist"><h3>Groups</h3></a></li>
+                <!--<li><a href="#support_page"><h3>Support</h3></a></li>-->
+            </ul>
+        </div>
             
         <div class="pullable_div groups_tab">
             <div data-role="main" class="ui-content">
