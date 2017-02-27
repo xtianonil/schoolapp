@@ -75,12 +75,31 @@ $( "#join_another_group_collapsible" ).on( "collapsiblecollapse", function( even
 	$("#groupslist_niuser_not").empty();
 	} );
 */
+
 $(document).on('pagebeforeshow','#group_userprofile',function(){
 	//alert("SDFs");
-	$(".header_navbar").empty();
-	$(".header_navbar").append("<div data-role='navbar'><ul><li><a href='#notifs_feed'><h3>Notifications</h3></a></li><li><a href='#group_userprofile' class='ui-btn-active ui-state-persist'><h3>Groups</h3></a></li></ul></div>");
-
 	$("[data-role=header]").show();	//show burger icon
+	$(".header-text").empty().append("Groups");
+	//$("[data-role=navbar]").addClass("ui-btn-active").addClass("ui-state-persist");
+	//$('[data-role="navbar"]').addClass("ui-btn-active").addClass("ui-state-persist");
+	//$("[data-role=header]").show();
+	//alert($(this).attr("class"));
+	//$("li a").removeClass("ui-btn-active").removeClass("ui-state-persist");
+	//$(".navbar_pt").empty().append("<ul><li><a style='border-top-left-radius:30px;border-bottom-left-radius:30px;' href='#notifs_feed'>Notifications</a></li><li><a class='navbar ui-btn-active ui-state-persist' href='#group_userprofile'>Groups</a></li><li><a style='border-top-right-radius:30px;border-bottom-right-radius:30px;' href='#support_page'>Support</a></li></ul>");
+
+	if ( $(this).hasClass("ui-btn-active") && $(".navbar").hasClass("ui-state-persist") )
+	{
+		//$(this).css("background-color","#0099cc");
+		alert($(this).attr('class'));
+		//alert($(this).attr('id'));
+		//$(this).removeClass("ui-btn-active").removeClass("ui-state-persist");
+	}
+	//$("#header-groups").addClass("ui-btn-active").addClass("ui-state-persist");
+	//$(".header_navbar").empty();
+	//$(".header_navbar").append("<div data-role='navbar'><ul><li><a href='#notifs_feed'><h3>Notifications</h3></a></li><li><a href='#group_userprofile' class='ui-btn-active ui-state-persist'><h3>Groups</h3></a></li></ul></div>");
+
+	//$("#header-groups").addClass("ui-btn-active ui-state-persist");
+	//$("[data-role=header]").show();	//show burger icon
 	burgerMenu();
 	showGroupsTab();
 	});//end of pagebeforeshow

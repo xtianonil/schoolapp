@@ -51,6 +51,25 @@
         input {
             -webkit-user-select: auto;
         }
+        .ui-page { 
+            background: #fff;
+        }
+        .ui-input-text.ui-custom {
+           border-left: none;
+           border-right: none;
+           border-top: none;
+           box-shadow: none;
+        }
+        .login-btn
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a9e4f7+0,0fb4e7+100;Ble+3D+%235 */
+            background: #a9e4f7; /* Old browsers */
+            background: -moz-linear-gradient(left, #a9e4f7 0%, #0fb4e7 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(left, #a9e4f7 0%,#0fb4e7 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right, #a9e4f7 0%,#0fb4e7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=1 ); /* IE6-9 */
+        }
+        /*
         .ui-page .ui-header 
         {
             background: #0099cc !important;
@@ -70,7 +89,7 @@
             margin: 0;
             /*
             background-color: #0099cc;
-            color: white;*/
+            color: white;
         }
         .overlay1
         {
@@ -84,6 +103,7 @@
             color: white;
             text-shadow: none;
         }
+        */
     </style>
 
     <script type="text/javascript">
@@ -110,6 +130,8 @@
                 //$(".overlaypanel_menu").listview();
                 //$.mobile.resetActivePageHeight();
                 burgerMenu();
+                $("[data-role='navbar']").navbar();
+                $("[data-role='header']").toolbar();
             }
             else
                 window.location.href = "index.html#not_logged_in";
@@ -134,18 +156,30 @@
                 //$("[data-role=footer]").toolbar();//.append( button );
                 //$(".overlaypanel_menu").listview();
                 burgerMenu();
+                $("[data-role='navbar']").navbar();
+                $("[data-role='header']").toolbar();
             }
             else
                 window.location.href = "index.html#not_logged_in";
             });
     </script>
-    <title>School Connect</title>
+    <title>School Alerts</title>
 </head>
 
 <body>
     <div data-role="header" data-position="fixed" class="ui-bar-a logged_in" style="background: white; ">
-        <div style="float:left; margin-left: 20px;"><h3><a href="#overlaypanel_user" class="burger_menu" style="text-decoration: none;"><img src="img/burger-icon.png"/></a></h3></div>
-        <!--<div class="header_navbar"></div> --> 
+        <div class="ui-grid-b my-breakpoint">
+            <div class="ui-block-a"><a href="#overlaypanel_user" class="burger_menu"><h3><img style="margin-left: 10px;" src="img/burger-icon.png"/></h3></a></div>
+            <div class="ui-block-b"><h3><div class="header-text" style="text-align: center;">Header Text</div></h3></div>
+            <div class="ui-block-c"><a href="#overlaypanel_user" class="logout" style="float: right;"><h3><img style="margin-right: 10px;" src="img/logout-icon.png"/></h3></a></div>
+        </div>
+        <div data-role="navbar" data-position="fixed" style="padding: 10px;">
+            <ul>
+                <li><a id="header-notifs-feed" class="ui-btn-active ui-state-persist" href="#notifs_feed" style="border-top-left-radius:30px;border-bottom-left-radius:30px;" >Notifications</a></li>
+                <li><a id="header-groups" href="#group_userprofile">Groups</a></li>
+                <li><a id="header-support" href="#support_page" style="border-top-right-radius:30px;border-bottom-right-radius:30px;" >Support</a></li>
+            </ul>
+        </div>
     </div>
 
     <div data-role="footer" data-position="fixed" class="ui-bar-a logged_in">
@@ -155,10 +189,12 @@
     <div data-role="panel" id="overlaypanel_user" data-display="overlay" data-theme="a">
         <div id="overlaypanel_userdetails"></div>
         <div style="height: 50px;"></div>
+        <!--
         <ul data-role="listview" class="overlaypanel_menu">
             <li data-icon="false"><a href="#support_page" data-role="button" style="background:#0099CC; color: white;text-shadow: none;">Contact Support</a></li>
             <li data-icon="false"><a href="#" class="logout">Log Out</a></li>
         </ul>
+        -->
     </div>
     
     <div data-role="page" id="not_logged_in">
@@ -167,10 +203,12 @@
             <div style="text-align: center;">
                 <img src="img/logo.png"/>
             </div>
-            <div data-role="main" class="ui-content">
-                <input id="email_login" type="text" placeholder="email" />            
-                <input id="password" type="password" placeholder="password" value="" autocomplete="off"/>
-                <button id="login" class="ui-btn ui-corner-all ui-btn-b">Log In</button>
+
+            <div data-role="main" class="ui-content" style="width: 300px; margin: auto;">
+                <input id="email_login" type="text" placeholder="Email" data-wrapper-class="ui-custom" />            
+                <input id="password" type="password" placeholder="Password" data-wrapper-class="ui-custom" value="" autocomplete="off"/>
+                <br><br>
+                <button id="login" class="ui-btn ui-corner-all ui-btn-b login-btn" style="border: none; text-shadow: none; border-radius: 70px; height: 70px;">Log In</button>
                 <!--<div style="text-align:center;"><a href="#register">Activate Account</a></div>-->
             </div>
         <!--</div>-->
@@ -195,18 +233,22 @@
         </div>
     </div>
     <div data-role="page" id="support_page">
+        <!--
         <ul data-role="listview"><li data-icon="false"><a id="notif_back_btn" href="index.html#notifs_feed">&#8592; Back</a></li></ul>
         <ul data-role="listview" data-icon="false">
             <li style="background-color:#0099cc;color:white;text-align: center;text-shadow: none;">Contact Support</li>
         </ul>
+        -->
+        <div style="height: 120px;background-color: white;"></div>
         <!--
-        <div data-role="navbar">
+        <div data-role="navbar" data-position="fixed">
             <ul>
-                <li><a href="#notifs_feed"><h3>Notifications</h3></a></li>
+                <li><a style="border-top-left-radius:30px;border-bottom-left-radius:30px;" href="#notifs_feed"><h3>Notifications</h3></a></li>
                 <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
-                <li><a href="#support_page" class="ui-btn-active ui-state-persist"><h3>Support</h3></a></li>
+                <li><a style="border-top-right-radius:30px;border-bottom-right-radius:30px;" href="#support_page" class="ui-btn-active ui-state-persist"><h3>Support</h3></a></li>
             </ul>
-        </div>-->
+        </div>
+        -->
         <div data-role="main" class="ui-content">
             <label for="email_subject">Subject:</label>
             <input type="text" name="email_subject" id="email_subject"/>
@@ -221,16 +263,18 @@
 
 
     <div data-role="page" id="notifs_feed">
-        <div style="height: 70px;background-color: white;"></div>
+        <!--
+        <div style="height: 80px;background-color: white;"></div>
         
-        <div data-role="navbar" data-position="fixed">
+        <div data-role="navbar" data-position="fixed" style="margin-left: 5px; margin-right: 5px;">
             <ul>
-                <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist"><h3>Notifications</h3></a></li>
+                <li><a style="border-top-left-radius:30px;border-bottom-left-radius:30px;" href="#notifs_feed" class="ui-btn-active ui-state-persist"><h3>Notifications</h3></a></li>
                 <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
-                <!--<li><a href="#support_page"><h3>Support</h3></a></li>-->
+                <li><a style="border-top-right-radius:30px;border-bottom-right-radius:30px;" href="#support_page"><h3>Support</h3></a></li>
             </ul>
         </div>
-        
+        -->
+        <div style="height: 120px; background-color: white;"></div>
         <div data-role="main" class="ui-content">
             
             <div class="pullable_div notifs_feed">
@@ -254,7 +298,6 @@
     </div>
     <div data-role="page" id="notif_view">
         
-        
         <ul data-role="listview"><li data-icon="false"><a style="background-color: #0099cc;color: white; text-shadow: none;" id="notif_back_btn" href="index.html#notifs_feed">&#8592; Back</a></li></ul>
         
         <div data-role="main" class="ui-content">
@@ -264,16 +307,16 @@
     </div>
 
     <div data-role="page" id="group_userprofile" data-position="fixed">
-        <div style="height: 70px;background-color: white;"></div>
-        
+        <div style="height: 120px;background-color: white;"></div>
+        <!--
         <div data-role="navbar" data-position="fixed">
             <ul>
-                <li><a href="#notifs_feed" ><h3>Notifications</h3></a></li>
+                <li><a style="border-top-left-radius:30px;border-bottom-left-radius:30px;" href="#notifs_feed" ><h3>Notifications</h3></a></li>
                 <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist"><h3>Groups</h3></a></li>
-                <!--<li><a href="#support_page"><h3>Support</h3></a></li>-->
+                <li><a style="border-top-right-radius:30px;border-bottom-right-radius:30px;" href="#support_page"><h3>Support</h3></a></li>
             </ul>
         </div>
-            
+        -->            
         <div class="pullable_div groups_tab">
             <div data-role="main" class="ui-content">
                 <div data-role="header">

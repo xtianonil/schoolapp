@@ -8,9 +8,10 @@ channel.bind('notifs_feed', function(data)
 //alert("AFSDFas");
 $(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
 	//alert("back");
-	$("[data-role=header]").show();
-	$(".header_navbar").empty();
-	$(".header_navbar").append("<div data-role='navbar' data-position='fixed'><ul><li><a href='#notifs_feed' class='ui-btn-active ui-state-persist'><h3>Notifications</h3></a></li><li><a href='#group_userprofile'><h3>Groups</h3></a></li></ul></div>");
+	$(".header-text").empty().append("Notifications");
+	//$("[data-role=header]").show();
+	//$(".header_navbar").empty();
+	//$(".header_navbar").append("<div data-role='navbar' data-position='fixed'><ul><li><a href='#notifs_feed' class='ui-btn-active ui-state-persist'><h3>Notifications</h3></a></li><li><a href='#group_userprofile'><h3>Groups</h3></a></li></ul></div>");
 	if ( localStorage.login === 'true' )
 		showNotifs();
 });
