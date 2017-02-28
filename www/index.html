@@ -69,6 +69,14 @@
             background: linear-gradient(to right, #a9e4f7 0%,#0fb4e7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=1 ); /* IE6-9 */
         }
+        .btn1
+        {
+            background: #0099cc !important;
+            color: white !important;
+            text-shadow: none !important;
+            border: none !important;
+            border-radius: 70px !important;
+        }
         /*
         .ui-page .ui-header 
         {
@@ -198,20 +206,19 @@
     </div>
     
     <div data-role="page" id="not_logged_in">
-        <!--<div style="position: absolute; margin: auto; width: 400px; height: 700px; top: 0; bottom: 0; left: 0; right: 0">-->
-            
+        <div data-role="main" class="ui-content" style="width: 300px; margin: auto;">
             <div style="text-align: center;">
                 <img src="img/logo.png"/>
             </div>
-
-            <div data-role="main" class="ui-content" style="width: 300px; margin: auto;">
-                <input id="email_login" type="text" placeholder="Email" data-wrapper-class="ui-custom" />            
-                <input id="password" type="password" placeholder="Password" data-wrapper-class="ui-custom" value="" autocomplete="off"/>
-                <br><br>
-                <button id="login" class="ui-btn ui-corner-all ui-btn-b login-btn" style="border: none; text-shadow: none; border-radius: 70px; height: 70px;">Log In</button>
-                <!--<div style="text-align:center;"><a href="#register">Activate Account</a></div>-->
-            </div>
-        <!--</div>-->
+            <input id="email_login" type="text" placeholder="Email" data-wrapper-class="ui-custom" />            
+            <input id="password" type="password" placeholder="Password" data-wrapper-class="ui-custom" value="" autocomplete="off"/>
+            <br>
+            <button id="login" class="ui-btn ui-corner-all ui-btn-b login-btn" style="border: none; text-shadow: none; border-radius: 70px; height: 40px;">Log In</button>
+            <!--<div style="text-align:center;"><a href="#register">Activate Account</a></div>-->
+            <a href="#">Activate</a> |
+            <a href="#">Forgot Password</a> |
+            <a href="#">Sign Up</a>
+        </div>
     </div>
     <div data-role="page" id="password_reset">
         
@@ -257,7 +264,7 @@
             <textarea rows="6" cols="50" name="email_body" id="email_body">
             
             </textarea>
-            <button id="email_send">Send</button>
+            <button id="email_send" class="btn1">Send</button>
         </div>
     </div>
 
