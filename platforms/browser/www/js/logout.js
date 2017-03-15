@@ -1,4 +1,5 @@
-$("#logout").click(function(){
+/*
+$(".logout").click(function(){
 	//localStorage.clear();
 	//alert("ASDF");
 	localStorage.clear();
@@ -14,6 +15,15 @@ $("#logout").click(function(){
 		$(".admin_only").show();
 	else
 		$(".admin_only").hide();
-	*/
+	
 	//$(':mobile-pagecontainer').pagecontainer('change', '#not_logged_in');
+});
+*/
+
+$(".logout").click(function(){
+	//window.location.href = "index.html#not_logged_in";
+	location.reload();
+	$("#login").html('Log In');
+	localStorage.clear();
+	//$("#footer_div").empty();
 });

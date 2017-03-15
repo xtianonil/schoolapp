@@ -38,6 +38,7 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
     <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.css" />
+    <!--<link rel="stylesheet" type="text/css" href="index.css" />-->
     <!--<link rel="stylesheet" type="text/css" href="css/flatui/jquery.mobile.flatui.css" />-->
     <!--<link rel="stylesheet" type="text/css" href="css/jquery.mobile.structure-1.4.5.min.css" />-->
 
@@ -50,12 +51,76 @@
         input {
             -webkit-user-select: auto;
         }
+        .ui-page { 
+            background: #fff;
+        }
+        .ui-input-text.ui-custom {
+           border-left: none;
+           border-right: none;
+           border-top: none;
+           box-shadow: none;
+        }
+        .login-btn
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a9e4f7+0,0fb4e7+100;Ble+3D+%235 */
+            background: #a9e4f7; /* Old browsers */
+            background: -moz-linear-gradient(left, #a9e4f7 0%, #0fb4e7 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(left, #a9e4f7 0%,#0fb4e7 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right, #a9e4f7 0%,#0fb4e7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=1 ); /* IE6-9 */
+        }
+        .btn1
+        {
+            background: #0099cc !important;
+            color: white !important;
+            text-shadow: none !important;
+            border: none !important;
+            border-radius: 70px !important;
+        }
+        /*
+        .ui-page .ui-header 
+        {
+            background: #0099cc !important;
+            color: white;
+            text-shadow: none;
+            border-radius: 10px;
+        }
+        .btn 
+        {
+            background: #0099cc !important;
+            color: white;
+            text-shadow: none;
+        }
+        .ui-collapsible-heading .ui-btn 
+        {
+            text-align: left;
+            margin: 0;
+            /*
+            background-color: #0099cc;
+            color: white;
+        }
+        .overlay1
+        {
+            background: #0099cc !important;
+            color: white;
+            text-shadow: none;
+        }
+        .overlaymenu .option1
+        {
+            background: #0099cc !important;
+            color: white;
+            text-shadow: none;
+        }
+        */
     </style>
 
     <script type="text/javascript">
         
         $(function(){   //on deviceready
+            //init pull to refresh library
             $(".pullable_div").pullToRefresh();
+            //init overlay panel 
+            $( "#overlaypanel_user" ).panel();
         //for debugging purposes only, omit this in production
             if (localStorage.login === "true")
             {
@@ -68,15 +133,23 @@
                     window.location.href = "index.html#notifs_feed";
                 }
                 //var button = $("<button id='btn1'>Dialog</button>");
-                $("[data-role=footer]").toolbar();//.append( button );
-
+                //$("[data-role=header]").toolbar();
+                //$("[data-role=footer]").toolbar();//.append( button );
+                //$(".overlaypanel_menu").listview();
+                //$.mobile.resetActivePageHeight();
+                burgerMenu();
+                $("[data-role='navbar']").navbar();
+                $("[data-role='header']").toolbar();
             }
             else
                 window.location.href = "index.html#not_logged_in";
             });     
         
         $(document).on('mobileinit',function(){
+            //init pull to refresh library
             $(".pullable_div").pullToRefresh();
+            //init overlay panel 
+            $( "#overlaypanel_user" ).panel();
             if (localStorage.login === "true")
             {
                 if ( localStorage.is_admin === "true" )
@@ -87,32 +160,70 @@
                 {
                     window.location.href = "index.html#notifs_feed";
                 }
-                $("[data-role=footer]").toolbar();
+                //$("[data-role=header]").toolbar();
+                //$("[data-role=footer]").toolbar();//.append( button );
+                //$(".overlaypanel_menu").listview();
+                burgerMenu();
+                $("[data-role='navbar']").navbar();
+                $("[data-role='header']").toolbar();
             }
             else
                 window.location.href = "index.html#not_logged_in";
             });
     </script>
-    <title>School Connect</title>
+    <title>School Alerts</title>
 </head>
 
 <body>
-    
-    <div data-role="footer" data-position="fixed" class="ui-bar-a">
-        <div id="footer_div" style="text-align:center;"></div>
-    </div> 
-    
-    <div data-role="page" id="not_logged_in">
-        <div data-role="header">
-            <h1></h1>
-        </div> 
-        <div data-role="main" class="ui-content">
-            <input id="email_login" type="text" placeholder="email" />            
-            <input id="password" type="password" placeholder="password" value="" autocomplete="off"/>
-            <button id="login" class="ui-btn">Login</button>
-            <div style="text-align:center;"><a href="#register">Register</a></div>
+    <div data-role="header" data-position="fixed" class="ui-bar-a logged_in" style="background: white; ">
+        <div class="ui-grid-b my-breakpoint">
+            <div class="ui-block-a"><a href="#overlaypanel_user" class="burger_menu"><h3><img style="margin-left: 10px;" src="img/burger-icon.png"/></h3></a></div>
+            <div class="ui-block-b"><h3><div class="header-text" style="text-align: center;">Header Text</div></h3></div>
+            <div class="ui-block-c"><a href="#overlaypanel_user" class="logout" style="float: right;"><h3><img style="margin-right: 10px;" src="img/logout-icon.png"/></h3></a></div>
+        </div>
+        <div data-role="navbar" data-position="fixed" style="padding: 10px;">
+            <ul>
+                <li><a id="header-notifs-feed" class="ui-btn-active ui-state-persist" href="#notifs_feed" style="border-top-left-radius:30px;border-bottom-left-radius:30px;" >Notifications</a></li>
+                <li><a id="header-groups" href="#group_userprofile">Groups</a></li>
+                <li><a id="header-support" href="#support_page" style="border-top-right-radius:30px;border-bottom-right-radius:30px;" >Support</a></li>
+            </ul>
         </div>
     </div>
+
+    <div data-role="footer" data-position="fixed" class="ui-bar-a logged_in">
+        <div id="footer_div" style="text-align:center;"></div>
+    </div> 
+
+    <div data-role="panel" id="overlaypanel_user" data-display="overlay" data-theme="a">
+        <div id="overlaypanel_userdetails"></div>
+        <div style="height: 50px;"></div>
+        <!--
+        <ul data-role="listview" class="overlaypanel_menu">
+            <li data-icon="false"><a href="#support_page" data-role="button" style="background:#0099CC; color: white;text-shadow: none;">Contact Support</a></li>
+            <li data-icon="false"><a href="#" class="logout">Log Out</a></li>
+        </ul>
+        -->
+    </div>
+    
+    <div data-role="page" id="not_logged_in">
+        <div data-role="main" class="ui-content" style="width: 300px; margin: auto;">
+            <div style="text-align: center;">
+                <img src="img/logo.png"/>
+            </div>
+            <input id="email_login" type="text" placeholder="Email" data-wrapper-class="ui-custom" />            
+            <input id="password" type="password" placeholder="Password" data-wrapper-class="ui-custom" value="" autocomplete="off"/>
+            <br>
+            <button id="login" class="ui-btn ui-corner-all ui-btn-b login-btn" style="border: none; text-shadow: none; border-radius: 70px; height: 40px;">Log In</button>
+            <!--<div style="text-align:center;"><a href="#register">Activate Account</a></div>-->
+            <a href="#">Activate</a> |
+            <a href="#">Forgot Password</a> |
+            <a href="#">Sign Up</a>
+        </div>
+    </div>
+    <div data-role="page" id="password_reset">
+        
+    </div>
+
     <div data-role="page" id="admin_panel">
         <div data-role="header" data-position="fixed">
             <div data-role="navbar">
@@ -129,15 +240,22 @@
         </div>
     </div>
     <div data-role="page" id="support_page">
-        <div data-role="header" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#notifs_feed">Notifications</a></li>
-                    <li><a href="#group_userprofile">Groups</a></li>
-                    <li><a href="#support_page" class="ui-btn-active ui-state-persist">Support</a></li>
-                </ul>
-            </div>
+        <!--
+        <ul data-role="listview"><li data-icon="false"><a id="notif_back_btn" href="index.html#notifs_feed">&#8592; Back</a></li></ul>
+        <ul data-role="listview" data-icon="false">
+            <li style="background-color:#0099cc;color:white;text-align: center;text-shadow: none;">Contact Support</li>
+        </ul>
+        -->
+        <div style="height: 120px;background-color: white;"></div>
+        <!--
+        <div data-role="navbar" data-position="fixed">
+            <ul>
+                <li><a style="border-top-left-radius:30px;border-bottom-left-radius:30px;" href="#notifs_feed"><h3>Notifications</h3></a></li>
+                <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
+                <li><a style="border-top-right-radius:30px;border-bottom-right-radius:30px;" href="#support_page" class="ui-btn-active ui-state-persist"><h3>Support</h3></a></li>
+            </ul>
         </div>
+        -->
         <div data-role="main" class="ui-content">
             <label for="email_subject">Subject:</label>
             <input type="text" name="email_subject" id="email_subject"/>
@@ -146,26 +264,32 @@
             <textarea rows="6" cols="50" name="email_body" id="email_body">
             
             </textarea>
-            <button id="email_send">Send</button>
+            <button id="email_send" class="btn1">Send</button>
         </div>
     </div>
+
+
     <div data-role="page" id="notifs_feed">
-        <div data-role="header" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#notifs_feed" class="ui-btn-active ui-state-persist">Notifications</a></li>
-                    <li><a href="#group_userprofile">Groups</a></li>
-                    <li><a href="#support_page">Support</a></li>
-                </ul>
-            </div>
+        <!--
+        <div style="height: 80px;background-color: white;"></div>
+        
+        <div data-role="navbar" data-position="fixed" style="margin-left: 5px; margin-right: 5px;">
+            <ul>
+                <li><a style="border-top-left-radius:30px;border-bottom-left-radius:30px;" href="#notifs_feed" class="ui-btn-active ui-state-persist"><h3>Notifications</h3></a></li>
+                <li><a href="#group_userprofile"><h3>Groups</h3></a></li>
+                <li><a style="border-top-right-radius:30px;border-bottom-right-radius:30px;" href="#support_page"><h3>Support</h3></a></li>
+            </ul>
         </div>
+        -->
+        <div style="height: 120px; background-color: white;"></div>
         <div data-role="main" class="ui-content">
+            
             <div class="pullable_div notifs_feed">
                 <ul id="notifs_list" data-role='listview'></ul>
             </div>
             <div data-role="popup" id="notif_details_popup_options" >
                 <ul data-role="listview" style="display: flex;flex-direction:row;">
-                    <li data-icon="false" style="width: 150px"><a style="background-color:#FF6347;color:white;text-align: center;" href='#' id='notif_toggleread'>Mark as read</a></li>
+                    <li data-icon="false" style="width: 150px"><a style="background-color:#0099cc;color:white;text-align: center;text-shadow: none;" href='#' id='notif_toggleread'>Mark as read</a></li>
                     <li data-icon="false" style="width: 150px"><a style="text-align: center;" href='#' id='notif_removefromfeed'>Archive</a></li>
                 </ul>
             </div>
@@ -180,37 +304,38 @@
         </div>
     </div>
     <div data-role="page" id="notif_view">
-        <div data-role="header" data-position="fixed">
-            <ul data-role="listview"><li data-icon="false"><a style="background-color: #e9e9e9" id="notif_back_btn" href="#">&#8592; Back</a></li></ul>
-        </div>
+        
+        <ul data-role="listview"><li data-icon="false"><a style="background-color: #0099cc;color: white; text-shadow: none;" id="notif_back_btn" href="index.html#notifs_feed">&#8592; Back</a></li></ul>
+        
         <div data-role="main" class="ui-content">
             <div id="notif_expanded_details"></div>
-            <ul data-role="listview" id='notif_details_list'></ul>
+            <ul data-role="listview" id='notif_details_list' data-icon="false"></ul>
         </div>
     </div>
 
-    <div data-role="page" id="group_userprofile">
-        <div data-role="header" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#notifs_feed"><h3>Notifications</h3></a></li>
-                    <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist"><h3>Groups</h3></a></li>
-                    <li><a href="#support_page"><h3>Support</h3></a></li>
-                </ul>
-            </div>
-        </div>      
+    <div data-role="page" id="group_userprofile" data-position="fixed">
+        <div style="height: 120px;background-color: white;"></div>
+        <!--
+        <div data-role="navbar" data-position="fixed">
+            <ul>
+                <li><a style="border-top-left-radius:30px;border-bottom-left-radius:30px;" href="#notifs_feed" ><h3>Notifications</h3></a></li>
+                <li><a href="#group_userprofile" class="ui-btn-active ui-state-persist"><h3>Groups</h3></a></li>
+                <li><a style="border-top-right-radius:30px;border-bottom-right-radius:30px;" href="#support_page"><h3>Support</h3></a></li>
+            </ul>
+        </div>
+        -->            
         <div class="pullable_div groups_tab">
             <div data-role="main" class="ui-content">
                 <div data-role="header">
-                    <h3>My groups</h3>
+                    <h3>My Groups</h3>
                 </div>   
                 <ul id="groups_joined" data-role="listview" data-inset="true">n/a</ul>
                 <div data-role="header">
-                    <h3>Group invites</h3>
+                    <h3>Group Invites</h3>
                 </div>
                 <ul id="groups_groupinvites" data-role="listview" data-inset="true">&nbsp;</ul>
                 <div data-role="header">
-                    <h3>Pending join requests</h3>
+                    <h3>Join Requests</h3>
                 </div>
                 <ul id="groups_pendingrequests" data-role="listview" data-inset="true">n/a</ul>
                 <div data-role="popup" id="group_subscriptiontoggle">
@@ -321,6 +446,20 @@
             <a href="#" data-role="button" data-theme="c" data-rel="back">Cancel</a>
         </div>
     </div>
+    <div data-role="dialog" id="group_admin">
+        <div data-role="content">
+            <h3 class="confirm-1 group_name" style="text-align: center;"></h3>
+            <p class="confirm-2" style="text-align: center;"></p>
+
+            <a id="group_sendnotif" href="#" data-role="button" data-theme="b">Send a Notification</a>
+            <a id="group_memberslist" href="#" data-role="button" data-theme="b">Members List</a>
+            <a id="group_joinrequests" href="#" data-role="button" data-theme="b">Join Requests</a>
+            <a id="group_invitenew" href="#" data-role="button" data-theme="b">Invite New Members</a>
+            <a id="group_flush" href="#" data-role="button" data-theme="b" style="background-color: red;border: none;text-shadow: none;">Flush All Members</a>
+
+            <a href="#" data-role="button" data-theme="c" data-rel="back">Cancel</a>
+        </div>
+    </div>
 
     <div data-role="page" id="user_mngmnt">
         <div data-role="header" data-position="fixed">
@@ -329,7 +468,7 @@
                     <li><a href="#admin_panel">Notifications</a></li>
                     <li><a href="#user_mngmnt" class="ui-btn-active ui-state-persist">Users</a></li>
                     <li><a href="#group_mngmnt">Groups</a></li>
-                    <li><a href="#send_notif">Send Notification</a></li>
+                    <li><a href="#send_notif">Notification</a></li>
                 </ul>
             </div>
         </div>
@@ -479,6 +618,19 @@
         </div>
     </div>
 
+    <div data-role="page" id="group_sendnotif">
+        <a data-role="button" data-icon="false" href="index.html#group_userprofile"><div style="float: left;">&#8592; Back</div></a>
+        <div data-role="main" class="ui-content">
+            <label for="notif_recipient" class="select">Send notification to group:</label>
+            <!--<select name="notif_recipient" id="notif_recipient_dropdown"></select>-->
+            <input type="text" name="notif_recipient" id="notif_recipient_textinput" disabled="true" />
+            <label for="notif_msg" class="select">Message:</label>
+            <!--<textarea rows="5" cols="40" rows="8" name="notif_msg_title" id="notif_msg_title" maxlength="255" style="resize: none"></textarea>-->
+            <textarea rows="5" cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
+            <button id="send_notif_btn" class="btn" style="color: white;">Send</button>
+        </div>
+    </div>
+
     <div data-role="page" id="send_notif">
         <div data-role="navbar">
                 <ul>
@@ -488,6 +640,7 @@
                     <li><a href="#send_notif" class="ui-btn-active ui-state-persist">Send Notification</a></li>
                 </ul>
             </div>
+        <!--
         <div id="overlaypanel3" data-role="panel" data-display="overlay">
             <ul data-role="listview" data-theme="a">
                 <li><a href="#notifs_feed">notifs_feed</a></li>
@@ -495,26 +648,47 @@
                 <li class="admin_only"><a href="#send_notif">Send Notification</a></li>
             </ul>
         </div>
+        -->
         <div data-role="header">
             <a href="#overlaypanel3" class="ui-btn">=</a>
             <h1>Send Notification</h1>
         </div>
 
         <div data-role="main" class="ui-content">
-            <label for="notif_recipient" class="select">Send to:</label>
-            <select name="notif_recipient" id="notif_recipient_dropdown"></select>
+            <label for="notif_recipient2" class="select">Send to:</label>
+            <select name="notif_recipient2" id="notif_recipient_dropdown2"></select>
             <label for="notif_msg" class="select">Notification:</label>
             <!--<textarea rows="5" cols="40" rows="8" name="notif_msg_title" id="notif_msg_title" maxlength="255" style="resize: none"></textarea>-->
             <textarea rows="5" cols="40" rows="8" name="notif_msg" id="notif_msg" maxlength="255" style="resize: none"></textarea>
-            <button id="send_notif_btn">Send</button>
+            <button id="send_notif_btn2">Send</button>
         </div>
     </div>
+    <div data-role="page" id="members_invite">
+        <ul data-role="listview" data-icon="false"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
+        <div data-role="main" style="text-align: center">
+            <h3>Send Group Invites</h3>
+        </div>
+        <ul data-role="listview" id="groupsendinvites" data-icon="false"></ul>
+        <!--
+        <ul data-role="listview" data-icon="false"><li><a href='#' id='add_email'>+ Email Address/es</a></li></ul>
+        <ul data-role="listview" data-icon="false" id="mi_emailslist"></ul>
+        <ul data-role="listview" data-icon="false"><li><a href="#" style="text-align: center" class="members_invite send_invite">Submit</a></li></ul>
+        <ul id="groupslist_niuser_not" data-role="listview" data-inset="true" data-filter="true"></ul>
+        -->
+        <ul id="group_invites" data-role="listview" data-inset="true" data-filter="true" data-icon="false"></ul>
+        <div data-role="footer" data-position="fixed">
+            <ul data-role="listview" data-icon="false"><li><a id="group_sendinvite" class="btn" href="#" data-role="button" style="text-align: center;"><h3 class="btn">Send Invite</h3></a></li></ul>
+        </div>
+    </div>
+
     <div data-role="page" id="members_list" class="admin_panel">
-        <ul data-role="listview" id="backbtn_mlist"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
-        Members list
-        <ul data-role="listview" data-inset="true" id="groupmembers_list"></ul>
+        <!--<div style="height: 60px;"></div>-->
+        <ul data-role="listview" id="backbtn_mlist" data-icon="false"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
+        <h3 style="text-align: center;"> Members list</h3>
+        <ul data-role="listview" data-inset="true" id="groupmembers_list" data-icon="false"></ul>
     </div>
     <div data-role="page" id="joinrequests_list">
+        <!--<div style="height: 60px;"></div>-->
         <ul data-role="listview" data-icon="false"><li><a href="index.html#group_userprofile">&#8592; Back</a></li></ul>
         <!--<ul data-role="listview"><li><a href="index.html#group_mngmnt">&#8592; Back</a></li></ul>-->
         <ul data-role="listview"><li style="text-align: center;">Join Requests</li></ul>
@@ -552,11 +726,18 @@
     <!-- pull to refresh module -->
     <script type="text/javascript" src="js/pull_refresh.js"></script>
 
+    <!--  burger menu -->
+    <script type="text/javascript" src="js/burger_menu.js"></script>
+    
+
     <!--<script type="text/javascript" src="js/restrict_access.js"></script>-->
     <!--<script type="text/javascript" src="js/register.js"></script>-->
     <script type="text/javascript" src="js/user_verify.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
-    <!--<script type="text/javascript" src="js/logout.js"></script>-->
+
+    <script type="text/javascript" src="js/overlaymenu.js"></script>
+
+    <script type="text/javascript" src="js/logout.js"></script>
 
     <script type="text/javascript" src="js/user_add.js"></script>
     <script type="text/javascript" src="js/username_availability.js"></script>
@@ -567,9 +748,11 @@
 
     <!--<script type="text/javascript" src="js/group_listmem.js"></script>-->
 
+    <script type="text/javascript" src="js/group_admin.js"></script>
     <script type="text/javascript" src="js/group_mngmnt.js"></script>
     <script type="text/javascript" src="js/group_memberslist.js"></script>
     <script type="text/javascript" src="js/group_joinrequestslist.js"></script>
+    <script type="text/javascript" src="js/group_newmembers.js"></script>
 
     <script type="text/javascript" src="js/group_userprofile.js"></script>
 

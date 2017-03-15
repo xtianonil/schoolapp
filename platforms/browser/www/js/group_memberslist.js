@@ -1,17 +1,18 @@
-$(".group_memberslist").click(function(){
+$("#group_memberslist").on('click',function(){
+//$(".group_memberslist").on('click',function(){	
 	$("#groupmembers_list").empty();
 	$.post(localStorage.webhost+"group_listmembers.php",{groupid:localStorage.grouprequestedtojoin})
 		.done(function(data){
 			var groupmembers = JSON.parse(data);
 
-			$("#groupmembers_list").append($("<li><h3>GROUP: "+localStorage.grouplistname+"</h3></li>"));
+			$("#groupmembers_list").append($("<li style='background:#0099cc;color:white;text-shadow:none'><h3>GROUP: "+localStorage.groupnamerequestedtojoin+"</h3></li>"));
 			//$("#groupmembers_list").append($("<li>List of Members</li>"));
 			if ( !jQuery.isEmptyObject(groupmembers) )
 			{
 				$.each(groupmembers,function(i,field){
 					$("#groupmembers_list").append($("<li><a href='#' class='groupmembers' data-rel='popup' id="+field.user_id+">"+field.lname+", "+field.fname+"</a></li>"));		
 				});
-				$("#groupmembers_list").append($("<li><a href='#' id='flush_members_admin'>Flush members</a></li>"));
+				$("#groupmembers_list").append($("<li style='background:red;color:white;'><a style='background:red;color:white;text-shadow:none;text-align:center;' href='#' id='flush_members_admin'>Flush members</a></li>"));
 			}
 			else
 				$("#groupmembers_list").append($("<li>n/a</li>"));
@@ -19,7 +20,7 @@ $(".group_memberslist").click(function(){
 			
 			setTimeout(function(){$("#groupmembers_popup").popup("open");},100);
 
-			$("#flush_members_admin").click(function(){
+			$("#flush_members_admin").on('click',function(){
 				flushGroupMembers();
 				});//end of flush members
 		});
@@ -30,6 +31,9 @@ $(".group_memberslist").click(function(){
         //reverse: true	//from left
     	});
 	});
+$("#group_flush").click(function(){
+	flushGroupMembers();
+});
 
 function flushGroupMembers()
 {

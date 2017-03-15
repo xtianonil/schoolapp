@@ -1,3 +1,4 @@
+/*
 $("#footer_div").empty();
 var logout = $("<p><a href='#' id='logout'> logout </a></p>");
 //logout.prepend("signed in as: "+localStorage.user_id);
@@ -9,3 +10,4 @@ $("#logout").click(function(){
 	localStorage.clear();
 	$("#footer_div").empty();
 });
+*/

@@ -1,12 +1,21 @@
 //bind notifs_feed as event
 channel.bind('notifs_feed', function(data)
 	{
+		//alert("ASDFS");
+
 		prependNotif(data.notifid,data.groupid);
 	});
+//alert("AFSDFas");
 $(document).on('pagebeforeshow','#notifs_feed',function(){	//adjust this delete?
+	//alert("back");
+	$(".header-text").empty().append("Notifications");
+	//$("[data-role=header]").show();
+	//$(".header_navbar").empty();
+	//$(".header_navbar").append("<div data-role='navbar' data-position='fixed'><ul><li><a href='#notifs_feed' class='ui-btn-active ui-state-persist'><h3>Notifications</h3></a></li><li><a href='#group_userprofile'><h3>Groups</h3></a></li></ul></div>");
 	if ( localStorage.login === 'true' )
 		showNotifs();
 });
+
 
 function prependNotif(notif_id,group_id)
 {
@@ -103,14 +112,16 @@ function showNotifs()
 
 			$( ".notif_item" ).on( "tap", tapHandler );
 				function tapHandler( event ){
+					$("[data-role=header]").hide();	//hide burger icon
 				    localStorage.notifid_selected = $(this).attr('id');
 				    $.post(localStorage.webhost+"notif_listspecific.php",{notifid:localStorage.notifid_selected})
 				    	.done(function(data){
 				    		var notif = JSON.parse(data);
 				    		$("#notif_details_list").empty();
-				    		$("#notif_details_list").append( $("<li>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+" "+notif[0].fname+"</li>") );
-				    		$("#notif_details_list").append( $("<li>Posted: "+moment(notif[0].created_on).add(1,'days').utcOffset('-0200').format('h:mm:ss a, MMMM D, YYYY')+"</li>") );
-				    		$("#notif_details_list").append( $("<br><ul><li>"+notif[0].payload+"</li></ul>") );
+				    		$("#notif_details_list").append( $("<li data-icon='false'>From: &nbsp;&nbsp;&nbsp;"+notif[0].lname+" "+notif[0].fname+"</li>") );
+				    		$("#notif_details_list").append( $("<li data-icon='false'>Posted: "+moment(notif[0].created_on).add(1,'days').utcOffset('-0200').format('h:mm:ss a, MMMM D, YYYY')+"</li>") );
+				    		$("#notif_details_list").append( $("<br><ul><li data-icon='false'>"+notif[0].payload+"</li></ul>") );
+				    		//$("#notif_details_list").trigger("create");
 				    		$("#notif_details_list").listview("refresh");
 				    	});
 				    //setTimeout(showNotifs,100);
@@ -123,6 +134,15 @@ function showNotifs()
 					});
 				    //showNotifs();
 					//setTimeout(function(){$("#notif_details_popup").popup("open",'positionTo: window');},100);
+					$.post(localStorage.webhost+"notif_toggleread.php",{userid:localStorage.user_id,notifid:localStorage.notifid_selected,toggleoption:"unread"})
+						.done(function(toggleread_success){
+							if (toggleread_success)
+							{
+								$("#notifs_list").empty();
+								showNotifs();
+								$("#notif_details_popup_options").popup("close");
+							}
+						});
 				}//end of tapHandler function
 
 				//on swipeleft, show notification options
