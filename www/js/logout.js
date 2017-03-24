@@ -26,4 +26,5 @@ $(".logout").click(function(){
 	$("#login").html('Log In');
 	localStorage.clear();
 	//$("#footer_div").empty();
+	Server.disconnect();
 });
