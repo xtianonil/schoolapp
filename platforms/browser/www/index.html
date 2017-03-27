@@ -210,18 +210,53 @@
             <div style="text-align: center;">
                 <img src="img/logo.png"/>
             </div>
-            <input id="email_login" type="text" placeholder="Email" data-wrapper-class="ui-custom" />            
-            <input id="password" type="password" placeholder="Password" data-wrapper-class="ui-custom" value="" autocomplete="off"/>
+            <table width="100%">
+                <tr>
+                <td width="95%">
+                <input id="email_login" type="text" placeholder="Email" data-wrapper-class="ui-custom" /> 
+                </td>
+                <td>
+                <div class="check_div"></div>
+                </td>
+                </tr>
+                <tr>
+                <td>
+                    <input id="password" type="password" placeholder="Password" data-wrapper-class="ui-custom" value="" autocomplete="off"/>
+                </td>
+                </tr>
+            </table>
             <br>
             <button id="login" class="ui-btn ui-corner-all ui-btn-b login-btn" style="border: none; text-shadow: none; border-radius: 70px; height: 40px;">Log In</button>
             <!--<div style="text-align:center;"><a href="#register">Activate Account</a></div>-->
-            <a href="#">Activate</a> |
-            <a href="#">Forgot Password</a> |
-            <a href="#">Sign Up</a>
+            <a href="#register">Activate</a> |
+            <a href="#password_reset">Forgot Password</a> |
+            <a href="#signup">Sign Up</a>
         </div>
     </div>
+    <div data-role="page" id="password_set">
+        <div data-role="header"><h3>Set password (6-8 characters)</h3></div>
+        <input type="password" name="password_new" id="password_new" placeholder="new password">
+        <input type="password" name="password_repeat" id="password_repeat" placeholder="repeat password">
+        <div><a href="#" data-role="button" id="password_submit_set">Submit</a></div>
+        <!--<div style="text-align:center;"><a href="#not_logged_in">Back to Log-in</a></div>-->
+    </div>
     <div data-role="page" id="password_reset">
-        
+        <div data-role="header">Password Reset</div>
+        <input type="password" name="" placeholder="new password">
+        <input type="password" name="" placeholder="repeat password">
+        <div><a href="#" data-role="button">Submit</a></div>
+        <!--<div style="text-align:center;"><a href="#not_logged_in">Back to Log-in</a></div>-->
+    </div>
+    <div data-role="page" id="signup">
+        <div data-role="header">Sign up for an account</div>
+        <input type="text" name="" placeholder="Email address" />
+        <input type="text" name="" placeholder="Last name"/>
+        <input type="text" name="" placeholder="First name">
+        <input type="text" name="" placeholder="Middle name">
+        <input type="text" name="" placeholder="Contact number">
+        <input type="text" name="" placeholder="Student number">
+        <input type="text" name="" placeholder="Relationship to child">
+        <div style="text-align:center;"><a href="#not_logged_in">Back to Log-in</a></div>
     </div>
 
     <div data-role="page" id="admin_panel">
@@ -728,6 +763,9 @@
 
     <!--  burger menu -->
     <script type="text/javascript" src="js/burger_menu.js"></script>
+
+    <!--fancy websocket-->
+    <script type="text/javascript" src="js/fancywebsocket.js"></script>
     
 
     <!--<script type="text/javascript" src="js/restrict_access.js"></script>-->
@@ -747,6 +785,7 @@
     <!--<script type="text/javascript" src="js/notif_getlistof.js"></script>-->
 
     <!--<script type="text/javascript" src="js/group_listmem.js"></script>-->
+    <script type="text/javascript" src="js/password_set.js"></script>
 
     <script type="text/javascript" src="js/group_admin.js"></script>
     <script type="text/javascript" src="js/group_mngmnt.js"></script>

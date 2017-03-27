@@ -162,6 +162,11 @@ $("#email_login").keyup(function(){
 				else
 					$(".check_div").append("<img height='10px' src='img/cross.png'/>");
 			});
+	else
+	{
+		$(".check_div").empty();
+		$(".check_div").append("<img height='10px' src='img/cross.png'/>");
+	}
 	//alert("ASDF");
 	//$("#email_login").append("<img src='img/check.png' height='10px' /></span>");
 });
