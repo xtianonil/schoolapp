@@ -144,6 +144,28 @@ function login()
 		});
 }//end of login function
 
+function isEmail(email) {
+	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	return regex.test(email);
+}
+
+$("#email_login").keyup(function(){
+	if ( isEmail($.trim( $("#email_login").val() )) )
+		$.post(localStorage.webhost+"email_ifexists.php",
+			{
+				email:$.trim( $("#email_login").val() )
+			}).done(function(email_exists){
+				//alert(email_exists);
+				$(".check_div").empty();
+				if (email_exists)
+					$(".check_div").append("<img height='10px' src='img/check.png'/>");
+				else
+					$(".check_div").append("<img height='10px' src='img/cross.png'/>");
+			});
+	//alert("ASDF");
+	//$("#email_login").append("<img src='img/check.png' height='10px' /></span>");
+});
+	
 $("#login").click(function(){
 	if ( $.trim( $("#email_login").val() ).length > 0 )
 	{	//check if email is not null
