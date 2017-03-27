@@ -210,7 +210,8 @@
             <div style="text-align: center;">
                 <img src="img/logo.png"/>
             </div>
-            <input id="email_login" type="text" placeholder="Email" data-wrapper-class="ui-custom" />            
+            <input id="email_login" type="text" placeholder="Email" data-wrapper-class="ui-custom" /> 
+            <span class="ui-icon ui-icon-circle-check"></span>     
             <input id="password" type="password" placeholder="Password" data-wrapper-class="ui-custom" value="" autocomplete="off"/>
             <br>
             <button id="login" class="ui-btn ui-corner-all ui-btn-b login-btn" style="border: none; text-shadow: none; border-radius: 70px; height: 40px;">Log In</button>
@@ -221,10 +222,10 @@
         </div>
     </div>
     <div data-role="page" id="password_set">
-        <div data-role="header">Set password</div>
+        <div data-role="header"><h3>Set password (6-8 characters)</h3></div>
         <input type="password" name="password_new" id="password_new" placeholder="new password">
         <input type="password" name="password_repeat" id="password_repeat" placeholder="repeat password">
-        <div><a href="#" data-role="button" id="password_set_submit">Submit</a></div>
+        <div><a href="#" data-role="button" id="password_submit_set">Submit</a></div>
         <!--<div style="text-align:center;"><a href="#not_logged_in">Back to Log-in</a></div>-->
     </div>
     <div data-role="page" id="password_reset">

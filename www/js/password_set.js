@@ -1,7 +1,7 @@
 //alert("password set");
 $(document).on('pagebeforeshow','#password_set',function(){
-	//alert("pasok");
-	$("#password_set_submit").click(function(){
+	$("#password_submit_set").click(function(){
+		//alert("ASDF");
 		var char_limit = /^[a-zA-Z0-9]{6,8}$/;
 		if ( $.trim( $("#password_new").val() ) !== $.trim( $("#password_repeat").val() ) )
 		{
@@ -16,8 +16,12 @@ $(document).on('pagebeforeshow','#password_set',function(){
 				{
 					password: 	$.trim( $("#password_new").val() ),
 					userid: 	localStorage.user_id
-				}).done(function(success){
-					alert(success);
+				}).done(function(password_reset_successful){
+					if (password_reset_successful)
+					{
+						alert(localStorage.user_id);
+						$.mobile.changePage("index.html#not_logged_in",{});
+					}//end of password reset successful
 				});
 		}
 	});

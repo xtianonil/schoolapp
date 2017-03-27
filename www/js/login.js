@@ -1,5 +1,5 @@
 //var Server;
-function login()
+function loginXXX()
 {
 	$.post(localStorage.webhost+"login.php",{email_login:$.trim($("#email_login").val()),password:$.trim($("#password").val())})
 		.done(function(data){
@@ -83,40 +83,76 @@ function login()
 				$("#login").html('Login');
 			}
 		});
-}//end of login function
-$("#login").click(function(){
-	//$.post(localStorage.webhost+"email_ifexists.php",
+}//end of loginXXX function
+
+function login()
+{
 	$.post(localStorage.webhost+"login.php",	
 		{
 			email: 		$.trim( $("#email_login").val() ),
 			password: 	$.trim( $("#password").val() )
 		}).done(function(login_status)
 		{
-			//alert(login_status);
-			//var user_details = JSON.parse(login_status);
-			if (login_status === 'inactive')
+			alert(login_status);
+			if (login_status === 'unregistered_email')
+			{	//unregistered email
+
+			}
+			else
 			{
+				alert("Please provide a password for your account.");
+				$.post(localStorage.webhost+"user_getuserid_usingemail.php",
+					{
+						email_login:$.trim($("#email_login").val())
+					}).done(function(user_id){
+						localStorage.user_id = user_id;
+					});
+
+				if (login_status === 'inactive')
+				{
+					$.post(localStorage.webhost+"account_activate.php",{userid:user_id})
+						.done(function(activate_successful){
+							if (activate_successful)
+								$.mobile.changePage("index.html#password_set",{});
+						});
+				}
+				else if (login_status === 'password_not_set')
+				{
+					$.mobile.changePage("index.html#password_set",{});
+				}
+			}
+			/*
+			else if (login_status === 'inactive')
+			{	//inactive account
 				$.post(localStorage.webhost+"user_getuserid_usingemail.php",{email_login:$.trim($("#email_login").val())}).done(function(user_id){
 					localStorage.user_id = user_id;
 					//active user acct, then redirect to password set interface
 					$.post(localStorage.webhost+"account_activate.php",{userid:user_id})
-					.done(function(activate_successful)
+						.done(function(activate_successful)
 						{
-							//alert(activate_successful);
-							$.mobile.changePage("index.html#password_set",{
-						        //transition: "slide",
-						        //reverse: false	//from right
-							});
+							$.mobile.changePage("index.html#password_set",{});
 						});
 				});
-			}
-			/*
-			if ( email_exists )
-				alert("email_exists");
-			else
-				alert("adf");
-			*/
+			}//end of if login_status = inactive
+			else if (login_status === 'password_not_set')
+			{	//active account, password not set
+				$.post(localStorage.webhost+"user_getuserid_usingemail.php",{email_login:$.trim($("#email_login").val())}).done(function(user_id){
+					localStorage.user_id = user_id;
+					$.mobile.changePage("index.html#password_set",{});
+				});
+			}*/
 		});
+}//end of login function
+
+$("#login").click(function(){
+	if ( $.trim( $("#email_login").val() ).length > 0 )
+	{	//check if email is not null
+		login();
+	}
+});//end of login click
+
+	//$.post(localStorage.webhost+"email_ifexists.php",
+	
 	//if ( $.trim( $("#email_login").val() ).length > 0 && $.trim( $("#password").val() ).length > 0 )
 	/*
 	if ( $.trim( $("#email_login").val() ).length > 0 )
@@ -139,7 +175,7 @@ $("#login").click(function(){
 	{
 		alert("Email or password field cannot be empty.");
 	}*/
-});
+//});
 /*
 $("#login2").click(function(){
 	localStorage.registrationId = '';
