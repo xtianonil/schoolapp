@@ -85,7 +85,7 @@ function loginXXX()
 		});
 }//end of loginXXX function
 
-function device()
+function registerDevice()
 {
 	alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
@@ -182,7 +182,8 @@ function login()
 					//update registration id of logged in user
 					app.initialize();
 
-					device();
+					alert(localStorage.reg_id);
+					registerDevice();
 					location.reload();
 					/*
 					$.post(localStorage.webhost+"user_validatepassword.php",
