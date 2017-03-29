@@ -69,6 +69,23 @@
             background: linear-gradient(to right, #a9e4f7 0%,#0fb4e7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=1 ); /* IE6-9 */
         }
+        .blue-gradient1
+        {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a9e4f7+0,0fb4e7+100;Ble+3D+%235 */
+            background: #a9e4f7; /* Old browsers */
+            background: -moz-linear-gradient(left, #a9e4f7 0%, #0fb4e7 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(left, #a9e4f7 0%,#0fb4e7 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to right, #a9e4f7 0%,#0fb4e7 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9e4f7', endColorstr='#0fb4e7',GradientType=1 ); /* IE6-9 */
+        }
+        .rounded-corner1
+        {
+            border-radius: 70px;
+        }
+        .white-text
+        {
+            color: white;
+        }
         .btn1
         {
             background: #0099cc !important;
@@ -116,15 +133,17 @@
 
     <script type="text/javascript">
         
+        
         $(function(){   //on deviceready
+            //alert(localStorage.isloggedin);
             //init pull to refresh library
             $(".pullable_div").pullToRefresh();
             //init overlay panel 
             $( "#overlaypanel_user" ).panel();
         //for debugging purposes only, omit this in production
-            if (localStorage.login === "true")
+            if (localStorage.isloggedin === "true")
             {
-                if ( localStorage.is_admin === "true" )
+                if ( localStorage.isadmin === "true" )
                 {
                     window.location.href = "index.html#admin_panel";
                 }
@@ -146,13 +165,14 @@
             });     
         
         $(document).on('mobileinit',function(){
+            alert(localStorage.isloggedin);
             //init pull to refresh library
             $(".pullable_div").pullToRefresh();
             //init overlay panel 
             $( "#overlaypanel_user" ).panel();
-            if (localStorage.login === "true")
+            if (localStorage.isloggedin === "true")
             {
-                if ( localStorage.is_admin === "true" )
+                if ( localStorage.isadmin === "true" )
                 {
                     window.location.href = "index.html#admin_panel";
                 }
@@ -226,7 +246,7 @@
                 </tr>
             </table>
             <br>
-            <button id="login" class="ui-btn ui-corner-all ui-btn-b login-btn" style="border: none; text-shadow: none; border-radius: 70px; height: 40px;">Log In</button>
+            <button id="login" class="ui-btn ui-corner-all ui-btn-b login-btn blue-gradient1 rounded-corner1" style="border: none; text-shadow: none; border-radius: 70px; height: 40px;">Log In</button>
             <!--<div style="text-align:center;"><a href="#register">Activate Account</a></div>-->
             <a href="#register">Activate</a> |
             <a href="#password_reset">Forgot Password</a> |
@@ -234,10 +254,14 @@
         </div>
     </div>
     <div data-role="page" id="password_set">
-        <div data-role="header"><h3>Set password (6-8 characters)</h3></div>
-        <input type="password" name="password_new" id="password_new" placeholder="new password">
-        <input type="password" name="password_repeat" id="password_repeat" placeholder="repeat password">
-        <div><a href="#" data-role="button" id="password_submit_set">Submit</a></div>
+        <div style="width: 100%">
+            <div data-role="header" ><h3>Set your password<br>(must be 6-8 characters)</h3></div>
+            <div data-role="main" style="padding-left: 20px; padding-right: 20px;">
+                <input type="password" maxlength="8" name="password_new" id="password_new" placeholder="new password">
+                <input type="password" maxlength="8" name="password_repeat" id="password_repeat" placeholder="repeat password">
+                <div><a href="#" style="color: white; text-shadow: none; border-radius:70px;" data-role="button" id="password_submit_set" class="blue-gradient1 rounded-corner1">Update</a></div>
+            </div>
+        </div>
         <!--<div style="text-align:center;"><a href="#not_logged_in">Back to Log-in</a></div>-->
     </div>
     <div data-role="page" id="password_reset">

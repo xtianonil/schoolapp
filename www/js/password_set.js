@@ -1,5 +1,6 @@
 //alert("password set");
 $(document).on('pagebeforeshow','#password_set',function(){
+	alert("Please provide a password for your account.");
 	$("#password_submit_set").click(function(){
 		//alert("ASDF");
 		var char_limit = /^[a-zA-Z0-9]{6,8}$/;

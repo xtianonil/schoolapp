@@ -96,11 +96,10 @@ function login()
 			alert(login_status);
 			if (login_status === 'unregistered_email')
 			{	//unregistered email
-
+				alert("Unregistered Email");
 			}
 			else
 			{
-				alert("Please provide a password for your account.");
 				$.post(localStorage.webhost+"user_getuserid_usingemail.php",
 					{
 						email_login:$.trim($("#email_login").val())
@@ -120,7 +119,42 @@ function login()
 				{
 					$.mobile.changePage("index.html#password_set",{});
 				}
-			}
+				else if (login_status === 'incorrect_password')
+				{
+					alert(login_status);
+				}
+				else
+				{
+					var user_details = JSON.parse(login_status);
+					localStorage.isloggedin = "true";
+					//alert(user_details[0].is_admin);
+					localStorage.isadmin = (user_details[0].is_admin==1?"true":"false");
+					//localStorage.isadmin = user_details[0].is_admin;
+					//localStorage.setItem(isadmin,user_details[0].is_admin);
+					//alert(localStorage.isloggedin);
+					//window.location.href = "index.html#notifs_feed";
+					location.reload();
+					/*
+					$.post(localStorage.webhost+"user_validatepassword.php",
+					{
+						userid: localStorage.user_id,
+						password: $.trim( $("#password").val() )
+					})
+						.done(function(valid_password){
+							if (valid_password)
+							{
+								//$.mobile.changePage("index.html#notifs_feed",{});
+								//window.location.href = "index.html#notifs_feed";
+								
+							}
+							else
+							{
+								alert('invalid password');
+							}
+						});
+						*/
+				}//end of else
+			}//end of else
 			/*
 			else if (login_status === 'inactive')
 			{	//inactive account
