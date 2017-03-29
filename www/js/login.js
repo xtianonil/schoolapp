@@ -85,6 +85,48 @@ function loginXXX()
 		});
 }//end of loginXXX function
 
+function device()
+{
+	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
+		.done(function(data){
+			if (data === "logged_in_previously")
+			{	//means user has logged in on this device before, just update device details
+				$.post(localStorage.webhost+"user_update_device.php",
+					{
+						userid 	: user_details[0].user_id,
+						uuid 	: device.uuid,
+						platform: device.platform,
+						model	: device.model,
+						regid 	: localStorage.reg_id
+					})
+					.done(function(user_device_updated){
+						if (user_device_updated)
+						{
+							//alert(user_device_updated);
+						}
+						//location.reload();
+						//$("#login").html('Login');
+					});
+			}
+			else if (data === "new_login")
+			{	//means users has not logged in on this device before, create a new record for device details
+				$.post(localStorage.webhost+"user_add_device.php",
+					{
+						userid 	: user_details[0].user_id,
+						uuid 	: device.uuid,
+						platform: device.platform,
+						model	: device.model,
+						regid 	: localStorage.reg_id
+					})
+					.done(function(){
+						//location.reload();
+						//$("#login").html('Login');
+					});
+			}
+		});
+	$("#login").html('Login');
+}//end of device function
+
 function login()
 {
 	$.post(localStorage.webhost+"login.php",	
@@ -133,6 +175,12 @@ function login()
 					//localStorage.setItem(isadmin,user_details[0].is_admin);
 					//alert(localStorage.isloggedin);
 					//window.location.href = "index.html#notifs_feed";
+					burgerMenu();
+            	
+					//update registration id of logged in user
+					app.initialize();
+
+					device();
 					location.reload();
 					/*
 					$.post(localStorage.webhost+"user_validatepassword.php",
