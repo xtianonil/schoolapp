@@ -79,6 +79,7 @@ var app = {
                 data.title,           // title
                 'Ok'                  // buttonName
             );
+            alert("customized msg: " + data.message);
        });//end of push.on('notif')
     }//end of setupPush: function()
 };

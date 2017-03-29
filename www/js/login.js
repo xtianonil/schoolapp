@@ -87,7 +87,7 @@ function loginXXX()
 
 function registerDevice()
 {
-	alert(localStorage.reg_id);
+	//alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 		.done(function(data){
 			if (data === "logged_in_previously")
@@ -182,7 +182,7 @@ function login()
 					//update registration id of logged in user
 					app.initialize();
 
-					alert(localStorage.reg_id);
+					//alert(localStorage.reg_id);
 					registerDevice();
 					location.reload();
 					/*
