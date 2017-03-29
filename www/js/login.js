@@ -87,6 +87,7 @@ function loginXXX()
 
 function device()
 {
+	alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 		.done(function(data){
 			if (data === "logged_in_previously")
@@ -102,7 +103,7 @@ function device()
 					.done(function(user_device_updated){
 						if (user_device_updated)
 						{
-							alert("user_device_updated");
+							//alert("user_device_updated");
 						}
 						//location.reload();
 						//$("#login").html('Login');
@@ -119,7 +120,7 @@ function device()
 						regid 	: localStorage.reg_id
 					})
 					.done(function(){
-						alert("user_device_new");
+						//alert("user_device_new");
 						//location.reload();
 						//$("#login").html('Login');
 					});
