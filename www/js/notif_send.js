@@ -23,9 +23,10 @@ $(document).on('pagebeforeshow','#group_sendnotif',function(){
 					//send msg
 					$.post(localStorage.webhost+"send_notif_gcm.php",
 						{
-							'regids[]' : regids_array,
-							notif_msg  : $("#notif_msg").val(),
-							created_by : localStorage.name
+							'regids[]' 	: regids_array,
+							notif_msg  	: $("#notif_msg").val(),
+							created_by 	: localStorage.name,
+							context		: "notif"
 						}).done(function(res){
 							//alert(res);
 							alert("Notification successfully sent.");
