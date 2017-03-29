@@ -70,6 +70,7 @@ var app = {
             console.log("push error = " + e.message);
         });
 
+        //notif, notif(?) payload handler
         push.on('notification', function(data) {
             console.log('notification event');
             navigator.notification.alert(

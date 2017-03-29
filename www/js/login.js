@@ -102,7 +102,7 @@ function device()
 					.done(function(user_device_updated){
 						if (user_device_updated)
 						{
-							//alert(user_device_updated);
+							alert("user_device_updated");
 						}
 						//location.reload();
 						//$("#login").html('Login');
@@ -119,6 +119,7 @@ function device()
 						regid 	: localStorage.reg_id
 					})
 					.done(function(){
+						alert("user_device_new");
 						//location.reload();
 						//$("#login").html('Login');
 					});
