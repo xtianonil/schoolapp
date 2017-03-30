@@ -79,8 +79,8 @@ var app = {
                 data.title,           // title
                 'Ok'                  // buttonName
             );
-            var data = JSON.parse(data.additionalData);
-            alert("context: " + data['context']); //this works
+            //var data = JSON.parse(data.additionalData);
+            alert("context: " + data.additionalData); //this works
        });//end of push.on('notif')
     }//end of setupPush: function()
 };
