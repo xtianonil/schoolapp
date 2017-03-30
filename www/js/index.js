@@ -79,7 +79,7 @@ var app = {
                 data.title,           // title
                 'Ok'                  // buttonName
             );
-            alert("context msg: " + data.title); //this works
+            alert("context msg: " + data.context); //this works
        });//end of push.on('notif')
     }//end of setupPush: function()
 };
