@@ -71,7 +71,7 @@ var app = {
         });
 
         //notif, notif(?) payload handler
-        push.on('notification', function(data) {
+        push.on('notification', function(data,context) {
             console.log('notification event');
             navigator.notification.alert(
                 data.message,         // message
@@ -79,7 +79,7 @@ var app = {
                 data.title,           // title
                 'Ok'                  // buttonName
             );
-            alert("context msg: " + data.context); //this works
+            alert("context: " + context); //this works
        });//end of push.on('notif')
     }//end of setupPush: function()
 };
