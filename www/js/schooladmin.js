@@ -41,8 +41,8 @@ $("#send_notif_schooladmin").click(function(){
 					$.post(localStorage.webhost+"send_notif_gcm.php",
 						{
 							'regids[]' 	: regids_array,
-							notif_msg  	: $("#notif_msg").val(),
-							created_by 	: localStorage.name,
+							notif_msg  	: $("#notif_msg2").val(),
+							created_by 	: 'localStorage.name',
 							context		: "notif"
 						}).done(function(res){
 							//alert(res);
@@ -52,7 +52,7 @@ $("#send_notif_schooladmin").click(function(){
 							$.post(localStorage.webhost+"notif_save.php",
 								{
 									created_by : localStorage.user_id,
-									payload : $("#notif_msg").val(),
+									payload : $("#notif_msg2").val(),
 									target_group : localStorage.grouprequestedtojoin
 								})
 								.done(function(notif_id){
