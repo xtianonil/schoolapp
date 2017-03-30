@@ -74,12 +74,12 @@ var app = {
         push.on('notification', function(data) {
             console.log('notification event');
             navigator.notification.alert(
-                data.context,         // message
+                data.message,         // message
                 null,                 // callback
                 data.title,           // title
                 'Ok'                  // buttonName
             );
-            alert("context: " + data.message); //this works
+            alert("context: " + data.additionalData.context); //this works
        });//end of push.on('notif')
     }//end of setupPush: function()
 };
