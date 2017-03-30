@@ -1,5 +1,6 @@
 //$(document).delegate('#send_notif', 'pageshow', function () {
 $("#group_sendnotif").click(function(){
+	//alert("send notif");
 	location.href = "index.html#group_sendnotif";
 });
 
