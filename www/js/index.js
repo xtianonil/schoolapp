@@ -72,13 +72,9 @@ var app = {
 
         //notif, notif(?) payload handler
         push.on('notification', function(data) {
-            //var data = JSON.parse(data.additionalData);
-            alert("context1: " + data.additionalData);
-            alert("context2: " + JSON.stringify(data.additionalData);
-            alert("context3: " + (JSON.parse(data.additionalData).context)); 
             console.log('notification event');
             navigator.notification.alert(
-                data.message,         // message
+                data.additionalData.context,         // message
                 null,                 // callback
                 data.title,           // title
                 'Ok'                  // buttonName
