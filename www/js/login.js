@@ -85,14 +85,11 @@ function loginXXX()
 		});
 }//end of loginXXX function
 
-function regDevice()
+function deviceLogin()
 {
-	//alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 		.done(function(data){
-			alert(data);
-			//alert(device.uuid+" "+device.platform+" "+device.model+" ");
-			
+			alert(JSON.stringify(device));
 			if (data === "logged_in_previously")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"user_update_device.php",
@@ -103,8 +100,7 @@ function regDevice()
 						model	: device.model,
 						regid 	: localStorage.reg_id
 					})
-					.done(function(user_device_updated){
-						//
+					.done(function(){
 					});
 			}
 			else if (data === "new_login")
@@ -118,7 +114,6 @@ function regDevice()
 						regid 	: localStorage.reg_id
 					})
 					.done(function(){
-						//
 					});
 			}
 		});
@@ -166,49 +161,16 @@ function login()
 				else
 				{
 					var user_details = JSON.parse(login_status);
+
 					localStorage.isloggedin = "true";
-					//alert(user_details[0].is_admin);
 					localStorage.isadmin = (user_details[0].is_admin==1?"true":"false");
 					localStorage.name = user_details[0].lname + " " + user_details[0].fname;
 					localStorage.user_id = user_details[0].user_id;
-					//localStorage.user_id =
-					//localStorage.isadmin = user_details[0].is_admin;
-					//localStorage.setItem(isadmin,user_details[0].is_admin);
-					//alert(localStorage.isloggedin);
-					//window.location.href = "index.html#notifs_feed";
-					
 
-					//set delay to accomodate access to cloud
+					//set timeout to accomodate process delay
 					setTimeout(function(){
 						location.reload();
 					},100);
-					//location.reload();
-					/*
-					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
-						.done(function(data){
-							alert(data);
-						});
-					alert("point of");
-					location.reload();
-					/*
-					$.post(localStorage.webhost+"user_validatepassword.php",
-					{
-						userid: localStorage.user_id,
-						password: $.trim( $("#password").val() )
-					})
-						.done(function(valid_password){
-							if (valid_password)
-							{
-								//$.mobile.changePage("index.html#notifs_feed",{});
-								//window.location.href = "index.html#notifs_feed";
-								
-							}
-							else
-							{
-								alert('invalid password');
-							}
-						});
-						*/
 				}//end of else
 			}//end of else
 		});
@@ -245,10 +207,8 @@ $("#login").click(function(){
 	burgerMenu();
 	//update registration id of logged in user
 	app.initialize();
-	//alert(localStorage.reg_id);
-	regDevice();
+	deviceLogin();
 	if ( $.trim( $("#email_login").val() ).length > 0 )
-	{	//check if email is not null
 		login();
 	}
 });//end of login click
