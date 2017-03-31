@@ -86,9 +86,10 @@ function loginXXX()
 		});
 }//end of loginXXX function
 */
+/*
 setTimeout(function(){
 	deviceLogin();
-},100);
+},100);*/
 
 function deviceLogin()
 {
