@@ -122,7 +122,7 @@ function regDevice()
 					});
 			}
 		});
-	//$("#login").html('Login');
+	$("#login").html('Login');
 }//end of device function
 
 function login()
