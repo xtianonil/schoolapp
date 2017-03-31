@@ -71,17 +71,31 @@ var app = {
             console.log("push error = " + e.message);
         });
 
-        //notif, notif(?) payload handler
-        push.on('notification', function(data) {
-            console.log('notification event');
+        function handleNotif(data)
+        {
             navigator.notification.alert(
-                data.message,
-                //JSON.parse(JSON.stringify(data.additionalData)),         // message
+                data.message,         //message
                 null,                 // callback
                 data.title,           // title
                 'Ok'                  // buttonName
             );
-            alert(data.additionalData.context);
+        }
+        //notif, notif(?) payload handler
+        push.on('notification', function(data) {
+            console.log('notification event');
+
+            //handles all incoming messages(notifications/data)
+            switch(data.additionalData.context)
+            {
+                case 'notif_new'    :   
+                                        handleNotif(data);
+                                        break;
+                case 'notif_'       :
+                                        alert("case 2"); 
+                                        break;
+                case 'user_new'     :   alert("new user");
+                                        break;
+            }           
             //var data = JSON.parse(data.additionalData);
             //alert("context1: " + data.additionalData);
             //alert("context2: " + JSON.stringify(data.additionalData);

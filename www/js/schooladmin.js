@@ -40,7 +40,8 @@ $("#send_notif_schooladmin").click(function(){
 						{
 							'regids[]' 	: regids_array,
 							notif_msg  	: $("#notif_msg2").val(),
-							created_by 	: 'localStorage.name'
+							created_by 	: 'localStorage.name',
+							context		: 'notif_new'
 						}).done(function(res){
 							//alert(res);
 							alert("Notification successfully sent.");
