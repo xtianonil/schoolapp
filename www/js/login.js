@@ -106,11 +106,11 @@ function deviceLogin()
 						regid 	: localStorage.reg_id
 					})
 					.done(function(device_updated){
-						alert(device_updated);
 						//set timeout to accomodate process delay
 						setTimeout(function(){
-						//location.reload();
-						window.location.href = "index.html#notifs_feed";
+							alert("device update: "+device_updated);
+							//location.reload();
+							window.location.href = "index.html#notifs_feed";
 						},100);
 					});
 			}
@@ -127,9 +127,9 @@ function deviceLogin()
 					.done(function(){
 						//set timeout to accomodate process delay
 						setTimeout(function(device_registered){
-						alert(device_registered);
-						//location.reload();
-						window.location.href = "index.html#notifs_feed";
+							alert("device registered: "+device_registered);
+							//location.reload();
+							window.location.href = "index.html#notifs_feed";
 						},100);
 					});
 			}
