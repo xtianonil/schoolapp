@@ -225,7 +225,8 @@ $("#login").click(function(){
 						model	: device.model,
 						regid 	: localStorage.reg_id
 					})
-					.done(function(){
+					.done(function(data){
+						alert(data);
 					});
 			}
 			else if (data === "unregistered")
@@ -238,7 +239,8 @@ $("#login").click(function(){
 						model	: device.model,
 						regid 	: localStorage.reg_id
 					})
-					.done(function(){
+					.done(function(data){
+						alert(data);
 					});
 			}
 		});
