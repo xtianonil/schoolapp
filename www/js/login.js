@@ -207,9 +207,15 @@ $("#login").click(function(){
 	burgerMenu();
 	//update registration id of logged in user
 	app.initialize();
+	/*
 	setTimeout(function(){
 		deviceLogin();
 	},100);
+	*/
+	$.post(localStorage.webhost+"device_isregistered.php",{regid:localStorage.reg_id})
+		.done(function(data){
+			alert(data);
+		});
 	if ( $.trim( $("#email_login").val() ).length > 0 )
 		login();
 });//end of login click
