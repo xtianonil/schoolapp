@@ -87,10 +87,10 @@ function loginXXX()
 
 function regDevice()
 {
-	alert(localStorage.reg_id);
+	//alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 		.done(function(data){
-			//alert(data);
+			alert(data);
 			if (data === "logged_in_previously")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"user_update_device.php",
