@@ -172,7 +172,7 @@ function login()
 					//set timeout to accomodate process delay
 					setTimeout(function(){
 						location.reload();
-					},100);
+					},300);
 				}//end of else
 			}//end of else
 		});
