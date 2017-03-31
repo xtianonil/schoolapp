@@ -85,11 +85,13 @@ function loginXXX()
 		});
 }//end of loginXXX function
 
-function updateDeviceTokens()
+function regDevice()
 {
+	//alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
-		.done(function(data){	
-			alert(data);		
+		.done(function(data){
+			//alert(device.uuid+" "+device.platform+" "+device.model+" ");
+			
 			if (data === "logged_in_previously")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"user_update_device.php",
@@ -185,8 +187,8 @@ function login()
 					//update registration id of logged in user
 					app.initialize();
 
-					//update device token (device-specifi)
-					updateDeviceTokens();
+					//alert(localStorage.reg_id);
+					regDevice();
 					location.reload();
 					/*
 					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
