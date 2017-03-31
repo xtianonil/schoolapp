@@ -91,7 +91,7 @@ function regDevice()
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 		.done(function(data){
 			alert(data);
-			/*
+			
 			if (data === "logged_in_previously")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"user_update_device.php",
@@ -126,7 +126,7 @@ function regDevice()
 						//location.reload();
 						//$("#login").html('Login');
 					});
-			}*/
+			}
 		});
 	$("#login").html('Login');
 }//end of device function
@@ -185,7 +185,8 @@ function login()
 					app.initialize();
 
 					//alert(localStorage.reg_id);
-					//regDevice();
+					regDevice();
+					/*
 					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 						.done(function(data){
 							alert(data);
