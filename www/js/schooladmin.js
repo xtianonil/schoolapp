@@ -1,3 +1,26 @@
+function saveNotifToDB()
+{	
+	alert(localStorage.user_id+" "+$("#notif_msg2").val()+" "+$("#notif_recipient_dropdown2").val());
+	$.post(localStorage.webhost+"notif_save.php",
+		{
+			created_by : localStorage.user_id,
+			payload : $("#notif_msg2").val(),
+			target_group : $("#notif_recipient_dropdown2").val()
+		})
+	.done(function(notif_id){
+		//alert(notif_id);
+		/*
+		if (notif_id)
+		{
+			$.post(localStorage.webhost+"websock_notifsfeed.php",{notifid:notif_id,groupid:$("#notif_recipient_dropdown2").val()})
+				.done(function(data){
+				});
+			location.reload();
+		}
+		*/
+	});
+	//alert("SDF");
+}
 $(document).on('pagebeforeshow','#send_notif',function(){
 	//alert("send notif");
 	$.post(localStorage.webhost+"group_fetch_list.php")
@@ -40,29 +63,14 @@ $("#send_notif_schooladmin").click(function(){
 						{
 							'regids[]' 	: regids_array,
 							notif_msg  	: $("#notif_msg2").val(),
-							created_by 	: 'localStorage.name',
+							created_by 	: localStorage.name,
 							context		: 'notif_new'
 						}).done(function(res){
 							//alert(res);
 							alert("Notification successfully sent.");
-							//window.location.href = "index.html#send_notif";
 							//do something after successful sending of notifs, save to DB
-							$.post(localStorage.webhost+"notif_save.php",
-								{
-									created_by : localStorage.user_id,
-									payload : $("#notif_msg2").val(),
-									target_group : $("#notif_recipient_dropdown2").val()
-								})
-								.done(function(notif_id){
-									if (notif_id)
-									{
-										$.post(localStorage.webhost+"websock_notifsfeed.php",{notifid:notif_id,groupid:$("#notif_recipient_dropdown2").val()})
-											.done(function(data){
-											});
-										location.reload();
-									}
-								});//end of localstorage webhost notif save
-						});//end of localstorage webhost send notif gcm
+					});//end of localstorage webhost send notif gcm
+					//saveNotifToDB();
 				}//end of if
 				else
 				{

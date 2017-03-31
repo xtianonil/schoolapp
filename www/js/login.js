@@ -85,13 +85,11 @@ function loginXXX()
 		});
 }//end of loginXXX function
 
-function regDevice()
+function updateDeviceTokens()
 {
-	//alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
-		.done(function(data){
-			//alert(device.uuid+" "+device.platform+" "+device.model+" ");
-			
+		.done(function(data){	
+			alert(data);		
 			if (data === "logged_in_previously")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"user_update_device.php",
@@ -175,6 +173,9 @@ function login()
 					localStorage.isloggedin = "true";
 					//alert(user_details[0].is_admin);
 					localStorage.isadmin = (user_details[0].is_admin==1?"true":"false");
+					localStorage.name = user_details[0].lname + " " + user_details[0].fname;
+					localStorage.user_id = user_details[0].user_id;
+					//localStorage.user_id =
 					//localStorage.isadmin = user_details[0].is_admin;
 					//localStorage.setItem(isadmin,user_details[0].is_admin);
 					//alert(localStorage.isloggedin);
@@ -184,8 +185,8 @@ function login()
 					//update registration id of logged in user
 					app.initialize();
 
-					//alert(localStorage.reg_id);
-					regDevice();
+					//update device token (device-specifi)
+					updateDeviceTokens();
 					location.reload();
 					/*
 					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
