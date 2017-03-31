@@ -172,7 +172,7 @@ function login()
 					//set timeout to accomodate process delay
 					setTimeout(function(){
 						location.reload();
-					},300);
+					},100);
 				}//end of else
 			}//end of else
 		});
@@ -207,7 +207,9 @@ $("#login").click(function(){
 	burgerMenu();
 	//update registration id of logged in user
 	app.initialize();
-	deviceLogin();
+	setTimeout(function(){
+		deviceLogin();
+	},100);
 	if ( $.trim( $("#email_login").val() ).length > 0 )
 		login();
 });//end of login click
