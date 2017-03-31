@@ -183,6 +183,11 @@ function login()
 
 					//alert(localStorage.reg_id);
 					regDevice();
+
+					//set delay to accomodate access to cloud
+					setTimeout(function(){
+						location.reload();
+					},100);
 					//location.reload();
 					/*
 					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
