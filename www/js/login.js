@@ -185,7 +185,11 @@ function login()
 					app.initialize();
 
 					//alert(localStorage.reg_id);
-					regDevice();
+					//regDevice();
+					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
+						.done(function(data){
+							alert(data);
+						});
 					location.reload();
 					/*
 					$.post(localStorage.webhost+"user_validatepassword.php",
