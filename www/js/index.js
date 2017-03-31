@@ -91,7 +91,7 @@ var app = {
                                         handleNotif(data);
                                         break;
                 case 'notif_'       :
-                                        alert(data.additionalData); 
+                                        alert(JSON.parse(data.additionalData)); 
                                         break;
                 case 'user_new'     :   alert("new user");
                                         break;
