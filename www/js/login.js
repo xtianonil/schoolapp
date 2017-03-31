@@ -87,7 +87,7 @@ function loginXXX()
 
 function regDevice()
 {
-	//alert(localStorage.reg_id);
+	alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 		.done(function(data){
 			//alert(data);
