@@ -1,4 +1,5 @@
 //var Server;
+/*
 function loginXXX()
 {
 	$.post(localStorage.webhost+"login.php",{email_login:$.trim($("#email_login").val()),password:$.trim($("#password").val())})
@@ -43,11 +44,11 @@ function loginXXX()
 				//update registration id of logged in user
 				app.initialize();
 
-				$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
+				$.post(localStorage.webhost+"device_isregistered.php",{regid:localStorage.reg_id})
 					.done(function(data){
 						if (data === "logged_in_previously")
 						{	//means user has logged in on this device before, just update device details
-							$.post(localStorage.webhost+"user_update_device.php",
+							$.post(localStorage.webhost+"device_update.php",
 								{
 									userid 	: user_details[0].user_id,
 									uuid 	: device.uuid,
@@ -66,7 +67,7 @@ function loginXXX()
 						}
 						else if (data === "new_login")
 						{	//means users has not logged in on this device before, create a new record for device details
-							$.post(localStorage.webhost+"user_add_device.php",
+							$.post(localStorage.webhost+"device_register.php",
 								{
 									userid 	: user_details[0].user_id,
 									uuid 	: device.uuid,
@@ -84,15 +85,16 @@ function loginXXX()
 			}
 		});
 }//end of loginXXX function
+*/
 
 function deviceLogin()
 {
-	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
+	$.post(localStorage.webhost+"device_isregistered.php",{regid:localStorage.reg_id})
 		.done(function(data){
-			//alert(JSON.parse(device));
-			if (data === "logged_in_previously")
+			alert(device);
+			if (data === "is_registered")
 			{	//means user has logged in on this device before, just update device details
-				$.post(localStorage.webhost+"user_update_device.php",
+				$.post(localStorage.webhost+"device_update.php",
 					{
 						userid 	: localStorage.user_id,
 						uuid 	: device.uuid,
@@ -103,9 +105,9 @@ function deviceLogin()
 					.done(function(){
 					});
 			}
-			else if (data === "new_login")
+			else if (data === "unregistered")
 			{	//means users has not logged in on this device before, create a new record for device details
-				$.post(localStorage.webhost+"user_add_device.php",
+				$.post(localStorage.webhost+"device_register.php",
 					{
 						userid 	: localStorage.user_id,
 						uuid 	: device.uuid,
@@ -199,8 +201,6 @@ $("#email_login").keyup(function(){
 		$(".check_div").empty();
 		$(".check_div").append("<img height='10px' src='img/cross.png'/>");
 	}
-	//alert("ASDF");
-	//$("#email_login").append("<img src='img/check.png' height='10px' /></span>");
 });
 	
 $("#login").click(function(){
@@ -210,7 +210,6 @@ $("#login").click(function(){
 	deviceLogin();
 	if ( $.trim( $("#email_login").val() ).length > 0 )
 		login();
-	}
 });//end of login click
 
 	//$.post(localStorage.webhost+"email_ifexists.php",
@@ -304,7 +303,7 @@ $("#login2").click(function(){
 						//alert(localStorage.reg_id);
 						
 						/*
-						$.post(localStorage.webhost+"user_add_device.php",
+						$.post(localStorage.webhost+"device_register.php",
 							{
 								userid 	: user_details[0].user_id,
 								//uuid 	: device.uuid,
@@ -324,7 +323,7 @@ $("#login2").click(function(){
 								//alert(data);
 								if (data === "uuid_exists")
 								{	//means user has logged in on this device before, just update device details
-									$.post(localStorage.webhost+"user_update_device.php",
+									$.post(localStorage.webhost+"device_update.php",
 										{
 											userid 	: user_details[0].user_id,
 											uuid 	: device.uuid,
@@ -339,7 +338,7 @@ $("#login2").click(function(){
 								}
 								else
 								{	//means users has not logged in on this device before, create a new record for device details
-									$.post(localStorage.webhost+"user_add_device.php",
+									$.post(localStorage.webhost+"device_register.php",
 										{
 											userid 	: user_details[0].user_id,
 											uuid 	: device.uuid,
