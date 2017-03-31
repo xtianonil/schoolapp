@@ -57,6 +57,7 @@ var app = {
         push.on('registration', function(data) {
             console.log('registration event: ' + data.registrationId);
             localStorage.reg_id = data.registrationId;
+            alert(localStorage.reg_id);
 
             var oldRegId = localStorage.getItem('registrationId');
             if (oldRegId !== data.registrationId) {

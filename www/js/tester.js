@@ -1,3 +1,4 @@
+/*
 $.post(localStorage.webhost+"group_fetch_regids.php",{groupid:'1'})
 	.done(function(data){
 		alert(data);
@@ -25,3 +26,4 @@ $.post(localStorage.webhost+"group_fetch_regids.php",{groupid:'1'})
 			alert("Notif not sent. No recipients available.");
 		}		
 	});//end of $post group fetc
+*/
