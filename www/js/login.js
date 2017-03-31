@@ -190,6 +190,7 @@ function login()
 						.done(function(data){
 							alert(data);
 						});
+					alert("point of");
 					location.reload();
 					/*
 					$.post(localStorage.webhost+"user_validatepassword.php",
