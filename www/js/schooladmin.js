@@ -64,9 +64,9 @@ $("#send_notif_schooladmin").click(function(){
 							'regids[]' 	: regids_array,
 							notif_msg  	: $("#notif_msg2").val(),
 							created_by 	: localStorage.name,
-							context		: 'notif_new'
+							context		: 'notif_'
 						}).done(function(res){
-							//alert(res);
+							alert(res);
 							alert("Notification successfully sent.");
 							//do something after successful sending of notifs, save to DB
 					});//end of localstorage webhost send notif gcm
