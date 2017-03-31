@@ -214,7 +214,33 @@ $("#login").click(function(){
 	*/
 	$.post(localStorage.webhost+"device_isregistered.php",{regid:localStorage.reg_id})
 		.done(function(data){
-			alert(data);
+			//alert(data);
+			if (data === "is_registered")
+			{	//means user has logged in on this device before, just update device details
+				$.post(localStorage.webhost+"device_update.php",
+					{
+						userid 	: localStorage.user_id,
+						uuid 	: device.uuid,
+						platform: device.platform,
+						model	: device.model,
+						regid 	: localStorage.reg_id
+					})
+					.done(function(){
+					});
+			}
+			else if (data === "unregistered")
+			{	//means users has not logged in on this device before, create a new record for device details
+				$.post(localStorage.webhost+"device_register.php",
+					{
+						userid 	: localStorage.user_id,
+						uuid 	: device.uuid,
+						platform: device.platform,
+						model	: device.model,
+						regid 	: localStorage.reg_id
+					})
+					.done(function(){
+					});
+			}
 		});
 	if ( $.trim( $("#email_login").val() ).length > 0 )
 		login();
