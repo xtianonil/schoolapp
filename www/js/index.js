@@ -94,7 +94,7 @@ var app = {
                                         alert("case 2"); 
                                         break;
                 case 'user_new'     :   alert("new user");
-                                        break;
+                                        //break;
             }           
             //var data = JSON.parse(data.additionalData);
             //alert("context1: " + data.additionalData);

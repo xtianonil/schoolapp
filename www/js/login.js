@@ -212,26 +212,6 @@ function login()
 						*/
 				}//end of else
 			}//end of else
-			/*
-			else if (login_status === 'inactive')
-			{	//inactive account
-				$.post(localStorage.webhost+"user_getuserid_usingemail.php",{email_login:$.trim($("#email_login").val())}).done(function(user_id){
-					localStorage.user_id = user_id;
-					//active user acct, then redirect to password set interface
-					$.post(localStorage.webhost+"account_activate.php",{userid:user_id})
-						.done(function(activate_successful)
-						{
-							$.mobile.changePage("index.html#password_set",{});
-						});
-				});
-			}//end of if login_status = inactive
-			else if (login_status === 'password_not_set')
-			{	//active account, password not set
-				$.post(localStorage.webhost+"user_getuserid_usingemail.php",{email_login:$.trim($("#email_login").val())}).done(function(user_id){
-					localStorage.user_id = user_id;
-					$.mobile.changePage("index.html#password_set",{});
-				});
-			}*/
 		});
 }//end of login function
 
