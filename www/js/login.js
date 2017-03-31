@@ -186,6 +186,7 @@ function login()
 
 					//alert(localStorage.reg_id);
 					regDevice();
+					location.reload();
 					/*
 					$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 						.done(function(data){
