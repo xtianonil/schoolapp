@@ -90,13 +90,13 @@ function regDevice()
 	//alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 		.done(function(data){
-			alert(data);
+			//alert(device.uuid+" "+device.platform+" "+device.model+" ");
 			
 			if (data === "logged_in_previously")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"user_update_device.php",
 					{
-						userid 	: user_details[0].user_id,
+						userid 	: localStorage.user_id,
 						uuid 	: device.uuid,
 						platform: device.platform,
 						model	: device.model,
@@ -115,7 +115,7 @@ function regDevice()
 			{	//means users has not logged in on this device before, create a new record for device details
 				$.post(localStorage.webhost+"user_add_device.php",
 					{
-						userid 	: user_details[0].user_id,
+						userid 	: localStorage.user_id,
 						uuid 	: device.uuid,
 						platform: device.platform,
 						model	: device.model,
