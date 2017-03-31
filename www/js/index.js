@@ -42,7 +42,8 @@ var app = {
         console.log('calling push init');
         var push = PushNotification.init({
             "android": {
-                "senderID": "196690309665"
+                "senderID": "196690309665",
+                "forceShow": "true"
             },
             "browser": {},
             "ios": {
@@ -91,7 +92,7 @@ var app = {
                                         handleNotif(data);
                                         break;
                 case 'notif_'       :
-                                        alert(JSON.parse(data.additionalData)); 
+                                        alert(JSON.stringify(data.additionalData)); 
                                         break;
                 case 'user_new'     :   alert("new user");
                                         break;
