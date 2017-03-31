@@ -85,12 +85,12 @@ function loginXXX()
 		});
 }//end of loginXXX function
 
-function registerDevice()
+function regDevice()
 {
 	//alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 		.done(function(data){
-			alert(data);
+			//alert(data);
 			if (data === "logged_in_previously")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"user_update_device.php",
@@ -102,10 +102,10 @@ function registerDevice()
 						regid 	: localStorage.reg_id
 					})
 					.done(function(user_device_updated){
-						if (user_device_updated)
-						{
+						//if (user_device_updated)
+						//{
 							//alert("user_device_updated");
-						}
+						//}
 						//location.reload();
 						//$("#login").html('Login');
 					});
@@ -138,7 +138,7 @@ function login()
 			password: 	$.trim( $("#password").val() )
 		}).done(function(login_status)
 		{
-			alert(login_status);
+			//alert(login_status);
 			if (login_status === 'unregistered_email')
 			{	//unregistered email
 				alert("Unregistered Email");
@@ -184,7 +184,7 @@ function login()
 					app.initialize();
 
 					//alert(localStorage.reg_id);
-					registerDevice();
+					regDevice();
 					location.reload();
 					/*
 					$.post(localStorage.webhost+"user_validatepassword.php",
