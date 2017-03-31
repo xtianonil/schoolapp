@@ -251,7 +251,8 @@ $("#login").click(function(){
 
 	//set timeout to accomodate process delay
 	setTimeout(function(){
-		location.reload();
+		//location.reload();
+		window.location.href = "index.html#notifs_feed";
 	},100);
 	
 });//end of login click
