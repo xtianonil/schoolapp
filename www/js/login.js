@@ -172,10 +172,6 @@ function login()
 					localStorage.name = user_details[0].lname + " " + user_details[0].fname;
 					localStorage.user_id = user_details[0].user_id;
 
-					//set timeout to accomodate process delay
-					setTimeout(function(){
-						location.reload();
-					},100);
 				}//end of else
 			}//end of else
 		});
@@ -245,9 +241,16 @@ $("#login").click(function(){
 			}
 		});
 	*/
+
+	if ( $.trim( $("#email_login").val() ).length > 0 )
+	{
+		deviceLogin();
+		login();
+	}
+
+	//set timeout to accomodate process delay
 	setTimeout(function(){
-		if ( $.trim( $("#email_login").val() ).length > 0 )
-			login();
+		location.reload();
 	},100);
 	
 });//end of login click
