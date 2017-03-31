@@ -81,6 +81,7 @@ var app = {
                 data.title,           // title
                 'Ok'                  // buttonName
             );
+            alert(data.additionalData.context);
             //var data = JSON.parse(data.additionalData);
             //alert("context1: " + data.additionalData);
             //alert("context2: " + JSON.stringify(data.additionalData);
