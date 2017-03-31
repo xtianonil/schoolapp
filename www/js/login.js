@@ -176,13 +176,7 @@ function login()
 					//localStorage.setItem(isadmin,user_details[0].is_admin);
 					//alert(localStorage.isloggedin);
 					//window.location.href = "index.html#notifs_feed";
-					burgerMenu();
-            	
-					//update registration id of logged in user
-					app.initialize();
-
-					//alert(localStorage.reg_id);
-					regDevice();
+					
 
 					//set delay to accomodate access to cloud
 					setTimeout(function(){
@@ -248,6 +242,11 @@ $("#email_login").keyup(function(){
 });
 	
 $("#login").click(function(){
+	burgerMenu();
+	//update registration id of logged in user
+	app.initialize();
+	//alert(localStorage.reg_id);
+	regDevice();
 	if ( $.trim( $("#email_login").val() ).length > 0 )
 	{	//check if email is not null
 		login();
