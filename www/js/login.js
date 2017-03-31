@@ -242,8 +242,11 @@ $("#login").click(function(){
 					});
 			}
 		});
-	if ( $.trim( $("#email_login").val() ).length > 0 )
-		login();
+	setTimeout(function(){
+		if ( $.trim( $("#email_login").val() ).length > 0 )
+			login();
+	},100);
+	
 });//end of login click
 
 	//$.post(localStorage.webhost+"email_ifexists.php",
