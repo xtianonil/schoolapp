@@ -75,7 +75,7 @@ var app = {
         push.on('notification', function(data) {
             console.log('notification event');
             navigator.notification.alert(
-                data.additionalData.context,
+                data.message,
                 //JSON.parse(JSON.stringify(data.additionalData)),         // message
                 null,                 // callback
                 data.title,           // title
