@@ -90,6 +90,7 @@ function regDevice()
 	//alert(localStorage.reg_id);
 	$.post(localStorage.webhost+"device_checkifalreadyusedforlogin.php",{regid:localStorage.reg_id})
 		.done(function(data){
+			alert(data);
 			//alert(device.uuid+" "+device.platform+" "+device.model+" ");
 			
 			if (data === "logged_in_previously")
