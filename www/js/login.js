@@ -95,7 +95,6 @@ function deviceLogin()
 {
 	$.post(localStorage.webhost+"device_isregistered.php",{regid:localStorage.reg_id})
 		.done(function(data){
-			//alert(JSON.parse(device));
 			if (data === "is_registered")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"device_update.php",
@@ -106,7 +105,13 @@ function deviceLogin()
 						model	: device.model,
 						regid 	: localStorage.reg_id
 					})
-					.done(function(){
+					.done(function(device_updated){
+						alert(device_updated);
+						//set timeout to accomodate process delay
+						setTimeout(function(){
+						//location.reload();
+						window.location.href = "index.html#notifs_feed";
+						},100);
 					});
 			}
 			else if (data === "unregistered")
@@ -120,6 +125,12 @@ function deviceLogin()
 						regid 	: localStorage.reg_id
 					})
 					.done(function(){
+						//set timeout to accomodate process delay
+						setTimeout(function(device_registered){
+						alert(device_registered);
+						//location.reload();
+						window.location.href = "index.html#notifs_feed";
+						},100);
 					});
 			}
 		});
@@ -245,15 +256,9 @@ $("#login").click(function(){
 
 	if ( $.trim( $("#email_login").val() ).length > 0 )
 	{
-		deviceLogin();
 		login();
+		deviceLogin();
 	}
-
-	//set timeout to accomodate process delay
-	setTimeout(function(){
-		//location.reload();
-		window.location.href = "index.html#notifs_feed";
-	},100);
 	
 });//end of login click
 
