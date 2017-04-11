@@ -6,10 +6,11 @@ $("#login").click(function(){
 	{
 		setTimeout(function(){ 
 			login();
-		},100);
+		},300);
+		/*
 		setTimeout(function(){ 
 			deviceLogin();
-		},100);
+		},300);*/
 	}
 	
 });//end of login click
