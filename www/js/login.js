@@ -218,7 +218,7 @@ $("#email_login").keyup(function(){
 $("#login").click(function(){
 	burgerMenu();
 	//update registration id of logged in user
-	app.initialize();
+	//app.initialize();
 	
 	/*
 	$.post(localStorage.webhost+"device_isregistered.php",{regid:localStorage.reg_id})
