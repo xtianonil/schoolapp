@@ -1,3 +1,18 @@
+app.initialize();
+$("#login").click(function(){
+	alert(localStorage.reg_id);
+	burgerMenu();
+	if ( $.trim( $("#email_login").val() ).length > 0 )
+	{
+		setTimeout(function(){ 
+			login();
+		},100);
+		setTimeout(function(){ 
+			deviceLogin();
+		},100);
+	}
+	
+});//end of login click
 //var Server;
 /*
 function loginXXX()
@@ -215,8 +230,7 @@ $("#email_login").keyup(function(){
 	}
 });
 	
-$("#login").click(function(){
-	burgerMenu();
+
 	//update registration id of logged in user
 	//app.initialize();
 	
@@ -255,13 +269,7 @@ $("#login").click(function(){
 		});
 	*/
 
-	if ( $.trim( $("#email_login").val() ).length > 0 )
-	{
-		login();
-		deviceLogin();
-	}
 	
-});//end of login click
 
 	//$.post(localStorage.webhost+"email_ifexists.php",
 	
