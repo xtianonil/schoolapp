@@ -172,6 +172,7 @@ function login()
 					{
 						email_login:$.trim($("#email_login").val())
 					}).done(function(user_id){
+						alert("user id: " + user_id);
 						localStorage.user_id = user_id;
 					});
 
