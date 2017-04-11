@@ -4,13 +4,12 @@ $("#login").click(function(){
 	burgerMenu();
 	if ( $.trim( $("#email_login").val() ).length > 0 )
 	{
-		setTimeout(function(){ 
+		//setTimeout(function(){ 
 			login();
-		},300);
-		/*
+		//},300);
 		setTimeout(function(){ 
 			deviceLogin();
-		},300);*/
+		},300);
 	}
 	
 });//end of login click
