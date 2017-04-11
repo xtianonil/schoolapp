@@ -95,6 +95,7 @@ function deviceLogin()
 {
 	$.post(localStorage.webhost+"device_isregistered.php",{regid:localStorage.reg_id})
 		.done(function(data){
+			alert(data);
 			if (data === "is_registered")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"device_update.php",
