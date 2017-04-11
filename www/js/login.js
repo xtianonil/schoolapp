@@ -4,12 +4,14 @@ $("#login").click(function(){
 	burgerMenu();
 	if ( $.trim( $("#email_login").val() ).length > 0 )
 	{
-		//setTimeout(function(){ 
+		setTimeout(function(){ 
 			login();
-		//},300);
+		},300);
+		/*
 		setTimeout(function(){ 
 			deviceLogin();
 		},300);
+		*/
 	}
 	
 });//end of login click
@@ -174,6 +176,10 @@ function login()
 					}).done(function(user_id){
 						alert("user id: " + user_id);
 						localStorage.user_id = user_id;
+
+						setTimeout(function(){ 
+							deviceLogin();
+						},300);
 					});
 
 				if (login_status === 'inactive')
