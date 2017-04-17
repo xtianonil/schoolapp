@@ -112,7 +112,7 @@ function deviceLogin()
 {
 	$.post(localStorage.webhost+"device_isregistered.php",{regid:localStorage.reg_id})
 		.done(function(data){
-			alert(localStorage.user_id + " " + device.uuid + " " + device.platform + " " + device.model + " " + localStorage.reg_id);
+			//alert(localStorage.user_id + " " + device.uuid + " " + device.platform + " " + device.model + " " + localStorage.reg_id);
 			if (data === "is_registered")
 			{	//means user has logged in on this device before, just update device details
 				$.post(localStorage.webhost+"device_update.php",
@@ -174,7 +174,7 @@ function login()
 					{
 						email_login:$.trim($("#email_login").val())
 					}).done(function(user_id){
-						alert("user id: " + user_id);
+						//alert("user id: " + user_id);
 						localStorage.user_id = user_id;
 
 						setTimeout(function(){ 
